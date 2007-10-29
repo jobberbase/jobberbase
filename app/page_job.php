@@ -1,0 +1,102 @@
+<?php
+	$job_flag = false;
+	$count = 0;
+	for ($i = 0; $i < count($_SESSION['search_results']); $i++)
+	{
+		if ($_SESSION['search_results'][$i]['id'] == $id)
+		{
+			$next = array_slice($_SESSION['search_results'], $count + 1);
+			$prev = array_slice($_SESSION['search_results'], 0, $count);
+			$job_flag = true;
+			break;
+		}
+		$count++;
+	}
+	if ($job_flag)
+	{
+		$smarty->assign('previous_results', $prev);
+		$smarty->assign('next_results', $next);
+		$smarty->assign('previous_result', $prev[count($prev) - 1]);
+		$smarty->assign('next_result', $next[0]);	
+	}
+	else
+	{
+		unset($_SESSION['search_results']);
+	}
+
+	// save recorded keywords, if available
+	if ($_SESSION['search_keywords'])
+	{
+		$search = new SearchKeywords($_SESSION['search_keywords']);
+		$search->Save();
+		unset($_SESSION['search_keywords']);
+	}
+
+	$job = new Job($id);
+	if ($job->Exists() && $job->GetTempStatus() == 0 && $job->GetActiveStatus() == 1)
+	{
+		$info = $job->GetInfo();
+		// if visitor comes from an outside website, record the referer
+		if ($outside_referer != '')
+		{
+			$job->RecordHit(base64_decode($outside_referer), $_SERVER['REMOTE_ADDR']);
+			redirect_to(BASE_URL . 'job/' . $id . '/' . $info['url_title'] . '/');
+		}
+		else
+		{
+			$job->IncreaseViewCount();
+		}
+
+		$job_flag = true;
+		$url = BASE_URL . 'job/' . $id . '/' . $info['url_title'] . '/';
+		if ($_SESSION['last_viewed_jobs'])
+		{
+			foreach ($_SESSION['last_viewed_jobs'] as $item)
+			{
+				if ($item['url'] == $url)
+				{
+					$job_flag = false;
+				}
+			}	
+		}
+		else
+		{
+			$_SESSION['last_viewed_jobs'] = array();
+		}
+		
+		if ($job_flag)
+		{
+			array_unshift($_SESSION['last_viewed_jobs'], array('url' => $url, 'title' => $job->mTitle));
+		}
+		
+		if (count($_SESSION['last_viewed_jobs']) > 10)
+		{
+			array_pop($_SESSION['last_viewed_jobs']);
+		}
+		
+		$app = new JobApplication($id);
+		$info['applied_count'] = $app->Count();
+		
+		if (strstr($info['description'], '*'))
+		{
+			$txt = new Textile();
+			$info['description'] = $txt->TextileThis($info['description']);	
+		}
+		else
+		{
+			//$info['description'] = nl2br($info['description']);
+			$info['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $info['description']);
+		}
+
+		$smarty->assign('job', $info);
+		$html_title = stripslashes($info['title']) . ' la ' . stripslashes($info['company']) . ' / ' . SITE_NAME;
+		$smarty->assign('current_category', $job->GetCategVarname($info['category_id']));
+		$smarty->assign('back_link', BASE_URL . 'jobs/' . $job->GetCategVarname($info['category_id']) . '/');
+		$template = 'job.tpl';
+	}
+	else
+	{
+		redirect_to(BASE_URL . 'job-unavailable/');
+		exit;
+	}
+?>

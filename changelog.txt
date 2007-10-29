@@ -1,0 +1,6 @@
+######## jobberbase changelog ########
+
+version 1.0 (10/20/2007):
+    * Translated www.jobber.ro into English.
+    * Fixed some bugs.
+    * Sent first copies to a couple of friends for testing.
