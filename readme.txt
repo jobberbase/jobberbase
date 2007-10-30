@@ -4,18 +4,20 @@
 
 2. Create a new database and import __db/jobberbase.sql into it.
 
-3. Open config.php and update the following constants so they suit your environment:
+3. Rename config.default.php into config.php
+
+4. Open config.php and update the following constants so they suit your environment:
    - DB_HOST, DB_USER, DB_PASS, DB_NAME, JOBBER_URL, _APP_MAIN_DIR, NOTIFY_EMAIL, ADMIN_EMAIL, SITE_NAME
 
-4. Following directories need write access:
+5. Following directories need write access:
    /uploads            (uploaded resumes are temporary stored here)
    /_templates/_cache  (smarty cache)
 
-5. If you can't see the .htaccess file or actually don't have it, rename htaccess.txt into .htaccess.
+6. If you can't see the .htaccess file or actually don't have it, rename htaccess.txt into .htaccess.
 
-6. If your host doesn't offer the mysqli PHP extension (find out from phpinfo()), you can use a mysql wrapper instead. Open config.php and just replace <require_once '_includes/class.Db.php'> with <require_once '_includes/class.Db.MySql.php'>.
+7. If your host doesn't offer the mysqli PHP extension (find out from phpinfo()), you can use a mysql wrapper instead. Open config.php and just replace <require_once '_includes/class.Db.php'> with <require_once '_includes/class.Db.MySql.php'>.
 
-7. That's it, open a browser and type in the URL (e.g. http://localhost/jobberbase/).
+8. That's it, open a browser and type in the URL (e.g. http://localhost/jobberbase/).
 
 =========================================================================================================
 
@@ -40,4 +42,4 @@ You may find me on the web at http://www.filipcte.ro/ or via e-mail: me@filipcte
 
 =========================================================================================================
 
--- last updated: October 20, 2:13pm
+-- last updated: October 30, 08:00am
