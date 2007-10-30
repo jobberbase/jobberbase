@@ -8,6 +8,9 @@
  */
 
 	session_start();
+	if(!file_exists('config.php')) {
+	   die('[index.php] config.php not found, please rename config.default.php to config.php');
+	}
 	require_once 'config.php';
 	
 	$page = (isset($_app_info['params'][0]) ? $db->real_escape_string($_app_info['params'][0]) : '');

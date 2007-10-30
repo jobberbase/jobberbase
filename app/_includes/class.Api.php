@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * jobber job board platform
  *
  * @author     Filip C.T.E. <http://www.filipcte.ro> <me@filipcte.ro>
@@ -69,8 +68,8 @@ class Api
 			var html = "<ul class=\"" + css_class + "\">";
 			for (j = 0; j < jobs.length; j++)
 			{
-				//html += "<li><a target=\"_blank\" href=\"' . JOBBER_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " la " + jobs[j].company + "</a></li>";
-				html += "<li><a target=\"_blank\" href=\"' . JOBBER_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " (" + jobs[j].location + ")</a></li>";
+				//html += "<li><a target=\"_blank\" href=\"' . BASE_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " la " + jobs[j].company + "</a></li>";
+				html += "<li><a target=\"_blank\" href=\"' . BASE_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " (" + jobs[j].location + ")</a></li>";
 			}
 			html += "</ul>";
 			
@@ -104,7 +103,7 @@ class Api
 		{
 			$response .= '<job>';
 			$response .= '<title><![CDATA[' . $job['title'] . ' la ' . $job['company'] . ']]></title>';
-			$response .= '<url>' . JOBBER_URL . 'job/' . $job['id'] . '/' . $job['url_title'] . '/</url>';
+			$response .= '<url>' . BASE_URL . 'job/' . $job['id'] . '/' . $job['url_title'] . '/</url>';
 			$response .= '<date>' . $job['created_on'] . '</date>';
 			$response .= '</job>';
 		}

@@ -9,10 +9,10 @@
         header('Content-Type: text/html; charset=UTF-8');
         
  	ini_set('display_errors', 'On');
-	error_reporting(E_ALL ^ E_NOTICE);
-	
+	error_reporting(E_ALL ^ E_STRICT);
+
 	date_default_timezone_set('Europe/Bucharest');
-	
+	//print_r($_SERVER);
 	// MySQL + misc settings for local environment
 	if ($_SERVER['SERVER_NAME'] == 'localhost')
 	{
@@ -21,8 +21,6 @@
 		define('DB_PASS', '');
 		define('DB_NAME', 'jobberbase');
 		define('LOCATION', 'local');
-		define('JOBBER_URL', 'http://localhost/jobberbase/site/');
-		define('_APP_MAIN_DIR', '/jobberbase/app');
 		define('ENVIRONMENT', 'dev');
 	}
 	// MySQL + misc settings for production environment
@@ -33,8 +31,6 @@
 		define('DB_PASS', '');
 		define('DB_NAME', 'jobberbase');
 		define('LOCATION', 'online');
-		define('JOBBER_URL', 'http://www.jobberbase.com/');
-		define('_APP_MAIN_DIR', '');
 		define('ENVIRONMENT', 'prod');
 	}
 	
@@ -45,8 +41,31 @@
 	
 	define('MAX_CV_SIZE', 3000000); // approx. 3 mb
 	define('FILE_UPLOAD_DIR', 'uploads/');
-	define ('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . _APP_MAIN_DIR . '/');
-	define ('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . _APP_MAIN_DIR . '/');
+
+	//define ('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . _APP_MAIN_DIR . '/');
+	define('APP_PATH',dirname(__FILE__).'/');
+
+
+
+
+        if(isset($_SERVER['SCRIPT_NAME'])) {
+            define('_APP_MAIN_DIR',rtrim(dirname($_SERVER['SCRIPT_NAME']),'/'));
+        } else {
+            //define('_APP_MAIN_DIR','/jobberbase/app');
+            die('[config.php] Cannot determine APP_MAIN_DIR, please set manual and comment this line');
+        }
+
+        if(isset($_SERVER['HTTP_HOST']) && isset($_SERVER['SERVER_PORT'])) {
+            if($_SERVER['SERVER_PORT'] == 80) {
+                define ('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . _APP_MAIN_DIR . '/');
+            } else {
+                define ('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'].':'.$_SERVER['SERVER_PORT'] . _APP_MAIN_DIR . '/');
+            }
+        } else {
+            //define ('BASE_URL', 'http://jobberbase.ro' . _APP_MAIN_DIR . '/');
+            die('[config.php] Cannot determine BASE_URL, please set manual and comment this line');
+        }
+	
 	
 	// Type of jobs. Values are the database ids.
 	define('JOBTYPE_FULLTIME', 1);
@@ -91,6 +110,7 @@
 	$smarty = new Smarty();
 	$smarty->template_dir = APP_PATH . '_templates/';
 	$smarty->compile_dir = APP_PATH . '_templates/_cache/';
+	
 	
 	// Create Textile object
 	$textile = new Textile;
