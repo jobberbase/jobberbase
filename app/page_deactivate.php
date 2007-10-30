@@ -1,7 +1,7 @@
 <?php
 	$j = new Job($id);
 	// if auth code used, check it and allow editing
-	if (($_SESSION['later_edit'] == $j->GetAuth()) || ($extra != '' && $extra == $j->GetAuth()))
+	if ((isset($_SESSION['later_edit']) && $_SESSION['later_edit'] == $j->GetAuth()) || ($extra != '' && $extra == $j->GetAuth()))
 	{
 		$deleter = $j->Deactivate();
 		$_SESSION['status'] = 'Anunţul tău a fost şters.';	
