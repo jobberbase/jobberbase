@@ -24,6 +24,12 @@
 	$meta_description = '';
 	$meta_keywords = '';
 	
+	if(!isset($_SERVER['HTTP_REFERER'])) {
+	   $_SERVER['HTTP_REFERER'] = '';
+	}
+	
+	
+	
 	switch($page)
 	{
 		// home
@@ -177,9 +183,6 @@
 		redirect_to(BASE_URL . 'page-unavailable/');
 	}
 	
-	if(!isset($_SERVER['HTTP_REFERER'])) {
-	   $_SERVER['HTTP_REFERER'] = '';
-	}
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('cities', get_cities());

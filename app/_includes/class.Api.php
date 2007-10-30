@@ -30,7 +30,7 @@ class Api
 			}
 			
 			$this->mResponse = $response;
-			$url = $_SERVER['HTTP_REFERER'];
+			$url = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'';
 			$this->mReferer = base64_encode($url);
 			$this->mAction = $action;
 		}
@@ -68,8 +68,8 @@ class Api
 			var html = "<ul class=\"" + css_class + "\">";
 			for (j = 0; j < jobs.length; j++)
 			{
-				//html += "<li><a target=\"_blank\" href=\"' . BASE_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " la " + jobs[j].company + "</a></li>";
-				html += "<li><a target=\"_blank\" href=\"' . BASE_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " (" + jobs[j].location + ")</a></li>";
+				//html += "<li><a target=\"_blank\" href=\"' . JOBBER_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " la " + jobs[j].company + "</a></li>";
+				html += "<li><a target=\"_blank\" href=\"' . JOBBER_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " (" + jobs[j].location + ")</a></li>";
 			}
 			html += "</ul>";
 			
@@ -103,7 +103,7 @@ class Api
 		{
 			$response .= '<job>';
 			$response .= '<title><![CDATA[' . $job['title'] . ' la ' . $job['company'] . ']]></title>';
-			$response .= '<url>' . BASE_URL . 'job/' . $job['id'] . '/' . $job['url_title'] . '/</url>';
+			$response .= '<url>' . JOBBER_URL . 'job/' . $job['id'] . '/' . $job['url_title'] . '/</url>';
 			$response .= '<date>' . $job['created_on'] . '</date>';
 			$response .= '</job>';
 		}
