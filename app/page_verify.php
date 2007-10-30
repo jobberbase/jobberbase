@@ -8,6 +8,7 @@
 	else
 	{
 		$later_edit = false;
+		$_SESSION['later_edit'] = '';
 	}
 	
 	if ($_SESSION['referer'] != BASE_URL . 'post/')

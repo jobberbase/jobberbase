@@ -14,7 +14,7 @@
 	}
 	else
 	{
-		if ($id != 0 && $_SESSION['later_edit'] == $j->GetAuth() && $j->GetAuth() != '')
+		if ($id != 0 && isset($_SESSION['later_edit']) && $_SESSION['later_edit'] == $j->GetAuth() && $j->GetAuth() != '')
 		{
 			$later_edit = true;
 		}
@@ -48,7 +48,7 @@
 	}
 
 	// this branch executes after first writing a post and hitting the submit button
-	if ($_POST['action'] && $_POST['action'] == 'publish')
+	if (!empty($_POST['action']) && $_POST['action'] == 'publish')
 	{
 		escape($_POST);
 		$errors = array();
@@ -102,7 +102,7 @@
 			$smarty->assign('errors', $errors);
 		}
 	}
-	else if ($_POST['action'] && $_POST['action'] == 'edit' /*&& $_SERVER['REMOTE_ADDR'] == $_SESSION['user_ip']*/)
+	else if (!empty($_POST['action']) && $_POST['action'] == 'edit' /*&& $_SERVER['REMOTE_ADDR'] == $_SESSION['user_ip']*/)
 	{
 		escape($_POST);
 		$errors = array();
@@ -148,13 +148,15 @@
 			              'poster_email' => $poster_email,
 			              'apply_online' => $apply_online);
 			$job->Edit($data);
-			if ($auth)
-			{
+			//where is set $auth ?
+			if (!empty($auth))
+			{ 
 				$add = $auth . '/';
 			}
 			else
 			{
-				$dd = '';
+				// $dd = '';
+				$add = '';
 			}
 			redirect_to(BASE_URL . 'verify/' . $job_id . '/' . $add);
 			exit;

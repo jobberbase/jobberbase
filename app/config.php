@@ -6,9 +6,12 @@
  * @license    You are free to edit and use this work, but it would be nice if you always referenced the original author ;)
  *             (see license.txt).
  */
-
+        header('Content-Type: text/html; charset=UTF-8');
+        
  	ini_set('display_errors', 'On');
-	error_reporting(E_ALL ^ E_NOTICE);
+	error_reporting(E_ALL ^ E_STRICT);
+	
+	date_default_timezone_set('Europe/Bucharest');
 	
 	// MySQL + misc settings for local environment
 	if ($_SERVER['SERVER_NAME'] == 'localhost')
@@ -108,5 +111,5 @@
 		}
 	}
 
-	header('Content-Type: text/html; charset=UTF-8');
+	
 ?>

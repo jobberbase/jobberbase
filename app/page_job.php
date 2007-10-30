@@ -1,6 +1,15 @@
 <?php
 	$job_flag = false;
 	$count = 0;
+	
+	if(!isset($_SESSION['search_results'])) {
+	       $_SESSION['search_results'] = array();
+	}
+	if(!isset($_SESSION['search_keywords'])) {
+	       $_SESSION['search_keywords'] = array();
+	}
+	
+	
 	for ($i = 0; $i < count($_SESSION['search_results']); $i++)
 	{
 		if ($_SESSION['search_results'][$i]['id'] == $id)
@@ -16,8 +25,8 @@
 	{
 		$smarty->assign('previous_results', $prev);
 		$smarty->assign('next_results', $next);
-		$smarty->assign('previous_result', $prev[count($prev) - 1]);
-		$smarty->assign('next_result', $next[0]);	
+		$smarty->assign('previous_result', $prev?$prev[count($prev) - 1]:'');
+		$smarty->assign('next_result', $next?$next[0]:'');	
 	}
 	else
 	{
@@ -37,7 +46,7 @@
 	{
 		$info = $job->GetInfo();
 		// if visitor comes from an outside website, record the referer
-		if ($outside_referer != '')
+		if (!empty($outside_referer))
 		{
 			$job->RecordHit(base64_decode($outside_referer), $_SERVER['REMOTE_ADDR']);
 			redirect_to(BASE_URL . 'job/' . $id . '/' . $info['url_title'] . '/');
@@ -49,7 +58,7 @@
 
 		$job_flag = true;
 		$url = BASE_URL . 'job/' . $id . '/' . $info['url_title'] . '/';
-		if ($_SESSION['last_viewed_jobs'])
+		if (!empty($_SESSION['last_viewed_jobs']))
 		{
 			foreach ($_SESSION['last_viewed_jobs'] as $item)
 			{

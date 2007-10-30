@@ -45,7 +45,7 @@ class Feed
 	public function Display()
 	{
 		global $db;
-		$rss_writer_object = &new rss_writer_class;
+		$rss_writer_object = new rss_writer_class;
 		$rss_writer_object->specification = '1.0';
 		$rss_writer_object->about = BASE_URL . 'rss.xml';
 		$rss_writer_object->rssnamespaces['dc']='http://purl.org/dc/elements/1.1/';

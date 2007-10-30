@@ -212,7 +212,10 @@ class Job
 		{
 			$sql_limit = 'LIMIT ' . $limit;
 		}
-		
+		else
+		{
+		        $sql_limit = '';        
+		}
 		$sql = 'SELECT id
 		               FROM jobs
 		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1
@@ -391,6 +394,7 @@ class Job
 		$conditions = '';
 		$_SESSION['keywords_array'] = array();
 		
+	        $kw1 = $kw2 = $extra_conditions = '';
 		if (strstr($keywords, ',') || strstr($keywords, ', '))
 		{
 			$tmp = explode(',', $keywords);

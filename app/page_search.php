@@ -5,7 +5,7 @@
 	}
 	else
 	{
-		if ($_POST['keywords'] && $_POST['keywords'] != '' && $_POST['keywords'] != 'caută un job')
+		if (!empty($_POST['keywords']) && $_POST['keywords'] != '' && $_POST['keywords'] != 'caută un job')
 		{
 			$keywords = $db->real_escape_string(trim($_POST['keywords']));
 		}
@@ -30,6 +30,8 @@
 	
 	// record search keywords
 	$_SESSION['search_keywords'] = $keywords;
+	
+	$is_home = false;
 
 	if ($keywords == '' || $keywords == ' ')
 	{
@@ -54,7 +56,7 @@
 	{
 		$template = 'home.tpl';
 	}
-	if ($_POST['keywords'])
+	if (!empty($_POST['keywords']))
 	{
 		// save recorded keywords, if available
 		if ($_SESSION['search_keywords'])

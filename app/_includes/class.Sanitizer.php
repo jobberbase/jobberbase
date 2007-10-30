@@ -67,7 +67,7 @@ class Sanitizer	{
 	}
 	
 
-	public function utf8_uri_encode( $utf8_string, $length = 0 ) {
+	public static function utf8_uri_encode( $utf8_string, $length = 0 ) {
 		$unicode = '';
 		$values = array();
 		$num_octets = 1;
