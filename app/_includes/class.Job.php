@@ -186,7 +186,9 @@ class Job
 		
 		if ($for_feed)
 		{
-			$conditions .=' AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) > 10';
+		        //need MySQL5
+			// $conditions .=' AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) > 10';
+			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
 		}
 		
 		if ($city_id && is_numeric($city_id))
@@ -266,7 +268,9 @@ class Job
 		
 		if ($for_feed)
 		{
-			$conditions .=' AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) > 10';
+		        //need MySQL 5.0
+			//$conditions .=' AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) > 10';
+			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
 		}
 		
 		if ($city_id && is_numeric($city_id))
@@ -316,7 +320,9 @@ class Job
 		
 		if ($for_feed)
 		{
-			$conditions .= ' AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) > 10';
+		        //need MySQL 5.0
+			//$conditions .=' AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) > 10'
+			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
 		}
 		
 		if ($limit > 0)
@@ -505,13 +511,19 @@ class Job
 		global $db;
 		// check if user has hit this page in the past hour
 		$ip = $_SERVER['REMOTE_ADDR'];
-		$sql = 'SELECT job_id
-		               FROM hits
-		               WHERE job_id = ' . $this->mId . ' AND ip = "' . $ip . '" AND TIMESTAMPDIFF(HOUR, created_on, NOW()) < ' . MAX_VISITS_PER_HOUR;
-		$result = $db->query($sql);
-		$row = $result->fetch_assoc();
+		// Need Mysql 5.0
+		//$sql = 'SELECT job_id
+		//    FROM hits
+		//     WHERE job_id = ' . $this->mId . ' AND ip = "' . $ip . '" AND TIMESTAMPDIFF(HOUR, created_on, NOW()) < ' . MAX_VISITS_PER_HOUR;
+
+                //extract number of hits on last hour
+                $sql = 'SELECT count(*) AS hits_last_hour '.
+                       'FROM hits WHERE job_id = ' . $this->mId . ' AND ip = "' . $ip . '" AND '.
+                       'created_on >= DATE_ADD(NOW(),INTERVAL -1 HOUR)';
+		$result = $db->QueryItem($sql);
+		
 		// ok to increase view count
-		if (empty($row))
+		if ($result < MAX_VISITS_PER_HOUR)
 		{
 			// update hits table
 			$sql = 'INSERT INTO hits (job_id, created_on, ip)
