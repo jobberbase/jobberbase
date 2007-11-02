@@ -19,7 +19,7 @@
  	<script src="{$BASE_URL}js/jquery.form.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/cmxforms.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/jquery.metadata.js" type="text/javascript"></script>
-	<script src="{$BASE_URL}js/jquery.validate.pack.js" type="text/javascript"></script>
+	<script src="{$BASE_URL}js/jquery.validate.pack.js" type="text/javascript" charset="iso-8859-1"></script>
 	<script src="{$BASE_URL}js/interface.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/functions.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/browser_detect.js" type="text/javascript"></script>

@@ -16,7 +16,7 @@
 			      var img = document.images[i];
 			      var imgName = img.src.toUpperCase();
 
-			      if (imgName == jobber_url.toUpperCase() + "IMG/BT-RSS.PNG")
+			      if (imgName == this.jobber_url.toUpperCase() + "IMG/BT-RSS.PNG")
 			      {
 			         var imgID = (img.id) ? "id='" + img.id + "' " : "";
 			         var imgClass = (img.className) ? "class='" + img.className + "' " : "";
@@ -34,6 +34,7 @@
 			      }
 			   }
 			}
+
 		},
 		
 		PerformSearch: function(url)

@@ -22,30 +22,33 @@
 	{literal}
 	<script type="text/javascript">
 		//<![CDATA[
+		
  		$(document).ready(function()
 		{
+		        var keywords = $('#keywords');
 			// setup search box
-			$('input#keywords').bind('click', function() {
-
-				if ($('#keywords').fieldValue() == 'search for a job')
+			keywords.bind('click', function() {
+				if (this.value == 'search for a job')
 				{
-					$(this).clearFields();
+					keywords.clearFields();
 				}
 			});
-			$('input#keywords').bind('blur', function() {  
-				if ($('#keywords').fieldValue() == 'search for a job' || $('#keywords').fieldValue() == '')
+
+			keywords.bind('blur', function() {  
+				if (this.value == 'search for a job' || this.value == '')
 				{
-					document.getElementById('keywords').value = 'search for a job';
+					this.value = 'search for a job';
 				}
 			});
 
 			// setup live search
-			$('#keywords').keyup(function(key) {
-				if ($('#keywords').fieldValue() == '')
+			keywords.keyup(function(key) {
+				if (this.value == '')
 				{
 					$('#job-listings').load('{/literal}{$BASE_URL}{literal}search/{/literal}{$current_category}{literal}|/');
 				}
-				var len = document.getElementById('keywords').value.length;
+				//var len = document.getElementById('keywords').value.length;
+				var len = this.value.length;
 			  if (key.keyCode != 9 && len >= 3)
 				{
 					$("#indicator").show();	
