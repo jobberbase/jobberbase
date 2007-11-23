@@ -378,7 +378,7 @@ class Job
 			$sql_limit = 'LIMIT ' . $limit;
 		}
 		$i = 0;
-		$sql = 'SELECT job_id, COUNT(id) as nr FROM job_applications GROUP BY job_id
+		$sql = 'SELECT job_id, COUNT(id) as nr FROM job_applications GROUP BY job_id 
 		               ORDER BY nr DESC ' . $sql_limit;
 		$result = $db->query($sql);
 		while ($row = $result->fetch_assoc())
@@ -511,15 +511,10 @@ class Job
 		global $db;
 		// check if user has hit this page in the past hour
 		$ip = $_SERVER['REMOTE_ADDR'];
-		// Need Mysql 5.0
-		//$sql = 'SELECT job_id
-		//    FROM hits
-		//     WHERE job_id = ' . $this->mId . ' AND ip = "' . $ip . '" AND TIMESTAMPDIFF(HOUR, created_on, NOW()) < ' . MAX_VISITS_PER_HOUR;
-
-                //extract number of hits on last hour
-                $sql = 'SELECT count(*) AS hits_last_hour '.
-                       'FROM hits WHERE job_id = ' . $this->mId . ' AND ip = "' . $ip . '" AND '.
-                       'created_on >= DATE_ADD(NOW(),INTERVAL -1 HOUR)';
+    //extract number of hits on last hour
+    $sql = 'SELECT count(*) AS hits_last_hour '.
+           'FROM hits WHERE job_id = ' . $this->mId . ' AND ip = "' . $ip . '" AND '.
+           'created_on >= DATE_ADD(NOW(),INTERVAL -1 HOUR)';
 		$result = $db->QueryItem($sql);
 		
 		// ok to increase view count

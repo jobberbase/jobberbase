@@ -6,13 +6,14 @@
  * @license    You are free to edit and use this work, but it would be nice if you always referenced the original author ;)
  *             (see license.txt).
  */
-        header('Content-Type: text/html; charset=UTF-8');
+  
+	header('Content-Type: text/html; charset=UTF-8');
         
  	ini_set('display_errors', 'On');
 	error_reporting(E_ALL ^ E_STRICT);
 
 	date_default_timezone_set('Europe/Bucharest');
-	//print_r($_SERVER);
+	
 	// MySQL + misc settings for local environment
 	if ($_SERVER['SERVER_NAME'] == 'localhost')
 	{
@@ -45,27 +46,32 @@
 	//define ('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . _APP_MAIN_DIR . '/');
 	define('APP_PATH',dirname(__FILE__).'/');
 
+  if(isset($_SERVER['SCRIPT_NAME'])) 
+	{
+  	define('_APP_MAIN_DIR',rtrim(dirname($_SERVER['SCRIPT_NAME']),'/'));
+  } 
+	else 
+	{
+		//define('_APP_MAIN_DIR','/jobberbase/app');
+		die('[config.php] Cannot determine APP_MAIN_DIR, please set manual and comment this line');
+  }
 
-
-
-        if(isset($_SERVER['SCRIPT_NAME'])) {
-            define('_APP_MAIN_DIR',rtrim(dirname($_SERVER['SCRIPT_NAME']),'/'));
-        } else {
-            //define('_APP_MAIN_DIR','/jobberbase/app');
-            die('[config.php] Cannot determine APP_MAIN_DIR, please set manual and comment this line');
-        }
-
-        if(isset($_SERVER['HTTP_HOST']) && isset($_SERVER['SERVER_PORT'])) {
-            if($_SERVER['SERVER_PORT'] == 80) {
-                define ('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . _APP_MAIN_DIR . '/');
-            } else {
-                define ('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'].':'.$_SERVER['SERVER_PORT'] . _APP_MAIN_DIR . '/');
-            }
-        } else {
-            //define ('BASE_URL', 'http://jobberbase.ro' . _APP_MAIN_DIR . '/');
-            die('[config.php] Cannot determine BASE_URL, please set manual and comment this line');
-        }
-	
+  if(isset($_SERVER['HTTP_HOST']) && isset($_SERVER['SERVER_PORT'])) 
+	{
+  	if($_SERVER['SERVER_PORT'] == 80) 
+    {
+      define ('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . _APP_MAIN_DIR . '/');
+    } 
+    else 
+    {
+      define ('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'].':'.$_SERVER['SERVER_PORT'] . _APP_MAIN_DIR . '/');
+    }
+  } 
+  else 
+  {
+    //define ('BASE_URL', 'http://jobberbase.ro' . _APP_MAIN_DIR . '/');
+    die('[config.php] Cannot determine BASE_URL, please set manual and comment this line');
+  }
 	
 	// Type of jobs. Values are the database ids.
 	define('JOBTYPE_FULLTIME', 1);
@@ -130,6 +136,4 @@
 			}
 		}
 	}
-
-	
 ?>
