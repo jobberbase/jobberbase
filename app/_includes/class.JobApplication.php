@@ -23,13 +23,9 @@ class JobApplication
 		global $db;
 		$ip = $_SERVER['REMOTE_ADDR'];
 		
-		//TIMESTAMPDIFF need MySQL 5.0
-		//$sql = 'SELECT id
-		//               FROM job_applications
-		//               WHERE ip = "' . $ip . '" AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) < 10';
 		$sql = 'SELECT id
 		               FROM job_applications
-		               WHERE ip = "' . $ip . '" AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
+		               WHERE ip = "' . $ip . '" AND NOW() < DATE_ADD(created_on,INTERVAL 10 MINUTE)';
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		if (empty($row))
