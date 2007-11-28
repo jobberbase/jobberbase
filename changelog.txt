@@ -1,4 +1,11 @@
-######## jobberbase changelog ########
+######## jobberBase changelog ########
+
+version 1.1 (11/28/2007):
+    * Modified the directory structure and moved the entire application into /app subdirectory.
+    * Added an alternate .htaccess that seems to work better on some big hosting companies.
+    * Cleaned up config.php of unnecessarry defines.
+    * Fixed a number of bugs reported on www.jobberbase.com/community/ (thanks to everyone!)
+
 
 version 1.0 (10/20/2007):
     * Translated www.jobber.ro into English.

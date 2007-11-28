@@ -1,3 +1,10 @@
+######## Useful links ########
+
+The blog: http://www.jobberbase.com/blog/
+The community (bug reports, fixes, etc.): http://www.jobberbase.com/community/
+jobberBase on Google Code: http://code.google.com/p/jobberbase/
+
+
 ######## Installation ########
 
 1. Make sure you have PHP 5+ and MySQL 4.1+ installed. Also, Apache module mod_rewrite should be enabled.
@@ -7,7 +14,7 @@
 3. Rename config.default.php into config.php
 
 4. Open config.php and update the following constants so they suit your environment:
-   - DB_HOST, DB_USER, DB_PASS, DB_NAME, JOBBER_URL, _APP_MAIN_DIR, NOTIFY_EMAIL, ADMIN_EMAIL, SITE_NAME
+   - DB_HOST, DB_USER, DB_PASS, DB_NAME, NOTIFY_EMAIL, ADMIN_EMAIL, SITE_NAME
 
 5. Following directories need write access:
    /uploads            (uploaded resumes are temporary stored here)
@@ -40,6 +47,8 @@ what you tried to do and what doesn't work. Thaaaaaank you! :)
 
 You may find me on the web at http://www.filipcte.ro/ or via e-mail: me@filipcte.ro
 
+P.S. your donations via PayPal are very much appreciated!
+
 =========================================================================================================
 
--- last updated: October 30, 08:00am
+-- last updated: November 28, 8pm
