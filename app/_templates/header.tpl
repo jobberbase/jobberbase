@@ -35,6 +35,8 @@
 		<div id="header">
 			<h1 id="logo"><a href="{$BASE_URL}" title="IT jobs">jobber</a></h1>
 			<ul id="top">
+				<li><a href="{$BASE_URL}ideal-job/" title="the ideal job">the ideal job</a></li>
+				<li>&bull;</li>
 				<li><a href="{$BASE_URL}widgets/" title="widgets">widgets</a></li>
 				<li>&bull;</li>
 				<li><a href="{$BASE_URL}about/" title="about us">about</a></li>

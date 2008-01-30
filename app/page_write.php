@@ -81,6 +81,10 @@
 			{
 				$url = 'http://' . $url;
 			}
+			if (!isset($city_id))
+			{
+				$city_id = -1;
+			}
 			$data = array('company' => $company,
 			              'url' => $url,
 			              'title' => $title,
@@ -135,6 +139,10 @@
 			if (!strstr($url, 'http://'))
 			{
 				$url = 'http://' . $url;
+			}
+			if (!isset($city_id))
+			{
+				$city_id = -1;
 			}
 			$data = array('company' => $company,
 			              'url' => $url,

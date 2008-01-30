@@ -833,3 +833,10 @@ label.request-label {
 #home-promo { background: url(../img/home-banner-bg.png) no-repeat; width: 757px; height: 66px; margin-top: 12px; text-align: center; padding-top: 8px; }
 #home-promo div { color: #0897C6; font-size: 20px; }
 #home-promo a { text-decoration: underline; font-size: 14px;}
+
+/* paginator */
+#job-listings .current_page{
+	font-weight: bold;
+	border: 1px solid #ccc;
+	padding: 1px 2px 1px 2px;
+}

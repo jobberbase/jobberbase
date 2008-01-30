@@ -143,6 +143,30 @@ class Job
 								 'days_old' => $this->mDaysOld);
 		return $job;
 	}
+
+	// Get a job post's basic information for admin
+	public function GetBasicInfoAdmin()
+	{
+		$job = array('id' => $this->mId,
+			           'type_id' => $this->mTypeId,
+			           'category_id' => $this->mCategoryId,
+ 			           'category_name' => $this->mCategoryName,
+								 'company' => stripslashes($this->mCompany),
+								 'url' => stripslashes($this->mUrl),
+								 'title' => stripslashes($this->mTitle),
+								 'url_title' => stripslashes($this->mUrlTitle),
+								 'location' => $this->mLocation,
+								 'description' => stripslashes($this->mDescription),
+								 'created_on' => stripslashes($this->mCreatedOn),
+								 'closed_on' => stripslashes($this->mClosedOn),
+								 'apply' => stripslashes($this->mApply),
+								 'city_id' => $this->mCityId,
+								 'mysql_date' => $this->mMySqlDate,
+								 'location_outside_ro' => $this->mLocationOutsideRo,
+								 'days_old' => $this->mDaysOld,
+								 'is_active' => $this->mIsActive);
+		return $job;
+	}
 	
 	// Get all job posts (optionally from a specific type and/or category)
 	// $type_id: freelance/fulltime/parttime
@@ -186,8 +210,6 @@ class Job
 		
 		if ($for_feed)
 		{
-		        //need MySQL5
-			// $conditions .=' AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) > 10';
 			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
 		}
 		
@@ -231,6 +253,92 @@ class Job
 		return $jobs;
 	}
 	
+	//Get all inactive jobs for admin 
+	public function GetInactiveJobs( $limit = false)
+	{
+		global $db;
+		$jobs = array();
+				
+		if ($limit > 0)
+		{
+			$sql_limit = 'LIMIT ' . $limit;
+		}
+		else
+		{
+		  $sql_limit = '';        
+		}
+		$sql = 'SELECT id
+		               FROM jobs
+		               WHERE 1 AND is_temp = 0 AND is_active = 0
+		               ORDER BY created_on DESC ' . $sql_limit;
+		$result = $db->query($sql);
+		while ($row = $result->fetch_assoc())
+		{
+			$current_job = new Job($row['id']);
+			$jobs[] = $current_job->GetBasicInfoAdmin();
+		}
+		return $jobs;
+	}
+	
+	//Get all inactive/active jobs for a specific category for admin
+	// $type_id: freelance/fulltime/parttime
+	// $categ_id: programatori/designeri/etc.
+	// $limit: (int) how many results
+	public function GetAllForCategoryJobsAdmin($type_id, $categ_id = false, $limit = false)
+	{
+		global $db;
+		$jobs = array();
+		$conditions = '';
+		
+		// if $categ_id is, in fact, the category's var_name, 
+		// get the categs id
+		if (!is_numeric($categ_id))
+		{
+			$categ_id = $this->GetCategId($categ_id);
+		}
+		// if $type_id is, in fact, the type's var_name, 
+		// get the type's id
+		if (!is_numeric($type_id))
+		{
+			$type_id = $this->GetTypeId($type_id);
+		}
+		
+		if (is_numeric($type_id) && $type_id != 0)
+		{
+			$conditions .= ' AND type_id = ' . $type_id;
+		}
+		if (is_numeric($categ_id) && $categ_id != 0)
+		{
+			$conditions .= ' AND category_id = ' . $categ_id;
+		}
+
+		if ($type_id && is_numeric($type_id))
+		{
+			$conditions .= ' AND type_id = ' . $type_id;
+		}
+
+		if ($limit > 0)
+		{
+			$sql_limit = 'LIMIT ' . $limit;
+		}
+		else
+		{
+		  $sql_limit = '';        
+		}
+		$sql = 'SELECT id
+		               FROM jobs
+		               WHERE 1 ' . $conditions . ' AND is_temp = 0 
+		               ' . $sql_limit;
+		$result = $db->query($sql);
+		while ($row = $result->fetch_assoc())
+		{
+			$current_job = new Job($row['id']);
+			$jobs[] = $current_job->GetBasicInfoAdmin();
+		}
+		return $jobs;
+	}
+	
+	
 	// get jobs for API
 	public function ApiGetJobs($type_id = false, $categ_id = false, $limit = false, $random, $days_behind, $for_feed = false, $city_id = false)
 	{
@@ -268,8 +376,6 @@ class Job
 		
 		if ($for_feed)
 		{
-		        //need MySQL 5.0
-			//$conditions .=' AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) > 10';
 			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
 		}
 		
@@ -320,8 +426,6 @@ class Job
 		
 		if ($for_feed)
 		{
-		        //need MySQL 5.0
-			//$conditions .=' AND TIMESTAMPDIFF(MINUTE, created_on, NOW()) > 10'
 			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
 		}
 		
@@ -661,6 +765,36 @@ class Job
 		$db->query($sql);
 	}
 	
+	// Delete a job post and all aditional information
+	public function DeleteJobAdmin()
+	{
+		global $db;
+			
+		$db->autocommit(FALSE);
+		
+		$sql = 'DELETE FROM hits WHERE job_id  = ' . $this->mId;
+		$res = $db->query($sql);	
+		
+		$sql = 'DELETE FROM job_applications WHERE job_id  = ' . $this->mId;
+		$res = $res && $db->query($sql);
+		
+		$sql = 'DELETE FROM spam_reports WHERE job_id  = ' . $this->mId;
+		$res = $res && $db->query($sql);
+
+		$sql = 'DELETE FROM jobs WHERE id  = ' . $this->mId;
+		$res = $res && $db->query($sql);
+		
+		if($res != false)
+		{
+			$db->commit();
+		}
+		else
+		{
+			$db->rollback();
+		}
+		$db->autocommit(TRUE);
+		return ($res==false)?$res:true;
+	}
 	public function MakeValidUrl($string)
 	{
 		$string = urlencode($string);
@@ -722,7 +856,7 @@ class Job
 	public function IsValidCategory($categ)
 	{
 		global $db;
-		$sql = 'SELECT id FROM categories WHERE name = "' . $categ . '"';
+		$sql = 'SELECT id FROM categories WHERE var_name = "' . $categ . '"';
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		if (!empty($row))

@@ -37,6 +37,12 @@
 		$smarty->assign('jobs_count', $job->CountJobs());
 	}
 	$the_jobs = $job->GetJobs(0, $id, 0, 0, 0, false, $city_id, $type_id);
+	
+	$paginator = new Paginator($the_jobs, JOBS_PER_PAGE, @$_REQUEST['p']);
+  $paginator->setLink(BASE_URL . "jobs/$id");
+  $the_jobs = $paginator->paginate();
+
+	$smarty->assign("pages",$paginator->pages_link);
 
 	$smarty->assign('jobs', $the_jobs);
 	$smarty->assign('current_category', $id);

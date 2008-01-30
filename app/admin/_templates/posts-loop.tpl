@@ -11,15 +11,15 @@
 {if !$jobs}
 <div id="no-ads">
 	{if $CURRENT_PAGE != 'search'}
-	There are currently no available jobs for <strong>{$current_category}</strong>.<br />
-	Do you wish to <a href="{$BASE_URL}post/">publish one</a>?
+	No jobs, yet.<br />
 	{else}
 	No jobs were found.<br />
 	{/if}
 </div><!-- #no-ads -->
 {/if}
-{foreach item=job from=$jobs}
-	<tr>
+{foreach item=job from=$jobs name=tmp}
+
+	<tr id="item{$job.id}">
 		<td>
 			{if $job.type_id == $smarty.const.JOBTYPE_FULLTIME}
 			<img src="{$BASE_URL}img/icon-fulltime.png" alt="full-time" />
@@ -31,6 +31,14 @@
 			<a href="{$BASE_URL}job/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">at</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">in</span> {$job.location}{/if}
 		</td>
 		<td class="time-posted"><img src="{$BASE_URL}img/clock.gif" alt="" /> {$job.created_on}</td>
+		<td style="font-size: 11px;">
+			{if $job.is_active == 0}
+				<a id="activateLink{$job.id}" href="javascript:void(0);" onclick="Jobber.Activate('{$BASE_URL_ADMIN}activate/', {$job.id}, {if $CURRENT_PAGE == ''}1{else}0{/if});" title="activate"><img src="{$BASE_URL}img/icon_accept.gif" alt="activate" /></a>
+			{else}
+				<a id="deactivateLink{$job.id}" href="javascript:void(0);" onclick="Jobber.Deactivate('{$BASE_URL_ADMIN}deactivate/', {$job.id});" title="deactivate"><img src="{$BASE_URL}img/icon_deactivate.gif" alt="deactivate" /></a>
+			{/if}&nbsp;
+			<a href="javascript:void(0);" onclick="Jobber.Delete('{$BASE_URL_ADMIN}delete/', {$job.id});" title="delete"><img src="{$BASE_URL}img/icon-delete.png" alt="delete" /></a>
+		</td>
 	</tr>
 {/foreach}
 </table>

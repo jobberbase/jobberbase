@@ -3,6 +3,8 @@
 	Jobber = {
 		
 		jobber_url: "",
+		jobber_admin_url: "",
+		job_id: "",
 		
 		FixPng: function()
 		{
@@ -120,6 +122,88 @@
 					$("#report-spam-response").html(status);
 			  }
 			});
+		},
+		DeactivateLink: function()
+		{	
+			
+			var url = Jobber.jobber_admin_url+'deactivate/';
+			Jobber.Deactivate(url, Jobber.job_id);
+			
+		},
+		ActivateLink: function()
+		{	
+			
+			var url = Jobber.jobber_admin_url+'activate/';
+			Jobber.Activate(url, Jobber.job_id, 0);
+			
+		},
+		Activate: function(url, job_id, is_first_page)
+		{
+			$.ajax({
+			  type: "POST",
+			  url: url,
+			  data: "job_id=" + job_id,
+			  success: function(msg) {
+			   	if (msg != "0")
+					{
+						var currentRowId = 'item'+job_id;
+						var currentLinkId = 'activateLink'+job_id;
+						if(is_first_page == 1)
+						{
+							$("#"+currentRowId).css({ display: "none" });
+						}
+						else
+						{
+							 Jobber.job_id = job_id;
+							 document.getElementById(currentLinkId).setAttribute('onclick', Jobber.DeactivateLink);
+							 document.getElementById(currentLinkId).onclick = Jobber.DeactivateLink; 
+							 document.getElementById(currentLinkId).innerHTML = '<img src="'+Jobber.jobber_url+'img/icon_deactivate.gif" alt="deactivate" />';
+							 document.getElementById(currentLinkId).id = 'deactivateLink'+job_id;
+						}	
+					}
+			  }
+			});
+		},
+		
+		Deactivate: function(url, job_id)
+		{
+			$.ajax({
+			  type: "POST",
+			  url: url,
+			  data: "job_id=" + job_id,
+			  success: function(msg) {
+			   	if (msg != "0")
+					{
+						var currentLinkId = 'deactivateLink'+job_id;
+						Jobber.job_id = job_id;
+						document.getElementById(currentLinkId).setAttribute('onclick', Jobber.ActivateLink);
+						document.getElementById(currentLinkId).onclick = Jobber.ActivateLink;
+						document.getElementById(currentLinkId).innerHTML = '<img src="'+Jobber.jobber_url+'img/icon_accept.gif" alt="activate" />';
+						document.getElementById(currentLinkId).id = 'activateLink'+job_id;
+					}
+			  }
+			});
+		},
+		
+		Delete: function(url, job_id)
+		{
+			if(confirm('Are you sure you want to delete this post?'))
+			{
+				$.ajax({
+				  type: "POST",
+				  url: url,
+				  data: "job_id=" + job_id,
+				  success: function(msg) {
+				   	if (msg != "0")
+						{
+							var currentJobId = 'item'+job_id;
+							$("#"+currentJobId).css({ display: "none" });
+						}
+				  }
+				});
+			}
+			else
+				return false;
 		}
 	}
 })();

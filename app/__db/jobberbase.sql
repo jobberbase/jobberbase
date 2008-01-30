@@ -1,17 +1,37 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.1.1
+-- version 2.11.2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2007 at 12:27 AM
--- Server version: 5.0.37
--- PHP Version: 5.2.1
+-- Generation Time: Jan 30, 2008 at 12:14 AM
+-- Server version: 5.0.41
+-- PHP Version: 5.2.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
 -- Database: `jobberbase`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(11) NOT NULL auto_increment,
+  `username` varchar(16) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -131,6 +151,24 @@ INSERT INTO `cities` (`id`, `name`, `ascii_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `downloads`
+--
+
+CREATE TABLE IF NOT EXISTS `downloads` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `created_on` datetime NOT NULL,
+  `ip` varchar(15) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `downloads`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hits`
 --
 
@@ -145,11 +183,6 @@ CREATE TABLE IF NOT EXISTS `hits` (
 -- Dumping data for table `hits`
 --
 
-INSERT INTO `hits` (`job_id`, `created_on`, `ip`) VALUES
-(1, '2007-10-20 13:44:13', '127.0.0.1'),
-(2, '2007-10-20 13:47:46', '127.0.0.1'),
-(1, '2007-10-21 21:11:18', '::1'),
-(1, '2007-10-22 00:26:15', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -178,15 +211,21 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   PRIMARY KEY  (`id`),
   KEY `type_id` (`type_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `jobs`
 --
 
 INSERT INTO `jobs` (`id`, `type_id`, `category_id`, `title`, `description`, `company`, `city_id`, `url`, `apply`, `created_on`, `is_temp`, `is_active`, `views_count`, `auth`, `outside_location`, `poster_email`, `apply_online`) VALUES
-(1, 1, 1, 'web developer', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 3, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
-(2, 3, 2, 'Illustrator/Photoshop expert', 'Could you redraw in Illustrator da Vinci\\''s Gioconda, blindfolded?\r\nLet us know! :)', 'UnrealExpectations', -1, 'http://unrealexpectations.com', '', '2007-10-20 13:47:05', 0, 1, 1, '6ebcfde637d98a9738c024c6074e945d', '', 'jobs@unrealexpectations.com', 1);
+(1, 1, 1, 'web developer', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 6, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
+(2, 3, 2, 'Illustrator/Photoshop expert', 'Could you redraw in Illustrator da Vinci\\''s Gioconda, blindfolded?\r\nLet us know! :)', 'UnrealExpectations', -1, 'http://unrealexpectations.com', '', '2007-10-20 13:47:05', 0, 1, 3, '6ebcfde637d98a9738c024c6074e945d', '', 'jobs@unrealexpectations.com', 1),
+(4, 1, 1, 'web developer 3', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 7, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
+(5, 1, 1, 'web developer 2', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 6, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
+(6, 1, 1, 'asdfasdf', 'asdfsdf', 'asdfasd', -1, 'http://asdf', '', '2007-12-12 10:15:58', 1, 0, 0, '04b0a92981efa5d169349dba0cc77ebb', 'testing, uk', 'fs@asdf.com', 1),
+(7, 1, 1, 'asdf', 'asdf', 'asdf', -1, 'http://asdf', '', '2007-12-12 10:18:25', 1, 0, 0, '7b16111f6160bb83ddc255ac13dee5f7', 'sdfasd', 'asdf', 1),
+(8, 1, 1, 'asdfasdf', 'asdfsdf', 'asdfasd', -1, 'http://asdf', '', '2007-12-12 10:20:50', 1, 0, 0, '3ae01ae904b6b0cb361dcbf438123e5e', 'testing, uk', 'fs@asdf.com', 1),
+(9, 1, 1, 'asdfasdf', 'asdfsdf', 'asdfasd', -1, 'http://asdf', '', '2007-12-12 10:21:23', 1, 0, 0, '3472f6a1151a315227d2a27c731328b1', 'testing, uk', 'fs@asdf.com', 1);
 
 -- --------------------------------------------------------
 
@@ -200,14 +239,127 @@ CREATE TABLE IF NOT EXISTS `job_applications` (
   `created_on` datetime NOT NULL,
   `ip` varchar(15) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `job_applications`
 --
 
-INSERT INTO `job_applications` (`id`, `job_id`, `created_on`, `ip`) VALUES
-(1, 1, '2007-10-20 13:44:40', '127.0.0.1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_params`
+--
+
+CREATE TABLE IF NOT EXISTS `job_params` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `value` varchar(50) NOT NULL,
+  `categ` varchar(20) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+
+--
+-- Dumping data for table `job_params`
+--
+
+INSERT INTO `job_params` (`id`, `value`, `categ`) VALUES
+(1, 'php/mysql', 'know-how'),
+(2, '.net', 'know-how'),
+(3, 'xhtml/css', 'know-how'),
+(4, 'graphic design', 'know-how'),
+(5, 'small team', 'company'),
+(6, 'large company', 'company'),
+(7, 'ruby/rails', 'know-how'),
+(8, 'oracle', 'know-how'),
+(9, 'c/c++/c#', 'know-how'),
+(10, 'javascript/ajax', 'know-how'),
+(11, 'java', 'know-how'),
+(12, 'flash', 'know-how'),
+(13, 'junior', 'level'),
+(14, 'senior', 'level'),
+(15, 'full-time', 'type'),
+(16, 'part-time', 'type'),
+(17, 'freelance', 'type'),
+(18, 'sysadmin', 'know-how'),
+(19, 'linux/server admin', 'know-how'),
+(20, 'erp/sap', 'know-how'),
+(21, 'copywriting/editare', 'know-how'),
+(22, 'seo/sem', 'know-how'),
+(23, 'manager', 'know-how'),
+(24, 'work from home', 'company'),
+(25, 'work at the office', 'company'),
+(28, 'internship', 'type'),
+(29, 'medium', 'level'),
+(30, 'python', 'know-how'),
+(31, 'bonuses', 'company'),
+(32, 'training', 'company');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_requests`
+--
+
+CREATE TABLE IF NOT EXISTS `job_requests` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `ip` varchar(15) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `job_requests`
+--
+
+INSERT INTO `job_requests` (`id`, `name`, `email`, `created_on`, `ip`) VALUES
+(1, 'asdf', 'me@filipcte.ro', '2008-01-30 00:10:28', '127.0.0.1'),
+(2, 'asdf', 'me@filipcte.ro', '2008-01-30 00:10:48', '127.0.0.1'),
+(3, 'asdf', 'me@filipcte.ro', '2008-01-30 00:11:56', '127.0.0.1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_requests_params`
+--
+
+CREATE TABLE IF NOT EXISTS `job_requests_params` (
+  `request_id` int(10) unsigned NOT NULL,
+  `param_id` int(10) unsigned NOT NULL,
+  KEY `request_id` (`request_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `job_requests_params`
+--
+
+INSERT INTO `job_requests_params` (`request_id`, `param_id`) VALUES
+(1, 17),
+(1, 31),
+(1, 5),
+(1, 32),
+(1, 10),
+(1, 1),
+(1, 3),
+(1, 14),
+(2, 17),
+(2, 31),
+(2, 5),
+(2, 32),
+(2, 10),
+(2, 1),
+(2, 3),
+(2, 14),
+(3, 17),
+(3, 31),
+(3, 5),
+(3, 32),
+(3, 10),
+(3, 1),
+(3, 3),
+(3, 14);
 
 -- --------------------------------------------------------
 
@@ -220,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `searches` (
   `keywords` varchar(100) NOT NULL,
   `created_on` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `searches`
@@ -245,8 +397,6 @@ CREATE TABLE IF NOT EXISTS `spam_reports` (
 -- Dumping data for table `spam_reports`
 --
 
-INSERT INTO `spam_reports` (`id`, `the_time`, `ip`, `job_id`) VALUES
-(1, '2007-10-20 11:58:25', '127.0.0.1', 309);
 
 -- --------------------------------------------------------
 

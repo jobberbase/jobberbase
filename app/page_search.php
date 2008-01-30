@@ -14,6 +14,7 @@
 			$tmp = explode('|', $id);
 			$categ = trim($tmp[0]);
 			$keywords = trim($tmp[1]);
+			$keywords = urldecode($keywords);
 			// clicked on a city on the map
 			if (isset($tmp[2]) && $tmp[2] == 'map')
 			{

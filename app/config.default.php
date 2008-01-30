@@ -8,12 +8,12 @@
  */
   
 	header('Content-Type: text/html; charset=UTF-8');
-        
- 	ini_set('display_errors', 'On');
+       
+	ini_set('display_errors', 'On');
 	error_reporting(E_ALL ^ E_STRICT);
 
 	date_default_timezone_set('Europe/Bucharest');
-	
+
 	// MySQL + misc settings for local environment
 	if ($_SERVER['SERVER_NAME'] == 'localhost')
 	{
@@ -34,25 +34,29 @@
 		define('LOCATION', 'online');
 		define('ENVIRONMENT', 'prod');
 	}
-	
+
 	// Global settings definitions
-	define('NOTIFY_EMAIL','hello@jobberbase.com');
-	define('ADMIN_EMAIL','hello@jobberbase.com');
+	define('NOTIFY_EMAIL','YOUR_EMAIL_HERE@gmail.com');
+	define('ADMIN_EMAIL','YOUR_EMAIL_HERE@gmail.com');
 	define('SITE_NAME', 'jobberBase');
-	
+
 	define('MAX_CV_SIZE', 3000000); // approx. 3 mb
 	define('FILE_UPLOAD_DIR', 'uploads/');
+	define('JOBS_PER_PAGE', 50);
+	
+	// Type of jobs. Values are the database ids.
+	define('JOBTYPE_FULLTIME', 1);
+	define('JOBTYPE_PARTTIME', 2);
+	define('JOBTYPE_FREELANCE', 3);
 
-	//define ('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . _APP_MAIN_DIR . '/');
 	define('APP_PATH',dirname(__FILE__).'/');
 
   if(isset($_SERVER['SCRIPT_NAME'])) 
 	{
-  	define('_APP_MAIN_DIR',rtrim(dirname($_SERVER['SCRIPT_NAME']),'/'));
+  	define('_APP_MAIN_DIR', rtrim(dirname($_SERVER['SCRIPT_NAME']),'/'));
   } 
 	else 
 	{
-		//define('_APP_MAIN_DIR','/jobberbase/app');
 		die('[config.php] Cannot determine APP_MAIN_DIR, please set manual and comment this line');
   }
 
@@ -69,14 +73,9 @@
   } 
   else 
   {
-    //define ('BASE_URL', 'http://jobberbase.ro' . _APP_MAIN_DIR . '/');
     die('[config.php] Cannot determine BASE_URL, please set manual and comment this line');
   }
 	
-	// Type of jobs. Values are the database ids.
-	define('JOBTYPE_FULLTIME', 1);
-	define('JOBTYPE_PARTTIME', 2);
-	define('JOBTYPE_FREELANCE', 3);
 	
 	// Function and classes includes
 	require_once '_includes/function.validate_email.php';
@@ -90,6 +89,8 @@
 	require_once '_includes/class.Sanitizer.php';
 	require_once '_includes/class.Db.php';
 	require_once '_includes/class.Job.php';
+	require_once '_includes/class.JobRequest.php';
+	require_once '_includes/class.Paginator.php';
 	require_once '_includes/class.Feed.php';
 	require_once '_includes/class.SpamReport.php';
 	require_once '_includes/class.Api.php';
