@@ -82,7 +82,7 @@ class Postman
 			$msg .= "\n\n\n";
 		}
 		$msg .= $job_title;
-		$msg .= "\n\n" . $data['title'] . " la " . $data['company'];
+		$msg .= "\n\n" . $data['title'] . " at " . $data['company'];
 		$msg .= "\n\n" . $data['description'];
 		$msg .= "\n\nURL: " . $data['url'];
 		$msg .= "\n\n---\Published by: " . $data['poster_email'];
@@ -138,7 +138,7 @@ class Postman
 		$subject = '[SPAM on ' . SITE_NAME . '] ' . $job_title;
 		$msg .= "Following ad was reported as false/spam:\n--\n\n";
 		$msg .= $job_title;
-		$msg .= "\n\n" . $data['title'] . " la " . $data['company'];
+		$msg .= "\n\n" . $data['title'] . " at " . $data['company'];
 		$msg .= "\n\n" . $data['description'];
 		$msg .= "\n\n---\nPublished by: " . $data['poster_email'];
 		$msg .= "\n---\nEdit: " . BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
