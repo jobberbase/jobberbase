@@ -42,7 +42,7 @@
 		PerformSearch: function(url)
 		{
 			clearTimeout(window.search_timer);	
-			$('#job-listings').load(url + $('#keywords').fieldValue() + '/');	
+			$('#job-listings').load(url + encodeURIComponent($('#keywords').fieldValue()) + '/');	
 			$("#indicator").hide();	
 		},
 		

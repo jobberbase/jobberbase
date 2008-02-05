@@ -1,20 +1,25 @@
 <?php
+
+	if (key_exists('keywords', $_POST)) {
+		$requestKeywords = str_replace('"', '', urldecode($_POST['keywords']));
+	}
+
 	if ($id != '' && !strstr($id, '|'))
 	{
 		$keywords = $db->real_escape_string(trim($id));
 	}
 	else
 	{
-		if (!empty($_POST['keywords']) && $_POST['keywords'] != '' && $_POST['keywords'] != 'caută un job')
+		if (!empty($requestKeywords) && $requestKeywords != $translations['search']['default'])
 		{
-			$keywords = $db->real_escape_string(trim($_POST['keywords']));
+			$keywords = $db->real_escape_string(trim($requestKeywords));
 		}
 		else if (strstr($id, '|'))
 		{
 			$tmp = explode('|', $id);
 			$categ = trim($tmp[0]);
 			$keywords = trim($tmp[1]);
-			$keywords = urldecode($keywords);
+			$keywords = str_replace('"', '', urldecode($keywords));
 			// clicked on a city on the map
 			if (isset($tmp[2]) && $tmp[2] == 'map')
 			{
@@ -57,7 +62,7 @@
 	{
 		$template = 'home.tpl';
 	}
-	if (!empty($_POST['keywords']))
+	if (!empty($requestKeywords))
 	{
 		// save recorded keywords, if available
 		if ($_SESSION['search_keywords'])
@@ -66,7 +71,7 @@
 			$search->Save();
 			unset($_SESSION['search_keywords']);
 		}
-		$smarty->assign('keywords', stripslashes(htmlentities($_POST['keywords'], ENT_QUOTES)));
+		$smarty->assign('keywords', stripslashes(htmlentities($requestKeywords, ENT_QUOTES)));
 		$template = 'search.tpl';
 	}
 	else if ($id != '' && !strstr($id, '|'))
