@@ -1,0 +1,44 @@
+#header ul {
+	position: absolute;
+	right: 0;
+	top: 80px;
+}
+#header ul li {
+	float: left;
+	padding-left: 20px;
+}
+#header ul li.selected {
+	font-weight: bold;
+}
+
+#publish_form .text_field {
+	width: 700px;
+}
+#publish_form .textarea_field_small {
+	width: 340px;
+}
+#publish_form .textarea_field {
+	width: 700px;
+}
+#publish_form .submit_button {
+	background-color: #0099CC;
+	color: #fff;
+	border: 1px solid #009988;
+	cursor: pointer;
+	cursor: hand;
+	font-family:Helvetica,Arial,sans-serif;
+	font-size:12px;
+	padding:5px;
+}
+.sidebar_page_edit {
+	padding-top: 430px;
+}
+table {
+	line-height: auto;
+}
+.form_error {
+	display: block;
+	background: url(../../img/exclamation.png) no-repeat left center;
+	padding: 10px 26px;
+	color: #E86857;
+}
