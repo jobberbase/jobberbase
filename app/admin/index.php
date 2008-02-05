@@ -98,6 +98,16 @@
 			$template = 'error.tpl';
 			$flag = 1;
 			break;
+
+		case 'pages':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
+			require_once 'page_pages.php';
+			$flag = 1;
+			break;
 		
 		default: 
 			$flag = 0;	

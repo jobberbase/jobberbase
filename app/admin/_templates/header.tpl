@@ -13,9 +13,13 @@
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/" />
 	{/if}
 	<link rel="stylesheet" href="{$BASE_URL}css/screen.css" type="text/css" media="screen" />
-	<script src="{$BASE_URL}js/jquery.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="{$BASE_URL_ADMIN}css/screen.css" type="text/css" media="screen" />
+	{if $editor}
+	<script src="{$BASE_URL_ADMIN}js/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+	{/if}
+	<script src="{$BASE_URL_ADMIN}js/jquery.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/functions.js" type="text/javascript"></script>
-	<script src="{$BASE_URL}js/browser_detect.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}js/main.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -27,7 +31,12 @@
 		{/if}
 		<div id="header">
 			<h1 id="logo"><a href="{$BASE_URL_ADMIN}home/" title="IT jobs">jobber</a></h1>
-			
+			{if $isAuthenticated == 1}
+			<ul>
+				<li {if $current_category == 'pages'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}pages">Pages</a></li>
+				<li><a href="{$BASE_URL_ADMIN}logout/">Logout &raquo;</a></li>
+			</ul>
+			{/if}
 		</div><!-- #header -->
 		
     <div id="categs-nav">
@@ -40,9 +49,3 @@
     	{/if}
 		</div><!-- #categs-nav -->
 		<div class="clear"></div>
-		
-		<div id="sidebar">
-			{if $isAuthenticated == 1}
-				<a href="{$BASE_URL_ADMIN}logout/">Logout &raquo;</a>
-			{/if}
-		</div><!-- #sidebar -->
