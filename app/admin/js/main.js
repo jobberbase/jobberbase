@@ -84,6 +84,16 @@
 					return false;
 				});
 		}
+		console.log($('#page_has_form')
+			.bind('change', function(){
+				console.log(this);
+				$(this)
+					.parent()
+					.parent()
+					.parent()
+					.nextAll()
+					.toggleClass('hidden');
+			}));
 	};
 	$(window).bind('load', jobberBase.editor);
 })();

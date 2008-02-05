@@ -86,8 +86,13 @@
 								<td colspan="2"><textarea id="page_content" name="page_content" class="textarea_field mceEditor" rows="40">{$defaults.page_content}</textarea></td>
 							</tr>
 							<tr>
-								<td colspan="2"><label><input type="checkbox" name="page_has_form" value="1"{if $defaults.page_has_form == '1'} checked="checked"{/if} /> Has contact form?</label></td>
+								<td colspan="2"><label><input type="checkbox" id="page_has_form" name="page_has_form" value="1"{if $defaults.page_has_form == '1'} checked="checked"{/if} /> Has contact form?</label></td>
 							</tr>
+							<tr{if $defaults.page_has_form != '1'} class="hidden"{/if}>
+								<td colspan="2"><label for="page_form_message">Form message</label></td>
+							</tr>
+							<tr{if $defaults.page_has_form != '1'} class="hidden"{/if}>
+								<td colspan="2"><textarea id="page_form_message" name="page_form_message" class="textarea_field mceEditor" rows="20">{$defaults.page_form_message}</textarea></td>
 							</tr>
 						</table>
 					</fieldset>

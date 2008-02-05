@@ -52,7 +52,8 @@
 				'ideal-job',
 				'rss',
 				'companies',
-				'search'
+				'search',
+				'admin'
 			);
 			$categories = get_categories();
 			foreach ($categories as $category) {
@@ -80,8 +81,8 @@
 						id != ' . $row['id'] : '' 
 						) . '
 				');
-				$isPage = $result->fetch_assoc();
-				if (!empty($isPage) ||  in_array($url, $reserved)) {
+				$isDuplicate = $result->fetch_assoc();
+				if (!empty($isDuplicate) ||  in_array($url, $reserved)) {
 					$errors['page_url'] = 'The URL is already in use. Please select another URL';
 				}
 			}
@@ -103,7 +104,8 @@
 							\'' . $db->real_escape_string($defaults['page_description']) . '\',
 							\'' . $db->real_escape_string($defaults['page_title']) . '\',
 							\'' . $db->real_escape_string($defaults['page_content']) . '\',
-							\'' . (empty($defaults['page_has_form']) ? '0' : '1') . '\'
+							\'' . (empty($defaults['page_has_form']) ? '0' : '1') . '\',
+							\'' . $db->real_escape_string($defaults['page_form_message']) . '\'
 						)
 				');
 				header('Location: ' . BASE_URL . 'pages/');
@@ -117,7 +119,8 @@
 				'page_description' => $row['description'],
 				'page_title' => $row['title'],
 				'page_content' => $row['content'],
-				'page_has_form' => $row['has_form']
+				'page_has_form' => $row['has_form'],
+				'page_form_message' => $row['form_message']
 			);
 		}
 		$smarty->assign('defaults', $defaults);

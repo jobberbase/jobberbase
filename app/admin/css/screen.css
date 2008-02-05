@@ -42,3 +42,6 @@ table {
 	padding: 10px 26px;
 	color: #E86857;
 }
+.hidden {
+	display: none;
+}

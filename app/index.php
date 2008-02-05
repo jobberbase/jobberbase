@@ -111,33 +111,6 @@
 			require_once 'page_rss.php';
 			$flag = 1;
 			break;
-
-		// static 'about' page
-		case 'about':
-			$html_title = 'About Us / ' . SITE_NAME;
-			$template = 'about.tpl';
-			$flag = 1;
-			break;
-
-		// static 'contact' page
-		case 'contact':
-			$html_title = 'Contact Us / ' . SITE_NAME;
-			$template = 'contact.tpl';
-			$flag = 1;
-			break;
-
-		// send contact message (ajaxified)
-		case 'contact-msg':
-			require_once 'page_contact.php';
-			$flag = 1;
-			break;
-
-		// static 'widget' page
-		case 'widgets':
-			$html_title = 'Widgets / ' . SITE_NAME;
-			$template = 'widgets.tpl';
-			$flag = 1;
-			break;
 			
 		case 'stats':
 			require_once '_includes/class.Stats.php';
@@ -180,7 +153,25 @@
 			break;
 		
 		default: 
-			$flag = 0;	
+			$result = $db->query('
+				SELECT 
+					* 
+				FROM 
+					pages 
+				WHERE 
+					`url` = \'' . $db->real_escape_string($page) . '\'
+			');
+			$pageData = $result->fetch_assoc();
+			if (is_array($pageData)) {
+				require_once 'page_page.php';
+				$html_title = $pageData['page_title'] . ' - ' . SITE_NAME;
+				$meta_keywords = $pageData['keywords'];
+				$meta_description = $pageData['description'];
+				$template = 'page.tpl';
+				$flag = 1;
+			} else {
+				$flag = 0;
+			}	
 			break;
 	}
 	// if page not found
