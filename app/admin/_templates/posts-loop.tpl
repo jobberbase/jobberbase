@@ -28,7 +28,7 @@
 			{elseif $job.type_id == $smarty.const.JOBTYPE_FREELANCE}
 			<img src="{$BASE_URL}img/icon-freelance.png" alt="freelance" />
 			{/if}
-			<a href="{$BASE_URL}job/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">at</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">in</span> {$job.location}{/if}
+			<a href="{$BASE_URL_ADMIN}job/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">at</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">in</span> {$job.location}{/if}
 		</td>
 		<td class="time-posted"><img src="{$BASE_URL}img/clock.gif" alt="" /> {$job.created_on}</td>
 		<td style="font-size: 11px;">

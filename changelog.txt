@@ -6,6 +6,9 @@ version 1.4:
 	* Added: simple page editing for static pages
 
 version 1.3 (30/01/2008):
+    * Fixed more search-related bugs (thanks to Mitchell Lane <mdlane@alumni.clemson.edu>)
+
+version 1.3 (30/01/2008):
     * Added an admin panel (thanks to Lavinia Creivean <links_clm@yahoo.com>)
     * Added a survey page: the ideal job (as seen on www.jobber.ro/jobul-ideal/)
     * Improved pagination support (thanks to Mihai Mocanu)

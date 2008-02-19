@@ -25,7 +25,7 @@
 		
  		$(document).ready(function()
 		{
-		        var keywords = $('#keywords');
+		  var keywords = $('#keywords');
 			// setup search box
 			keywords.bind('click', function() {
 				if (this.value == 'search for a job')
@@ -58,7 +58,6 @@
 			});
 		});
 		Jobber.jobber_url = "{/literal}{$BASE_URL}{literal}";
-		Jobber.FixPng();
 		//]]>
 	</script>
 	{/literal}

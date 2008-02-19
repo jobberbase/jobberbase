@@ -41,6 +41,6 @@
 	}
 	$smarty->assign('companies', $companies);
 	$smarty->assign('companies_count', count($comps));
-	$html_title = 'Companiile care au publicat anunţuri pe jobber';
+	$html_title = 'Companies who published here';
 	$template = 'companies.tpl';
 ?>

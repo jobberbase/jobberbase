@@ -10,7 +10,7 @@
 	}
 	else
 	{
-		if (!empty($requestKeywords) && $requestKeywords != $translations['search']['default'])
+		if (!empty($requestKeywords) && $requestKeywords != 'search for a job')
 		{
 			$keywords = $db->real_escape_string(trim($requestKeywords));
 		}

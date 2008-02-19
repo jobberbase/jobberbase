@@ -80,7 +80,8 @@ div#header h1#logo a { width:390px;	height:82px; outline:0;	background: url(../i
 div#header ul#top {position:absolute; top:20px; right:20px;}
 div#header ul#top li{display:inline; margin-left:2px; background-color:transparent; color:#0099CC;}
 
-div#the_feed {margin-top:74px; position:absolute; right:20px;}
+div#the_feed {top:74px; position:absolute; right:20px;}
+
 
 div#box { width:950px; height:102px; background: url(../img/bg-box.png) 0 0 no-repeat; position:relative;}
 div#box div#search { position:absolute;	top:25px; left:20px;}
@@ -109,13 +110,13 @@ div#promo a:hover { background: #fff; }
 div#categs-nav {background: #0099cc; float: left; width:950px; padding-bottom: 6px; margin-top:25px; font-size: 11px;}
 div#categs-nav ul{background: #fff; float: left; width:950px;  list-style-type: none; margin:0; padding:0;}
 div#categs-nav ul li {background: white; float: left; padding-right: 6px; }
-div#categs-nav ul li a{display: block; background: #eee url(../img/top_left_cnr.gif) no-repeat 0 0; padding: 4px 0px 4px 6px;  float: left; text-decoration: none; color: #333 !important; position: relative; outline: none;}
-div#categs-nav ul li a:hover{ background: #0099cc url(../img/top_left_cnr_h.gif) no-repeat 0 0; color: #fff !important;}
-div#categs-nav ul li.selected a{ background: #0099cc url(../img/top_left_cnr_h.gif) no-repeat 0 0; color: #fff !important;}
+div#categs-nav ul li a{display: block; background: #eee url(../img/sd_left.gif) no-repeat 0 0; background-position: 0 -75px;  padding: 4px 0px 4px 6px;  float: left; text-decoration: none; color: #333 !important; position: relative; outline: none;}
+div#categs-nav ul li a:hover{ background-position: 0 0px; color: #fff !important;}
+div#categs-nav ul li.selected a{ background-position: 0 0px; color: #fff !important;}
 div#categs-nav ul li a span{display: block; float: left;  padding-left: 12px;cursor: pointer; font-size:14px; padding-top:4px; }
-div#categs-nav ul li a span.cnr{display: block; background:  url(../img/top_right_cnr.gif) no-repeat right 0; float: left; position: relative; top:-4px;}
-div#categs-nav ul li a:hover span.cnr{background:  url(../img/top_right_cnr_h.gif) no-repeat right 0; cursor: pointer; }
-div#categs-nav ul li.selected a span.cnr{background:  url(../img/top_right_cnr_h.gif) no-repeat right 0; cursor: pointer; }
+div#categs-nav ul li a span.cnr{display: block; background: url(../img/sd_right.gif) no-repeat right 0; background-position: right -75px;  float: left; position: relative; top:-4px;}
+div#categs-nav ul li a:hover span.cnr{ background-position: right 0px; cursor: pointer; }
+div#categs-nav ul li.selected a span.cnr{ background-position: right 0px; cursor: pointer; }
 
 #sitemap-1 {float: left; display: inline; width: 200px;}
 #sitemap-2 {float: left; display: inline; width: 200px; margin-left: 30px;}

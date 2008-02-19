@@ -44,7 +44,7 @@
 				<li><a href="{$BASE_URL}contact/" title="contact us" ><strong>contact</strong></a></li>
 			</ul>
 			<div id="the_feed">
-				<a href="{$BASE_URL}rss/all/" title="subscribe to the RSS feed"><img src="{$BASE_URL}img/bt-rss.png" alt="RSS" /></a>
+				<a href="{$BASE_URL}rss/all/" title="subscribe to the RSS feed"><img src="{$BASE_URL}img/bt-rss.gif" alt="RSS" /></a>
 			</div>
 		</div><!-- #header -->
 		

@@ -83,6 +83,16 @@
 			$flag = 1;
 			break;
 
+			
+		case 'job':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
+			require_once 'page_job.php';
+			$flag = 1;
+			break;
 		case 'jobs':
 			if(!isset($_SESSION['AdminId']))
 			{

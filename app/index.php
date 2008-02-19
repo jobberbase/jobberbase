@@ -28,8 +28,6 @@
 	   $_SERVER['HTTP_REFERER'] = '';
 	}
 	
-	
-	
 	switch($page)
 	{
 		// home
