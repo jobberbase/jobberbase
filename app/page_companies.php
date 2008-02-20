@@ -41,6 +41,6 @@
 	}
 	$smarty->assign('companies', $companies);
 	$smarty->assign('companies_count', count($comps));
-	$html_title = 'Companies who published here';
+	$html_title = $translations['companies']['page_title'];
 	$template = 'companies.tpl';
 ?>

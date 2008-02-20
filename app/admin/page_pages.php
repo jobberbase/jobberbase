@@ -125,11 +125,14 @@
 		}
 		$smarty->assign('defaults', $defaults);
 		$smarty->assign('errors', $errors);
-		
+		$html_title = $isPage ? 'Editing page ' . $row['title'] . ' / ' : '';
+		$html_title .= SITE_NAME;
 		$smarty->assign('editor', true);
 		$template = 'page_edit.tpl';
+		$js[] = 'editor';
 	} else {
 		$smarty->assign('list_pages', true);
+		$html_title = 'Pages / ' . SITE_NAME;
 		$template = 'pages.tpl';
 	}
 		

@@ -17,15 +17,15 @@ switch($id)
 			// validation
 			if ($name == '')
 			{
-				$errors['name'] = 'Your name is important.';
+				$errors['name'] = $translations['idealjob']['name_error'];
 			}
 			if ($email == '' && validate_email($email))
 			{
-				$errors['email'] = 'Your e-mail is important.';
+				$errors['email'] = $translations['idealjob']['email_error'];
 			}
 			if (count($req_params) < 1)
 			{
-				$errors['the_params'] = 'Please complete the survey.';
+				$errors['the_params'] = $translations['idealjob']['params_error'];
 			}
 
 			// no errors, save request
@@ -52,19 +52,19 @@ switch($id)
 			}
 		}
 	
-		$html_title = 'What\'s the ideal job like, for you?';
+		$html_title = $translations['idealjob']['title'];
 		$template = 'request-job.tpl';
 		break;
 		
 	case 'saved':
 		$smarty->assign('status', 1);
-		$html_title = 'Thank you for your time!';
+		$html_title = $translations['idealjob']['thankyou_message'];
 		$template = 'request-job-confirmation.tpl';
 		break;
 
 	case 'unsaved':
 		$smarty->assign('status', 0);
-		$html_title = 'Thank you for your time!';
+		$html_title = $translations['idealjob']['thankyou_message'];
 		$template = 'request-job-confirmation.tpl';
 		break;
 }

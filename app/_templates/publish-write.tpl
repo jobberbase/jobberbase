@@ -4,13 +4,13 @@
 			<div id="job-listings"></div><!-- #job-listings -->
 			<div class="steps">
 				<div id="step-1" class="step-active">
-					Step 1: Write
+					{$translations.publish.step1}
 				</div>
 				<div id="step-2">
-					Step 2: Verify
+					{$translations.publish.step2}
 				</div>
 				<div id="step-3">
-					Step 3: Confirm
+					{$translations.publish.step3}
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -24,13 +24,13 @@
 			{if $errors}
 			<div class="validation-failure">
 				<img src="{$BASE_URL}img/icon-delete.png" alt="" />
-				Please revise the form...
+				{$translations.publish.form_error}
 			</div>
 			{/if}
 
 			<form id="publish_form" method="post" action="{$BASE_URL}post/">
 				<fieldset>
-					<legend>Job details</legend>
+					<legend>{$translations.publish.job_details}</legend>
 					<table border="0" cellspacing="2" cellpadding="2">
 						<tr>
 							<td colspan="2">
@@ -52,40 +52,40 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="publish-label" valign="top">Title:</td>
+							<td class="publish-label" valign="top">{$translations.publish.title_label}:</td>
 							<td>
 								<input {if $errors.title}class="error"{/if} type="text" name="title" id="title" tabindex="2" size="50" value="{if $job.company}{$job.title}{else}{$smarty.post.title}{/if}" />
 								{if $errors.title}<span class="validation-error"><img src="{$BASE_URL}img/icon-delete.png" alt="" /></span>{/if}
-								<div class="suggestion">e.g. "PHP Developer", "UI designer"</div>
+								<div class="{$translations.publish.title_info}"></div>
 							</td>
 						</tr>
 						<tr>
-							<td valign="top">Location:</td>
+							<td valign="top">{$translations.publish.location_label}:</td>
 							<td>
 								<select name="city_id" id="city_id" tabindex="3" {if $job.location_outside_ro != '' OR $smarty.post.location_outside_ro_where != ''}disabled="disabled"{/if}>
 									{section name="c" loop=$cities}
 									<option value="{$cities[c].id}" {if $smarty.post.city_id == $cities[c].id || $job.city_id == $cities[c].id}selected="selected"{else}{if $user_city.id == $cities[c].id AND !$smarty.post.city_id AND !$job.city_id}selected="selected"{/if}{/if}>{$cities[c].name}</option>
 									{/section}
 								</select>
-								<a id="other_location_label" href="#" onclick="Jobber.HandleLocationOutsideRo(); return false;">{if $job.location_outside_ro != '' OR $smarty.post.location_outside_ro_where != ''}în Româna{else}other{/if}</a>
+								<a id="other_location_label" href="#" onclick="Jobber.HandleLocationOutsideRo(); return false;">{if $job.location_outside_ro != '' OR $smarty.post.location_outside_ro_where != ''}{$translations.publish.country}{else}{$translations.publish.other}{/if}</a>
 								<div id="location_outside_ro" {if $job.location_outside_ro != '' OR $smarty.post.location_outside_ro_where != ''}style="display: block;"{else}style="display: none;"{/if}>
-									where? <input type="text" name="location_outside_ro_where" id="location_outside_ro_where" size="50" maxlength="140" {if $job.location_outside_ro != ''}value="{$job.location}"{/if}{if $smarty.post.location_outside_ro_where != ''}value="{$smarty.post.location_outside_ro_where}"{/if} />
-									<div class="suggestion">e.g. "London, UK"</div>
+									{$translations.publish.where} <input type="text" name="location_outside_ro_where" id="location_outside_ro_where" size="50" maxlength="140" {if $job.location_outside_ro != ''}value="{$job.location}"{/if}{if $smarty.post.location_outside_ro_where != ''}value="{$smarty.post.location_outside_ro_where}"{/if} />
+									<div class="suggestion">{$translations.publish.where_info}</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td valign="top">Description:</td>
+							<td valign="top">{$translations.publish.description_label}:</td>
 							<td><textarea {if $errors.description}class="error"{/if} tabindex="4" name="description" id="description" cols="80" rows="15">{if $job.company}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
 								{if $errors.description}<span class="validation-error"><img src="{$BASE_URL}img/icon-delete.png" alt="" /></span>{/if}
 								<div class="suggestion">
-									<a target="_blank" href="http://www.textism.com/tools/textile/" onclick="$('#textile-suggestions').toggle(); return false;">Format text with Textile</a></div>
+									<a target="_blank" href="http://www.textism.com/tools/textile/" onclick="$('#textile-suggestions').toggle(); return false;">{$translations.publish.description_info}</a></div>
 								<div id="textile-suggestions" style="display: none;">
 									<table>
 											<thead>
 											<tr class="odd">
-												<th>Textile syntax</th>
-												<th>Final result</th>
+												<th>{$translations.publish.syntax}</th>
+												<th>{$translations.publish.result}</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -134,33 +134,33 @@
 					</table>
 				</fieldset>
 				<fieldset>
-					<legend>Hiring company or person</legend>
+					<legend>{$translations.publish.company}</legend>
 					<table border="0" cellspacing="2" cellpadding="2">
 						<tr>
-							<td class="publish-label">Name:</td>
+							<td class="publish-label">{$translations.publish.name_label}:</td>
 							<td><input {if $errors.company}class="error"{/if} tabindex="6" type="text" name="company" id="company" size="40" value="{if $job.company}{$job.company}{else}{$smarty.post.company}{/if}" />
 							<span class="validation-error">{if $errors.company}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>
 							</td>
 						</tr> 
 						<tr>
-							<td valign="top">Website:</td>
+							<td valign="top">{$translations.publish.website_label}:</td>
 							<td>http://<input tabindex="7" type="text" name="url" id="url" size="35" value="{if $job.company}{$job.url}{else}{$smarty.post.url}{/if}" />
-								<div class="suggestion">e.g. "www.google.com"</div>
+								<div class="suggestion">{$translations.publish.website_info}</div>
 							</td>
 						</tr>
 						<tr>
-							<td class="publish-label">E-mail<br /><strong>(not published)</strong>:</td>
+							<td class="publish-label">{$translations.publish.email_label}<br /><strong>({$translations.publish.email_info1})</strong>:</td>
 							<td>
 								<input {if $errors.poster_email}class="error"{/if} tabindex="8" type="text" name="poster_email" id="poster_email" size="40" value="{if $job.poster_email}{$job.poster_email}{else}{$smarty.post.poster_email}{/if}" />
 								<span class="validation-error">{if $errors.poster_email}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>
 								<div class="suggestion">
-									Online applications will be sent to this address.
+									{$translations.publish.email_info2}
 								</div>
 							</td>
 						</tr>
 					</table>
 				</fieldset>
-				<fieldset><input type="submit" name="submit" id="submit" value="Step 2: Verify ad" /></fieldset>
+				<fieldset><input type="submit" name="submit" id="submit" value="{$translations.publish.step1_submit}" /></fieldset>
 				<fieldset class="hidden">
 					<input type="checkbox" name="apply_online" id="apply_online" checked="checked" />
 					<input type="hidden" name="action" {if $job.id || $smarty.session.later_edit}value="edit"{else}value="publish"{/if} />

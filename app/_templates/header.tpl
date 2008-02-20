@@ -33,18 +33,18 @@
 			</div><!-- #status -->
 		{/if}
 		<div id="header">
-			<h1 id="logo"><a href="{$BASE_URL}" title="IT jobs">jobber</a></h1>
+			<h1 id="logo"><a href="{$BASE_URL}" title="{$translations.header.title}">{$translations.header.name}</a></h1>
 			<ul id="top">
-				<li><a href="{$BASE_URL}ideal-job/" title="the ideal job">the ideal job</a></li>
+				<li><a href="{$BASE_URL}ideal-job/" title="{$translations.header.ideal_job_title}">{$translations.header.ideal_job}</a></li>
 				<li>&bull;</li>
-				<li><a href="{$BASE_URL}widgets/" title="widgets">widgets</a></li>
+				<li><a href="{$BASE_URL}{$articles.widgets.url}/" title="{$articles.widgets.page_title}">{$articles.widgets.title}</a></li>
 				<li>&bull;</li>
-				<li><a href="{$BASE_URL}about/" title="about us">about</a></li>
+				<li><a href="{$BASE_URL}{$articles.about.url}/" title="{$articles.about.page_title}">{$articles.about.title}</a></li>
 				<li>&bull;</li>
-				<li><a href="{$BASE_URL}contact/" title="contact us" ><strong>contact</strong></a></li>
+				<li><a href="{$BASE_URL}{$articles.contact.url}/" title="{$articles.contact.page_title}">Contact</a></li>
 			</ul>
 			<div id="the_feed">
-				<a href="{$BASE_URL}rss/all/" title="subscribe to the RSS feed"><img src="{$BASE_URL}img/bt-rss.gif" alt="RSS" /></a>
+				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}img/bt-rss.gif" alt="{$translations.header.contact_alt}" /></a>
 			</div>
 		</div><!-- #header -->
 		
@@ -52,14 +52,14 @@
 			<div id="search">
 				<form id="search_form" method="post" action="{$BASE_URL}search/">
 					<fieldset>
-						<input type="text" name="keywords" id="keywords" maxlength="30" {if $keywords}value="{$keywords}"{else}value="search for a job"{/if} />
+						<input type="text" name="keywords" id="keywords" maxlength="30" value="{if $keywords}{$keywords}{else}{$translations.search.default}{/if}" />
 						<span id="indicator" style="display: none;"><img src="{$BASE_URL}img/ajax-loader.gif" alt="" /></span>
-						<label class="suggestionTop">(e.g. &quot;ajax&quot;, &quot;designer, london&quot;, &quot;php, chicago&quot;)</label>
+						<label class="suggestionTop">{$translations.search.example}</label>
 					</fieldset>
 				</form>
 			</div><!-- #search -->
 			<div class="addJob">
-				<a href="{$BASE_URL}post/" title="Post a new job" class="add">Post a new job</a>
+				<a href="{$BASE_URL}post/" title="{$translations.search.title}" class="add">{$translations.search.submit}</a>
 			</div><!-- .addJob -->
 		</div><!-- #box -->
 		

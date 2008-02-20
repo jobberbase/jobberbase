@@ -11,6 +11,6 @@
 
 	$smarty->assign('current_category', 'home');
 	
-	$html_title = 'Find IT jobs on ' . SITE_NAME;
+	$html_title = $translations['homepage']['title'] . SITE_NAME;
 	$template = 'index.tpl';
 ?>

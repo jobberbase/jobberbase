@@ -49,7 +49,7 @@
 	define('JOBTYPE_PARTTIME', 2);
 	define('JOBTYPE_FREELANCE', 3);
 
-	define('APP_PATH',dirname(__FILE__).'/');
+	define('APP_PATH',dirname(__FILE__).DIRECTORY_SEPARATOR);
 
   if(isset($_SERVER['SCRIPT_NAME'])) 
 	{

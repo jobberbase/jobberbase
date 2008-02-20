@@ -1,9 +1,9 @@
 			{if $CURRENT_PAGE != ''}
-			<a href="{$BASE_URL}" title="IT jobs">&laquo; home</a><br />
+			<a href="{$BASE_URL}" title="{$translations.header.title}">&laquo; {$translations.header.home}</a><br />
 			{/if}
 			
 			{if $smarty.session.last_viewed_jobs}
-			<h4>Seen recently</h4>
+			<h4>{$translations.header.seen_recently}</h4>
 			<ul>
 				{section name=last loop=$smarty.session.last_viewed_jobs}
 				<li><a href="{$smarty.session.last_viewed_jobs[last].url}">&raquo; {$smarty.session.last_viewed_jobs[last].title}</a></li>

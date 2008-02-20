@@ -21,13 +21,28 @@ function get_categories()
 	$categories = array();
 	$sql = 'SELECT id, name, var_name
 	               FROM categories
-	               ORDER BY id ASC';
+	               ORDER BY `category_order` ASC';
 	$result = $db->query($sql);
 	while ($row = $result->fetch_assoc())
 	{
 		$categories[] = array('id' => $row['id'], 'name' => $row['name'], 'var_name' => $row['var_name']);
 	}
 	return $categories;
+}
+
+function get_articles()
+{
+	global $db;
+	$articles = array();
+	$sql = 'SELECT id, `title`, `page_title`, `url`
+	               FROM `pages`
+	               ORDER BY `title` ASC';
+	$result = $db->query($sql);
+	while ($row = $result->fetch_assoc())
+	{
+		$articles[$row['url']] = $row;
+	}
+	return $articles;
 }
 
 function get_types()

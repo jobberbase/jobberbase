@@ -4,6 +4,9 @@ version 1.4:
 	* Fixed: proper url encoding done in JavaScript for search requests
 	* Fixed: search escaping
 	* Added: simple page editing for static pages
+	* Added: categories management
+	* Enhanced: backend javascript
+	* Added/Changed: translations based on an ini file
 
 version 1.3 (30/01/2008):
     * Fixed more search-related bugs (thanks to Mitchell Lane <mdlane@alumni.clemson.edu>)

@@ -47,7 +47,7 @@
 	$smarty->assign('jobs', $the_jobs);
 	$smarty->assign('current_category', $id);
 
-	$html_title = 'Are you looking for ' . $extra . ' ' . $id . ' jobs?';
+	$html_title = $translations['jobs']['title_part1'] . ' ' . $extra . ' ' . $id . ' ' . $translations['jobs']['title_part2'];
 	$meta_description = '';
 
 	$template = 'category.tpl';

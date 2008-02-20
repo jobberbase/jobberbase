@@ -59,19 +59,19 @@
 		// validation
 		if ($company == '')
 		{
-			$errors['company'] = 'Please enter company name.';
+			$errors['company'] = $translations['jobs']['name_error'];
 		}
 		if ($title == '')
 		{
-			$errors['title'] = 'Please enter job title.';
+			$errors['title'] = $translations['jobs']['title_error'];
 		}
 		if ($description == '')
 		{
-			$errors['description'] = 'Please enter job description.';
+			$errors['description'] = $translations['jobs']['description_error'];
 		}
 		if ($poster_email == '')
 		{
-			$errors['poster_email'] = 'Please enter your e-mail.';
+			$errors['poster_email'] = $translations['jobs']['email_error'];
 		}
 
 		// no errors, go to review page
@@ -117,19 +117,19 @@
 		$errors = array();
 		if ($company == '')
 		{
-			$errors['company'] = 'Please enter company name.';
+			$errors['company'] = $translations['jobs']['company_error'];
 		}
 		if ($title == '')
 		{
-			$errors['title'] = 'Please enter job title.';
+			$errors['title'] = $translations['jobs']['job_title_error'];
 		}
 		if ($description == '')
 		{
-			$errors['description'] = 'Please enter job description.';
+			$errors['description'] = $translations['jobs']['job_description_error'];
 		}
 		if ($poster_email == '')
 		{
-			$errors['poster_email'] = 'Please enter your e-mail.';
+			$errors['poster_email'] = $translations['jobs']['job_email_error'];
 		}
 		
 		// no errors, go to review page
@@ -192,11 +192,11 @@
 	$smarty->assign('types', get_types());
 	if ($later_edit)
 	{
-		$html_title = 'Edit your job ad / ' . SITE_NAME;
+		$html_title = $translations['jobs']['title_edit'] . ' / ' . SITE_NAME;
 	}
 	else
 	{
-		$html_title = 'Post a new job / ' . SITE_NAME;
+		$html_title = $translations['jobs']['title_new'] . ' / ' . SITE_NAME;
 	}
 
 	$template = 'publish-write.tpl';

@@ -82,7 +82,6 @@ div#header ul#top li{display:inline; margin-left:2px; background-color:transpare
 
 div#the_feed {top:74px; position:absolute; right:20px;}
 
-
 div#box { width:950px; height:102px; background: url(../img/bg-box.png) 0 0 no-repeat; position:relative;}
 div#box div#search { position:absolute;	top:25px; left:20px;}
 div#box div#search fieldset input { background:transparent url(../img/bg-search.png) 0 0 no-repeat; font-size:1.6em; width:276px; height:27px; border:none;	padding:6px 10px 6px 10px; color:#444;}	
@@ -433,6 +432,7 @@ span.la {
 		color: #fff;
 		border: 1px solid #009988;
 		cursor: pointer;
+		cursor: hand;
 	}
 		#publish_form input#submit:hover, #send-to-friend input#submit:hover, #apply-online input#submit:hover, #promo_form input#submit:hover {
 			background-color: #00aaee;
@@ -589,6 +589,7 @@ td.send-to-friend-address-label {
 
 #accordion-list h4 {
 	cursor: pointer;
+	cursor: hand;
 	text-decoration: underline;
 }
 

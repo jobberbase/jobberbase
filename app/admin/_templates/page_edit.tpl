@@ -7,7 +7,6 @@
 						<dl id="links_list">
 							<dt><strong>Internal</strong></dt>
 							<dd><a href="#" rel="{$BASE_URL}post/">Post a job</a></dd>
-							<dd><a href="#" rel="{$BASE_URL}widgets/">Widgets</a></dd>
 							<dd><a href="#" rel="{$BASE_URL}ideal-job/">Ideal job</a></dd>
 							<dd><a href="#" rel="{$BASE_URL}rss/">RSS Feed</a></dd>
 							<dd><a href="#" rel="{$BASE_URL}companies/">Companies</a></dd>

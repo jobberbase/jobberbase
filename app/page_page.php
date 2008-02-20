@@ -8,19 +8,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$errors = array();
 	if ($contact_name == '')
 	{
-		$errors['contact_name'] = 'Numele tÄ?u este important.';
+		$errors['contact_name'] = $translations['contact']['name_error'];
 	}
 	if ($contact_email == '' || !validate_email($contact_email))
 	{
-		$errors['contact_email'] = 'Adresa ta de e-mail este importantÄ?.';
+		$errors['contact_email'] = $translations['contact']['email_error'];
 	}
 	if ($contact_msg == '')
 	{
-		$errors['contact_msg'] = 'Mesajul este important.';
+		$errors['contact_msg'] = $translations['contact']['msg_error'];
 	}
 	
 	if (count($errors) > 0) {
-		$errors['contact_error'] = 'Your message could not be sent. Try again?';
+		$errors['contact_error'] = $translations['contact']['send_error'];
 		$smarty->assign('errors', $errors);
 	} else {
 		$johnny = new Postman();

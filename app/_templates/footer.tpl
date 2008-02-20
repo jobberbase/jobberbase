@@ -2,19 +2,20 @@
 	<div class="footer">
 		<div id="footer-contents">
 			<div id="footer-col1">
-				Use:<br />
-				<a href="{$BASE_URL}post/" title="Post a new job">Post a new job</a><br />
-				<a href="{$BASE_URL}widgets/" title="Site widget">Widgets</a><br />
-				<a href="{$BASE_URL}rss/" title="RSS Feeds">RSS Feeds</a><br />
+				{$translations.footer.column_use}:<br />
+				<a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a><br />
+				<a href="{$BASE_URL}{$articles.widgets.url}/" title="{$articles.widgets.page_title}">{$articles.widgets.title}</a><br />
+				<a href="{$BASE_URL}rss/" title="{$translations.footer.title}">{$translations.footer.rss}</a><br />
 			</div>
 			<div id="footer-col2">
-				Find out more:<br />
-				<a href="{$BASE_URL}about/" title="about us">About Us</a><br />
-				<a href="{$BASE_URL}contact/" title="Contact">Contact Us</a>
+				{$translations.footer.column_find}:<br />
+				<a href="{$BASE_URL}{$articles.about.url}/" title="{$articles.about.page_title}">{$articles.about.title}</a><br />
+				<a href="{$BASE_URL}{$articles.contact.url}/" title="{$articles.contact.page_title}">Contact</a>
 			</div>
 			<div id="footer-col3">
-				Misc:<br />
-				<a href="{$BASE_URL}companies/" title="Companies that posted here">Companies</a><br />
+				{$translations.footer.column_misc}:<br />
+				<a href="{$BASE_URL}companies/" title="{$translations.footer.companies_title}">{$translations.footer.companies}</a><br />
+				<a href="{$BASE_URL}sitemap/" title="{$translations.sitemap.title}">{$translations.sitemap.title}</a><br />
 			</div>
 			<div class="clear"></div>
 		</div><!-- #footer-contents -->
@@ -25,19 +26,19 @@
 		
  		$(document).ready(function()
 		{
-		  var keywords = $('#keywords');
+		   var keywords = $('#keywords');
 			// setup search box
 			keywords.bind('click', function() {
-				if (this.value == 'search for a job')
+				if (this.value == '{/literal}{$translations.search.default}{literal}')
 				{
 					keywords.clearFields();
 				}
 			});
 
 			keywords.bind('blur', function() {  
-				if (this.value == 'search for a job' || this.value == '')
+				if (this.value == '{/literal}{$translations.search.default}{literal}' || this.value == '')
 				{
-					this.value = 'search for a job';
+					this.value = '{/literal}{$translations.search.default}{literal}';
 				}
 			});
 

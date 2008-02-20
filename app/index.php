@@ -16,6 +16,12 @@
 	$page = (isset($_app_info['params'][0]) ? $db->real_escape_string($_app_info['params'][0]) : '');
 	$id = (isset($_app_info['params'][1]) ? $db->real_escape_string($_app_info['params'][1]) : 0);
 	$extra = (isset($_app_info['params'][2]) ? $db->real_escape_string($_app_info['params'][2]) : '');
+	if (file_exists(APP_PATH . '_includes' . DIRECTORY_SEPARATOR . 'translations.ini')) {
+		$translations = parse_ini_file(APP_PATH . '_includes' . DIRECTORY_SEPARATOR . 'translations.ini', true);
+		$smarty->assign('translations', $translations);
+	} else {
+		trigger_error('Unable to find the translations file!');
+	}
 	
 	$flag = 0;
 	
@@ -27,6 +33,8 @@
 	if(!isset($_SERVER['HTTP_REFERER'])) {
 	   $_SERVER['HTTP_REFERER'] = '';
 	}
+	
+	
 	
 	switch($page)
 	{
@@ -110,6 +118,11 @@
 			$flag = 1;
 			break;
 			
+		case 'sitemap':
+			$template = 'sitemap.tpl';
+			$flag = 1;
+			break;
+			
 		case 'stats':
 			require_once '_includes/class.Stats.php';
 			$stats = new Stats();
@@ -169,7 +182,7 @@
 				$flag = 1;
 			} else {
 				$flag = 0;
-			}	
+			}
 			break;
 	}
 	// if page not found
@@ -180,6 +193,7 @@
 	
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
+	$smarty->assign('articles', get_articles());
 	$smarty->assign('cities', get_cities());
 	
 	$smarty->assign('CURRENT_PAGE', $page);

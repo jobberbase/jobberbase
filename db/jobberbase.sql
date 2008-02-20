@@ -1,16 +1,8 @@
--- phpMyAdmin SQL Dump
--- version 2.11.2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Feb 19, 2008 at 04:56 PM
--- Server version: 5.0.41
--- PHP Version: 5.2.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Database: `jobberbase`
+-- Database: `jobber`
 --
 
 -- --------------------------------------------------------
@@ -43,22 +35,24 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(32) NOT NULL,
   `var_name` varchar(32) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='programming/design/admin/etc.' AUTO_INCREMENT=10 ;
+  `category_order` int(11) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `category_order` (`category_order`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='programming/design/admin/etc.' AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `var_name`) VALUES
-(1, 'Programmers', 'programmers'),
-(2, 'Designers', 'designers'),
-(3, 'Administrators', 'administrators'),
-(7, 'Marketers', 'marketers'),
-(5, 'Testers', 'testers'),
-(6, 'Editors', 'editors'),
-(8, 'Managers', 'managers'),
-(9, 'Consultants', 'consultants');
+INSERT INTO `categories` (`id`, `name`, `var_name`, `category_order`) VALUES
+(1, 'Programmers', 'programmers', 7),
+(2, 'Designers', 'designers', 3),
+(3, 'Administrators', 'administrators', 0),
+(7, 'Marketers', 'marketers', 2),
+(5, 'Testers', 'testers', 5),
+(6, 'Editors', 'editors', 1),
+(8, 'Managers', 'managers', 4),
+(9, 'Consultants', 'consultants', 6);
 
 -- --------------------------------------------------------
 
@@ -82,71 +76,89 @@ INSERT INTO `cities` (`id`, `name`, `ascii_name`) VALUES
 (2, 'Alba Iulia', 'Alba-iulia'),
 (3, 'Alexandria', 'Alexandria'),
 (4, 'Arad', 'Arad'),
-(5, 'Bac', 'Bacau'),
+(5, 'Bacãu', 'Bacau'),
 (6, 'Baia-Mare', 'Baia-mare'),
-(7, 'B', 'Barlad'),
-(8, 'Bistri', 'Bistrita'),
-(9, 'Boto', 'Botosani'),
-(10, 'Br', 'Braila'),
-(11, 'Bra', 'Brasov'),
+(7, 'Bârlad', 'Barlad'),
+(8, 'Bistriþa', 'Bistrita'),
+(9, 'Botoºani', 'Botosani'),
+(10, 'Brãila', 'Braila'),
+(11, 'Braºov', 'Brasov'),
 (12, 'Breaza', 'Breaza'),
-(13, 'Bucure', 'Bucuresti'),
-(14, 'Buz', 'Buzau'),
-(15, 'C', 'Calarasi'),
-(16, 'C', 'Campina'),
+(13, 'Bucureºti', 'Bucuresti'),
+(14, 'Buzãu', 'Buzau'),
+(15, 'Cãlãraºi', 'Calarasi'),
+(16, 'Câmpina', 'Campina'),
 (18, 'Caracal', 'Caracal'),
-(19, 'Caransebe', 'Caransebes'),
-(20, 'Cernavod', 'Cernavoda'),
+(19, 'Caransebeº', 'Caransebes'),
+(20, 'Cernavodã', 'Cernavoda'),
 (22, 'Cluj-Napoca', 'Cluj-napoca'),
-(23, 'Constan', 'Constanta'),
+(23, 'Constanþa', 'Constanta'),
 (24, 'Covasna', 'Covasna'),
 (25, 'Craiova', 'Craiova'),
-(26, 'Curtea de Arge', 'Curtea-de-arges'),
+(26, 'Curtea de Argeº', 'Curtea-de-arges'),
 (27, 'Deva', 'Deva'),
 (28, 'Drobeta T. Severin', 'Drobeta-t-severin'),
-(29, 'Foc', 'Focsani'),
-(30, 'G', 'Gaesti'),
-(31, 'Gala', 'Galati'),
+(29, 'Focºani', 'Focsani'),
+(30, 'Gãesti', 'Gaesti'),
+(31, 'Galaþi', 'Galati'),
 (32, 'Giurgiu', 'Giurgiu'),
 (33, 'Hunedoara', 'Hunedoara'),
-(34, 'Ia', 'Iasi'),
+(34, 'Iaºi', 'Iasi'),
 (36, 'Lugoj', 'Lugoj'),
 (37, 'Mangalia', 'Mangalia'),
-(38, 'Media', 'Medias'),
+(38, 'Mediaº', 'Medias'),
 (39, 'Miercurea-Ciuc', 'Miercurea-ciuc'),
-(40, 'One', 'Onesti'),
+(40, 'Oneºti', 'Onesti'),
 (41, 'Oradea', 'Oradea'),
-(42, 'Or', 'Orsova'),
+(42, 'Orºova', 'Orsova'),
 (43, 'Otopeni', 'Otopeni'),
-(44, 'Pa', 'Pascani'),
-(46, 'Piatra Neam', 'Piatra-neamt'),
-(47, 'Pite', 'Pitesti'),
-(48, 'Ploie', 'Ploiesti'),
+(44, 'Paºcani', 'Pascani'),
+(46, 'Piatra Neamþ', 'Piatra-neamt'),
+(47, 'Piteºti', 'Pitesti'),
+(48, 'Ploieºti', 'Ploiesti'),
 (49, 'Reghin', 'Reghin'),
-(50, 'Re', 'Resita'),
-(51, 'R', 'Rimnicu-sarat'),
-(52, 'R', 'Rimnicu-vilcea'),
+(50, 'Reºiþa', 'Resita'),
+(51, 'Rîmnicu-Sãrat', 'Rimnicu-sarat'),
+(52, 'Rîmnicu-Vîlcea', 'Rimnicu-vilcea'),
 (53, 'Roman', 'Roman'),
 (54, 'Satu-Mare', 'Satu-mare'),
 (55, 'Secuieni', 'Secuieni'),
-(56, 'Sf', 'Sfantu-gheorghe'),
+(56, 'Sfântu Gheorghe', 'Sfantu-gheorghe'),
 (57, 'Sibiu', 'Sibiu'),
 (58, 'Sinaia', 'Sinaia'),
-(59, 'Sl', 'Slanic-moldova'),
+(59, 'Slãnic Moldova', 'Slanic-moldova'),
 (60, 'Slatina', 'Slatina'),
 (61, 'Slobozia', 'Slobozia'),
 (62, 'Suceava', 'Suceava'),
-(63, 'T', 'Targoviste'),
-(64, 'T', 'Targu-jiu'),
-(65, 'T', 'Targu Ocna'),
+(63, 'Târgoviºte', 'Targoviste'),
+(64, 'Târgu Jiu', 'Targu-jiu'),
+(65, 'Târgu Ocna', 'Targu Ocna'),
 (66, 'Tecuci', 'Tecuci'),
-(67, 'Timi', 'Timisoara'),
-(68, 'T', 'Tirgu-mures'),
+(67, 'Timiºoara', 'Timisoara'),
+(68, 'Tîrgu-Mureº', 'Tirgu-mures'),
 (69, 'Tulcea', 'Tulcea'),
 (70, 'Turda', 'Turda'),
 (71, 'Vaslui', 'Vaslui'),
 (72, 'Zalau', 'Zalau'),
 (-1, 'Anywhere', 'Anywhere');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `downloads`
+--
+
+CREATE TABLE IF NOT EXISTS `downloads` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `created_on` datetime NOT NULL,
+  `ip` varchar(15) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `downloads`
+--
+
 
 -- --------------------------------------------------------
 
@@ -397,7 +409,7 @@ CREATE TABLE IF NOT EXISTS `searches` (
 INSERT INTO `searches` (`id`, `keywords`, `created_on`) VALUES
 (4, 'London', '2008-01-31 13:24:54'),
 (5, 'search', '2008-02-05 12:29:01'),
-(6, 'asdp lda', '2008-02-19 16:34:09');
+(6, 'developer', '2008-02-05 16:25:13');
 
 -- --------------------------------------------------------
 

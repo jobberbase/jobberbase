@@ -19,6 +19,7 @@
 	$extra = (isset($_app_info['params'][2]) ? $db->real_escape_string($_app_info['params'][2]) : '');
 	
 	$flag = 0;
+	$js = array();
 	if(!isset($_SERVER['HTTP_REFERER'])) {
 	   $_SERVER['HTTP_REFERER'] = '';
 	}
@@ -83,7 +84,6 @@
 			$flag = 1;
 			break;
 
-			
 		case 'job':
 			if(!isset($_SESSION['AdminId']))
 			{
@@ -93,6 +93,7 @@
 			require_once 'page_job.php';
 			$flag = 1;
 			break;
+
 		case 'jobs':
 			if(!isset($_SESSION['AdminId']))
 			{
@@ -118,7 +119,10 @@
 			require_once 'page_pages.php';
 			$flag = 1;
 			break;
-		
+		case 'categories':
+			require_once 'page_categories.php';
+			$flag = 1;
+			break;
 		default: 
 			$flag = 0;	
 			break;
@@ -143,6 +147,7 @@
 		$smarty->assign('isAuthenticated', 1);
 	else
 		$smarty->assign('isAuthenticated', 0);
+	$smarty->assign('js', $js);
 	if (isset($template) && $template != '')
 		$smarty->display($template);
 ?>

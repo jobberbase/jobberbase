@@ -6,14 +6,14 @@
 			{if $CURRENT_PAGE == 'job'}
 			<div id="job-bottom">
 				<div id="job-post-utils">
-					<a href="{$back_link}" title="home">&laquo; go back</a><br />
-					Is this job ad fake? <a href="#" onclick="Jobber.ReportSpam('{$BASE_URL}report-spam/', {$job.id}); return false;" title="report fake ad">Report it!</a>
+					<a href="{$back_link}" title="home">&laquo; {$translations.notfound.back}</a><br />
+					{$translations.jobs.report_fake} <a href="#" onclick="Jobber.ReportSpam('{$BASE_URL}report-spam/', {$job.id}); return false;" title="report fake ad">{$translations.jobs.report_it}</a>
 					&nbsp;&nbsp;<span id="report-spam-response"></span><br />
-					<a href="#" onclick="Jobber.SendToFriend.showHide(); return false;" title="Recommend to a friend">Recommend to a friend</a>
+					<a href="#" onclick="Jobber.SendToFriend.showHide(); return false;" title="{$translations.recommend.title}">{$translations.recommend.title}</a>
 				</div><!-- #job-post-utils -->
 				<div id="number-views">
-					Published at <strong>{$job.created_on}</strong><br />
-					Viewed: <strong>{$job.views_count}</strong> times
+					{$translations.jobs.published_at} <strong>{$job.created_on}</strong><br />
+					{$translations.jobs.viewed}: <strong>{$job.views_count}</strong> {$translations.jobs.times}
 				</div><!-- #number-views -->
 				<div class="clear"></div>
 			</div><!-- #job-bottom -->
@@ -21,16 +21,16 @@
 				<form id="frm-send-to-friend" method="post" action="{$BASE_URL}send-to-friend/">
 					<table>
 						<tr>
-							<td class="send-to-friend-address-label"><label for="friend_email">Friend's e-mail:</label></td>
+							<td class="send-to-friend-address-label"><label for="friend_email">{$translations.recommend.friend_email_label}:</label></td>
 							<td><input type="text" name="friend_email" id="friend_email" maxlength="50" size="30" /></td>
 						</tr>
 						<tr>
-							<td><label for="my_email">Your e-mail:</label></td>
+							<td><label for="my_email">{$translations.recommend.your_email_label}:</label></td>
 							<td><input type="text" name="my_email" id="my_email" maxlength="50" size="30" /></td>
 						</tr>
 						<tr>
 							<td colspan="2">
-								<input type="submit" name="submit" id="submit" value="Send" />
+								<input type="submit" name="submit" id="submit" value="{$translations.recommend.submit}" />
 								&nbsp;&nbsp;<span id="send-to-friend-response"></span>
 							</td>
 						</tr>

@@ -8,7 +8,7 @@
 		$vali->MailPostActivatedToUser($j->GetInfo());
 		
 		
-		$_SESSION['status'] = 'Job ad was successfully activated.';	
+		$_SESSION['status'] = $translations['jobs']['activated_success'];	
 		redirect_to(BASE_URL . 'job/' . $id . '/');
 		exit;
 	}

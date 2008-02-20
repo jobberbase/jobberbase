@@ -3,19 +3,19 @@
 		<div id="content">
 			<h3 class="page-heading">Stats</h3>
 			<div id="accordion-list">
-				<h3>Online applications, last 50 displayed:</h3> 
+				<h3>{$translations.stas.last_50_posts}:</h3> 
 				<ul> 
-					<li>total: {$applications.count}</li> 
-					<li>avg / last 7 days: {$applications.avg}</li> 
-					<li>max / last 7 days: {$applications.max}</li> 
+					<li>{$translations.stas.total}: {$applications.count}</li> 
+					<li>{$translations.stas.average} / {$translations.stas.last_7_days}: {$applications.avg}</li> 
+					<li>{$translations.stas.maximum} / {$translations.stas.last_7_days}: {$applications.max}</li> 
 				</ul>
 				<br />
 				{$applications.stats}
-				<h3>Site searches, last 50 displayed:</h3>
+				<h3>{$translations.stas.last_50_searches}:</h3>
 				<ul> 
-					<li>total: {$keywordz.count}</li> 
-					<li>avg / last 7 days: {$keywordz.avg}</li> 
-					<li>max / last 7 days: {$keywordz.max}</li> 
+					<li>{$translations.stas.total}: {$keywordz.count}</li> 
+					<li>{$translations.stas.average} / {$translations.stas.last_7_days}: {$keywordz.avg}</li> 
+					<li>{$translations.stas.maximum} / {$translations.stas.last_7_days}: {$keywordz.max}</li> 
 				</ul>
 				<br />
 				{$keywordz.stats}

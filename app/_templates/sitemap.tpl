@@ -2,29 +2,25 @@
 		
 		<div id="content">
 			<div id="job-listings"></div><!-- #job-listings -->
-			<h3 class="page-heading">Sitemap</h3>
-			<h4>Jobs for:</h4>
+			<h3 class="page-heading">{$translations.sitemap.title}</h3>
+			<h4>{$translations.sitemap.jobs}:</h4>
 			<ul>
-				<li><a href="{$BASE_URL}jobs/programmers/">Programmers</a></li>
-				<li><a href="{$BASE_URL}jobs/designers/">Designers</a></li>
-				<li><a href="{$BASE_URL}jobs/administrators/">Administrators</a></li>
-				<li><a href="{$BASE_URL}jobs/testers/">Testers</a></li>
-				<li><a href="{$BASE_URL}jobs/editors/">Editors</a></li>
-				<li><a href="{$BASE_URL}jobs/marketers/">Marketers</a></li>
-				<li><a href="{$BASE_URL}jobs/managers/">Managers</a></li>
-				<li><a href="{$BASE_URL}jobs/consultants/">Consultants</a></li>
+				{section name=tmp loop=$categories}
+        		<li id="{$categories[tmp].var_name}"><a href="{$BASE_URL}jobs/{$categories[tmp].var_name}/" title="{$categories[tmp].var_name}">{$categories[tmp].name}</a></li>
+				{/section}
 			</ul>
-			<h4>Use it:</h4>
+			<h4>{$translations.sitemap.use}:</h4>
 			<ul>
-				<li><a href="{$BASE_URL}post/">Post an ad</a></li>
-				<li><a href="{$BASE_URL}widgets/">Widgets</a></li>
-				<li><a href="{$BASE_URL}rss/">RSS feeds</a></li>
+				<li><a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a></li>
+				<li><a href="{$BASE_URL}widgets/" title="{$translations.footer.widgets_title}">{$translations.footer.widgets}</a></li>
+				<li><a href="{$BASE_URL}rss/" title="{$translations.footer.title}">{$translations.footer.rss}</a></li>
 			</ul>
-			<h4>Find out more:</h4>
+			<h4>{$translations.sitemap.more}:</h4>
 			<ul>
-				<li><a href="{$BASE_URL}about/">About us</a></li>
-				<li><a href="{$BASE_URL}companies/">Companies who posted here</a></li>
-				<li><a href="{$BASE_URL}contact/">Contact us</a></li>
+				<li><a href="{$BASE_URL}companies/" title="{$translations.footer.companies_title}">{$translations.footer.companies}</a></li>
+				{foreach from=$articles item=article}
+				<li><a href="{$BASE_URL}{$article.url}/" title="{$article.page_title}">{$article.title}</a></li>
+				{/foreach}
 			</ul>
 		</div><!-- /content -->
 

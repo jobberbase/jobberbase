@@ -1,14 +1,14 @@
 {include file="header.tpl"}
 		
 		<div id="content">
-			<h3 class="page-heading"><a href="{$BASE_URL}" title="home">Home</a> / RSS</h3>
+			<h3 class="page-heading"><a href="{$BASE_URL}" title="{$translations.header.title}">&laquo; {$translations.header.home}</a> / {$translations.rss.title}</h3>
 			<p>
-				Please choose one (or more) of the following feeds:
+				{$translations.rss.intro}
 			</p>
 			<ul>
-				<li><a href="{$BASE_URL}rss/all/">Feed for all categories</a></li>
+				<li><a href="{$BASE_URL}rss/toate/">{$translations.rss.all_categories}</a></li>
 				{section name=tmp loop=$categories}
-				<li><a href="{$BASE_URL}rss/{$categories[tmp].var_name}/">Feed for {$categories[tmp].name}</a></li>
+				<li><a href="{$BASE_URL}rss/{$categories[tmp].var_name}/">{$translations.rss.for} {$categories[tmp].name}</a></li>
 				{/section}
 			</ul>
 		</div><!-- /content -->

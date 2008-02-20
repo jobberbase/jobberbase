@@ -4,7 +4,7 @@
 	if ((isset($_SESSION['later_edit']) && $_SESSION['later_edit'] == $j->GetAuth()) || ($extra != '' && $extra == $j->GetAuth()))
 	{
 		$deleter = $j->Deactivate();
-		$_SESSION['status'] = 'Anunţul tău a fost şters.';	
+		$_SESSION['status'] = $translations['jobs']['delete_success'];
 		redirect_to(BASE_URL);
 		exit;
 	}
@@ -15,7 +15,7 @@
 		if ($job->GetTempStatus() == 1 || $job->GetActiveStatus() == 0)
 		{
 			$info = $job->Deactivate();
-			$_SESSION['status'] = 'Anunţul tău nu a fost publicat.';
+			$_SESSION['status'] = $translations['jobs']['confirmation_success'];
 			redirect_to(BASE_URL);
 			exit;
 		}

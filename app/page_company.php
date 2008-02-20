@@ -14,7 +14,7 @@
 	$smarty->assign('jobs', $job->ApiGetJobsByCompany($company, false, false));
 	$smarty->assign('current_company', $company);
 
-	$html_title = 'Cauţi oferte de muncă la ' . $company . '?';
-	$meta_description = 'Vino pe jobber pentru joburi la ' . $company . '! Anunţuri gratuite pentru angajatori.';
+	$html_title = $translations['companies']['are_you_looking'] . ' ' . $company . '?';
+	$meta_description = $translations['companies']['meta_part1'] . ' ' . $company . '! ' . $translations['companies']['meta_part2'];
 	$template = 'company.tpl';
 ?>

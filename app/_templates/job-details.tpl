@@ -1,21 +1,21 @@
 			<div id="job-details">
 				{if $smarty.session.apply_mail_sent AND $smarty.session.apply_mail_sent eq 1}
 				<div class="apply-status-ok">
-					Congratulations, your application has been sent! Best of luck to you! :)
+					{$translations.apply.success}
 				</div>
 				{/if}
 				{if $job.days_old > 40}
 				<div id="old-ad">
-					This job ad has been posted over 40 days ago...
+					{$translations.apply.old_ad}
 				</div>
 				{/if}
 				{if $CURRENT_PAGE == 'job'}
 				<div id="applied-to-job">
 					{$job.applied_count}
 					{if $job.applied_count != 1}
-					<p>applicants</p>
+					<p>{$translations.homepage.applicants}</p>
 					{else}
-					<p>applicant</p>
+					<p>{$translations.homepage.applicant}</p>
 					{/if}
 				</div>
 				{/if}
@@ -38,7 +38,7 @@
 					{if $job.location == 'Anywhere'}
 					<strong>({$job.location})</strong>
 					{else}
-					<span class="fading">in</span> <strong>{$job.location}</strong>
+					<span class="fading">{$translations.homepage.in}</span> <strong>{$job.location}</strong>
 					{/if}
 				</p>
 				<div id="job-description">
@@ -49,7 +49,7 @@
 					{if $smarty.session.apply_mail_sent AND $smarty.session.apply_mail_sent eq -1}
 					<div class="validation-failure">
 						<img src="{$BASE_URL}img/icon-delete.png" alt="" />
-						Unfortunately, your application could not be sent. Please check the form. Also, we only allow 1 application every 10 minutes.
+						{$translations.apply.failure}
 					</div>
 					{/if}
 				
@@ -57,39 +57,39 @@
 						<form id="frm-apply-online" method="post" enctype="multipart/form-data" action="{$BASE_URL}apply-online/">
 							<table>
 								<tr>
-									<td><label for="apply_name">Your name:</label></td>
+									<td><label for="apply_name">{$translations.apply.name_label}:</label></td>
 									<td>
 										<input {if $smarty.session.apply_errors.apply_name}class="error"{/if} type="text" name="apply_name" id="apply_name" maxlength="50" size="30" value="{$smarty.session.apply_fields.apply_name}" />
 										<span class="validation-error">{if $smarty.session.apply_errors.apply_name}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
 									</td>
 								</tr>
 								<tr>
-									<td><label for="apply_email">Your e-mail:</label></td>
+									<td><label for="apply_email">{$translations.apply.email_label}:</label></td>
 									<td>
 										<input {if $smarty.session.apply_errors.apply_email}class="error"{/if} type="text" name="apply_email" id="apply_email" maxlength="50" size="30" value="{$smarty.session.apply_fields.apply_email}" />
 										<span class="validation-error">{if $smarty.session.apply_errors.apply_email}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
 									</td>
 								</tr>
 								<tr>
-									<td valign="top"><label for="apply_msg">Message<br />or letter of intention:</label></td>
+									<td valign="top"><label for="apply_msg">{$translations.apply.message_label}:</label></td>
 									<td>
 										<textarea {if $smarty.session.apply_errors.apply_msg}class="error"{/if} name="apply_msg" id="apply_msg" cols="60" rows="15">{$smarty.session.apply_fields.apply_msg}</textarea>
 										<span class="validation-error">{if $smarty.session.apply_errors.apply_msg}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
 									</td>
 								</tr>
 								<tr>
-									<td valign="top"><label for="apply_cv">Upload resume/CV:</label></td>
+									<td valign="top"><label for="apply_cv">{$translations.apply.cv_label}:</label></td>
 									<td>
 										<input type="file" name="apply_cv" id="apply_cv" />
 										<span class="validation-error">{if $smarty.session.apply_errors.apply_cv}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
-										<div class="suggestion">Max. 3 MB. Recommended formats: PDF, RTF, DOC, ODT. </div>
+										<div class="suggestion">{$translations.apply.cv_info}</div>
 									</td>
 								</tr>
 								<tr><td colspan="2">&nbsp;</td></tr>
 								<tr>
 									<td colspan="2">
-										<input type="submit" name="submit" id="submit" value="Send my application" /> or
-										<a href="#" onclick="$('#apply-online').SwitchVertically(10); return false;">cancel</a>
+										<input type="submit" name="submit" id="submit" value="{$translations.apply.submit}" /> {$translations.apply.or}
+										<a href="#" onclick="$('#apply-online').SwitchVertically(10); return false;">{$translations.apply.cancel}</a>
 									</td>
 								</tr>
 							</table>

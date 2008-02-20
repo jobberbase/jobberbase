@@ -10,14 +10,14 @@
 	{
 		// post published
 		$nicu->MailPublishToUser($job->GetInfo());	
-		$html_title = 'Congratulations, your job ad was published! / ' . SITE_NAME;
+		$html_title = $translations['jobs']['publish_success'] . ' / ' . SITE_NAME;
 		$smarty->assign('first_time_post', 0);
 	}
 	else
 	{
 		// post in pending status
 		$nicu->MailPublishPendingToUser($job->mPosterEmail);	
-		$html_title = 'Your job ad was successfully posted! / ' . SITE_NAME;
+		$html_title = $translations['jobs']['add_success'] . ' / ' . SITE_NAME;
 		$smarty->assign('first_time_post', 1);
 	}
 	$job->Publish();

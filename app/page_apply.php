@@ -8,23 +8,23 @@
 	// validation
 	if ($apply_name == '')
 	{
-		$errors['apply_name'] = 'Please enter your name.';
+		$errors['apply_name'] = $translations['apply']['name_error'];
 	}
 	if ($apply_email == '')
 	{
-		$errors['apply_email'] = 'Please enter your e-mail.';
+		$errors['apply_email'] = $translations['apply']['email_error'];
 	}
 	if ($apply_msg == '')
 	{
-		$errors['apply_msg'] = 'Please enter a message.';
+		$errors['apply_msg'] = $translations['apply']['msg_error'];
 	}
 	if ($_FILES['apply_cv'] && $_FILES['apply_cv']['size'] >= MAX_CV_SIZE)
 	{
-		$errors['apply_cv'] = 'Resume/CV size can be maximum 3 MB.';
+		$errors['apply_cv'] = $translations['apply']['cv_error'];
 	}
 	if (!validate_email($apply_email))
 	{
-		$errors['apply_email'] = 'Your e-mail is incorrect.';
+		$errors['apply_email'] = $translations['apply']['email_invalid'];
 	}
 
 	if (empty($errors))

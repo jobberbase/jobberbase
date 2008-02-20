@@ -20,6 +20,11 @@
 	<script src="{$BASE_URL_ADMIN}js/jquery.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/functions.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}js/main.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}js/overlay.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}js/messages.js" type="text/javascript"></script>
+	{foreach from=$js item=j}
+	<script src="{$BASE_URL_ADMIN}js/{$j}.js" type="text/javascript"></script>
+	{/foreach}
 </head>
 
 <body>
@@ -33,8 +38,8 @@
 			<h1 id="logo"><a href="{$BASE_URL_ADMIN}home/" title="IT jobs">jobber</a></h1>
 			{if $isAuthenticated == 1}
 			<ul>
-				<li {if $current_category == ''}class="selected"{/if}><a href="{$BASE_URL_ADMIN}home/">Admin home</a></li>
-				<li {if $current_category == 'pages'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}pages/">Pages</a></li>
+				<li {if $current_category == 'pages'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}pages">Pages</a></li>
+				<li {if $current_category == 'categories'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}categories">Categories</a></li>
 				<li><a href="{$BASE_URL_ADMIN}logout/">Logout &raquo;</a></li>
 			</ul>
 			{/if}
