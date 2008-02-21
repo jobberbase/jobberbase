@@ -1,4 +1,4 @@
 <?php
-	header('Location: http://www.jobber.ro/');
+	header('Location: http://www.jobberbase.com/');
 	exit;
 ?>

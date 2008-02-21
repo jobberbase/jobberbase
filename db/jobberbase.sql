@@ -1,8 +1,16 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Feb 21, 2008 at 01:21 PM
+-- Server version: 5.0.41
+-- PHP Version: 5.2.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Database: `jobber`
+-- Database: `jobberbase`
 --
 
 -- --------------------------------------------------------
@@ -38,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `category_order` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `category_order` (`category_order`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='programming/design/admin/etc.' AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='programming/design/admin/etc.' AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `categories`
@@ -76,89 +84,71 @@ INSERT INTO `cities` (`id`, `name`, `ascii_name`) VALUES
 (2, 'Alba Iulia', 'Alba-iulia'),
 (3, 'Alexandria', 'Alexandria'),
 (4, 'Arad', 'Arad'),
-(5, 'Bacãu', 'Bacau'),
+(5, 'Bac', 'Bacau'),
 (6, 'Baia-Mare', 'Baia-mare'),
-(7, 'Bârlad', 'Barlad'),
-(8, 'Bistriþa', 'Bistrita'),
-(9, 'Botoºani', 'Botosani'),
-(10, 'Brãila', 'Braila'),
-(11, 'Braºov', 'Brasov'),
+(7, 'B', 'Barlad'),
+(8, 'Bistri', 'Bistrita'),
+(9, 'Boto', 'Botosani'),
+(10, 'Br', 'Braila'),
+(11, 'Bra', 'Brasov'),
 (12, 'Breaza', 'Breaza'),
-(13, 'Bucureºti', 'Bucuresti'),
-(14, 'Buzãu', 'Buzau'),
-(15, 'Cãlãraºi', 'Calarasi'),
-(16, 'Câmpina', 'Campina'),
+(13, 'Bucure', 'Bucuresti'),
+(14, 'Buz', 'Buzau'),
+(15, 'C', 'Calarasi'),
+(16, 'C', 'Campina'),
 (18, 'Caracal', 'Caracal'),
-(19, 'Caransebeº', 'Caransebes'),
-(20, 'Cernavodã', 'Cernavoda'),
+(19, 'Caransebe', 'Caransebes'),
+(20, 'Cernavod', 'Cernavoda'),
 (22, 'Cluj-Napoca', 'Cluj-napoca'),
-(23, 'Constanþa', 'Constanta'),
+(23, 'Constan', 'Constanta'),
 (24, 'Covasna', 'Covasna'),
 (25, 'Craiova', 'Craiova'),
-(26, 'Curtea de Argeº', 'Curtea-de-arges'),
+(26, 'Curtea de Arge', 'Curtea-de-arges'),
 (27, 'Deva', 'Deva'),
 (28, 'Drobeta T. Severin', 'Drobeta-t-severin'),
-(29, 'Focºani', 'Focsani'),
-(30, 'Gãesti', 'Gaesti'),
-(31, 'Galaþi', 'Galati'),
+(29, 'Foc', 'Focsani'),
+(30, 'G', 'Gaesti'),
+(31, 'Gala', 'Galati'),
 (32, 'Giurgiu', 'Giurgiu'),
 (33, 'Hunedoara', 'Hunedoara'),
-(34, 'Iaºi', 'Iasi'),
+(34, 'Ia', 'Iasi'),
 (36, 'Lugoj', 'Lugoj'),
 (37, 'Mangalia', 'Mangalia'),
-(38, 'Mediaº', 'Medias'),
+(38, 'Media', 'Medias'),
 (39, 'Miercurea-Ciuc', 'Miercurea-ciuc'),
-(40, 'Oneºti', 'Onesti'),
+(40, 'One', 'Onesti'),
 (41, 'Oradea', 'Oradea'),
-(42, 'Orºova', 'Orsova'),
+(42, 'Or', 'Orsova'),
 (43, 'Otopeni', 'Otopeni'),
-(44, 'Paºcani', 'Pascani'),
-(46, 'Piatra Neamþ', 'Piatra-neamt'),
-(47, 'Piteºti', 'Pitesti'),
-(48, 'Ploieºti', 'Ploiesti'),
+(44, 'Pa', 'Pascani'),
+(46, 'Piatra Neam', 'Piatra-neamt'),
+(47, 'Pite', 'Pitesti'),
+(48, 'Ploie', 'Ploiesti'),
 (49, 'Reghin', 'Reghin'),
-(50, 'Reºiþa', 'Resita'),
-(51, 'Rîmnicu-Sãrat', 'Rimnicu-sarat'),
-(52, 'Rîmnicu-Vîlcea', 'Rimnicu-vilcea'),
+(50, 'Re', 'Resita'),
+(51, 'R', 'Rimnicu-sarat'),
+(52, 'R', 'Rimnicu-vilcea'),
 (53, 'Roman', 'Roman'),
 (54, 'Satu-Mare', 'Satu-mare'),
 (55, 'Secuieni', 'Secuieni'),
-(56, 'Sfântu Gheorghe', 'Sfantu-gheorghe'),
+(56, 'Sf', 'Sfantu-gheorghe'),
 (57, 'Sibiu', 'Sibiu'),
 (58, 'Sinaia', 'Sinaia'),
-(59, 'Slãnic Moldova', 'Slanic-moldova'),
+(59, 'Sl', 'Slanic-moldova'),
 (60, 'Slatina', 'Slatina'),
 (61, 'Slobozia', 'Slobozia'),
 (62, 'Suceava', 'Suceava'),
-(63, 'Târgoviºte', 'Targoviste'),
-(64, 'Târgu Jiu', 'Targu-jiu'),
-(65, 'Târgu Ocna', 'Targu Ocna'),
+(63, 'T', 'Targoviste'),
+(64, 'T', 'Targu-jiu'),
+(65, 'T', 'Targu Ocna'),
 (66, 'Tecuci', 'Tecuci'),
-(67, 'Timiºoara', 'Timisoara'),
-(68, 'Tîrgu-Mureº', 'Tirgu-mures'),
+(67, 'Timi', 'Timisoara'),
+(68, 'T', 'Tirgu-mures'),
 (69, 'Tulcea', 'Tulcea'),
 (70, 'Turda', 'Turda'),
 (71, 'Vaslui', 'Vaslui'),
 (72, 'Zalau', 'Zalau'),
 (-1, 'Anywhere', 'Anywhere');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `downloads`
---
-
-CREATE TABLE IF NOT EXISTS `downloads` (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `created_on` datetime NOT NULL,
-  `ip` varchar(15) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `downloads`
---
-
 
 -- --------------------------------------------------------
 
@@ -179,7 +169,8 @@ CREATE TABLE IF NOT EXISTS `hits` (
 
 INSERT INTO `hits` (`job_id`, `created_on`, `ip`) VALUES
 (1, '2008-01-31 13:24:54', '127.0.0.1'),
-(1, '2008-02-05 11:50:06', '127.0.0.1');
+(1, '2008-02-05 11:50:06', '127.0.0.1'),
+(2, '2008-02-21 13:18:43', '::1');
 
 -- --------------------------------------------------------
 
@@ -216,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 
 INSERT INTO `jobs` (`id`, `type_id`, `category_id`, `title`, `description`, `company`, `city_id`, `url`, `apply`, `created_on`, `is_temp`, `is_active`, `views_count`, `auth`, `outside_location`, `poster_email`, `apply_online`) VALUES
 (1, 1, 1, 'web developer', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 8, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
-(2, 3, 2, 'Illustrator/Photoshop expert', 'Could you redraw in Illustrator da Vinci\\''s Gioconda, blindfolded?\r\nLet us know! :)', 'UnrealExpectations', -1, 'http://unrealexpectations.com', '', '2007-10-20 13:47:05', 0, 1, 3, '6ebcfde637d98a9738c024c6074e945d', '', 'jobs@unrealexpectations.com', 1),
+(2, 3, 2, 'Illustrator/Photoshop expert', 'Could you redraw in Illustrator da Vinci\\''s Gioconda, blindfolded?\r\nLet us know! :)', 'UnrealExpectations', -1, 'http://unrealexpectations.com', '', '2007-10-20 13:47:05', 0, 1, 4, '6ebcfde637d98a9738c024c6074e945d', '', 'jobs@unrealexpectations.com', 1),
 (4, 1, 1, 'web developer 3', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 7, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
 (5, 1, 1, 'web developer 2', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 6, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
 (6, 1, 1, 'asdfasdf', 'asdfsdf', 'asdfasd', -1, 'http://asdf', '', '2007-12-12 10:15:58', 1, 0, 0, '04b0a92981efa5d169349dba0cc77ebb', 'testing, uk', 'fs@asdf.com', 1),
