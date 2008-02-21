@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			UPDATE 
 				`admin` 
 			SET 
-				`password` = md5(' . $db->real_escape_string($_POST['new_password']) . ') 
+				`password` = md5(\'' . $db->real_escape_string($_POST['new_password']) . '\') 
 			WHERE 
 				`id` = 1
 		');
