@@ -7,7 +7,7 @@ version 1.4:
 	* Added: categories management
 	* Enhanced: backend javascript
 	* Added/Changed: translations based on an ini file
-	* Added: option to change the login password
+	* Added: option to change the admin password
 	* Fixed: security issue
 
 version 1.3 (30/01/2008):
