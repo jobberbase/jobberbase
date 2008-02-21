@@ -105,6 +105,11 @@
 			break;
 
 		case 'page-unavailable':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
 			$html_title = 'Page unavailable / ' . SITE_NAME;
 			$template = 'error.tpl';
 			$flag = 1;
@@ -120,7 +125,23 @@
 			$flag = 1;
 			break;
 		case 'categories':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
 			require_once 'page_categories.php';
+			$flag = 1;
+			break;
+		case 'password':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
+			require_once 'page_password.php';
+			$html_title = 'Change password / ' . SITE_NAME;
+			$template = 'password.tpl';
 			$flag = 1;
 			break;
 		default: 
