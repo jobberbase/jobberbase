@@ -5,7 +5,7 @@
 				{$translations.footer.column_use}:<br />
 				<a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a><br />
 				<a href="{$BASE_URL}{$articles.widgets.url}/" title="{$articles.widgets.page_title}">{$articles.widgets.title}</a><br />
-				<a href="{$BASE_URL}rss/" title="{$translations.footer.title}">{$translations.footer.rss}</a><br />
+				<a href="{$BASE_URL}rss/" title="{$translations.footer.rss_title}">{$translations.footer.rss}</a><br />
 			</div>
 			<div id="footer-col2">
 				{$translations.footer.column_find}:<br />
