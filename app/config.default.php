@@ -53,7 +53,10 @@
 
   if(isset($_SERVER['SCRIPT_NAME'])) 
 	{
-  	define('_APP_MAIN_DIR', rtrim(dirname($_SERVER['SCRIPT_NAME']),'/'));
+  	# on Windows _APP_MAIN_DIR becomes \ and abs url would look something like HTTP_HOST\/restOfUrl, so \ should be trimed too
+		# @modified Chis Florinel <chis.florinel@candoo.ro>
+		$app_main_dir = rtrim(dirname($_SERVER['SCRIPT_NAME']),'/\\');	
+		define('_APP_MAIN_DIR', $app_main_dir);
   } 
 	else 
 	{
