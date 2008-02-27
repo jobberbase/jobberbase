@@ -24,23 +24,30 @@ class Stats
 		                        WHERE a.job_id = b.id
 		                        ORDER BY a.created_on DESC';
 		$result = $db->query($sql);
-		while ($row = $result->fetch_assoc())
+		if (!empty($result))
 		{
-			$count++;
-			if ($count < 50)
+			while ($row = $result->fetch_assoc())
 			{
-				$stats .= '<div>' . $row['date'] . ' <a href="' . BASE_URL . 'job/' . $row['job_id'] . '/">' . $row['title'] . ' la ' . $row['company'] . '</a></div>';	
-			}
+				$count++;
+				if ($count < 50)
+				{
+					$stats .= '<div>' . $row['date'] . ' <a href="' . BASE_URL . 'job/' . $row['job_id'] . '/">' . $row['title'] . ' la ' . $row['company'] . '</a></div>';	
+				}
+			}	
 		}
 		
 		$apps_per_day = array();
 		$sql = 'SELECT count(id) AS nr FROM job_applications WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d") 
 		               ORDER BY count(id) DESC';
 		$result = $db->query($sql);
-		while ($row = $result->fetch_assoc())
+		if (!empty($result))
 		{
-			$apps_per_day[] = $row['nr'];
+			while ($row = $result->fetch_assoc())
+			{
+				$apps_per_day[] = $row['nr'];
+			}	
 		}
+		
 		if ($apps_per_day)
 		{
 			$avg = ceil(array_sum($apps_per_day) / count($apps_per_day));	
