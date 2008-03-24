@@ -1,0 +1,124 @@
+#header ul {
+	position: absolute;
+	right: 0;
+	top: 80px;
+}
+#header ul li {
+	float: left;
+	padding-left: 20px;
+}
+#header ul li.selected {
+	font-weight: bold;
+}
+
+#publish_form .text_field {
+	width: 700px;
+}
+#publish_form .textarea_field_small {
+	width: 340px;
+}
+#publish_form .textarea_field {
+	width: 700px;
+}
+#publish_form .submit_button {
+	background-color: #0099CC;
+	color: #fff;
+	border: 1px solid #009988;
+	cursor: pointer;
+	cursor: hand;
+	font-family:Helvetica,Arial,sans-serif;
+	font-size:12px;
+	padding:5px;
+}
+.sidebar_page_edit {
+	padding-top: 430px;
+}
+table {
+	line-height: auto;
+}
+.form_error {
+	display: block;
+	background: url(../../img/exclamation.png) no-repeat left center;
+	padding: 10px 26px;
+	color: #E86857;
+}
+.hidden {
+	display: none;
+}
+
+#categoriesContainer  {
+	position: relative;
+	width: 650px;
+	overlfow: auto;
+}
+.categoryItem {
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+	margin: 0 0 5px 0;
+	position: relative;
+}
+.categoryItem a {
+	float: right;
+}
+.categoryItem label {
+	display: block;
+	margin-bottom: 5px;
+}
+.categoryItem label span {
+	font-weight: bold;
+	float: left;
+	display: block;
+	margin-bottom: 5px;
+	clear: left;
+	width: 70px;
+}
+.categoryHandle {
+	margin-bottom: 5px;
+	height: 10px;
+	overflow: hidden;
+	cursor: move;
+	background: #0099CC;
+}
+.categoryWrapper {
+	padding: 5px;
+}
+.draggingItem {
+	z-index: 4000;
+}
+div.draggingItem div.categoryHandle {
+	background: #E86857;
+}
+#content a.saveCategory {
+	display: none;
+}
+
+#messagesContainer {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -150px;
+	width: 300px;
+}
+#messagesContainer div {
+	border: 5px solid #eee;
+	margin: 0 0 10px;
+	padding: 10px;
+	background-color: #fff;
+}
+
+#overlay {
+	background-color: #fff;
+	filter:alpha(opacity=70); 
+	-moz-opacity: 0.7; 
+	opacity: 0.7;
+	position: absolute;
+	display: none;
+}
+#overlay img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -12px;
+	margin-left: -12px;
+	z-index: 3000;
+}
