@@ -1,6 +1,4 @@
 <?php
- 
-   
 	if ($extra == 'full-time')
 	{
 		$type_id = JOBTYPE_FULLTIME;
@@ -22,26 +20,10 @@
 		$city_id = false;
 	}
 	
-	if($type_id && $id != 'all')
+	if ($id != 'all')
 	{
 		if ($job->IsValidCategory($id))
 		{
-			$jobCount =  $job->CountJobs($id, $type_id);
-			$smarty->assign('jobs_count', $job->CountJobs($id, $type_id));
-		}
-		else
-		{
-			redirect_to(BASE_URL . 'page-unavailable/');
-			exit;
-		}
-		
-	}
-	if (!$type_id && $id != 'all')
-	{
-		if ($job->IsValidCategory($id))
-		{
-			
-			$jobCount =  $job->CountJobs($id);
 			$smarty->assign('jobs_count', $job->CountJobs($id));
 		}
 		else
@@ -50,25 +32,16 @@
 			exit;
 		}
 	}
-	else if($id == 'all')
+	else
 	{
-		$jobCount =  $job->CountJobs();
 		$smarty->assign('jobs_count', $job->CountJobs());
 	}
+	$the_jobs = $job->GetJobs(0, $id, 0, 0, 0, false, $city_id, $type_id);
 	
-	
-	$paginator = new Paginator($jobCount, JOBS_PER_PAGE, @$_REQUEST['p']);
-	$paginator->setLink(BASE_URL . "jobs/$id");
-	$paginator->paginate();
-	
-	$firstLimit = $paginator->getFirstLimit();
-	$lastLimit = $paginator->getLastLimit();
-	
-	
-	
-	$the_jobs = array();
-	$the_jobs = $job->GetJobsPaginate(0, $id, $firstLimit, JOBS_PER_PAGE, 0, 0, false, $city_id, $type_id);
-	//$the_jobs = $job->GetJobsPaginate(0, $id, 0, 0, 0, $firstLimit, $lastLimit, $city_id, $type_id);
+	$paginator = new Paginator($the_jobs, JOBS_PER_PAGE, @$_REQUEST['p']);
+  $paginator->setLink(BASE_URL . "jobs/$id");
+  $the_jobs = $paginator->paginate();
+
 	$smarty->assign("pages",$paginator->pages_link);
 
 	$smarty->assign('jobs', $the_jobs);
@@ -78,6 +51,4 @@
 	$meta_description = '';
 
 	$template = 'category.tpl';
-	
-	
 ?>
