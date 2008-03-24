@@ -1,12 +1,19 @@
 <?php
+	$the_jobs = array();
 	
-	$the_jobs = $job->GetInactiveJobs(false);
+	
+	$jobCount = $job->getInactiveJobCount();
 	
 	
-	$paginator = new Paginator($the_jobs, 50, @$_REQUEST['p']);
-  	$paginator->setLink(BASE_URL.'home');
-  	$the_jobs = $paginator->paginate();
-
+	$paginator = new Paginator($jobCount, JOBS_PER_PAGE, @$_REQUEST['p']);
+	$paginator->setLink(BASE_URL.'home');
+	$paginator->paginate();
+	
+	$firstLimit = $paginator->getFirstLimit();
+	$lastLimit = $paginator->getLastLimit();
+		
+	$the_jobs = $job->GetInactiveJobs($firstLimit, JOBS_PER_PAGE);;
+	
 	$smarty->assign("pages",$paginator->pages_link);
 
 	$smarty->assign('jobs', $the_jobs);
