@@ -12,20 +12,31 @@
 
 class Paginator
 {
-  var $items;
+  var $itemsCount;
   var $items_per_page;
   var $current_page;
   var $current_items;
   var $link;
   var $pages_link;
+  var $firstLimit;
+  var $lastLimit;
 
-  function Paginator( $items, $items_per_page, $current_page = 1 )
+  function Paginator( $itemsCount, $items_per_page, $current_page = 1 )
   {
-    $this->items = $items;
+    $this->itemsCount = $itemsCount;
     $this->items_per_page = $items_per_page;
     $this->current_page = $current_page;
   }
+  
+  function getFirstLimit()
+  {
+  	return $this->firstLimit;
+  }
 
+  function getLastLimit()
+  {
+  	return $this->lastLimit;
+  }
   /**
    * Sets the link used in the pages text
    *
@@ -44,7 +55,8 @@ class Paginator
   function paginate()
   {
 
-    $total_items = count($this->items);
+    $total_items = $this->itemsCount;
+    
 
     if( $this->items_per_page == "" || $this->items_per_page == "0" || $this->items_per_page == 0 )
     {
@@ -77,9 +89,9 @@ class Paginator
     $temp = array();
     $i = 0;
     $pages = "";
-    if(is_array($this->items) && count($this->items))
+    if(is_numeric($this->itemsCount))
     {
-      foreach ($this->items as $key => $item)
+      /*foreach ($this->items as $key => $item)
       {
         $i++;
       	if( ( $i > $this->items_per_page * ($page-1) ) && ( $i <= $this->items_per_page * $page ) )
@@ -90,9 +102,11 @@ class Paginator
       		continue;
       	}
       	$temp[] = $item;
-      }
+      }*/
+    $this->firstLimit = $this->items_per_page * ($page-1);
+    $this->lastLimit =  $this->items_per_page * $page;
     }
-    $this->current_items = $temp;
+   // $this->current_items = $temp;
 		if ($total_pages != 1)
 		{
 	    if($total_pages>0)
@@ -161,7 +175,7 @@ class Paginator
 		}
     $this->pages_link = $pages;
 
-    return $this->current_items;
+    //return $this->current_items;
   }
 
 

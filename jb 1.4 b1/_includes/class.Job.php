@@ -253,13 +253,104 @@ class Job
 		return $jobs;
 	}
 	
-	//Get all inactive jobs for admin 
-	public function GetInactiveJobs( $limit = false)
+	// Get all job posts (optionally from a specific type and/or category)
+	// $type_id: freelance/fulltime/parttime
+	// $categ_id: programatori/designeri/etc.
+	// $limit: (int) how many results
+	// $random: (1/0) randomize results?
+	// $days_behind: (int) only get results from last N days
+	// $for_feed: (boolean) is this request from rss feed?
+	public function GetJobsPaginate($type_id = false, $categ_id = false, $firstLimit = false, $lastLimit=false, $random, $days_behind, $for_feed = false, $city_id = false, $type_id = false)
 	{
 		global $db;
 		$jobs = array();
-				
-		if ($limit > 0)
+		$conditions = '';
+		
+		// if $categ_id is, in fact, the category's var_name, 
+		// get the categs id
+		if (!is_numeric($categ_id))
+		{
+			$categ_id = $this->GetCategId($categ_id);
+		}
+		// if $type_id is, in fact, the type's var_name, 
+		// get the type's id
+		if (!is_numeric($type_id))
+		{
+			$type_id = $this->GetTypeId($type_id);
+		}
+		
+		if (is_numeric($type_id) && $type_id != 0)
+		{
+			$conditions .= ' AND type_id = ' . $type_id;
+		}
+		if (is_numeric($categ_id) && $categ_id != 0)
+		{
+			$conditions .= ' AND category_id = ' . $categ_id;
+		}
+		
+		if ($days_behind > 0)
+		{
+			$conditions .=' AND DATEDIFF(NOW(), created_on) <= ' . $days_behind;
+		}
+		
+		if ($for_feed)
+		{
+			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
+		}
+		
+		if ($city_id && is_numeric($city_id))
+		{
+			$conditions .= ' AND city_id = ' . $city_id;
+		}
+		
+		if ($type_id && is_numeric($type_id))
+		{
+			$conditions .= ' AND type_id = ' . $type_id;
+		}
+
+		if ($random == 1)
+		{
+			$order = ' ORDER BY RAND() ';
+		}
+		else
+		{
+			$order = ' ORDER BY created_on DESC ';
+		}
+
+		
+		if ($firstLimit >= 0 && $lastLimit >= 0)
+		{
+			$sql_limit = 'LIMIT ' . $firstLimit .', ' . $lastLimit;
+		}
+		else
+		{
+		        $sql_limit = '';        
+		}
+		$sql = 'SELECT id
+		               FROM jobs
+		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1
+		               ' . $order . ' ' . $sql_limit;
+		
+		$result = $db->query($sql);
+		while ($row = $result->fetch_assoc())
+		{
+			$current_job = new Job($row['id']);
+			$jobs[] = $current_job->GetInfo();
+		}
+		return $jobs;
+	}
+	
+	//Get all inactive jobs for admin 
+	public function GetInactiveJobs( $limit = false, $limit2 = false)
+	{
+		global $db;
+		$jobs = array();
+
+		if($limit>0 && $limit2>0)
+		{
+			$sql_limit = 'LIMIT ' . $limit .' , ' . $limit2;
+		}
+		else if ($limit > 0)
 		{
 			$sql_limit = 'LIMIT ' . $limit;
 		}
@@ -278,6 +369,16 @@ class Job
 			$jobs[] = $current_job->GetBasicInfoAdmin();
 		}
 		return $jobs;
+	}
+	
+	public function getInactiveJobCount()
+	{
+		global $db;
+		$sql = 'SELECT COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 0';
+	
+		$result = $db->query($sql);
+		$row = $result->fetch_assoc();
+		return $row['total'];	
 	}
 	
 	//Get all inactive/active jobs for a specific category for admin
@@ -828,10 +929,25 @@ class Job
 		$db->query($sql);
 	}
 	
-	public function CountJobs($categ = false)
+	public function CountJobs($categ = false, $type = false)
 	{
 		global $db;
-		if ($categ)
+		$condition = '';
+		$condition1 = '';
+	 	if ($categ && $type)
+		{
+			if (!is_numeric($type))
+			{
+				$type_id = $this->GetTypeId($type);
+			}
+			else
+			{
+				$type_id = $type;
+			}
+			
+			$condition1 = 'AND type_id = ' . $type_id;
+		}
+		else if ($categ)
 		{
 			if (!is_numeric($categ))
 			{
@@ -841,13 +957,15 @@ class Job
 			{
 				$categ_id = $categ;
 			}
+			
 			$condition = 'AND category_id = ' . $categ_id;
 		}
 		else
 		{
 			$condition = '';
 		}
-		$sql = 'SELECT COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1 ' . $condition;
+		$sql = 'SELECT COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1 ' . $condition . ' ' .$condition1;
+	
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		return $row['total'];	
