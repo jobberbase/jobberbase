@@ -24,7 +24,7 @@ class Stats
 		                        WHERE a.job_id = b.id
 		                        ORDER BY a.created_on DESC';
 		$result = $db->query($sql);
-		if (!empty($result))
+		if ($db->affected_rows > 0)
 		{
 			while ($row = $result->fetch_assoc())
 			{
@@ -40,7 +40,7 @@ class Stats
 		$sql = 'SELECT count(id) AS nr FROM job_applications WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d") 
 		               ORDER BY count(id) DESC';
 		$result = $db->query($sql);
-		if (!empty($result))
+		if ($db->affected_rows > 0)
 		{
 			while ($row = $result->fetch_assoc())
 			{
@@ -48,16 +48,17 @@ class Stats
 			}	
 		}
 		
+		
 		if ($apps_per_day)
 		{
 			$avg = ceil(array_sum($apps_per_day) / count($apps_per_day));	
+			return array('stats' => $stats, 'count' => $count, 'avg' => $avg, 'max' => $apps_per_day[0]);
 		}
 		else
 		{
 			$avg = 0;
+			return false;
 		}
-		
-		return array('stats' => $stats, 'count' => $count, 'avg' => $avg, 'max' => $apps_per_day[0]);
 	}
 	
 	public function Keywords()
