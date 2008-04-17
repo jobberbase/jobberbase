@@ -127,7 +127,7 @@
 	
 	// Split URL - get parameters
 	$_app_info['params'] = array();
-	$_url = str_replace(_APP_MAIN_DIR, '', $_SERVER['REQUEST_URI']);
+	$_url = preg_replace('#'._APP_MAIN_DIR.'#', '', $_SERVER['REQUEST_URI'],1);
 	$_tmp = explode('?', $_url);
 	$_url = $_tmp[0];
 	if ($_url = explode('/', $_url))

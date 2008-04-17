@@ -17,4 +17,5 @@
 	$smarty->compile_dir = APP_PATH . CURRENT_DIRECTORY. '/_templates/_cache/';
 
 	define('BASE_URL_ORIG', str_replace('/admin/', '/', BASE_URL) );
+	
 ?>

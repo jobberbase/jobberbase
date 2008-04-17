@@ -28,9 +28,18 @@
 	
 	switch($page)
 	{
-		// home
+		// home		
 		case '':
-			require_once 'page_login.php';
+			#show login page only if the admin is not logged in
+			#else show homepage
+			if(!isset($_SESSION['AdminId']))
+			{
+				require_once 'page_login.php';			
+			}
+			else
+			{				
+				require_once 'page_home.php';
+			}
 			$flag = 1;
 			break;
 
@@ -89,7 +98,7 @@
 			{
 				redirect_to(BASE_URL);
 				exit;
-			}
+			}			
 			require_once 'page_job.php';
 			$flag = 1;
 			break;
