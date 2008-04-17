@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 			$categories = get_categories();
 			$html = '';
 			foreach ($categories as $category) {
-				$html .= '<li id="' . $category['var_name'] . '"><a title="administrators" href="http://localhost/jobber/admin/jobs/' . $category['var_name'] . '/"><span>' . $category['name'] . '</span><span class="cnr">&nbsp;</span></a></li>';
+				$html .= '<li id="' . $category['var_name'] . '"><a title="'.$category['var_name'].'" href="'.BASE_URL.'jobs/' . $category['var_name'] . '/"><span>' . $category['name'] . '</span><span class="cnr">&nbsp;</span></a></li>';
 			}
 			echo $html;
 			break;
