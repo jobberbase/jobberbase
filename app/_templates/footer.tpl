@@ -17,6 +17,10 @@
 				<a href="{$BASE_URL}companies/" title="{$translations.footer.companies_title}">{$translations.footer.companies}</a><br />
 				<a href="{$BASE_URL}sitemap/" title="{$translations.sitemap.title}">{$translations.sitemap.title}</a><br />
 			</div>
+			<div id="footer-copyright">
+				{$translations.footer.powered_by}
+				<a href="http://www.jobberbase.com/" title="open source job board software">jobberBase</a>
+			</div>
 			<div class="clear"></div>
 		</div><!-- #footer-contents -->
 	</div><!-- .footer -->

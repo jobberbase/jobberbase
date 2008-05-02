@@ -773,14 +773,16 @@ class Job
 	public function Edit($params)
 	{
 		global $db;
-		if ($params['city_id'] == '')
+
+		/*if ($params['city_id'] == '')
 		{
 			$params['city_id'] = -1;
 		}
 		else
 		{
 			$params['location_outside_ro_where'] = '';
-		}
+		}*/
+
 		if ($params['apply_online'] == 'on')
 		{
 			$params['apply_online'] = 1;
@@ -789,6 +791,7 @@ class Job
 		{
 			$params['apply_online'] = 0;
 		}
+
 		$sql = 'UPDATE jobs SET type_id = ' . $params['type_id'] . ',
         										category_id = ' . $params['category_id'] . ',
 										        title = "' . $params['title'] . '",

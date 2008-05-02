@@ -1,5 +1,5 @@
 <?php /**
- * jobber job board platform
+ * jobberBase job board platform
  *
  * @author     Filip C.T.E. <http://www.filipcte.ro> <me@filipcte.ro>
  * @license    You are free to edit and use this work, but it would be nice if you always referenced the original author ;)
@@ -14,6 +14,7 @@ class Api
 	var $mReferer = false;
 	var $mResponse = false;
 	var $mAction = false;
+	var $mParams = false;
 	
 	function __construct($action, $params = false, $response)
 	{
@@ -27,6 +28,10 @@ class Api
 			else if ($action == 'getJobsByCompany')
 			{
 				$this->mJobs = $job->ApiGetJobsByCompany($params['company'], $params['count']);
+			}
+			else if ($action == 'getJobs4JobJob')
+			{
+				$this->mParams = $params;
 			}
 			
 			$this->mResponse = $response;
@@ -105,6 +110,73 @@ class Api
 			$response .= '<title><![CDATA[' . $job['title'] . ' la ' . $job['company'] . ']]></title>';
 			$response .= '<url>' . JOBBER_URL . 'job/' . $job['id'] . '/' . $job['url_title'] . '/</url>';
 			$response .= '<date>' . $job['created_on'] . '</date>';
+			$response .= '</job>';
+		}
+		$response .= '</jobs>';
+		return $response;
+	}
+	
+	// custom API for jobjob.ro
+	private function ApiGetJobs4JobJob()
+	{
+		global $db;
+
+		$jobs = array();
+		$sql = 'SELECT id
+		               FROM jobs
+		               WHERE is_temp = 0 AND is_active = 1 AND 
+												 created_on > DATE_SUB("' . $this->mParams['since'] . '", INTERVAL 1 DAY)
+		               ORDER BY created_on DESC';
+		$result = $db->query($sql);
+
+		while ($row = $result->fetch_assoc())
+		{
+			$current_job = new Job($row['id']);
+			$jobs[] = $current_job->GetBasicInfo();
+		}
+		return $jobs;
+	}
+	
+	// Return result as XML specially formatted for jobjob.ro
+	public function ReturnXml4JobJob()
+	{
+		$jobs = $this->ApiGetJobs4JobJob($this->mParams['since']);
+
+		header('Content-Type: text/xml; charset=UTF-8');
+		$response = '<?xml version="1.0" encoding="utf-8"?>';
+		$response .= '<jobs>';
+		foreach ($jobs as $job)
+		{
+			if ($job['type_id'] == JOBTYPE_FULLTIME)
+			{
+				$type = 'Full-time';
+			}
+			else if ($job['type_id'] == JOBTYPE_PARTTIME)
+			{
+				$type = 'Part-time';
+			}
+			else if ($job['type_id'] == JOBTYPE_FREELANCE)
+			{
+				$type = 'Freelance';
+			}
+			$response .= '<job>';
+			$response .= '<title>' . base64_encode(htmlspecialchars($job['title'], ENT_QUOTES)) . '</title>';
+			$response .= '<job_url>' . JOBBER_URL . 'job/' . $job['id'] . '/' . $job['url_title'] . '/</job_url>';
+			$response .= '<job_city>' . $job['location'] . '</job_city>';
+			$response .= '<job_type>' . $type . '</job_type>';
+			$response .= '<job_category>' . $job['category_name'] . '</job_category>';
+			
+			$response .= '<description>';
+			$response .= '<summary>' . base64_encode($job['description']) . '</summary>';
+			$response .= '</description>';
+			
+			$response .= '<posted_date>' . $job['mysql_date'] . '</posted_date>';
+			
+			$response .= '<company>';
+			$response .= '<name>' . htmlspecialchars($job['company'], ENT_QUOTES) . '</name>';
+			$response .= '<url>' . htmlspecialchars($job['url'], ENT_QUOTES) . '</url>';
+		  $response .= '</company>';
+		
 			$response .= '</job>';
 		}
 		$response .= '</jobs>';

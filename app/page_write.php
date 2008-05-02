@@ -144,6 +144,7 @@
 			{
 				$city_id = -1;
 			}
+
 			$data = array('company' => $company,
 			              'url' => $url,
 			              'title' => $title,
@@ -155,6 +156,7 @@
 			              'apply' => '',
 			              'poster_email' => $poster_email,
 			              'apply_online' => $apply_online);
+
 			$job->Edit($data);
 			//where is set $auth ?
 			if (!empty($auth))

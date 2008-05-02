@@ -98,7 +98,7 @@
 		}
 
 		$smarty->assign('job', $info);
-		$html_title = stripslashes($info['title']) . ' la ' . stripslashes($info['company']) . ' / ' . SITE_NAME;
+		$html_title = stripslashes($info['title']) . ' ' . $translations['jobs']['preposition_at'] . ' ' . stripslashes($info['company']) . ' / ' . SITE_NAME;
 		$smarty->assign('current_category', $job->GetCategVarname($info['category_id']));
 		$smarty->assign('back_link', BASE_URL . 'jobs/' . $job->GetCategVarname($info['category_id']) . '/');
 		$template = 'job.tpl';
