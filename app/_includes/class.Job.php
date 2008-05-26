@@ -534,6 +534,10 @@ class Job
 		{
 			$sql_limit = 'LIMIT ' . $limit;
 		}
+		else
+		{
+			$sql_limit = '';
+		}
 		
 		$sql = 'SELECT id
 		               FROM jobs

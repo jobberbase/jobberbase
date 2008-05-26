@@ -24,6 +24,10 @@
 		}	
 		$job->Publish();
 	}
+	else
+	{
+		$job->Publish();
+	}
 	
 	$job_title = BASE_URL . 'job/' . $job->mId . '/' . $job->mUrlTitle . '/';
 	$smarty->assign('auth', $job->GetAuth());
