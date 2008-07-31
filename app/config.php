@@ -127,9 +127,15 @@
 	
 	// Split URL - get parameters
 	$_app_info['params'] = array();
+	
+	// if your server is IIS, use these lines and comment lines 135-137:
+	//$_url = $_SERVER["QUERY_STRING"];
+
+	// if server is Apache:	
 	$_url = str_replace(_APP_MAIN_DIR, '', $_SERVER['REQUEST_URI']);
 	$_tmp = explode('?', $_url);
-	$_url = $_tmp[0];
+	$_url = $_tmp[0];	
+	
 	if ($_url = explode('/', $_url))
 	{
 		foreach ($_url as $tag)

@@ -608,50 +608,92 @@ class Job
 		$jobs = array();
 		$conditions = '';
 		$_SESSION['keywords_array'] = array();
-		
-	        $kw1 = $kw2 = $extra_conditions = '';
+	  $kw1 = $kw2 = $extra_conditions = '';
+		$found_city = false;
+
+
 		if (strstr($keywords, ',') || strstr($keywords, ', '))
 		{
 			$tmp = explode(',', $keywords);
-			$kw1 = $tmp[0];
-			$kw2 = $tmp[1];
+			$kw1 = trim($tmp[0]);
+			$kw2 = trim($tmp[1]);
 			if ($kw1 == '')
 			{
 				$kw1 = $kw2;
 				$kw2 = '';
 			}
 		}
-
-		if ($kw1 != '')
+		else if (strstr($keywords, ' ') || strstr($keywords, '  '))
 		{
-			$conditions .= 'title LIKE "%' . $kw1 . '%" OR description LIKE "%' . $kw1 . '%"';
-			$_SESSION['keywords_array'][] = $kw1;
-		}
-		if ($kw2 != '')
-		{
-			$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $kw2 . '%"';
-			$result = $db->query($sql);
-			$row = $result->fetch_assoc();
-			if ($row['id'] != '')
+			$tmp = explode(' ', $keywords);
+			foreach ($tmp as $word)
 			{
-				$conditions .= ' AND (city_id = ' . $row['id'] . ' OR outside_location LIKE "%' . $kw2 . '%")';
+				// try to find city based on city_id
+				$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $word . '%"';
+				$result = $db->query($sql);
+				$row = $result->fetch_assoc();
+				if ($row['id'] != '')
+				{
+					$conditions .= ' city_id = ' . $row['id'];
+					$found_city = true;
+					$keywords = trim(str_replace($word, '', $keywords));
+				}
+				
+				// try to find city based on postcode or location_details
+				$sql = 'SELECT id FROM jobs WHERE outside_location LIKE "%' . $word . '%"';
+				$results = $db->QueryArray($sql);
+				if ($db->affected_rows > 0)
+				{
+					$conditions .= ' OR id IN (';
+					foreach ($results as $j)
+					{
+						$conditions .= $j['id'] . ',';
+						$found_city = true;
+					}	
+					$conditions = rtrim($conditions, ',');
+					$conditions .= ') ';
+				}
 			}
-			$_SESSION['keywords_array'][] = $kw2;
-		}
-		if ($kw1 == '' && $kw2 == '')
-		{
-			$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $keywords . '%"';
-			$result = $db->query($sql);
-			$row = $result->fetch_assoc();
-			if ($row['id'] != '')
+			if ($found_city)
 			{
-				$extra_conditions .= ' OR city_id = ' . $row['id'];
+				$conditions .= ' AND (title LIKE "%' . $keywords . '%" OR company LIKE "%' . $keywords . '%"' .  ' OR description LIKE "%' . $keywords . '%")';	
 			}
-			$conditions = 'title LIKE "%' . $keywords . '%" OR company LIKE "%' . $keywords . '%"' .  ' OR description LIKE "%' . $keywords . '%" OR outside_location LIKE "%' . $keywords . '%"' . $extra_conditions;
-
-			$_SESSION['keywords_array'][] = $keywords;
 		}
-		
+
+		if (!$found_city)
+		{
+			if ($kw1 != '')
+			{
+				$conditions .= ' (title LIKE "%' . $kw1 . '%" OR description LIKE "%' . $kw1 . '%")';
+				$_SESSION['keywords_array'][] = $kw1;
+			}
+			if ($kw2 != '')
+			{
+				$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $kw2 . '%"';
+				$result = $db->query($sql);
+				$row = $result->fetch_assoc();
+				if ($row['id'] != '')
+				{
+					$extra_conditions .= ' OR city_id = ' . $row['id'];
+				}
+				$conditions .= ' AND (outside_location LIKE "%' . $kw2 . '%" ' . $extra_conditions . ')';
+				$_SESSION['keywords_array'][] = $kw2;
+			}
+			if ($kw1 == '' && $kw2 == '')
+			{
+				$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $keywords . '%"';
+				$result = $db->query($sql);
+				$row = $result->fetch_assoc();
+				if ($row['id'] != '')
+				{
+					$extra_conditions .= ' OR city_id = ' . $row['id'];
+				}
+				$conditions = 'title LIKE "%' . $keywords . '%" OR company LIKE "%' . $keywords . '%"' .  ' OR description LIKE "%' . $keywords . '%" OR outside_location LIKE "%' . $keywords . '%"' . $extra_conditions;
+
+				$_SESSION['keywords_array'][] = $keywords;
+			}
+		}
+
 		$sql = 'SELECT id
 		               FROM jobs
 		               WHERE is_temp = 0 AND is_active = 1 AND (' . $conditions . ')

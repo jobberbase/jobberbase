@@ -74,7 +74,7 @@ class Postman
 	{
 		$msg = '';
 		$job_title = BASE_URL . 'job/' . $data['id'] . '/' . $data['url_title'] . '/';
-		$subject = '[jobber] ' . $job_title;
+		$subject = "[" . SITE_NAME . "]" . $job_title;
 		
 		if ($data['check_poster_email'] == 0)
 		{
@@ -82,14 +82,14 @@ class Postman
 			$msg .= "\n\n\n";
 		}
 		$msg .= $job_title;
-		$msg .= "\n\n" . $data['title'] . " la " . $data['company'];
+		$msg .= "\n\n" . $data['title'] . " at " . $data['company'];
 		$msg .= "\n\n" . $data['description'];
 		$msg .= "\n\nURL: " . $data['url'];
 		$msg .= "\n\n---\Published by: " . $data['poster_email'];
 		$msg .= "\n---\nEdit: " . BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\nDeactivate: " . BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\n\n---\nIP: " . $_SERVER['REMOTE_ADDR'];
-		$msg .= "\nData: " . $data['created_on'];
+		$msg .= "\nDate: " . $data['created_on'];
 		mail(NOTIFY_EMAIL, $subject, $msg, "From: " . SITE_NAME . " <" . NOTIFY_EMAIL . ">");
 	}
 	
@@ -117,7 +117,7 @@ class Postman
 		$msg .= "Your ad was published and is available at: " . BASE_URL . "job/" . $data['id'] . "/" . $data['url_title'] . "/";
 		$msg .= "\n\n---\nEdit it: " . BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\nDeactivate it: " . BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
-		$msg .= "\n\n---\n\nThank you for using our service!\nThe Team";
+		$msg .= "\n\n---\n\nThank you for using our service!\nThe " . SITE_NAME . " Team";
 		
 		if ($data['poster_email'] != '' && validate_email($data['poster_email']))
 		{
@@ -138,13 +138,13 @@ class Postman
 		$subject = '[SPAM on ' . SITE_NAME . '] ' . $job_title;
 		$msg .= "Following ad was reported as false/spam:\n--\n\n";
 		$msg .= $job_title;
-		$msg .= "\n\n" . $data['title'] . " la " . $data['company'];
+		$msg .= "\n\n" . $data['title'] . " at " . $data['company'];
 		$msg .= "\n\n" . $data['description'];
-		$msg .= "\n\n---\nPublished by: " . $data['poster_email'];
+		$msg .= "\n\n--- \n Published by: " . $data['poster_email'];
 		$msg .= "\n---\nEdit: " . BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\nDeactivate: " . BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\n---\nIP: " . $_SERVER['REMOTE_ADDR'];
-		$msg .= "\nData: " . $data['created_on'];
+		$msg .= "\nDate: " . $data['created_on'];
 		
 		mail(NOTIFY_EMAIL, $subject, $msg, "From: " . SITE_NAME . " <" . NOTIFY_EMAIL . ">");
 	}
@@ -152,7 +152,7 @@ class Postman
 	public function MailContact($name, $email, $msg)
 	{
 		$msg .= "\n\n---\nIP: " . $_SERVER['REMOTE_ADDR'];
-		$msg .= "\nData: " . date('Y-m-d H:i');
+		$msg .= "\nDate: " . date('Y-m-d H:i');
 
 		$subject = "[" . SITE_NAME . "] contact";
 
