@@ -1,5 +1,9 @@
 <?php
-
+	if (strstr($id, '%7C'))
+	{
+		$id = str_replace('%7C', '|', $id);
+	}
+	
 	if (key_exists('keywords', $_POST)) {
 		$requestKeywords = str_replace('"', '', urldecode($_POST['keywords']));
 	}
