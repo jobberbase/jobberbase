@@ -89,6 +89,7 @@ class Job
 				$this->mUrlTitle = $sanitizer->sanitize_title_with_dashes($this->mTitle . ' at ' . $this->mCompany);
 				$this->mApplyOnline = $row['apply_online'];
 				$this->mDaysOld = $row['days_old'];
+				$this->mIsActive = $row['is_active'];
 			}
 		}
 	}
@@ -117,6 +118,7 @@ class Job
 								 'poster_email' => $this->mPosterEmail,
 								 'apply_online' => $this->mApplyOnline,
 								 'check_poster_email' => $this->CheckPosterEmail(),
+								 'is_active' => $this->mIsActive,
 								 'days_old' => $this->mDaysOld);
 		return $job;
 	}
@@ -140,6 +142,7 @@ class Job
 								 'city_id' => $this->mCityId,
 								 'mysql_date' => $this->mMySqlDate,
 								 'location_outside_ro' => $this->mLocationOutsideRo,
+								 'is_active' => $this->mIsActive,
 								 'days_old' => $this->mDaysOld);
 		return $job;
 	}
@@ -611,7 +614,6 @@ class Job
 	  $kw1 = $kw2 = $extra_conditions = '';
 		$found_city = false;
 
-
 		if (strstr($keywords, ',') || strstr($keywords, ', '))
 		{
 			$tmp = explode(',', $keywords);
@@ -644,7 +646,11 @@ class Job
 				$results = $db->QueryArray($sql);
 				if ($db->affected_rows > 0)
 				{
-					$conditions .= ' OR id IN (';
+					if ($found_city)
+					{
+						$conditions .= ' OR ';
+					}
+					$conditions .= ' id IN (';
 					foreach ($results as $j)
 					{
 						$conditions .= $j['id'] . ',';
@@ -652,6 +658,7 @@ class Job
 					}	
 					$conditions = rtrim($conditions, ',');
 					$conditions .= ') ';
+					$keywords = trim(str_replace($word, '', $keywords));
 				}
 			}
 			if ($found_city)

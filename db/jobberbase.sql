@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2008 at 01:21 PM
+-- Generation Time: Aug 20, 2008 at 02:39 AM
 -- Server version: 5.0.41
 -- PHP Version: 5.2.5
 
@@ -168,9 +168,7 @@ CREATE TABLE IF NOT EXISTS `hits` (
 --
 
 INSERT INTO `hits` (`job_id`, `created_on`, `ip`) VALUES
-(1, '2008-01-31 13:24:54', '127.0.0.1'),
-(1, '2008-02-05 11:50:06', '127.0.0.1'),
-(2, '2008-02-21 13:18:43', '::1');
+(11, '2008-08-20 02:36:27', '::1');
 
 -- --------------------------------------------------------
 
@@ -199,22 +197,18 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   PRIMARY KEY  (`id`),
   KEY `type_id` (`type_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `jobs`
 --
 
 INSERT INTO `jobs` (`id`, `type_id`, `category_id`, `title`, `description`, `company`, `city_id`, `url`, `apply`, `created_on`, `is_temp`, `is_active`, `views_count`, `auth`, `outside_location`, `poster_email`, `apply_online`) VALUES
-(1, 1, 1, 'web developer', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 8, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
-(2, 3, 2, 'Illustrator/Photoshop expert', 'Could you redraw in Illustrator da Vinci\\''s Gioconda, blindfolded?\r\nLet us know! :)', 'UnrealExpectations', -1, 'http://unrealexpectations.com', '', '2007-10-20 13:47:05', 0, 1, 4, '6ebcfde637d98a9738c024c6074e945d', '', 'jobs@unrealexpectations.com', 1),
-(4, 1, 1, 'web developer 3', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 7, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
-(5, 1, 1, 'web developer 2', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2007-10-20 13:43:27', 0, 1, 6, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
-(6, 1, 1, 'asdfasdf', 'asdfsdf', 'asdfasd', -1, 'http://asdf', '', '2007-12-12 10:15:58', 1, 0, 0, '04b0a92981efa5d169349dba0cc77ebb', 'testing, uk', 'fs@asdf.com', 1),
-(7, 1, 1, 'asdf', 'asdf', 'asdf', -1, 'http://asdf', '', '2007-12-12 10:18:25', 1, 0, 0, '7b16111f6160bb83ddc255ac13dee5f7', 'sdfasd', 'asdf', 1),
-(8, 1, 1, 'asdfasdf', 'asdfsdf', 'asdfasd', -1, 'http://asdf', '', '2007-12-12 10:20:50', 1, 0, 0, '3ae01ae904b6b0cb361dcbf438123e5e', 'testing, uk', 'fs@asdf.com', 1),
-(9, 1, 1, 'asdfasdf', 'asdfsdf', 'asdfasd', -1, 'http://asdf', '', '2007-12-12 10:21:23', 1, 0, 0, '3472f6a1151a315227d2a27c731328b1', 'testing, uk', 'fs@asdf.com', 1),
-(10, 1, 1, 'dsadsa', 'dasdasdsa', 'dasdas', -1, 'http://asddsad', '', '2008-02-05 14:30:23', 1, 0, 0, 'f7cebdb617722c7f00ead4b6675773f2', '', 'dasdas', 1);
+(1, 1, 1, 'web developer', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2008-08-20 02:35:29', 0, 1, 10, 'f1acd80152446f4cf8a0bb8242398be7', 'sss', 'jobs@fooinc.com', 1),
+(2, 3, 2, 'Illustrator/Photoshop expert', 'Could you redraw in Illustrator da Vinci\\''s Gioconda, blindfolded?\r\nLet us know! :)', 'UnrealExpectations', -1, 'http://unrealexpectations.com', '', '2008-08-20 02:35:37', 0, 1, 6, '6ebcfde637d98a9738c024c6074e945d', '', 'jobs@unrealexpectations.com', 1),
+(4, 1, 1, 'web developer 3', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2008-08-20 02:35:45', 0, 1, 8, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
+(5, 1, 1, 'web developer 2', 'We\\''re a startup searching for a cool web developer that masters following technologies:\r\n* php, mysql\r\n* javascript, dom, ajax\r\n* html, css\r\n\r\nPerson should also have a good sens of user behavior.\r\n\r\nExcellent payment! ;)', 'Foo Inc.', -1, 'http://www.fooinc.com', '', '2008-08-20 02:35:52', 0, 1, 6, 'f1acd80152446f4cf8a0bb8242398be7', 'London, UK', 'jobs@fooinc.com', 1),
+(11, 1, 3, 'nice developer needed', 'asdfsd', 'temp name', 1, 'http://google.com', '', '2008-08-20 02:35:57', 0, 1, 2, '2e3f1e857af3a4e191f453d747fbf212', '', 'jobs@fooinc.com', 1);
 
 -- --------------------------------------------------------
 
@@ -228,14 +222,12 @@ CREATE TABLE IF NOT EXISTS `job_applications` (
   `created_on` datetime NOT NULL,
   `ip` varchar(15) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `job_applications`
 --
 
-INSERT INTO `job_applications` (`id`, `job_id`, `created_on`, `ip`) VALUES
-(6, 1, '2008-01-31 13:25:18', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -369,14 +361,14 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `has_form` enum('0','1') NOT NULL,
   `form_message` text NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id`, `url`, `page_title`, `keywords`, `description`, `title`, `content`, `has_form`, `form_message`) VALUES
-(1, 'about', 'About Us', '', '', 'About Us', '			<h4>Hello!</h4>\r\n			<p>\r\n				This job board is an open source implementation of <a href="http://www.jobber.ro/">www.jobber.ro</a>.\r\n			</p>\r\n			<p>\r\n				Don''t hesitate to <a href="http://localhost/jobber/contact/">contact us</a>!\r\n			</p>\r\n		', '', ''),
+(1, 'about', 'About Us', '', '', 'About Us', '<h4>Hello!</h4>\r\n<p>This job board is an open source implementation of <a href="http://www.jobber.ro/">www.jobber.ro</a>.</p>\r\n<p>Don''t hesitate to&nbsp;contact us!</p>', '0', ''),
 (5, 'contact', 'Contact Us', '', '', 'We really appreciate feedback!', '<p>E-mail us at <strong>hello [at] domain [dot] com</strong> or use the form below:</p>', '1', '<p>Thank you for your message! :)</p>'),
 (4, 'widgets', 'Widgets', '', '', 'Site widget', '<h4>Would you like to display our latest jobs on your site?</h4>\r\n<p>Insert one of the following snippets in your page''s HTML code, in the position where the ads should appear:</p>\r\n<ol>\r\n<li>Get latest 5 jobs from all categories and all types, posted in the past 7 days, in random order:\r\n<pre>&lt;script src="http://localhost/jobber/api/api.php?action=getJobs<br />&amp;type=0&amp;category=0&amp;count=5&amp;random=1&amp;days_behind=7&amp;response=js" type="text/javascript"&gt;&lt;/script&gt;<br /><br />&lt;script type="text/javascript"&gt;<strong>showJobs(''jobber-container'', ''jobber-list'');</strong>&lt;/script&gt;</pre>\r\n</li>\r\n<li>Get last 10 full-time jobs for programmers, posted in the past 15 days, ordered by publish date (newest on top):\r\n<pre>&lt;script src="http://localhost/jobber/api/api.php?action=getJobs<br />&amp;type=fulltime&amp;category=programmers&amp;count=10&amp;random=0&amp;days_behind=15&amp;response=js" <br />type="text/javascript"&gt;&lt;/script&gt;<br /><br />&lt;script type="text/javascript"&gt;<strong>showJobs(''jobber-container'', ''jobber-list'');</strong>&lt;/script&gt;</pre>\r\n</li>\r\n<li>Get latest jobs published by a company (e.g. Google):\r\n<pre>&lt;script src="http://localhost/jobber/api/api.php?action=getJobsByCompany<br />&amp;company=google&amp;count=10&amp;response=js" type="text/javascript"&gt;&lt;/script&gt;<br /><br />&lt;script type="text/javascript"&gt;<strong>showJobs(''jobber-container'', ''jobber-list'');</strong>&lt;/script&gt;</pre>\r\n</li>\r\n</ol>\r\n<h2>The parameters you can use when calling the API, are:</h2>\r\n<ul>\r\n<li><strong>action</strong>: "getJobs" - all jobs / "getJobsByCompany" - a single company''s jobs</li>\r\n<li><strong>type</strong>: "0" - toate / "fulltime" / "parttime" / "freelance";</li>\r\n<li><strong>category</strong>: "0" - all / "programmers" / "designers" / "administrators" / "managers" / "testers" / "editors";</li>\r\n<li><strong>count</strong>: number of job ads to display;</li>\r\n<li><strong>random</strong>: "1" - display randomly / "0" - display ordered by publish date (newest on top);</li>\r\n<li><strong>days_behind</strong>: get only jobs posted in the past X days (type "0" if you don''t want to limit this);</li>\r\n<li><strong>response</strong>: "js" - returns jobs as JavaScript code / "json" - returns only a JSON string / "xml" - returns an XML.</li>\r\n</ul>\r\n<h2>Use CSS to style the list:</h2>\r\n<pre>ul.jobber-list {<br />  list-style-type: none;<br />  margin: 0;<br />  padding: 0;<br />}<br />ul.jobber-list li {<br />  margin-bottom: 5px;<br />}</pre>', '0', '');
 
@@ -391,16 +383,12 @@ CREATE TABLE IF NOT EXISTS `searches` (
   `keywords` varchar(100) NOT NULL,
   `created_on` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `searches`
 --
 
-INSERT INTO `searches` (`id`, `keywords`, `created_on`) VALUES
-(4, 'London', '2008-01-31 13:24:54'),
-(5, 'search', '2008-02-05 12:29:01'),
-(6, 'developer', '2008-02-05 16:25:13');
 
 -- --------------------------------------------------------
 

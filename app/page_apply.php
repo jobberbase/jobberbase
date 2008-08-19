@@ -56,15 +56,6 @@
 		{
 			$alex = new Postman();
 			
-			// promo "ipod for 300th application"
-			$sql = 'SELECT COUNT(id) AS count FROM job_applications';
-			$result = $db->query($sql);
-			$row = $result->fetch_assoc();
-			if ($row['count'] == 300)
-			{
-				$alex->MailAdminAppliersPromoWinner($data);
-			}
-			
 			if ($alex->MailApplyOnline($data))
 			{
 				$_SESSION['apply_mail_sent'] = 1;

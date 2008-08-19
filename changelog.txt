@@ -1,5 +1,9 @@
 ######## jobberBase changelog ########
 
+version 1.5 beta 1 (20/08/2008):
+  * Admin bug fix - activation/deactivation of ads now works
+	* Other small fixes (search, mostly)
+
 version 1.4:
 	* Fixed bug that caused alternate location to be deleted when editing a job posting
 	* Fixed bug that sent a notification e-mail whenever a user edited a job posting

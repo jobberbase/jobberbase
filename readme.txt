@@ -1,7 +1,7 @@
 ######## Useful links ########
 
 The blog: http://www.jobberbase.com/blog/
-The community (bug reports, fixes, etc.): http://www.jobberbase.com/community/
+The community (bug reports, fixes, etc.): http://www.jobberbase.com/forum/
 jobberBase on Google Code: http://code.google.com/p/jobberbase/
 
 
@@ -24,6 +24,8 @@ Open config.php and just replace <require_once '_includes/class.Db.php'> with
 <require_once '_includes/class.Db.MySql.php'>.
 
 6. That's it, open a browser and type in the URL (e.g. http://localhost/jobberbase/).
+
+7. The admin panel is available at http://localhost/admin/ with the default username "admin" and password "admin".
 
 =========================================================================================================
 
@@ -49,4 +51,4 @@ P.S. your donations via PayPal are very much appreciated!
 
 =========================================================================================================
 
--- last updated: 5pm, May 2, 2008
+-- last updated: 2am, August 20, 2008

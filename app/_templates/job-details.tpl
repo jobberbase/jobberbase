@@ -42,7 +42,7 @@
 					{/if}
 				</p>
 				<div id="job-description">
-				{$job.description|highlight_keywords:$smarty.session.keywords_array}
+				{$job.description}
 				</div><br />
 				{if $job.apply_online == 1 && $CURRENT_PAGE != 'verify'}
 					<div id="apply_online_now"><a href="#" onclick="$('#apply-online').SwitchVertically(10); document.getElementById('apply_name').focus(); window.location.href = '#apply'; return false;">&raquo; Apply now</a><a href="#" name="apply">&nbsp;</a></div>
