@@ -75,7 +75,7 @@
 		
 		if ($job_flag)
 		{
-			array_unshift($_SESSION['last_viewed_jobs'], array('url' => $url, 'title' => $job->mTitle));
+			array_unshift($_SESSION['last_viewed_jobs'], array('url' => $url, 'title' => stripslashes($job->mTitle)));		
 		}
 		
 		if (count($_SESSION['last_viewed_jobs']) > 10)
