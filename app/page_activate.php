@@ -1,7 +1,7 @@
 <?php
 	$j = new Job($id);
 	// if auth code used, check it and allow activating
-	if (($_SESSION['later_edit'] == $j->GetAuth()) || ($extra != '' && $extra == $j->GetAuth()))
+	if ((isset($_SESSION['later_edit']) && $_SESSION['later_edit'] == $j->GetAuth()) || ($extra != '' && $extra == $j->GetAuth()))
 	{
 		$activator = $j->Activate();
 		$vali = new Postman();
