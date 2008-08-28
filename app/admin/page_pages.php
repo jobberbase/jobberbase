@@ -66,7 +66,7 @@
 			$url = $defaults['page_url'];
 			if (empty($url)) {
 				$errors['page_url'] = 'Please fill in the URL';
-			} elseif(preg_match('/([^a-zA-z0-1\-_]+?)/is', $url)) {
+			} elseif(preg_match('/([^a-z0-9\-_]+?)/i', $url)) {
 				$errors['page_url'] = 'The URL must contain only alphanumerical characters, dashed and underscores';
 			} else {
 				$result = $db->query('
