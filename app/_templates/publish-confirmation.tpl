@@ -37,8 +37,8 @@
 					{$translations.publish.options_info}:
 				</p>
 				<ul>	
-					<li><a href="{$BASE_URL}post/{$CURRENT_ID.id}/{$auth}/" title="{$translations.publish.edit}">&raquo; {$translations.publish.edit}</a></li>
-					<li><a href="{$BASE_URL}deactivate/{$CURRENT_ID.id}/{$auth}/" title="{$translations.publish.deactivate}">&raquo; {$translations.publish.deactivate}</a></li>
+					<li><a href="{$BASE_URL}post/{$CURRENT_ID}/{$auth}/" title="{$translations.publish.edit}">&raquo; {$translations.publish.edit}</a></li>
+					<li><a href="{$BASE_URL}deactivate/{$CURRENT_ID}/{$auth}/" title="{$translations.publish.deactivate}">&raquo; {$translations.publish.deactivate}</a></li>
 				</ul>
 				{else}
 				<div class="posted-pending">
