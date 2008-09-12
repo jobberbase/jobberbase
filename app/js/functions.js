@@ -53,13 +53,13 @@
 				document.getElementById("city_id").setAttribute("disabled", "disabled");
 				$("div#location_outside_ro").show();
 				document.getElementById("location_outside_ro_where").focus();
-				$("a#other_location_label").html("pick one from the list");
+				$("a#other_location_label").html(Jobber.I18n.js.location_pick_from_list);
 			}
 			else
 			{
 				document.getElementById("city_id").removeAttribute("disabled");
 				$("div#location_outside_ro").hide();
-				$("a#other_location_label").html("other");
+				$("a#other_location_label").html(Jobber.I18n.js.location_other);
 			}
 		},
 		
@@ -87,12 +87,12 @@
 				$("#frm-send-to-friend").ajaxForm(function(responseText) { 
 					if (responseText == "0")
 					{
-						var msg = "Your message could not be sent. Did you enter both addresses?";
+						var msg = Jobber.I18n.js.send_to_friend_unsuccessful;
 						$("#send-to-friend-response").css({ color: "red" });
 					}
 					else
 					{
-						var msg = "Your message was sent. Let's hope it doesn't get marked as spam!";
+						var msg = Jobber.I18n.js.send_to_friend_successful;
 						$("#frm-send-to-friend").clearForm();
 						$("#send-to-friend-response").css({ color: "green" });
 					}
@@ -110,12 +110,12 @@
 			  success: function(msg) {
 			   	if (msg == "0")
 					{
-						var status = "Thank you for your intention, but your vote could not be registered.";
+						var status = Jobber.I18n.js.report_spam_unsuccessful;
 						$("#report-spam-response").css({ color: "red" });
 					}
 					else
 					{
-						var status = "Thank you, your vote was registered and is highly appreciated!";
+						var status = Jobber.I18n.js.report_spam_successful;
 						$("#frm-send-to-friend").clearForm();
 						$("#report-spam-response").css({ color: "green" });
 					}
@@ -187,7 +187,7 @@
 		
 		Delete: function(url, job_id)
 		{
-			if(confirm('Are you sure you want to delete this post?'))
+			if(confirm(Jobber.I18n.js.delete_job_confirmation_question))
 			{
 				$.ajax({
 				  type: "POST",
