@@ -191,6 +191,9 @@
 		redirect_to(BASE_URL . 'page-unavailable/');
 	}
 	
+	// create a JSON string from the translations array
+	$smarty->assign('translationsJson', iniSectionsToJSON($translations));
+	
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('articles', get_articles());
