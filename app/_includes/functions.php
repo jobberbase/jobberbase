@@ -102,4 +102,44 @@ function get_city_id_by_asciiname($ascii_name)
 	$row = $result->fetch_assoc();
 	return array('id' => $row['id'], 'name' => $row['name']);
 }
+
+/**
+* Converts the multidimensional array that results after calling parse_ini_file (filePath, processSections = true)
+* to a JSON string.
+* The resulting JSON string will look something like this:
+* {"sectionOne": {"messageKeyOne": "messageTextOne", "messageKeyTwo": "messageTextTwo"}, "sectionTwo": {....},....}
+*
+* @author putypuruty
+*/
+function iniSectionsToJSON($iniSections)
+{
+	$translationsJson = "{";
+	$sectionsCount = 0;
+		
+	foreach ($iniSections as $section => $sectionMessages)
+	{
+		$translationsJson = $translationsJson . "\"" . $section . "\": {";
+		$sectionMessagesCount = 0;
+		
+		foreach ($sectionMessages as $messageKey => $messageText)
+		{
+			$translationsJson = $translationsJson . "\"".$messageKey . "\":\"" . preg_replace("/\r?\n/", "\\n", addslashes($messageText)) . "\"";
+			
+			$sectionMessagesCount++;
+			
+			if ($sectionMessagesCount < count($sectionMessages))
+				$translationsJson .= ",";
+		}
+		$translationsJson .= "}";
+		
+		$sectionsCount++;
+
+		if ($sectionsCount < count($iniSections))
+			$translationsJson .= ",";
+	}
+	
+	$translationsJson = $translationsJson."}";
+	
+	return $translationsJson;
+}
 ?>
