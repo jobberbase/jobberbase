@@ -23,6 +23,10 @@
 	<script src="{$BASE_URL}js/interface.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/functions.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/browser_detect.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		Jobber.I18n = {$translationsJson};
+	</script>
+	
 </head>
 
 <body>
