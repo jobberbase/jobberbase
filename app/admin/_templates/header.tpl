@@ -25,6 +25,9 @@
 	{foreach from=$js item=j}
 	<script src="{$BASE_URL_ADMIN}js/{$j}.js" type="text/javascript"></script>
 	{/foreach}
+	<script type="text/javascript">
+		Jobber.I18n = {$translationsJson};
+	</script>
 </head>
 
 <body>

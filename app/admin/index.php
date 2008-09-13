@@ -17,6 +17,12 @@
 	$page = (isset($_app_info['params'][0]) ? $db->real_escape_string($_app_info['params'][0]) : '');
 	$id = (isset($_app_info['params'][1]) ? $db->real_escape_string($_app_info['params'][1]) : 0);
 	$extra = (isset($_app_info['params'][2]) ? $db->real_escape_string($_app_info['params'][2]) : '');
+	if (file_exists(APP_PATH . '_includes' . DIRECTORY_SEPARATOR . 'translations.ini')) {
+		$translations = parse_ini_file(APP_PATH . '_includes' . DIRECTORY_SEPARATOR . 'translations.ini', true);
+		$smarty->assign('translations', $translations);
+	} else {
+		trigger_error('Unable to find the translations file!');
+	}
 	
 	$flag = 0;
 	$js = array();
@@ -162,6 +168,9 @@
 	{
 		redirect_to(BASE_URL . 'page-unavailable/');
 	}
+	
+	// create a JSON string from the translations array
+	$smarty->assign('translationsJson', iniSectionsToJSON($translations));
 	
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
