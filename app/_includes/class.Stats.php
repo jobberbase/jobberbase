@@ -38,7 +38,7 @@ class Stats
 		
 		$apps_per_day = array();
 		$sql = 'SELECT count(id) AS nr FROM job_applications WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d") 
-		               ORDER BY count(id) DESC';
+		               ORDER BY nr DESC';
 		$result = $db->query($sql);
 		if ($db->affected_rows > 0)
 		{
@@ -75,13 +75,13 @@ class Stats
 			$count++;
 			if ($count < 50)
 			{
-				$stats .= '<div>' . $row['created_on'] . ' <strong>' . $row['keywords'] . '</strong></div>';
+				$stats .= '<div>' . $row['created_on'] . ' <strong>' . htmlspecialchars($row['keywords']) . '</strong></div>';
 			}
 		}
 		
 		$per_day = array();
 		$sql = 'SELECT count(id) AS nr FROM searches WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")
-		               ORDER BY count(id) DESC';
+		               ORDER BY nr DESC';
 		$result = $db->query($sql);
 		while ($row = $result->fetch_assoc())
 		{
