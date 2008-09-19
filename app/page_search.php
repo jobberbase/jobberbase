@@ -58,6 +58,7 @@
 	}
 	else
 	{
+		$keywords = trim($keywords);
 		$smarty->assign('jobs', $job->Search($keywords));
 	}
 	// if user hit enter after entering a search query, we know this causes a 
