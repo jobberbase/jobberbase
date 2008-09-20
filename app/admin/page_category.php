@@ -25,7 +25,7 @@
 		if ($job->IsValidCategory($id))
 		{
 			$jobCount =  $job->CountJobs($id, $type_id);
-			$smarty->assign('jobs_count', $job->CountJobs($id, $type_id));
+			$smarty->assign('jobs_count', $jobCount);
 		}
 		else
 		{
@@ -38,9 +38,8 @@
 	{
 		if ($job->IsValidCategory($id))
 		{
-			
 			$jobCount =  $job->CountJobs($id);
-			$smarty->assign('jobs_count', $job->CountJobs($id));
+			$smarty->assign('jobs_count', $jobCount);
 		}
 		else
 		{
@@ -51,7 +50,7 @@
 	else if($id == 'all')
 	{
 		$jobCount =  $job->CountJobs();
-		$smarty->assign('jobs_count', $job->CountJobs());
+		$smarty->assign('jobs_count', $jobCount);
 	}
 	$paginator = new Paginator($jobCount, JOBS_PER_PAGE, @$_REQUEST['p']);
 	$paginator->setLink(BASE_URL . "jobs/$id");
