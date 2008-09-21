@@ -1065,11 +1065,24 @@ class Job
 	public function GetJobsCountForAllCategs()
 	{
 		global $db;
+		$jobsCountPerCategory = array();
+		
+		$sql = 'SELECT category_id, COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1 GROUP BY category_id'; 
+		$result = $db->query($sql);
+		
+		while ($row = $result->fetch_assoc())
+			$jobsCountPerCategory[$row['category_id']] = $row['total'];
+			
 		$categs = get_categories();
 		$result = array();
 		foreach ($categs as $categ)
 		{
-			$count = $this->CountJobs($categ['id']);
+			$count = 0;
+			
+			// this check is needed because we don't have an entry if there are no jobs for a category
+			if (isset($jobsCountPerCategory[$categ['id']]))
+				$count = $jobsCountPerCategory[$categ['id']];
+				
 			$result[] = array('categ_name' => strtolower($categ['name']), 'categ_count' => $count, 'categ_varname' => $categ['var_name']);
 		}
 		return $result;
