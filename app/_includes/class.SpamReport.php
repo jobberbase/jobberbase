@@ -29,7 +29,7 @@ class SpamReport
 			$this->mJobId = $job_id;
 			$sql = 'SELECT id
 			               FROM spam_reports
-			               WHERE job_id = ' . $this->mJobId . ' AND ip = "' . $this->mIp . '" AND TIMESTAMPDIFF(MINUTE, the_time, NOW()) < ' . REPORT_POST_AGAIN_AFTER;
+			               WHERE job_id = ' . $this->mJobId . ' AND ip = "' . $this->mIp . '" AND DATE_ADD(the_time, INTERVAL ' . REPORT_POST_AGAIN_AFTER . ' MINUTE) > NOW()';
 			$result = $db->query($sql);
 			$row = $result->fetch_assoc();
 			if (empty($row))
