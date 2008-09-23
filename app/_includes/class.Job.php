@@ -627,7 +627,8 @@ class Job
 		}
 		else if (strstr($keywords, ' ') || strstr($keywords, '  '))
 		{
-			$tmp = explode(' ', $keywords);
+			// filter out empty strings (can happen if there are many whitespaces between two words in the search string)
+			$tmp = array_filter(explode(' ', $keywords));
 			foreach ($tmp as $word)
 			{
 				// try to find city based on city_id
