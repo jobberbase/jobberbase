@@ -39,10 +39,10 @@
 
 		},
 		
-		PerformSearch: function(url)
+		PerformSearch: function(url, keywords)
 		{
 			clearTimeout(window.search_timer);	
-			$('#job-listings').load(url + encodeURIComponent($('#keywords').fieldValue()) + '/');	
+			$('#job-listings').load(url + encodeURIComponent(keywords) + '/');	
 			$("#indicator").hide();	
 		},
 		
