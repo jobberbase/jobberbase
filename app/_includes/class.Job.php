@@ -590,7 +590,7 @@ class Job
 			$sql_limit = 'LIMIT ' . $limit;
 		}
 		$i = 0;
-		$sql = 'SELECT job_id, COUNT(id) as nr FROM job_applications GROUP BY job_id 
+		$sql = 'SELECT ja.job_id, COUNT(ja.id) as nr FROM job_applications ja, jobs jbs WHERE ja.job_id = jbs.id GROUP BY ja.job_id 
 		               ORDER BY nr DESC ' . $sql_limit;
 		$result = $db->query($sql);
 		while ($row = $result->fetch_assoc())
@@ -1097,6 +1097,7 @@ class Job
 		                  WHERE poster_email = "' . strtolower($this->mPosterEmail) . '" AND id <> ' . $this->mId . ' AND is_temp = 0
  		                        AND (is_active = 1 OR (is_active = 0 AND DATEDIFF(NOW(), created_on) > 30))'; 
 		$result = $db->query($sql);
+				
 		$row = $result->fetch_assoc();
 		if (!empty($row['poster_email']))
 		{
