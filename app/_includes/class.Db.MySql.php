@@ -113,6 +113,25 @@ class Db
             }
         }
 	
+	public function GetServerInfo()
+	{
+		return mysql_get_server_info();
+	}
+	
+	public function ExecuteMultiple($query)
+	{
+		$result = parent::multi_query($query); 
+		if(mysqli_error($this) && ENVIRONMENT == 'dev')
+		{
+			throw new QueryException(mysqli_connect_error(), mysqli_connect_errno()); 
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
 	public function real_escape_string($string)
 	{
 	   return mysql_real_escape_string($string,$this->link);

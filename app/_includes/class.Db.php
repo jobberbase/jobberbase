@@ -81,5 +81,24 @@ class Db extends mysqli
 			return true;
 		}
 	}
+	
+	public function GetServerInfo()
+	{
+		return $this->server_info;
+	}
+	
+	public function ExecuteMultiple($query)
+	{
+		$result = parent::multi_query($query); 
+		if(mysqli_error($this) && ENVIRONMENT == 'dev')
+		{
+			throw new QueryException(mysqli_connect_error(), mysqli_connect_errno()); 
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 }
 ?>
