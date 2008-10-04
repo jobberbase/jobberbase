@@ -15,10 +15,10 @@
 	// MySQL + misc settings for local environment
 	if ($_SERVER['SERVER_NAME'] == 'localhost')
 	{
-		define('DB_HOST', 'localhost');
-		define('DB_USER', 'root');
-		define('DB_PASS', '');
-		define('DB_NAME', 'jobberbase');
+		define('DB_HOST', '[[DB_HOST]]');
+		define('DB_USER', '[[DB_USER]]');
+		define('DB_PASS', '[[DB_PASS]]');
+		define('DB_NAME', '[[DB_NAME]]');
 		define('LOCATION', 'local');
 		define('ENVIRONMENT', 'dev');
 	}
