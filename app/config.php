@@ -132,7 +132,9 @@
 	//$_url = $_SERVER["QUERY_STRING"];
 
 	// if server is Apache:	
-	$_url = str_replace(_APP_MAIN_DIR, '', $_SERVER['REQUEST_URI']);
+	$newUrl = str_replace('/', '\/', _APP_MAIN_DIR);
+    $pattern = '/'.$newUrl.'/';   
+    $_url = preg_replace($pattern, '', $_SERVER['REQUEST_URI'], 1);
 	$_tmp = explode('?', $_url);
 	$_url = $_tmp[0];	
 	
