@@ -11,92 +11,93 @@
 
 class Stats
 {
+	const MAKE_STATS_ON_MAX_NUMBER_OF_APPLICATIONS = 50;
+	const MAKE_STATS_ON_MAX_NUMBER_OF_SEARCHES = 50;
+	 
 	function __construct()
 	{ }
 	
 	public function Applications()
 	{
 		global $db;
-		$stats = '';
-		$count = 0;
+		
+		$sql = 'SELECT count(a.job_id) AS totalNumberOfApplications
+		                        FROM job_applications a, jobs b
+		                        WHERE a.job_id = b.id';
+		$result = $db->query($sql);
+		$row = $result->fetch_assoc();
+		
+		$totalNumberOfApplications = $row['totalNumberOfApplications'];
+		
 		$sql = 'SELECT DATE_FORMAT(a.created_on, "%d-%m-%Y") AS date, b.title AS title, b.company AS company, a.job_id AS job_id
 		                        FROM job_applications a, jobs b
 		                        WHERE a.job_id = b.id
-		                        ORDER BY a.created_on DESC';
+		                        ORDER BY a.created_on DESC limit ' . self::MAKE_STATS_ON_MAX_NUMBER_OF_APPLICATIONS;
 		$result = $db->query($sql);
-		if ($db->affected_rows > 0)
-		{
-			while ($row = $result->fetch_assoc())
-			{
-				$count++;
-				if ($count < 50)
-				{
-					$stats .= '<div>' . $row['date'] . ' <a href="' . BASE_URL . 'job/' . $row['job_id'] . '/">' . $row['title'] . ' la ' . $row['company'] . '</a></div>';	
-				}
-			}	
-		}
+		
+		$stats = '';
+		while ($row = $result->fetch_assoc())
+			$stats .= '<div>' . $row['date'] . ' <a href="' . BASE_URL . 'job/' . $row['job_id'] . '/">' . $row['title'] . ' la ' . $row['company'] . '</a></div>';
 		
 		$apps_per_day = array();
-		$sql = 'SELECT count(id) AS nr FROM job_applications WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d") 
-		               ORDER BY nr DESC';
+		$sql = 'SELECT count(id) AS nr FROM job_applications WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
 		$result = $db->query($sql);
-		if ($db->affected_rows > 0)
+		
+		while ($row = $result->fetch_assoc())
+			$apps_per_day[] = $row['nr'];
+		
+		$avg = 0;	
+		$maxNumberOfApplications = 0;
+		$numberOfApplications = array_sum($apps_per_day);
+		$numberOfDaysWithApplications = count($apps_per_day);
+		
+		if ($numberOfDaysWithApplications > 0)
 		{
-			while ($row = $result->fetch_assoc())
-			{
-				$apps_per_day[] = $row['nr'];
-			}	
+			$avg = ceil(array_sum($apps_per_day) / count($apps_per_day));
+			$maxNumberOfApplications = max($apps_per_day);
 		}
 		
-		
-		if ($apps_per_day)
-		{
-			$avg = ceil(array_sum($apps_per_day) / count($apps_per_day));	
-			return array('stats' => $stats, 'count' => $count, 'avg' => $avg, 'max' => $apps_per_day[0]);
-		}
-		else
-		{
-			$avg = 0;
-			return false;
-		}
+		return array('stats' => $stats, 'count' => $totalNumberOfApplications, 'avg' => $avg, 'max' => $maxNumberOfApplications);
 	}
 	
 	public function Keywords()
 	{
 		global $db;
-		$stats = '';
-		$count = 0;
+		
+		$sql = 'SELECT count(id) AS totalNumberOfSearches FROM searches';
+		$result = $db->query($sql);
+		$row = $result->fetch_assoc();
+		
+		$totalNumberOfSearches = $row['totalNumberOfSearches'];
+		
 		$sql = 'SELECT created_on, keywords
 		                        FROM searches
-		                        ORDER BY created_on DESC';
+		                        ORDER BY created_on DESC limit ' . self::MAKE_STATS_ON_MAX_NUMBER_OF_SEARCHES;
 		$result = $db->query($sql);
-		while ($row = $result->fetch_assoc())
-		{
-			$count++;
-			if ($count < 50)
-			{
-				$stats .= '<div>' . $row['created_on'] . ' <strong>' . htmlspecialchars($row['keywords']) . '</strong></div>';
-			}
-		}
 		
-		$per_day = array();
-		$sql = 'SELECT count(id) AS nr FROM searches WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")
-		               ORDER BY nr DESC';
+		$stats = '';
+		while ($row = $result->fetch_assoc())
+			$stats .= '<div>' . $row['created_on'] . ' <strong>' . htmlspecialchars($row['keywords']) . '</strong></div>';
+		
+		$numberOfSearchesPerDay = array();
+		$sql = 'SELECT count(id) AS nr FROM searches WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
 		$result = $db->query($sql);
+
 		while ($row = $result->fetch_assoc())
-		{
-			$per_day[] = $row['nr'];
-		}
-		if ($per_day)
-		{
-			$avg = ceil(array_sum($per_day) / count($per_day));	
-		}
-		else
-		{
-			$avg = 0;
-		}
+			$numberOfSearchesPerDay[] = $row['nr'];
 		
-		return array('stats' => $stats, 'count' => $count, 'avg' => $avg, 'max' => $per_day[0]);
+		$avg = 0;
+		$maxNumberOfSearches = 0;
+		$numberOfSearches = array_sum($numberOfSearchesPerDay);
+		$numberOfDaysWithSearches = count($numberOfSearchesPerDay);
+		
+		if ($numberOfDaysWithSearches > 0)
+		{
+			$avg = ceil($numberOfSearches / $numberOfDaysWithSearches);
+			$maxNumberOfSearches = max($numberOfSearchesPerDay);
+		}	
+		
+		return array('stats' => $stats, 'count' => $totalNumberOfSearches, 'avg' => $avg, 'max' => $maxNumberOfSearches);
 	}
 }
 ?>
