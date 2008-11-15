@@ -32,6 +32,7 @@
 		</td>
 		<td class="time-posted"><img src="{$BASE_URL}img/clock.gif" alt="" /> {$job.created_on}</td>
 		<td style="font-size: 11px;">
+			<a href="{$BASE_URL_ADMIN}edit-post/{$job.id}/" title="edit"><img src="{$BASE_URL}img/icon_edit.gif" alt="edit" /></a>
 			{if $job.is_active == 0}
 				<a id="activateLink{$job.id}" href="javascript:void(0);" onclick="Jobber.Activate('{$BASE_URL_ADMIN}activate/', {$job.id}, {if $CURRENT_PAGE == ''}1{else}0{/if});" title="activate"><img src="{$BASE_URL}img/icon_accept.gif" alt="activate" /></a>
 			{else}
