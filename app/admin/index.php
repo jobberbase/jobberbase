@@ -159,6 +159,10 @@
 			$template = 'password.tpl';
 			$flag = 1;
 			break;
+		case 'edit-post':
+			require_once 'page_edit_post.php';
+			$flag = 1;
+			break;
 		default: 
 			$flag = 0;	
 			break;
