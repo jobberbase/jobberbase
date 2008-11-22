@@ -122,3 +122,15 @@ div.draggingItem div.categoryHandle {
 	margin-left: -12px;
 	z-index: 3000;
 }
+
+#preview_job_fieldset {
+	background-color: #F5F5F5;
+	border: 1px solid #CCCCCC;
+	padding: 10px;
+}
+
+#preview_job_fieldset legend {
+	color: #555555;
+	font-size: 12px;
+	font-weight: bold;
+}

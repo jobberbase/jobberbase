@@ -1,5 +1,5 @@
-			<fieldset style="background-color:#F5F5F5; border:1px solid #CCCCCC; padding: 10px;">
-			<legend style="color:#555555; font-size:12px; font-weight:bold;">Preview</legend>
+			<fieldset id="preview_job_fieldset">
+			<legend>Preview</legend>
 			<div id="job-details">
 				{if $job.days_old > 40}
 				<div id="old-ad">
