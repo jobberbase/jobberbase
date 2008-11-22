@@ -3,7 +3,6 @@
  * @author putypuruty
  * 
  * Business logic for editing a post.
- * TODO: refactor code, comments
  */
 	
 	if ($id != 0)
@@ -35,6 +34,7 @@
 
 		$isCitySelected = false;
 
+		// we didn't receive a city (when the cities combo is disabled)
 		if (!isset($_POST['city_id']))
 			$city_id = -1;
 		else
@@ -60,27 +60,9 @@
 		
 		if ($isCitySelected)
 		{
-			$cityName = '';
+			$city = get_city_by_id($city_id);
 			
-			// TODO: make a getCityByID function
-			
-			if ($city_id == -1)
-				$cityName = 'Anywhere';
-			else
-			{
-				$cities = get_cities();
-				
-				foreach ($cities as $city)
-				{
-					if ($city['id'] == $city_id)
-					{
-						$cityName = $city['name'];
-						break;
-					}
-				}
-			}
-			
-			$jobToEdit['location'] = $cityName;
+			$jobToEdit['location'] = $city['name'];
 		}
 		else
 			$jobToEdit['location'] = $jobToEdit['location_outside_ro'];
