@@ -142,4 +142,30 @@ function iniSectionsToJSON($iniSections)
 	
 	return $translationsJson;
 }
+
+/**
+ * Returns the city with the specified ID or null
+ * if the city was not found.
+ *
+ * @param $cityID
+ * @return 
+ */
+function get_city_by_id($cityID)
+{
+	global $db;
+	
+	$city = null;
+	
+	$sql = 'SELECT id, name
+	               FROM cities
+	               WHERE id = ' . $cityID;
+	$result = $db->query($sql);
+	
+	$row = $result->fetch_assoc();
+	
+	if ($row)
+		$city = array('id' => $row['id'], 'name' => $row['name']);
+		
+	return $city;  
+}
 ?>
