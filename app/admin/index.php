@@ -160,6 +160,11 @@
 			$flag = 1;
 			break;
 		case 'edit-post':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
 			require_once 'page_edit_post.php';
 			$flag = 1;
 			break;
