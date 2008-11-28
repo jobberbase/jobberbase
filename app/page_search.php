@@ -76,12 +76,12 @@
 			$search->Save();
 			unset($_SESSION['search_keywords']);
 		}
-		$smarty->assign('keywords', stripslashes(htmlentities($requestKeywords, ENT_QUOTES)));
+		$smarty->assign('keywords', stripslashes(htmlentities($requestKeywords, ENT_QUOTES, 'UTF-8')));
 		$template = 'search.tpl';
 	}
 	else if ($id != '' && !strstr($id, '|'))
 	{
-		$smarty->assign('keywords', stripslashes(htmlentities($id, ENT_QUOTES)));
+		$smarty->assign('keywords', stripslashes(htmlentities($id, ENT_QUOTES, 'UTF-8')));
 		$template = 'search.tpl';
 	}
 	else
