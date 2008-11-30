@@ -1,14 +1,19 @@
 <?php
 	$companies = array();
 	$sanitizer = new Sanitizer();
-	$sql = 'SELECT DISTINCT company FROM jobs WHERE is_temp = 0 AND is_active = 1 ORDER BY company ASC';
+	
+	$sql = 'SELECT company, count(id) AS nr
+			FROM jobs
+			WHERE is_temp = 0 AND is_active = 1
+			GROUP BY company
+			ORDER BY company ASC';
+	
 	$comps = $db->QueryArray($sql);
+	
 	foreach ($comps as $company)
 	{
-		$sql = 'SELECT COUNT(id) AS nr
-		               FROM jobs
-		               WHERE company = "' . $company['company'] . '"';
-		$nr = $db->QueryItem($sql);
+		$nr = $company['nr'];
+		
 		if ($nr < 2)
 		{
 			$tag_height = 1;
