@@ -117,7 +117,6 @@ class Job
 								 'location_outside_ro' => $this->mLocationOutsideRo,
 								 'poster_email' => $this->mPosterEmail,
 								 'apply_online' => $this->mApplyOnline,
-								 'check_poster_email' => $this->CheckPosterEmail(),
 								 'is_active' => $this->mIsActive,
 								 'days_old' => $this->mDaysOld);
 		return $job;
