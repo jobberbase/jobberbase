@@ -1,6 +1,4 @@
 <?php
- 
-   
 	if ($extra == 'full-time')
 	{
 		$type_id = JOBTYPE_FULLTIME;
@@ -34,8 +32,8 @@
 			redirect_to(BASE_URL . 'page-unavailable/');
 			exit;
 		}
-		
 	}
+	
 	if (!$type_id && $id != 'all')
 	{
 		if ($job->IsValidCategory($id))
@@ -56,21 +54,22 @@
 		$smarty->assign('jobs_count', $jobCount);
 	}
 	
+	$paginatorLink = BASE_URL . "jobs/$id";
 	
+	if (isset($extra))
+		$paginatorLink .= "/$extra";
+		
 	$paginator = new Paginator($jobCount, JOBS_PER_PAGE, @$_REQUEST['p']);
-	$paginator->setLink(BASE_URL . "jobs/$id");
+	$paginator->setLink($paginatorLink);
 	$paginator->paginate();
 	
 	$firstLimit = $paginator->getFirstLimit();
 	$lastLimit = $paginator->getLastLimit();
 	
-	
-	
 	$the_jobs = array();
 	$the_jobs = $job->GetJobsPaginate(0, $id, $firstLimit, JOBS_PER_PAGE, 0, 0, false, $city_id, $type_id);
-	//$the_jobs = $job->GetJobsPaginate(0, $id, 0, 0, 0, $firstLimit, $lastLimit, $city_id, $type_id);
 	$smarty->assign("pages",$paginator->pages_link);
-
+	
 	$smarty->assign('jobs', $the_jobs);
 	$smarty->assign('current_category', $id);
 
@@ -78,6 +77,4 @@
 	$meta_description = '';
 
 	$template = 'category.tpl';
-	
-	
 ?>
