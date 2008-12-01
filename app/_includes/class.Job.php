@@ -989,8 +989,8 @@ class Job
 	{
 		global $db;
 		$condition = '';
-		$condition1 = '';
-	 	if ($categ && $type)
+	 	
+		if ($type)
 		{
 			if (!is_numeric($type))
 			{
@@ -1001,9 +1001,10 @@ class Job
 				$type_id = $type;
 			}
 			
-			$condition1 = 'AND type_id = ' . $type_id;
+			$condition .= ' AND type_id = ' . $type_id;
 		}
-		else if ($categ)
+		
+		if ($categ)
 		{
 			if (!is_numeric($categ))
 			{
@@ -1014,14 +1015,11 @@ class Job
 				$categ_id = $categ;
 			}
 			
-			$condition = 'AND category_id = ' . $categ_id;
+			$condition .= ' AND category_id = ' . $categ_id;
 		}
-		else
-		{
-			$condition = '';
-		}
-		$sql = 'SELECT COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1 ' . $condition . ' ' .$condition1;
-	
+
+		$sql = 'SELECT COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1' . $condition;
+		
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		return $row['total'];	
