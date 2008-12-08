@@ -610,7 +610,7 @@ class Job
 		$jobs = array();
 		$conditions = '';
 		$_SESSION['keywords_array'] = array();
-	  $kw1 = $kw2 = $extra_conditions = '';
+	  	$kw1 = $kw2 = $extra_conditions = '';
 		$found_city = false;
 
 		if (strstr($keywords, ',') || strstr($keywords, ', '))
@@ -636,6 +636,11 @@ class Job
 				$row = $result->fetch_assoc();
 				if ($row['id'] != '')
 				{
+					if ($found_city)
+					{
+						$conditions .= ' OR';
+					}
+					
 					$conditions .= ' city_id = ' . $row['id'];
 					$found_city = true;
 					$keywords = trim(str_replace($word, '', $keywords));
