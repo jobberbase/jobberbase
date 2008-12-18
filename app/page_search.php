@@ -1,4 +1,9 @@
 <?php
+	if ($id != '')
+	{
+		$id = urldecode($id);
+	}
+	 
 	if (strstr($id, '%7C'))
 	{
 		$id = str_replace('%7C', '|', $id);
