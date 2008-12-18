@@ -56,7 +56,7 @@
 							<td>
 								<select name="city_id" id="city_id" tabindex="3" {if $job.location_outside_ro != ''}disabled="disabled"{/if}>
 									{section name="c" loop=$cities}
-									<option value="{$cities[c].id}" {if $smarty.post.city_id == $cities[c].id || $job.city_id == $cities[c].id}selected="selected"{else}{if $user_city.id == $cities[c].id AND !$smarty.post.city_id AND !$job.city_id}selected="selected"{/if}{/if}>{$cities[c].name}</option>
+									<option value="{$cities[c].id}" {if $smarty.post.city_id == $cities[c].id || $job.city_id == $cities[c].id}selected="selected"{else}{if $user_city.id == $cities[c].id AND !$smarty.post.city_id AND !$job.city_id}selected="selected"{/if}{/if}>{if $cities[c].id == -1}-- {$cities[c].name} --{else}{$cities[c].name}{/if}</option>
 									{/section}
 								</select>
 								<a id="other_location_label" href="#" onclick="Jobber.HandleLocationOutsideRo(); return false;">{if $job.location_outside_ro != ''}pick one from the list{else}other{/if}</a>
