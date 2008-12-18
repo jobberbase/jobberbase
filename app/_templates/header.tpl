@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-	<title>{$html_title}</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="{$meta_description}" />
-	<meta name="keywords" content="{$meta_keywords}" />
+    <title>{$seo_title}</title>
+    <meta name="description" content="{$seo_desc}" />
+    <meta name="keywords" content="{$seo_keys}" />
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
 	<meta name="author" content="Filip Cherecheş-Toşa (http://www.filipcte.ro)" />
 	<link rel="shortcut icon" href="{$BASE_URL}favicon.ico" type="image/x-icon" />
 	{if $CURRENT_PAGE == '' || $CURRENT_PAGE != 'jobs'}

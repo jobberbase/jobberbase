@@ -1091,6 +1091,69 @@ class Job
 		return $result;
 	}
 	
+	public function GetJobsCountPerCity($excludeCitiesWithNoJobs)
+	{
+		global $db;
+		$jobsCountPerCity = array();
+		
+		$sql = 'SELECT city_id, COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1 GROUP BY city_id'; 
+		$result = $db->query($sql);
+		
+		while ($row = $result->fetch_assoc())
+			$jobsCountPerCity[$row['city_id']] = $row['total'];
+			
+		$cities = get_cities();
+		$result = array();
+		foreach ($cities as $city)
+		{
+			$count = 0;
+			
+			// this check is needed because we don't have an entry if there are no jobs for a city
+			if (isset($jobsCountPerCity[$city['id']]))
+				$count = $jobsCountPerCity[$city['id']];
+
+			if ($count > 0)
+				$result[] = array('city_name' => $city['name'], 'jobs_in_city' => $count, 'city_ascii_name' => $city['ascii_name']);
+			else 
+			{
+				if (!$excludeCitiesWithNoJobs)
+					$result[] = array('city_name' => $city['name'], 'jobs_in_city' => $count, 'city_ascii_name' => $city['ascii_name']);
+			}
+					
+		}
+		return $result;
+	}
+	
+	public function GetJobsCountForCity($city_id, $type)
+	{
+		global $db;
+		
+		$jobsCountPerCity = array();
+		$condition = '';
+		
+		if ($type)
+		{
+			if (!is_numeric($type))
+			{
+				$type_id = $this->GetTypeId($type);
+			}
+			else
+			{
+				$type_id = $type;
+			}
+			
+			$condition .= ' AND type_id = ' . $type_id;
+		}
+		
+		$sql = 'SELECT COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1 and city_id = '. $city_id . $condition;
+
+		$result = $db->query($sql);
+		
+		$row = $result->fetch_assoc();
+		
+		return $row['total'];
+	}
+	
 	// Check if the poster of this post has posted before with this e-mail address
 	public function CheckPosterEmail()
 	{

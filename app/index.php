@@ -56,6 +56,12 @@
 			$flag = 1;
 			break;
 			
+		// per city
+		case 'jobs-in':
+			require_once 'page_city.php';
+			$flag = 1;
+			break;
+			
 		// search results
 		case 'search':
 			require_once 'page_search.php';

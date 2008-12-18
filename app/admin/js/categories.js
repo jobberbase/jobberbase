@@ -11,6 +11,9 @@
 					'<a href="#" title="Save" class="saveCategory"><img src="',
 					'',
 					'img/disk.png" alt="Save" /> Save</a>',
+					'<label><span>Title:</span><input type="text" size="60" name="title[]" value="newcategory" /></label>',
+					'<label><span>Description:</span><input type="text" size="60" name="description[]" value="newcategory" /></label>',
+					'<label><span>Keywords:</span><input type="text" size="60" name="keywords[]" value="newcategory" /></label>',
 					'<label><span>URL:</span><input type="text" size="60" name="url[]" value="newcategory" /></label>',
 				'</div>',
 			'</div>'
@@ -173,6 +176,9 @@
 						action: 'saveCategory',
 						category: $(el).parent().parent().attr('rel'),
 						name: $(el).parent().find('input:first').val(),
+						title: $(el).parent().find('input:eq(1)').val(),
+						description: $(el).parent().find('input:eq(2)').val(),
+						keywords: $(el).parent().find('input:eq(3)').val(),
 						url: $(el).parent().find('input:last').val()
 					},
 					success: function() {
@@ -238,6 +244,15 @@
 						.find('input:first')
 							.attr('name', 'name[' + id + ']')
 							.end()
+						.find('input:text.eq(1)')
+					        .attr('name', 'title[' + id + ']')
+					        .end()
+					    .find('input:text.eq(2)')
+					        .attr('name', 'description[' + id + ']')
+					        .end()
+					    .find('input:text.eq(3)')
+					        .attr('name', 'keywords[' + id + ']')
+					        .end()
 						.find('input:last')
 							.attr('name', 'url[' + id + ']')
 							.end();

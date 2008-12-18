@@ -17,17 +17,49 @@ function add_single_quotes($arg)
 
 function get_categories()
 {
-	global $db;
-	$categories = array();
-	$sql = 'SELECT id, name, var_name
-	               FROM categories
-	               ORDER BY `category_order` ASC';
-	$result = $db->query($sql);
-	while ($row = $result->fetch_assoc())
-	{
-		$categories[] = array('id' => $row['id'], 'name' => $row['name'], 'var_name' => $row['var_name']);
-	}
-	return $categories;
+    global $db;
+    $categories = array();
+    $sql = 'SELECT *
+                   FROM categories
+                   ORDER BY `category_order` ASC';
+    $result = $db->query($sql);
+    while ($row = $result->fetch_assoc())
+    {
+        $categories[] = array('id' => $row['id'], 'name' => $row['name'], 'var_name' => $row['var_name'], 'title' => $row['title'], 'description' => $row['description'], 'keywords' => $row['keywords']);
+    }
+    return $categories;
+}
+
+function get_seo_title($id)
+{
+    global $db;
+    $sql = 'SELECT *
+                   FROM categories
+                   WHERE var_name = "'.$id.'"';
+    $result = $db->query($sql);
+    $row = $result->fetch_assoc();
+    return $row['title'];
+}
+
+function get_seo_desc($id)
+{
+    global $db;
+    $sql = 'SELECT *
+                   FROM categories
+                   WHERE var_name = "'.$id.'"';
+    $result = $db->query($sql);
+    $row = $result->fetch_assoc();
+    return $row['description'];
+}
+function get_seo_keys($id)
+{
+    global $db;
+    $sql = 'SELECT *
+                   FROM categories
+                   WHERE var_name = "'.$id.'"';
+    $result = $db->query($sql);
+    $row = $result->fetch_assoc();
+    return $row['keywords'];
 }
 
 function get_articles()
@@ -63,22 +95,20 @@ function get_types()
 function get_cities()
 {
 	global $db;
+	
 	$cities = array();
-	$sql = 'SELECT id, name
+	
+	$sql = 'SELECT id, name, ascii_name
 	               FROM cities
 	               ORDER BY id ASC';
+	
 	$result = $db->query($sql);
+	
 	while ($row = $result->fetch_assoc())
 	{
-		if (count($cities) < 1)
-		{
-			$cities[] = array('id' => $row['id'], 'name' => '-- ' . $row['name'] . ' --');
-		}
-		else
-		{
-			$cities[] = array('id' => $row['id'], 'name' => $row['name']);
-		}
+		$cities[] = array('id' => $row['id'], 'name' => $row['name'], 'ascii_name' => $row['ascii_name']);
 	}
+	
 	return $cities;
 }
 
@@ -94,13 +124,20 @@ function get_categ_id_by_varname($var_name)
 function get_city_id_by_asciiname($ascii_name)
 {
 	global $db;
-	$cities = array();
+	
+	$city = null;
+	
 	$sql = 'SELECT id, name
 	               FROM cities
 	               WHERE ascii_name = "' . $ascii_name . '"';
+
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
-	return array('id' => $row['id'], 'name' => $row['name']);
+	
+	if ($row)
+		$city = array('id' => $row['id'], 'name' => $row['name']);
+		
+	return $city;
 }
 
 /**

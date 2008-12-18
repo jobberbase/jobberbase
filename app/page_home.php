@@ -4,7 +4,15 @@
 	
 	// get jobs
 	$smarty->assign('jobs_count_all', $job->CountJobs());
-	$smarty->assign('jobs_count_all_categs', $job->GetJobsCountForAllCategs());
+	
+	if (SIDEBAR_SHOW_WHAT == SIDEBAR_CATEGORIES)
+	{
+		$smarty->assign('jobs_count_all_categs', $job->GetJobsCountForAllCategs());
+	}
+	else
+	{
+		$smarty->assign('jobs_count_per_city', $job->GetJobsCountPerCity(SIDEBAR_ONLY_CITIES_WITH_JOBS));
+	}
 	
 	$smarty->assign('most_applied_to_jobs', $job->GetMostAppliedToJobs(NUMBER_OF_MOST_APPLIED_TO_JOBS_TO_GET));
 	
@@ -12,6 +20,9 @@
 
 	$smarty->assign('current_category', 'home');
 	
-	$html_title = $translations['homepage']['title'] . SITE_NAME;
+	$smarty->assign('seo_title', "This is the homepage title");
+    $smarty->assign('seo_desc', "This is the homepage Description");
+    $smarty->assign('seo_keys', "This is the homepage keyword");
+	
 	$template = 'index.tpl';
 ?>

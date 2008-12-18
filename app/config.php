@@ -8,7 +8,7 @@
  */
   
 	header('Content-Type: text/html; charset=UTF-8');
-  ini_set('display_errors', 'On');
+    ini_set('display_errors', 'On');
 	error_reporting(E_ALL ^ E_STRICT);
 	date_default_timezone_set('Europe/Bucharest');
 
@@ -47,6 +47,35 @@
 	define('JOBTYPE_FULLTIME', 1);
 	define('JOBTYPE_PARTTIME', 2);
 	define('JOBTYPE_FREELANCE', 3);
+	
+	define('SIDEBAR_CATEGORIES', 'categories');
+	define('SIDEBAR_CITIES', 'cities');
+	
+	/**
+	 * Controls what will be displayed in the sidebar - categories or cities.
+	 * By default, categories are shown.
+	 * 
+	 * Possible values:
+	 * 
+	 * - SIDEBAR_CATEGORIES - show categories in sidebar
+	 * - SIDEBAR_CITIES - show cities in sidebar
+	 *
+	 */
+	define('SIDEBAR_SHOW_WHAT', SIDEBAR_CATEGORIES);
+	
+	/**
+	 * Controls which cities to show in the sidebar - applies only
+	 * if SIDEBAR_SHOW_WHAT is SIDEBAR_CITIES. 
+	 * 
+	 * By default, also cities where there are currently no active jobs are shown.
+	 * 
+	 * Possible values:
+	 * 
+	 * true - show only cities where there are currently active jobs
+	 * false - show also cities where the are currently no active jobs
+	 * 
+	 */ 
+	define('SIDEBAR_ONLY_CITIES_WITH_JOBS', false);
 
 	define('APP_PATH',dirname(__FILE__).DIRECTORY_SEPARATOR);
 

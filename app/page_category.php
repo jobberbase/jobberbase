@@ -73,8 +73,9 @@
 	$smarty->assign('jobs', $the_jobs);
 	$smarty->assign('current_category', $id);
 
-	$html_title = $translations['category']['title_part1'] . ' ' . $extra . ' ' . $id . ' ' . $translations['category']['title_part2'];
-	$meta_description = '';
+	$smarty->assign('seo_title', get_seo_title($id));
+	$smarty->assign('seo_desc', get_seo_desc($id));
+	$smarty->assign('seo_keys', get_seo_keys($id));
 
 	$template = 'category.tpl';
 ?>

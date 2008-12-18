@@ -32,16 +32,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 				LIMIT 1
 			');
 			$last = $result->fetch_assoc();
-			$db->query('
-				INSERT INTO 
-					`categories` 
-				VALUES (
-					NULL,
-					\'New category\',
-					\'new_category\',
-					' . (intval($last['category_order']) + 1) . '
-				)
-			');
+            $db->query('
+                INSERT INTO 
+                    `categories` 
+                VALUES (
+                    NULL,
+                    \'enter a name\',
+                    \'custom url\',
+                    \'SEO Title\',
+                    \'SEO Description\',
+                    \'SEO Keywords\',
+                    ' . (intval($last['category_order']) + 1) . '
+                )
+            ');
 			$result = $db->query('
 				SELECT 
 					`id` 
@@ -85,15 +88,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 			break;
 		case 'saveCategory':
 			$result = $db -> query('
-				UPDATE  
-					`categories` 
-				SET 
-					`var_name` = \'' . $_POST['url'] . '\',
-					`name` = \'' . $_POST['name'] . '\'
-				WHERE 
-					`id` = ' . intval($_POST['category']) . '
-			');
-			break;
+                UPDATE  
+                    `categories` 
+                SET 
+                    `var_name` = \'' . $_POST['url'] . '\',
+                    `name` = \'' . $_POST['name'] . '\',
+                    `title` = \'' . $_POST['title'] . '\',
+                    `description` = \'' . $_POST['description'] . '\',
+                    `keywords` = \'' . $_POST['keywords'] . '\'
+                WHERE 
+                    `id` = ' . intval($_POST['category']) . '
+            ');
+             break;
 	}
 	exit();
 }
