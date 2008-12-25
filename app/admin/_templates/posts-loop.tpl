@@ -33,6 +33,11 @@
 		<td class="time-posted"><img src="{$BASE_URL}img/clock.gif" alt="" /> {$job.created_on}</td>
 		<td style="font-size: 11px;">
 			<a href="{$BASE_URL_ADMIN}edit-post/{$job.id}/" title="edit"><img src="{$BASE_URL}img/icon_edit.gif" alt="edit" /></a>
+			 {if $job.is_spotlight == 0}
+		        <a id="activateSpotlight{$job.id}" href="javascript:void(0);" onclick="Jobber.SpotlightActivate('{$BASE_URL_ADMIN}activate-spotlight/', {$job.id}, {if $CURRENT_PAGE == ''}1{else}0{/if});" title="activate-spotlight"><img src="{$BASE_URL}img/icon_spotlight_activate.gif" alt="activate" /></a>
+		    {else}
+		        <a id="deactivateSpotlight{$job.id}" href="javascript:void(0);" onclick="Jobber.SpotlightDeactivate('{$BASE_URL_ADMIN}deactivate-spotlight/', {$job.id});" title="deactivate-spotlight"><img src="{$BASE_URL}img/icon_spotlight_deactivate.gif" alt="deactivate" /></a>
+		    {/if}&nbsp;
 			{if $job.is_active == 0}
 				<a id="activateLink{$job.id}" href="javascript:void(0);" onclick="Jobber.Activate('{$BASE_URL_ADMIN}activate/', {$job.id}, {if $CURRENT_PAGE == ''}1{else}0{/if});" title="activate"><img src="{$BASE_URL}img/icon_accept.gif" alt="activate" /></a>
 			{else}

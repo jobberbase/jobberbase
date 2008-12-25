@@ -185,6 +185,68 @@
 			});
 		},
 		
+		DeactivateSpotlight: function()
+        {    
+            
+            var url = Jobber.jobber_admin_url+'deactivate-spotlight/';
+            Jobber.SpotlightDeactivate(url, Jobber.job_id);
+            
+        },
+        ActivateSpotlight: function()
+        {    
+            
+            var url = Jobber.jobber_admin_url+'activate-spotlight/';
+            Jobber.SpotlightActivate(url, Jobber.job_id, 0);
+            
+        },
+        SpotlightActivate: function(url, job_id, is_first_page)
+        {
+            $.ajax({
+              type: "POST",
+              url: url,
+              data: "job_id=" + job_id,
+              success: function(msg) {
+                   if (msg != "0")
+                    {
+                        var currentRowId = 'item'+job_id;
+                        var currentLinkId = 'activateSpotlight'+job_id;
+                        if(is_first_page == 1)
+                        {
+                            $("#"+currentRowId).css({ display: "none" });
+                        }
+                        else
+                        {
+                             Jobber.job_id = job_id;
+                             document.getElementById(currentLinkId).setAttribute('onclick', Jobber.DeactivateSpotlight);
+                             document.getElementById(currentLinkId).onclick = Jobber.DeactivateSpotlight; 
+                             document.getElementById(currentLinkId).innerHTML = '<img src="'+Jobber.jobber_url+'img/icon_spotlight_deactivate.gif" alt="deactivate" />';
+                             document.getElementById(currentLinkId).id = 'deactivateSpotlight'+job_id;
+                        }    
+                    }
+              }
+            });
+        },
+        
+        SpotlightDeactivate: function(url, job_id)
+        {
+            $.ajax({
+              type: "POST",
+              url: url,
+              data: "job_id=" + job_id,
+              success: function(msg) {
+                   if (msg != "0")
+                    {
+                        var currentLinkId = 'deactivateSpotlight'+job_id;
+                        Jobber.job_id = job_id;
+                        document.getElementById(currentLinkId).setAttribute('onclick', Jobber.ActivateSpotlight);
+                        document.getElementById(currentLinkId).onclick = Jobber.ActivateSpotlight;
+                        document.getElementById(currentLinkId).innerHTML = '<img src="'+Jobber.jobber_url+'img/icon_spotlight_activate.gif" alt="activate" />';
+                        document.getElementById(currentLinkId).id = 'activateSpotlight'+job_id;
+                    }
+              }
+            });
+        },
+		
 		Delete: function(url, job_id)
 		{
 			if(confirm(Jobber.I18n.js.delete_job_confirmation_question))

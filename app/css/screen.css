@@ -842,3 +842,40 @@ label.request-label {
 	border: 1px solid #ccc;
 	padding: 1px 2px 1px 2px;
 }
+
+table#job-posts4 {
+  	width: 100%;
+    border-top: 1px solid #ddd;    
+    border-left: 1px solid #ddd;    
+    border-right: 1px solid #ddd;    
+}
+  
+table#job-posts4 tr {
+    background: #fffad4;
+}
+table#job-posts4 tr.over td {
+    background: #f5fefe;
+}
+table#job-posts4 tr.alt td {
+    background: #f5f5f5;
+}
+table#job-posts4 td {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+table#job-posts4 a:link, table#job-posts4 a:visited {
+    color: #0099CC;
+    padding: 2px;
+}
+table#job-posts4 a:hover {
+    background-color: #0099CC;
+    color: #fff;
+    text-decoration: none;
+    padding: 2px;
+}
+table#job-posts4 td.spotlight-image {
+    text-align: right;
+    color: #888;
+    font-size: 11px;
+    width: 80px;
+}

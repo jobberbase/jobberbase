@@ -17,6 +17,8 @@
 	$smarty->assign('most_applied_to_jobs', $job->GetMostAppliedToJobs(NUMBER_OF_MOST_APPLIED_TO_JOBS_TO_GET));
 	
 	$smarty->assign('latest_jobs', $job->GetJobs(0, 0, NUMBER_OF_LATEST_JOBS_TO_GET, 0, 0));
+	
+	$smarty->assign('spotlight_jobs', $job->GetJobs(0, 0, 3, 1, 0, 0, 0, 0, 1));
 
 	$smarty->assign('current_category', 'home');
 	

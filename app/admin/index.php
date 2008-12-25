@@ -168,6 +168,24 @@
 			require_once 'page_edit_post.php';
 			$flag = 1;
 			break;
+		case 'activate-spotlight':
+            if(!isset($_SESSION['AdminId']))
+            {
+                redirect_to(BASE_URL);
+                exit;
+            }
+            require_once 'page_activate_spotlight.php';
+            $flag = 1;
+            break;
+   		case 'deactivate-spotlight':
+            if(!isset($_SESSION['AdminId']))
+            {
+                redirect_to(BASE_URL);
+                exit;
+            }
+            require_once 'page_deactivate_spotlight.php';
+            $flag = 1;
+            break;
 		default: 
 			$flag = 0;	
 			break;
