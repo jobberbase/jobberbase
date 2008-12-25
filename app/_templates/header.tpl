@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>{$seo_title}</title>
-    <meta name="description" content="{$seo_desc}" />
-    <meta name="keywords" content="{$seo_keys}" />
+    <title>{if $seo_title}{$seo_title}{else}{$html_title}{/if}</title>
+    <meta name="description" content="{if $seo_desc}{$seo_desc}{else}{$meta_description}{/if}" />
+    <meta name="keywords" content="{if $seo_keys}{$seo_keys}{else}{$meta_keywords}{/if}" />
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
 	<meta name="author" content="Filip Cherecheş-Toşa (http://www.filipcte.ro)" />
 	<link rel="shortcut icon" href="{$BASE_URL}favicon.ico" type="image/x-icon" />
