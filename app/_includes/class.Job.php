@@ -46,7 +46,7 @@ class Job
 			$sql = 'SELECT a.type_id AS type_id, a.category_id AS category_id, a.title AS title, a.description AS description, 
 			               a.company AS company, a.url AS url, a.apply AS apply, 
 			               DATE_FORMAT(a.created_on, \'%d-%m-%Y\') AS created_on, a.created_on AS mysql_date,
-			               a.is_temp AS is_temp, a.is_active AS is_active, 
+			               a.is_temp AS is_temp, a.is_active AS is_active, a.spotlight AS spotlight,
 			               a.views_count AS views_count, a.auth AS auth, a.city_id AS city_id, a.outside_location AS outside_location,
 			               a.poster_email AS poster_email, a.apply_online AS apply_online, b.name AS category_name,
 			               DATE_ADD(created_on, INTERVAL 30 DAY) AS closed_on, DATEDIFF(NOW(), created_on) AS days_old
@@ -89,7 +89,7 @@ class Job
 				$this->mUrlTitle = $sanitizer->sanitize_title_with_dashes($this->mTitle . ' at ' . $this->mCompany);
 				$this->mApplyOnline = $row['apply_online'];
 				$this->mDaysOld = $row['days_old'];
-				$this->mIsActive = $row['is_active'];
+				$this->mIsSpotlight = $row['spotlight'];
 			}
 		}
 	}
@@ -118,7 +118,8 @@ class Job
 								 'poster_email' => $this->mPosterEmail,
 								 'apply_online' => $this->mApplyOnline,
 								 'is_active' => $this->mIsActive,
-								 'days_old' => $this->mDaysOld);
+								 'days_old' => $this->mDaysOld,
+								 'is_spotlight' => $this->mIsSpotlight);
 		return $job;
 	}
 	
@@ -142,7 +143,8 @@ class Job
 								 'mysql_date' => $this->mMySqlDate,
 								 'location_outside_ro' => $this->mLocationOutsideRo,
 								 'is_active' => $this->mIsActive,
-								 'days_old' => $this->mDaysOld);
+								 'days_old' => $this->mDaysOld,
+								 'is_spotlight' => $this->mIsSpotlight);
 		return $job;
 	}
 
@@ -166,7 +168,8 @@ class Job
 								 'mysql_date' => $this->mMySqlDate,
 								 'location_outside_ro' => $this->mLocationOutsideRo,
 								 'days_old' => $this->mDaysOld,
-								 'is_active' => $this->mIsActive);
+								 'is_active' => $this->mIsActive,
+								 'is_spotlight' => $this->mIsSpotlight);
 		return $job;
 	}
 	
@@ -177,7 +180,7 @@ class Job
 	// $random: (1/0) randomize results?
 	// $days_behind: (int) only get results from last N days
 	// $for_feed: (boolean) is this request from rss feed?
-	public function GetJobs($type_id = false, $categ_id = false, $limit = false, $random, $days_behind, $for_feed = false, $city_id = false, $type_id = false)
+	public function GetJobs($type_id = false, $categ_id = false, $limit = false, $random, $days_behind, $for_feed = false, $city_id = false, $type_id = false, $spotlight = false)
 	{
 		global $db;
 		$jobs = array();
@@ -223,6 +226,11 @@ class Job
 		if ($type_id && is_numeric($type_id))
 		{
 			$conditions .= ' AND type_id = ' . $type_id;
+		}
+		
+		if ($spotlight &&  is_numeric($spotlight))
+    	{
+  			$conditions .= ' AND spotlight = ' . $spotlight;
 		}
 
 		if ($random == 1)
@@ -343,27 +351,16 @@ class Job
 	}
 	
 	//Get all inactive jobs for admin 
-	public function GetInactiveJobs( $limit = false, $limit2 = false)
+	public function GetInactiveJobs($offset, $rowCount)
 	{
 		global $db;
 		$jobs = array();
-
-		if($limit>0 && $limit2>0)
-		{
-			$sql_limit = 'LIMIT ' . $limit .' , ' . $limit2;
-		}
-		else if ($limit > 0)
-		{
-			$sql_limit = 'LIMIT ' . $limit;
-		}
-		else
-		{
-		  $sql_limit = '';        
-		}
+		
 		$sql = 'SELECT id
 		               FROM jobs
 		               WHERE 1 AND is_temp = 0 AND is_active = 0
-		               ORDER BY created_on DESC ' . $sql_limit;
+		               ORDER BY created_on DESC LIMIT ' . $offset .' , ' . $rowCount;
+		
 		$result = $db->query($sql);
 		while ($row = $result->fetch_assoc())
 		{
@@ -895,6 +892,22 @@ class Job
 		$sql = 'UPDATE jobs SET is_active = 0 WHERE id = ' . $this->mId;
 		$db->query($sql);
 	}
+	
+	// Activate spotlight-feature for a job post
+    public function SpotlightActivate()
+    {
+        global $db;
+        $sql = 'UPDATE jobs SET spotlight = 1 WHERE id = ' . $this->mId;
+        $db->query($sql);
+    }
+    
+    // Deactivate spotlight-feature for a job post
+    public function SpotlightDeactivate()
+    {
+        global $db;
+        $sql = 'UPDATE jobs SET spotlight = 0 WHERE id = ' . $this->mId;
+        $db->query($sql);
+    }
 	
 	// Extend a post for 30 days
 	public function Extend()
