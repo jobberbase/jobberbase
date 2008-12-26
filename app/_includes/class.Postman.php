@@ -110,13 +110,13 @@ class Postman
 	}
 	
 	// Send mail to user when a post is published
-	public function MailPublishToUser($data)
+	public function MailPublishToUser($data, $url=BASE_URL)
 	{
 		$subject = 'Your ad on ' . SITE_NAME . ' was published';
 		$msg = "Hello! :)\n\n";
-		$msg .= "Your ad was published and is available at: " . BASE_URL . "job/" . $data['id'] . "/" . $data['url_title'] . "/";
-		$msg .= "\n\n---\nEdit it: " . BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
-		$msg .= "\nDeactivate it: " . BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
+		$msg .= "Your ad was published and is available at: " . $url . "job/" . $data['id'] . "/" . $data['url_title'] . "/";
+		$msg .= "\n\n---\nEdit it: " . $url . "post/" . $data['id'] . "/" . $data['auth'] . "/";
+		$msg .= "\nDeactivate it: " . $url . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\n\n---\n\nThank you for using our service!\nThe " . SITE_NAME . " Team";
 		
 		if ($data['poster_email'] != '' && validate_email($data['poster_email']))
@@ -126,10 +126,10 @@ class Postman
 	}
 	
 	// Send mail to user when a post is activated (after first-time post)
-	public function MailPostActivatedToUser($data)
-	{
-		$this->MailPublishToUser($data);
-	}
+ 	public function MailPostActivatedToUser($data, $url=BASE_URL)
+    {
+        $this->MailPublishToUser($data, $url);
+    }
 	
 	// Send mail to admin when someone posts a new spam word
 	public function MailReportSpam($data)
