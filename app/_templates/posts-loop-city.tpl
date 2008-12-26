@@ -5,7 +5,7 @@
 <table id="job-posts" class="job-posts" cellspacing="0">
 {if !$jobs}
 <div id="no-ads">
-	The are currently no jobs in <strong>{$city_name}</strong>.<br />
+	{$translations.jobscity.no_jobs_in} <strong>{$city_name}</strong>.<br />
 	<a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a>
 </div><!-- #no-ads -->
 {/if}

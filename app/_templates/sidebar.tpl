@@ -22,7 +22,7 @@
 					{/foreach}
 				{else}
 					{foreach item=job from=$jobs_count_per_city}
-					<strong>{$job.jobs_in_city}</strong> in <a href="{$BASE_URL}jobs-in/{$job.city_ascii_name}/">{$job.city_name}</a><br />
+					<strong>{$job.jobs_in_city}</strong> {$translations.jobscity.sidebar_jobs_in} <a href="{$BASE_URL}jobs-in/{$job.city_ascii_name}/">{$job.city_name}</a><br />
 					{/foreach}
 				{/if}
 			</div><!-- #stats -->
