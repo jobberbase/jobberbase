@@ -139,15 +139,6 @@
 			$flag = 1;
 			break;
 			
-		case 'stats':
-			require_once '_includes/class.Stats.php';
-			$stats = new Stats();
-			$smarty->assign('applications', $stats->Applications());
-			$smarty->assign('keywordz', $stats->Keywords());
-			$template = 'stats.tpl';
-			$flag = 1;
-			break;
-			
 		// companies
 		case 'companies':
 			require_once 'page_companies.php';

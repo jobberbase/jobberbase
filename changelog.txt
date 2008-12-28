@@ -17,6 +17,8 @@ version 1.6 (28/12/2008), tribute to putypuruty (http://www.jobberbase.com/forum
 	* fixed: although set, the job type (ie: full time, part time) was not remembered in the pagination process and thus the pagination was incorrect
 	* fixed: a database query exception was thrown if more than one city was found from the search keywords
 	* fixed: the URLs in the mail that is sent after a job is actived by the administrator are wrong
+	* fixed: multiple emails were sent to the job poster if the jobberbase based site had google ads - thanks to links
+	* fixed: moved stats in admin (/admin/stats/)
 	* new: possibility to show cities in sidebar instead of categories (configurable from config.php)
 	* new: SEO for Job Categories - thanks to CtCoder
 	* new: spotlight jobs (sponsored jobs) - thanks to CtCoder
