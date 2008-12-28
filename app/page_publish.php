@@ -13,6 +13,8 @@
 	if ($jobInfo['check_poster_email'])
 	{
 		// post published
+		$first_time_post = 0;
+		
 		$postMan->MailPublishToUser($jobInfo);	
 		$html_title = $translations['jobs']['publish_success'] . ' / ' . SITE_NAME;
 		$smarty->assign('first_time_post', 0);
@@ -20,6 +22,8 @@
 	else
 	{
 		// post in pending status
+		$first_time_post = 1;
+		
 		$postMan->MailPublishPendingToUser($job->mPosterEmail);	
 		$html_title = $translations['jobs']['add_success'] . ' / ' . SITE_NAME;
 		$smarty->assign('first_time_post', 1);
@@ -27,10 +31,6 @@
 	
 	$job->Publish();
 	
-	$job_title = BASE_URL . 'job/' . $job->mId . '/' . $job->mUrlTitle . '/';
-	
-	$smarty->assign('auth', $job->GetAuth());
-	$smarty->assign('job_url', $job_title);
-	
-	$template = 'publish-confirmation.tpl';
+	redirect_to(BASE_URL . 'confirm/' . $job->mId  . '/'.$first_time_post.'/');
+	exit;
 ?>

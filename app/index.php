@@ -107,6 +107,16 @@
 			$flag = 1;
 			break;
 			
+		case 'confirm':
+            $flag =1;
+            $job = new Job($id);
+            $job_title = BASE_URL . 'job/' . $job->mId . '/' . $job->mUrlTitle . '/';
+            $smarty->assign('auth', $job->GetAuth());
+            $smarty->assign('job_url', $job_title);
+            $smarty->assign('first_time_post', $extra);
+            $template = 'publish-confirmation.tpl';
+            break;
+			
 		// deactivate a post
 		case 'deactivate':
 			require_once 'page_deactivate.php';
