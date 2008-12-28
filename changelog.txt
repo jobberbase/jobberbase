@@ -1,5 +1,27 @@
 ######## jobberBase changelog ########
 
+version 1.6 (28/12/2008), tribute to putypuruty (http://www.jobberbase.com/forum/user19.html):
+	* added: i18n for labels inside javascript files
+	* fixed: 'Invalid use of group function' exception in class.Stats.php
+	* fixed: a database query exception was thrown if the search string contained a city that existed in the DB and ended in a space character (ie: "london "). This happened only for live-searches (via AJAX)
+	* enh: GetJobsCountForAllCategs makes a single query now instead of a query for *each* category
+	* fixed: made the select query compatible with mysql 4 in class.SpamReport.php
+	* fixed: a database query exception was thrown if the words in the search query were separated by many whitespace characters (ie: "one    two    three")
+	* fix/enh: tweaked the query that gets the job applications so that only applications which still point to a job are returned (in case you manually delete the jobs but don't remove the job applications)
+	* enh: if the search query is empty, do nothing - until now (which was pretty confusing from end user point of view), all the jobs for the current category were displayed which could lead to huge results because if you're on the index page you will get *ALL* active jobs from the DB
+	* fixed: allow to install jobberbase in a folder called "jobs" - thanks to links
+	* fixed: the total number of applications/searches was not computed correctly; return meaningful data even if there are no applications/searches in class.Stats.php
+	* enh: now, only one query is used to get the number of jobs per companies, instead of one query for *each* company
+	* fixed: the number of jobs per company was wrong - it also included jobs that are not active
+	* fixed: CheckPosterEmail was called needlessly when displaying jobs thus degrading performance (see http://www.jobberbase.com/forum/post2994.html)
+	* fixed: although set, the job type (ie: full time, part time) was not remembered in the pagination process and thus the pagination was incorrect
+	* fixed: a database query exception was thrown if more than one city was found from the search keywords
+	* fixed: the URLs in the mail that is sent after a job is actived by the administrator are wrong
+	* new: possibility to show cities in sidebar instead of categories (configurable from config.php)
+	* new: SEO for Job Categories - thanks to CtCoder
+	* new: spotlight jobs (sponsored jobs) - thanks to CtCoder
+	* new: 'Edit post' functionality in admin
+
 version 1.5 beta 1 (20/08/2008):
   * Admin bug fix - activation/deactivation of ads now works
 	* Other small fixes (search, mostly)
