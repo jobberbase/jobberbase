@@ -8,8 +8,9 @@
  */
   
 	header('Content-Type: text/html; charset=UTF-8');
-    ini_set('display_errors', 'On');
+  ini_set('display_errors', 'Off');
 	error_reporting(E_ALL ^ E_STRICT);
+	
 	date_default_timezone_set('Europe/Bucharest');
 
 	// MySQL + misc settings for local environment
@@ -77,6 +78,7 @@
 	 */ 
 	define('SIDEBAR_ONLY_CITIES_WITH_JOBS', false);
 
+	
 	define('APP_PATH',dirname(__FILE__).DIRECTORY_SEPARATOR);
 
   if(isset($_SERVER['SCRIPT_NAME'])) 

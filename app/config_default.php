@@ -8,7 +8,7 @@
  */
   
 	header('Content-Type: text/html; charset=UTF-8');
-  ini_set('display_errors', 'On');
+  ini_set('display_errors', 'Off');
 	error_reporting(E_ALL ^ E_STRICT);
 	date_default_timezone_set('Europe/Bucharest');
 
