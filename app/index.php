@@ -195,7 +195,7 @@
 	// if page not found
 	if ($flag == 0)
 	{
-		redirect_to(BASE_URL . 'page-unavailable/');
+		redirect_to(BASE_URL . 'page-unavailable/', '404');
 	}
 	
 	// create a JSON string from the translations array
