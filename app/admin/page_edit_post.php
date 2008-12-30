@@ -104,6 +104,7 @@
 		
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('types', get_types());
+	$smarty->assign('cities', get_cities());
 	
 	$html_title = $translations['jobs']['title_edit'] . ' / ' . SITE_NAME;
 	
