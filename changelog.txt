@@ -21,7 +21,7 @@ version 1.6 (28/12/2008), tribute to putypuruty (http://www.jobberbase.com/forum
 	* fixed: moved stats in admin (/admin/stats/)
 	* new: possibility to show cities in sidebar instead of categories (configurable from config.php)
 	* new: SEO for Job Categories - thanks to CtCoder
-	* new: spotlight jobs (sponsored jobs) - thanks to CtCoder
+	* new: spotlight jobs (sponsored jobs) - thanks to Chronos
 	* new: 'Edit post' functionality in admin
 
 version 1.5 beta 1 (20/08/2008):
