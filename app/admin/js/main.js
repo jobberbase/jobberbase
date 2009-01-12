@@ -56,6 +56,27 @@
 				}
 				inst.execCommand("mceEndUndoLevel");
 			}
+			,
+			deleteCity: function(url, cityID)
+			{
+				if(confirm('Are you sure you want to delete this city?'))
+				{
+					$.ajax({
+					  type: "POST",
+					  url: url,
+					  data: "cityID=" + cityID,
+					  success: function(msg) {
+					   	if (msg != "0")
+						{
+							var cityElementID = 'item'+cityID;
+							$("#"+cityElementID).remove();
+						}
+					   	else
+					   		alert('There was a problem deleting the city!')
+					  }
+					});
+				}
+			}
 		}
 	}();
 	$(jobberBase.init);

@@ -196,6 +196,18 @@
             require_once 'page_deactivate_spotlight.php';
             $flag = 1;
             break;
+   		case 'cities':
+	  		if(!isset($_SESSION['AdminId']))
+            {
+                redirect_to(BASE_URL);
+                exit;
+            }
+            
+   			require_once 'page_cities.php';
+   			$flag = 1;
+   			$citiesPage = new CitiesPage();
+   			$template = $citiesPage->processRequest($id, $extra, $smarty);
+   			break;
 		default: 
 			$flag = 0;	
 			break;
