@@ -136,7 +136,7 @@
 	try 
 	{
 		$db = new Db(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-		$db->Execute('SET CHARSET UTF8');
+		$db->Execute('SET NAMES UTF8');
 	}
 	catch(ConnectException $exception) 
 	{
