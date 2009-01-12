@@ -16,7 +16,7 @@
 		$type_id = false;
 	}
 	
-	$city_ascii_name = $id;
+	$city_ascii_name = urldecode($id);
 	
 	$city = get_city_id_by_asciiname($city_ascii_name);
 	
