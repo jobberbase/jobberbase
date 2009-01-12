@@ -1099,7 +1099,7 @@ class Job
 			if (isset($jobsCountPerCategory[$categ['id']]))
 				$count = $jobsCountPerCategory[$categ['id']];
 				
-			$result[] = array('categ_name' => strtolower($categ['name']), 'categ_count' => $count, 'categ_varname' => $categ['var_name']);
+			$result[] = array('categ_name' => $categ['name'], 'UTF-8', 'categ_count' => $count, 'categ_varname' => $categ['var_name']);
 		}
 		return $result;
 	}
