@@ -72,11 +72,11 @@ INSERT INTO `categories` (`id`, `name`, `var_name`, `category_order`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cities` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
   `ascii_name` varchar(50) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=73 ;
 
 --
 -- Dumping data for table `cities`
