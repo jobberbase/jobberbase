@@ -44,11 +44,11 @@
 			<h1 id="logo"><a href="{$BASE_URL_ADMIN}home/" title="IT jobs">jobber</a></h1>
 			{if $isAuthenticated == 1}
 			<ul>
-				<li {if $current_category == 'pages'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}pages">Pages</a></li>
-				<li {if $current_category == 'categories'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}categories">Categories</a></li>
-				<li {if $current_category == 'stats'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}stats">Stats</a></li>
-				<li {if $current_category == 'cities'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}cities/list">Cities</a></li>
-				<li {if $current_category == 'password'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}password">Change your password</a></li>
+				<li {if $current_category == 'pages'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}pages/">Pages</a></li>
+				<li {if $current_category == 'categories'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}categories/">Categories</a></li>
+				<li {if $current_category == 'stats'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}stats/">Stats</a></li>
+				<li {if $current_category == 'cities'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}cities/list/">Cities</a></li>
+				<li {if $current_category == 'password'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}password/">Change your password</a></li>
 				<li><a href="{$BASE_URL_ADMIN}logout/">Logout &raquo;</a></li>
 			</ul>
 			{/if}
