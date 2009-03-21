@@ -20,9 +20,9 @@
 			</div>
 			{/if}
 
-			<form id="publish_form" method="post" action="{$BASE_URL_ADMIN}edit-post/{$job.id}/">
+			<form id="publish_form" method="post" action="{$BASE_URL_ADMIN}edit-post/{if $job.id neq 0}{$job.id}/{/if}">
 				<fieldset>
-					<legend>Edit job</legend>
+					<legend>{if $job.id == 0}Post job{else}Edit job{/if}</legend>
 					<table border="0" cellspacing="2" cellpadding="2">
 						<tr>
 							<td colspan="2">
@@ -155,7 +155,7 @@
 				</fieldset>
 			
 				<fieldset>
-					<input type="button" id="save" value="Save" />
+					<input type="button" id="save" {if $job.id == 0}value="Post"{else}value="Save"{/if} />
 					<input type="button" id="preview" value="Preview" />
 				</fieldset>
 				<fieldset class="hidden">

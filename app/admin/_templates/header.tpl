@@ -44,6 +44,7 @@
 			<h1 id="logo"><a href="{$BASE_URL_ADMIN}home/" title="IT jobs">jobber</a></h1>
 			{if $isAuthenticated == 1}
 			<ul>
+				<li {if $current_category == 'edit-post'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}edit-post/">Post a job</a></li>
 				<li {if $current_category == 'pages'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}pages/">Pages</a></li>
 				<li {if $current_category == 'categories'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}categories/">Categories</a></li>
 				<li {if $current_category == 'stats'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}stats/">Stats</a></li>

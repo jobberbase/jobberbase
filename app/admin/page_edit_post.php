@@ -5,12 +5,18 @@
  * Business logic for editing a post.
  */
 	
-	if ($id != 0)
+	//Note: $id is a job ID
+	
+if ($id != 0)
 	{
-		$j = new Job($id);
+		$job = new Job($id);
+	}
+	else
+	{
+		$job = new Job();
 	}
 	
-	$jobToEdit = $j->GetInfo();
+	$jobToEdit = $job->GetInfo();
 	$smarty->assign_by_ref('job', $jobToEdit);
 	
 	$smarty->assign('show_preview', false);
@@ -76,8 +82,6 @@
 			{
 				escape($_POST);	
 				
-				$job = new Job($job_id);
-				
 				$data = array('company' => $company,
 				          	  'url' => $url,
 				              'title' => $title,
@@ -90,7 +94,17 @@
 				              'poster_email' => $poster_email,
 				              'apply_online' => $apply_online);
 				
-				$job->Edit($data);
+				if ($id != 0)
+				{
+					$job->Edit($data);
+				}
+				else
+				{
+					$data['is_temp'] = 0;
+					$data['is_active'] = 1;
+					
+					$job->Create($data);
+				}
 				
 				$jobCategName = $job->GetCategVarname($category_id);
 				
