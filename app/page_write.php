@@ -92,7 +92,9 @@
 			              'category_id' => $category_id,
 			              'type_id' => $type_id,
 			              'description' => $description,
-										'location_outside_ro_where' => $location_outside_ro_where,
+						  'location_outside_ro_where' => $location_outside_ro_where,
+						  'is_temp' => 1,
+						  'is_active' => 0,
 			              'apply' => '',
 			              'poster_email' => $poster_email,
 			              'apply_online' => $apply_online);

@@ -36,6 +36,8 @@ class Job
 	var $mCategoryName = false;
 	var	$mClosedOn = false;
 	var	$mDaysOld = false;
+	var $mIsSpotlight = false;
+	var $mMySqlDate = false;
 	
 	function __construct($job_id = false)
 	{
@@ -792,7 +794,7 @@ class Job
 		}
 	}
 
-	// Create a new job post (is_temp => 1)
+	// Create a new job post
 	public function Create($params)
 	{
 		global $db;
@@ -818,7 +820,7 @@ class Job
 		                                 ' . $params['city_id'] . ',
 		                                 "' . $params['url'] . '",
 		                                 "' . $params['apply'] . '",
-		                                 NOW(), 1, 0, 0, "' . $this->GenerateAuthCode() . '", 
+		                                 NOW(), ' . $params['is_temp'] . ', '. $params['is_active'] .', 0, "' . $this->GenerateAuthCode() . '", 
 		                                 "' . $params['location_outside_ro_where'] . '", "' . $params['poster_email'] . '", ' . $params['apply_online'] . ')';
 		$result = $db->query($sql);
 		return $db->insert_id;
