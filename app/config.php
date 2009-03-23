@@ -122,6 +122,8 @@
 	require_once '_includes/class.Textile.php';
 	require_once '_includes/class.Sanitizer.php';
 	require_once '_includes/class.Db.php';
+	// comment the previous line and uncomment the next line if you get a Class 'mysqli' not found error
+	// require_once '_includes/class.Db.MySql.php';
 	require_once '_includes/class.Job.php';
 	require_once '_includes/class.JobRequest.php';
 	require_once '_includes/class.Paginator.php';
