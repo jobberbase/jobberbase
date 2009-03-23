@@ -63,8 +63,21 @@
 	
 	$the_jobs = array();
 	$the_jobs = $job->GetJobsPaginate(0, $id, $firstLimit, JOBS_PER_PAGE, 0, 0, false, $city_id, $type_id);
+	
+	$statisticalData = array();
+	
+	if (count($the_jobs))
+	{
+		$jobIDs = array();
+		
+		foreach ($the_jobs as $index => $aJob)
+			$jobIDs[] = $aJob['id'];
+		
+		$statisticalData = $job->GetApplicationsStatistics($jobIDs);
+	}
 
 	$smarty->assign("pages",$paginator->pages_link);
+	$smarty->assign("statisticalData", $statisticalData);
 
 	$smarty->assign('jobs', $the_jobs);
 	$smarty->assign('current_category', $id);

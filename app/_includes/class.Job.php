@@ -171,6 +171,7 @@ class Job
 								 'location_outside_ro' => $this->mLocationOutsideRo,
 								 'days_old' => $this->mDaysOld,
 								 'is_active' => $this->mIsActive,
+								 'views_count' => $this->mViewsCount,
 								 'is_spotlight' => $this->mIsSpotlight);
 		return $job;
 	}
@@ -1187,6 +1188,43 @@ class Job
 		{
 			return 0;
 		}
+	}
+	
+	/**
+	 * Returns an associative array containing the
+	 * @param $jobIDs an array of job IDs
+	 * @return
+	 */
+	public function GetApplicationsStatistics($jobIDs)
+	{
+		global $db;
+		
+		$statisticalData = array();
+		
+		$sql = 'SELECT job_id, count(id) numberOfApplications,  DATE_FORMAT(max(created_on), \'%d-%m-%Y %H:%i\') lastApplicationOn 
+				FROM job_applications j 
+				WHERE job_id in (' . $this->buildCommaSeparatedIDsString($jobIDs) . ') GROUP BY job_id'; 
+		$result = $db->query($sql);
+		
+		while ($row = $result->fetch_assoc())
+			$statisticalData[$row['job_id']] = $row;
+			
+		return $statisticalData;
+	}
+	
+	private function buildCommaSeparatedIDsString($numbersArray)
+	{
+		$string = '';
+		
+		for ($i = 0; $i < count($numbersArray); $i++)
+		{
+			$string .= $numbersArray[$i];
+
+			if ($i < count($numbersArray) - 1)
+				$string .= ',';
+		}
+		
+		return $string;
 	}
 }
 ?>
