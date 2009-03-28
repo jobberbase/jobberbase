@@ -34,5 +34,4 @@
 					.toggleClass('hidden');
 			});
 	};
-	$(window).bind('load', jobberBase.editor);
 })();
