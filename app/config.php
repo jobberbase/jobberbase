@@ -8,7 +8,7 @@
  */
   
 	header('Content-Type: text/html; charset=UTF-8');
-  ini_set('display_errors', 'Off');
+  	ini_set('display_errors', 'Off');
 	error_reporting(E_ALL ^ E_STRICT);
 	
 	date_default_timezone_set('Europe/Bucharest');
@@ -39,10 +39,25 @@
 	define('ADMIN_EMAIL','YOUR_EMAIL_HERE@gmail.com');
 	define('SITE_NAME', 'jobberBase');
 
-
 	define('MAX_CV_SIZE', 3000000); // approx. 3 mb
 	define('FILE_UPLOAD_DIR', 'uploads/');
 	define('JOBS_PER_PAGE', 50);
+	
+	/**
+	 * The number of minutes that must pass between applications from the same IP address.
+	 * If a user tries to apply again to a job before the specified number of minutes has
+	 * passed, his application will be denied and he will get an error message.
+	 * 
+	 * This is needed to avoid spamming via the apply form if there is no CAPTCHA implemented.
+	 *
+	 * Note: it is highly recommended to implement CAPTCHA in the apply form - search the forum
+	 * for instructions on how to do this.
+	 * 
+	 * If you implement some sort of CAPTCHA in the apply form, you can safely set this value to 0.
+	 * This will allow the same user to apply to as many jobs as he wishes without his application 
+	 * being denied.
+	 */
+	define('MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP', 10);
 	
 	// Type of jobs. Values are the database ids.
 	define('JOBTYPE_FULLTIME', 1);
@@ -78,7 +93,6 @@
 	 */ 
 	define('SIDEBAR_ONLY_CITIES_WITH_JOBS', false);
 
-	
 	define('APP_PATH',dirname(__FILE__).DIRECTORY_SEPARATOR);
 
   if(isset($_SERVER['SCRIPT_NAME'])) 
@@ -109,7 +123,6 @@
   {
     die('[config.php] Cannot determine BASE_URL, please set manual and comment this line');
   }
-	
 	
 	// Function and classes includes
 	require_once '_includes/function.validate_email.php';
@@ -153,7 +166,6 @@
 	$smarty = new Smarty();
 	$smarty->template_dir = APP_PATH . '_templates/';
 	$smarty->compile_dir = APP_PATH . '_templates/_cache/';
-	
 	
 	// Create Textile object
 	$textile = new Textile;

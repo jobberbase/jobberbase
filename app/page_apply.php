@@ -34,11 +34,11 @@
 		$filename = time() . '_' . $_FILES['apply_cv']['name'];
 		if (move_uploaded_file($_FILES['apply_cv']['tmp_name'], FILE_UPLOAD_DIR . $filename))
 		{
-			$attach = $filename;
+			$attachment = $filename;
 		}
 		else
 		{
-			$attach = '';
+			$attachment = '';
 		}
 
 		$data = array('apply_email' => $apply_email,
@@ -47,39 +47,60 @@
 		              'company_email' => $j->mPosterEmail,
 		              'company_name' => $j->mCompany,
 		              'job_title' => $j->mTitle,
-		              'attachment_path' => APP_PATH . FILE_UPLOAD_DIR . $attach,
-		              'attachment_filename' => $attach,
+		              'attachment_path' => APP_PATH . FILE_UPLOAD_DIR . $attachment,
+		              'attachment_filename' => $attachment,
 		              'job_id' => $job_id);
 								
 		$app = new JobApplication($job_id);
-		if ($app->Apply())
+		
+		$applicationTimeoutDisabled = MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP <= 0;
+		$applicationTimeoutPassed = false;
+		
+		$applicantIP = $_SERVER['REMOTE_ADDR'];
+		
+		if (!$applicationTimeoutDisabled)
 		{
-			$alex = new Postman();
+			$applicationTimeoutPassed = $app->HasApplyTimeoutPassed($applicantIP);
+		}
+		
+		$applicationAllowed = $applicationTimeoutDisabled || $applicationTimeoutPassed;
+		
+		if ($applicationAllowed)
+		{
+			$app->Apply($applicantIP);
 			
-			if ($alex->MailApplyOnline($data))
+			$mailSender = new Postman();
+			
+			$applyMailSent = $mailSender->MailApplyOnline($data);
+			
+			if ($applyMailSent)
 			{
 				$_SESSION['apply_mail_sent'] = 1;
-
+				$_SESSION['apply_successful'] = 1;
 			}
 			else
 			{
 				$_SESSION['apply_mail_sent'] = -1;
+				$_SESSION['apply_successful'] = -1;
+				$_SESSION['apply_fields'] = $_POST;
 			}
 		}
 		else
 		{
-			$_SESSION['apply_mail_sent'] = -1;
+			$_SESSION['apply_allowed'] =  -1;
+			$_SESSION['apply_successful'] = -1;
+			$_SESSION['apply_fields'] = $_POST;
 		}
-
+		
 		// delete uploaded file (cleanup)
-		if ($attach != '')
+		if ($attachment != '')
 		{
-			unlink(APP_PATH . FILE_UPLOAD_DIR . $filename);
+			unlink(APP_PATH . FILE_UPLOAD_DIR . $attachment);
 		}
 	}
 	else
 	{
-		$_SESSION['apply_mail_sent'] = -1;
+		$_SESSION['apply_successful'] = -1;
 		$_SESSION['apply_errors'] = $errors;
 		$_SESSION['apply_fields'] = $_POST;
 	}

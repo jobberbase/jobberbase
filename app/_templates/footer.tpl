@@ -80,6 +80,14 @@
 		{
 			unset($_SESSION['apply_fields']);
 		}
+		if (isset($_SESSION['apply_allowed']))
+		{
+			unset($_SESSION['apply_allowed']);
+		}
+		if (isset($_SESSION['apply_successful']))
+		{
+			unset($_SESSION['apply_successful']);
+		}
 		if (isset($_SESSION['contact_msg_sent']))
 		{
 			unset($_SESSION['contact_msg_sent']);
