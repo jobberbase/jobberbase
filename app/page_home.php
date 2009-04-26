@@ -22,9 +22,9 @@
 
 	$smarty->assign('current_category', 'home');
 	
-	$smarty->assign('seo_title', "This is the homepage title");
-  $smarty->assign('seo_desc', "This is the homepage Description");
-  $smarty->assign('seo_keys', "This is the homepage keyword");
+	$smarty->assign('seo_title', $translations['homepage']['seo_title']);
+    $smarty->assign('seo_desc', $translations['homepage']['seo_description']);
+    $smarty->assign('seo_keys', $translations['homepage']['seo_keywords']);
 	
 	$template = 'index.tpl';
 ?>
