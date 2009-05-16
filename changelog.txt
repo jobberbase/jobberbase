@@ -1,5 +1,9 @@
 ######## jobberBase changelog ########
 
+version 1.7 (16/05/2009), tribute to putypuruty (http://www.jobberbase.com/forum/user19.html):
+	* new: locations management
+	* lots of bug fixes
+
 version 1.6 (28/12/2008), tribute to putypuruty (http://www.jobberbase.com/forum/user19.html):
 	* added: i18n for labels inside javascript files
 	* fixed: 'Invalid use of group function' exception in class.Stats.php
