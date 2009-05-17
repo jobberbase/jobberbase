@@ -1,8 +1,14 @@
 ######## jobberBase changelog ########
 
 version 1.7 (16/05/2009), tribute to putypuruty (http://www.jobberbase.com/forum/user19.html):
-	* new: locations management
-	* lots of bug fixes
+	* new: add/edit/delete cities from the admin section (see http://www.jobberbase.com/forum/post3500.html#p3500 for how to integrate this into an existing 1.6 version)
+	* new: allow to post a job from the admin section (see http://www.jobberbase.com/forum/post4673.html#p4673 for how to integrate this into an existing 1.6 version)
+	* new: in the admin section, for each job, show the number of views and if there are applicants, the number of applicants and the date of the last application (see http://www.jobberbase.com/forum/post4700.html#p4700 for how to integrate this into an existing 1.6 version)
+	* fixed: get_cities() was called needlessly on every page (thus a database connection was made)
+	* fixed: some users were getting 404 errors in the admin section because the top menu links did not end in a / char
+	* fixed: in Internet Explorer, in the admin section, clicking on the create/edit page links was showing a blank page with a 'tinymce is undefined' JS error. This bug was reproduceable only if opening the create/edit page in the same browser tab/page - opening it in a new browser tab/page worked.
+	* enh: the number of minutes after which someone can apply again is now a constant defined in config.php
+	* enh: the apply process now gives better error messages (if the number of minutes between applications did not pass, if the application mail could not be sent to the employer, if the apply form data was incorrect/incomplete) minor fixes and improvements
 
 version 1.6 (28/12/2008), tribute to putypuruty (http://www.jobberbase.com/forum/user19.html):
 	* added: i18n for labels inside javascript files
