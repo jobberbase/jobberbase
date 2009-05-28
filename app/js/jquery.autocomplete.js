@@ -1,147 +1,56 @@
 /*
- * Autocomplete - jQuery plugin 1.0 Alpha
+ * Autocomplete - jQuery plugin 1.0.2
  *
- * Copyright (c) 2007 Dylan Verheul, Dan G. Switzer, Anjesh Tuladhar, Jörn Zaefferer
+ * Copyright (c) 2007 Dylan Verheul, Dan G. Switzer, Anjesh Tuladhar, JÃ¶rn Zaefferer
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
  *   http://www.gnu.org/licenses/gpl.html
  *
- * Revision: $Id: jquery.autocomplete.js 1729 2007-04-17 20:04:10Z joern $
+ * Revision: $Id: jquery.autocomplete.js 5747 2008-06-25 18:30:55Z joern.zaefferer $
  *
  */
 
-/*
-TODO
-- add a callback to allow decoding the response
-- fix mustMatch
-- add scrollbars and page down/up, option for height or number of items to be visible without scrolling
-- allow modification of not-last value in multiple-fields
-@option TODO Number size Limit the number of items to show at once. Default: 
-*/
-
-/**
- * Provide autocomplete for text-inputs or textareas.
- *
- * Depends on dimensions plugin's offset method for correct positioning of the select box and bgiframe plugin
- * to fix IE's problem with selects.
- *
- * @example $("#input_box").autocomplete("my_autocomplete_backend.php");
- * @before <input id="input_box" />
- * @desc Autocomplete a text-input with remote data. For small to giant datasets.
- *
- * When the user starts typing, a request is send to the specified backend ("my_autocomplete_backend.php"),
- * with a GET parameter named q that contains the current value of the input box and a paremeter "limit" with
- * the value specified for the max option.
- *
- * A value of "foo" would result in this request url: my_autocomplete_backend.php?q=foo&limit=10
- *
- * The result must return with one value on each line. The result is presented in the order
- * the backend sends it.
- *
- * @example $("#input_box").autocomplete(["Cologne", "Berlin", "Munich"]);
- * @before <input id="input_box" />
- * @desc Autcomplete a text-input with local data. For small datasets.
- *
- * @example $.getJSON("my_backend.php", function(data) {
- *   $("#input_box").autocomplete(data);
- * });
- * @before <input id="input_box" />
- * @desc Autcomplete a text-input with data received via AJAX. For small to medium sized datasets.
- *
- * @example $("#mytextarea").autocomplete(["Cologne", "Berlin", "Munich"], {
- *  multiple: true
- * });
- * @before <textarea id="mytextarea" />
- * @desc Autcomplete a textarea with local data (for small datasets). Once the user chooses one
- * value, a separator is appended (by default a comma, see multipleSeparator option) and more values
- * are autocompleted.
- *
- * @name autocomplete
- * @cat Plugins/Autocomplete
- * @type jQuery
- * @param String|Array urlOrData Pass either an URL for remote-autocompletion or an array of data for local auto-completion
- * @param Map options Optional settings
- * @option String inputClass This class will be added to the input box. Default: "ac_input"
- * @option String resultsClass The class for the UL that will contain the result items (result items are LI elements). Default: "ac_results"
- * @option String loadingClass The class for the input box while results are being fetched from the server. Default: "ac_loading"
- * @option Number minChars The minimum number of characters a user has to type before the autocompleter activates. Default: 1
- * @option Number delay The delay in milliseconds the autocompleter waits after a keystroke to activate itself. Default: 400 for remote, 10 for local
- * @option Number cacheLength The number of backend query results to store in cache. If set to 1 (the current result), no caching will happen. Do not set below 1. Default: 10
- * @option Boolean matchSubset Whether or not the autocompleter can use a cache for more specific queries. This means that all matches of "foot" are a subset of all matches for "foo". Usually this is true, and using this options decreases server load and increases performance. Only useful with cacheLength settings bigger then one, like 10. Default: true
- * @option Boolean matchCase Whether or not the comparison is case sensitive. Only important only if you use caching. Default: false
- * @option Boolean matchContains Whether or not the comparison looks inside (i.e. does "ba" match "foo bar") the search results. Only important if you use caching. Don't mix with autofill. Default: false
- * @option Booolean mustMatch If set to true, the autocompleter will only allow results that are presented by the backend. Note that illegal values result in an empty input box. Default: false
- * @option Object extraParams Extra parameters for the backend. If you were to specify { bar:4 }, the autocompleter would call my_autocomplete_backend.php?q=foo&bar=4 (assuming the input box contains "foo"). Default: {}
- * @option Boolean selectFirst If this is set to true, the first autocomplete value will be automatically selected on tab/return, even if it has not been handpicked by keyboard or mouse action. If there is a handpicked (highlighted) result, that result will take precedence. Default: true
- * @option Function formatItem Provides advanced markup for an item. For each row of results, this function will be called. The returned value will be displayed inside an LI element in the results list. Autocompleter will provide 3 parameters: the results row, the position of the row in the list of results (starting at 1), and the number of items in the list of results. Default: none, assumes that a single row contains a single value.
- * @option Function formatResult Similar to formatResult, but provides the formatting for the value to be put into the input field. Again three arguments: Data, position (starting with one) and total number of data. Default: none, assumes either plain data to use as result or uses the same value as provided by formatItem.
- * @option Boolean multiple Whether to allow more then one autocomplted-value to enter. Default: false
- * @option String multipleSeparator Seperator to put between values when using multiple option. Default: ", "
- * @option Number width Specify a custom width for the select box. Default: width of the input element
- * @option Boolean autoFill Fill the textinput while still selecting a value, replacing the value if more is type or something else is selected. Default: false
- * @option Number max Limit the number of items in the select box. Is also send as a "limit" parameter with a remote request. Default: 10
- */
-
-/**
- * Handle the result of a search event. Is executed when the user selects a value or a
- * programmatic search event is triggered (see search()).
- *
- * You can add and remove (using unbind("result")) this event at any time.
- *
- * @example jQuery('input#suggest').result(function(event, data, formatted) {
- *   jQuery("#result").html( !data ? "No match!" : "Selected: " + formatted);
- * });
- * @desc Bind a handler to the result event to display the selected value in a #result element.
- *    The first argument is a generic event object, in this case with type "result".
- *    The second argument refers to the selected data, which can be a plain string value or an array or object.
- *    The third argument is the formatted value that is inserted into the input field.
- *
- * @param Function handler The event handler, gets a default event object as first and
- * 		the selected list item as second argument.
- * @name result
- * @cat Plugins/Autocomplete
- * @type jQuery
- */
-
-/**
- * Trigger a search event. See result(Function) for binding to that event.
- *
- * A search event mimics the same behaviour as when the user selects a value from
- * the list of autocomplete items. You can use it to execute anything that does something
- * with the selected value, beyond simply putting the value into the input and submitting it.
- *
- * @example jQuery('input#suggest').search();
- * @desc Triggers a search event.
- *
- * @name search
- * @cat Plugins/Autocomplete
- * @type jQuery
- */
-
-// * @option Function onSelectItem Called when an item is selected. The autocompleter will specify a single argument, being the LI element selected. This LI element will have an attribute "extra" that contains an array of all cells that the backend specified. Default: none
-
-jQuery.fn.extend({
+;(function($) {
+	
+$.fn.extend({
 	autocomplete: function(urlOrData, options) {
 		var isUrl = typeof urlOrData == "string";
-		options = jQuery.extend({}, jQuery.Autocompleter.defaults, {
+		options = $.extend({}, $.Autocompleter.defaults, {
 			url: isUrl ? urlOrData : null,
 			data: isUrl ? null : urlOrData,
-			delay: isUrl ? jQuery.Autocompleter.defaults.delay : 10
+			delay: isUrl ? $.Autocompleter.defaults.delay : 10,
+			max: options && !options.scroll ? 10 : 150
 		}, options);
+		
+		// if highlight is set to false, replace it with a do-nothing function
+		options.highlight = options.highlight || function(value) { return value; };
+		
+		// if the formatMatch option is not specified, then use formatItem for backwards compatibility
+		options.formatMatch = options.formatMatch || options.formatItem;
+		
 		return this.each(function() {
-			new jQuery.Autocompleter(this, options);
+			new $.Autocompleter(this, options);
 		});
 	},
 	result: function(handler) {
 		return this.bind("result", handler);
 	},
-	search: function() {
-		return this.trigger("search");
+	search: function(handler) {
+		return this.trigger("search", [handler]);
+	},
+	flushCache: function() {
+		return this.trigger("flushCache");
+	},
+	setOptions: function(options){
+		return this.trigger("setOptions", [options]);
+	},
+	unautocomplete: function() {
+		return this.trigger("unautocomplete");
 	}
 });
 
-jQuery.Autocompleter = function(input, options) {
+$.Autocompleter = function(input, options) {
 
 	var KEY = {
 		UP: 38,
@@ -150,20 +59,37 @@ jQuery.Autocompleter = function(input, options) {
 		TAB: 9,
 		RETURN: 13,
 		ESC: 27,
-		COMMA: 188
+		COMMA: 188,
+		PAGEUP: 33,
+		PAGEDOWN: 34,
+		BACKSPACE: 8
 	};
 
-	// Create jQuery object for input element
+	// Create $ object for input element
 	var $input = $(input).attr("autocomplete", "off").addClass(options.inputClass);
 
 	var timeout;
 	var previousValue = "";
-	var cache = jQuery.Autocompleter.Cache(options);
+	var cache = $.Autocompleter.Cache(options);
 	var hasFocus = 0;
 	var lastKeyPressCode;
-	var select = jQuery.Autocompleter.Select(options, input, selectCurrent);
+	var config = {
+		mouseDownOnSelect: false
+	};
+	var select = $.Autocompleter.Select(options, input, selectCurrent, config);
 	
-	$input.keydown(function(event) {
+	var blockSubmit;
+	
+	// prevent form submit in opera when selecting with return key
+	$.browser.opera && $(input.form).bind("submit.autocomplete", function() {
+		if (blockSubmit) {
+			blockSubmit = false;
+			return false;
+		}
+	});
+	
+	// only opera doesn't trigger keydown multiple times while pressed, others don't work with keypress at all
+	$input.bind(($.browser.opera ? "keypress" : "keydown") + ".autocomplete", function(event) {
 		// track last key pressed
 		lastKeyPressCode = event.keyCode;
 		switch(event.keyCode) {
@@ -185,16 +111,34 @@ jQuery.Autocompleter = function(input, options) {
 					onChange(0, true);
 				}
 				break;
+				
+			case KEY.PAGEUP:
+				event.preventDefault();
+				if ( select.visible() ) {
+					select.pageUp();
+				} else {
+					onChange(0, true);
+				}
+				break;
+				
+			case KEY.PAGEDOWN:
+				event.preventDefault();
+				if ( select.visible() ) {
+					select.pageDown();
+				} else {
+					onChange(0, true);
+				}
+				break;
 			
 			// matches also semicolon
-			case options.multiple && jQuery.trim(options.multipleSeparator) == "," && KEY.COMMA:
+			case options.multiple && $.trim(options.multipleSeparator) == "," && KEY.COMMA:
 			case KEY.TAB:
 			case KEY.RETURN:
-				if( selectCurrent() ){
-					// make sure to blur off the current field
-					if( !options.multiple )
-						$input.blur();
+				if( selectCurrent() ) {
+					// stop default to prevent a form submit, Opera needs special handling
 					event.preventDefault();
+					blockSubmit = true;
+					return false;
 				}
 				break;
 				
@@ -207,21 +151,23 @@ jQuery.Autocompleter = function(input, options) {
 				timeout = setTimeout(onChange, options.delay);
 				break;
 		}
-	}).keypress(function() {
-		// having fun with opera - remove this binding and Opera submits the form when we select an entry via return
 	}).focus(function(){
 		// track whether the field has focus, we shouldn't process any
 		// results if the field no longer has focus
 		hasFocus++;
 	}).blur(function() {
 		hasFocus = 0;
-		hideResults();
+		if (!config.mouseDownOnSelect) {
+			hideResults();
+		}
 	}).click(function() {
 		// show select when clicking in a focused field
 		if ( hasFocus++ > 1 && !select.visible() ) {
 			onChange(0, true);
 		}
 	}).bind("search", function() {
+		// TODO why not just specifying both arguments?
+		var fn = (arguments.length > 1) ? arguments[1] : null;
 		function findValueCallback(q, data) {
 			var result;
 			if( data && data.length ) {
@@ -232,14 +178,25 @@ jQuery.Autocompleter = function(input, options) {
 					}
 				}
 			}
-			$input.trigger("result", result && [result.data, result.value]);
+			if( typeof fn == "function" ) fn(result);
+			else $input.trigger("result", result && [result.data, result.value]);
 		}
-		jQuery.each(trimWords($input.val()), function(i, value) {
+		$.each(trimWords($input.val()), function(i, value) {
 			request(value, findValueCallback, findValueCallback);
 		});
+	}).bind("flushCache", function() {
+		cache.flush();
+	}).bind("setOptions", function() {
+		$.extend(options, arguments[1]);
+		// if we've updated the data, repopulate
+		if ( "data" in arguments[1] )
+			cache.populate();
+	}).bind("unautocomplete", function() {
+		select.unbind();
+		$input.unbind();
+		$(input.form).unbind(".autocomplete");
 	});
 	
-	hideResultsNow();
 	
 	function selectCurrent() {
 		var selected = select.selected();
@@ -281,7 +238,7 @@ jQuery.Autocompleter = function(input, options) {
 			$input.addClass(options.loadingClass);
 			if (!options.matchCase)
 				currentValue = currentValue.toLowerCase();
-			request(currentValue, receiveData, stopLoading);
+			request(currentValue, receiveData, hideResultsNow);
 		} else {
 			stopLoading();
 			select.hide();
@@ -292,11 +249,11 @@ jQuery.Autocompleter = function(input, options) {
 		if ( !value ) {
 			return [""];
 		}
-		var words = value.split( jQuery.trim( options.multipleSeparator ) );
+		var words = value.split( options.multipleSeparator );
 		var result = [];
-		jQuery.each(words, function(i, value) {
-			if ( jQuery.trim(value) )
-				result[i] = jQuery.trim(value);
+		$.each(words, function(i, value) {
+			if ( $.trim(value) )
+				result[i] = $.trim(value);
 		});
 		return result;
 	}
@@ -309,14 +266,16 @@ jQuery.Autocompleter = function(input, options) {
 	}
 	
 	// fills in the input box w/the first match (assumed to be the best match)
+	// q: the term entered
+	// sValue: the first matching result
 	function autoFill(q, sValue){
 		// autofill in the complete box w/the first match as long as the user hasn't entered in more data
 		// if the last user key pressed was backspace, don't autofill
-		if( options.autoFill && (lastWord($input.val()).toLowerCase() == q.toLowerCase()) && lastKeyPressCode != 8 ) {
+		if( options.autoFill && (lastWord($input.val()).toLowerCase() == q.toLowerCase()) && lastKeyPressCode != KEY.BACKSPACE ) {
 			// fill in the value (keep the case the user has typed)
 			$input.val($input.val() + sValue.substring(lastWord(previousValue).length));
 			// select the portion of the value not typed by the user (so the next character will erase)
-			jQuery.Autocompleter.Selection(input, previousValue.length, previousValue.length + sValue.length);
+			$.Autocompleter.Selection(input, previousValue.length, previousValue.length + sValue.length);
 		}
 	};
 
@@ -326,15 +285,29 @@ jQuery.Autocompleter = function(input, options) {
 	};
 
 	function hideResultsNow() {
+		var wasVisible = select.visible();
 		select.hide();
 		clearTimeout(timeout);
 		stopLoading();
-		// TODO fix mustMatch...
 		if (options.mustMatch) {
-			if ($input.val() != previousValue) {
-				//selectCurrent();
-			}
+			// call search and run callback
+			$input.search(
+				function (result){
+					// if no value found, clear the input box
+					if( !result ) {
+						if (options.multiple) {
+							var words = trimWords($input.val()).slice(0, -1);
+							$input.val( words.join(options.multipleSeparator) + (words.length ? options.multipleSeparator : "") );
+						}
+						else
+							$input.val( "" );
+					}
+				}
+			);
 		}
+		if (wasVisible)
+			// position cursor at end of input field
+			$.Autocompleter.Selection(input, input.value.length, input.value.length);
 	};
 
 	function receiveData(q, data) {
@@ -357,12 +330,25 @@ jQuery.Autocompleter = function(input, options) {
 			success(term, data);
 		// if an AJAX url has been supplied, try loading the data now
 		} else if( (typeof options.url == "string") && (options.url.length > 0) ){
-			jQuery.ajax({
+			
+			var extraParams = {
+				timestamp: +new Date()
+			};
+			$.each(options.extraParams, function(key, param) {
+				extraParams[key] = typeof param == "function" ? param() : param;
+			});
+			
+			$.ajax({
+				// try to leverage ajaxQueue plugin to abort previous requests
+				mode: "abort",
+				// limit abortion to this input
+				port: "autocomplete" + input.name,
+				dataType: options.dataType,
 				url: options.url,
-				data: jQuery.extend({
+				data: $.extend({
 					q: lastWord(term),
 					limit: options.max
-				}, options.extraParams),
+				}, extraParams),
 				success: function(data) {
 					var parsed = options.parse && options.parse(data) || parse(data);
 					cache.add(term, parsed);
@@ -370,34 +356,36 @@ jQuery.Autocompleter = function(input, options) {
 				}
 			});
 		} else {
+			// if we have a failure, we need to empty the list -- this prevents the the [TAB] key from selecting the last successful match
+			select.emptyList();
 			failure(term);
 		}
-	}
+	};
 	
 	function parse(data) {
 		var parsed = [];
 		var rows = data.split("\n");
 		for (var i=0; i < rows.length; i++) {
-			var row = jQuery.trim(rows[i]);
+			var row = $.trim(rows[i]);
 			if (row) {
 				row = row.split("|");
 				parsed[parsed.length] = {
 					data: row,
 					value: row[0],
-					result: options.formatResult && options.formatResult(row) || row[0]
+					result: options.formatResult && options.formatResult(row, row[0]) || row[0]
 				};
 			}
 		}
 		return parsed;
-	}
+	};
 
 	function stopLoading() {
 		$input.removeClass(options.loadingClass);
-	}
+	};
 
-}
+};
 
-jQuery.Autocompleter.defaults = {
+$.Autocompleter.defaults = {
 	inputClass: "ac_input",
 	resultsClass: "ac_results",
 	loadingClass: "ac_loading",
@@ -407,18 +395,24 @@ jQuery.Autocompleter.defaults = {
 	matchSubset: true,
 	matchContains: false,
 	cacheLength: 10,
+	max: 100,
 	mustMatch: false,
 	extraParams: {},
 	selectFirst: true,
-	max: 10,
-	//size: 10,
+	formatItem: function(row) { return row[0]; },
+	formatMatch: null,
 	autoFill: false,
 	width: 0,
 	multiple: false,
-	multipleSeparator: ", "
+	multipleSeparator: ", ",
+	highlight: function(value, term) {
+		return value.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + term.replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1") + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>");
+	},
+    scroll: true,
+    scrollHeight: 180
 };
 
-jQuery.Autocompleter.Cache = function(options) {
+$.Autocompleter.Cache = function(options) {
 
 	var data = {};
 	var length = 0;
@@ -432,54 +426,60 @@ jQuery.Autocompleter.Cache = function(options) {
 	};
 	
 	function add(q, value) {
-			if (length > options.cacheLength) {
-				this.flush();
-			}
-			if (!data[q]) {
-				length++;
-			}
-			data[q] = value;
+		if (length > options.cacheLength){
+			flush();
 		}
+		if (!data[q]){ 
+			length++;
+		}
+		data[q] = value;
+	}
 	
-	// if there is a data array supplied
-	if( options.data ){
+	function populate(){
+		if( !options.data ) return false;
+		// track the matches
 		var stMatchSets = {},
 			nullData = 0;
 
 		// no url was specified, we need to adjust the cache length to make sure it fits the local data store
 		if( !options.url ) options.cacheLength = 1;
 		
+		// track all options for minChars = 0
 		stMatchSets[""] = [];
-
+		
 		// loop through the array and create a lookup structure
-		jQuery.each(options.data, function(i, rawValue) {
-			// if row is a string, make an array otherwise just reference the array
+		for ( var i = 0, ol = options.data.length; i < ol; i++ ) {
+			var rawValue = options.data[i];
+			// if rawValue is a string, make an array otherwise just reference the array
+			rawValue = (typeof rawValue == "string") ? [rawValue] : rawValue;
 			
-			
-			value = options.formatItem
-				? options.formatItem(rawValue, i+1, options.data.length)
-				: rawValue;
+			var value = options.formatMatch(rawValue, i+1, options.data.length);
+			if ( value === false )
+				continue;
+				
 			var firstChar = value.charAt(0).toLowerCase();
 			// if no lookup array for this character exists, look it up now
-			if( !stMatchSets[firstChar] )
+			if( !stMatchSets[firstChar] ) 
 				stMatchSets[firstChar] = [];
+
 			// if the match is a string
 			var row = {
 				value: value,
 				data: rawValue,
 				result: options.formatResult && options.formatResult(rawValue) || value
-			}
+			};
 			
+			// push the current match into the set list
 			stMatchSets[firstChar].push(row);
-			
+
+			// keep track of minChars zero items
 			if ( nullData++ < options.max ) {
 				stMatchSets[""].push(row);
 			}
-			
-		});
+		};
 
 		// add the data items to the cache
-		jQuery.each(stMatchSets, function(i, value) {
+		$.each(stMatchSets, function(i, value) {
 			// increase the cache size
 			options.cacheLength++;
 			// add to the cache
@@ -487,23 +487,54 @@ jQuery.Autocompleter.Cache = function(options) {
 		});
 	}
 	
+	// populate any existing data
+	setTimeout(populate, 25);
+	
+	function flush(){
+		data = {};
+		length = 0;
+	}
+	
 	return {
-		flush: function() {
-			data = {};
-			length = 0;
-		},
+		flush: flush,
 		add: add,
+		populate: populate,
 		load: function(q) {
 			if (!options.cacheLength || !length)
 				return null;
-			if (data[q])
+			/* 
+			 * if dealing w/local data and matchContains than we must make sure
+			 * to loop through all the data collections looking for matches
+			 */
+			if( !options.url && options.matchContains ){
+				// track all matches
+				var csub = [];
+				// loop through all the data grids for matches
+				for( var k in data ){
+					// don't search through the stMatchSets[""] (minChars: 0) cache
+					// this prevents duplicates
+					if( k.length > 0 ){
+						var c = data[k];
+						$.each(c, function(i, x) {
+							// if we've got a match, add it to the array
+							if (matchSubset(x.value, q)) {
+								csub.push(x);
+							}
+						});
+					}
+				}				
+				return csub;
+			} else 
+			// if the exact item exists, use it
+			if (data[q]){
 				return data[q];
+			} else
 			if (options.matchSubset) {
 				for (var i = q.length - 1; i >= options.minChars; i--) {
 					var c = data[q.substr(0, i)];
 					if (c) {
 						var csub = [];
-						jQuery.each(c, function(i, x) {
+						$.each(c, function(i, x) {
 							if (matchSubset(x.value, q)) {
 								csub[csub.length] = x;
 							}
@@ -517,51 +548,81 @@ jQuery.Autocompleter.Cache = function(options) {
 	};
 };
 
-jQuery.Autocompleter.Select = function (options, input, select) {
+$.Autocompleter.Select = function (options, input, select, config) {
 	var CLASSES = {
 		ACTIVE: "ac_over"
 	};
 	
-	// Create results
-	var element = jQuery("<div>")
-		.hide()
-		.addClass(options.resultsClass)
-		.css("position", "absolute")
-		.appendTo("body");
-
-	var list = jQuery("<ul>").appendTo(element).mouseover( function(event) {
-		active = jQuery("li", list).removeClass(CLASSES.ACTIVE).index(target(event));
-		jQuery(target(event)).addClass(CLASSES.ACTIVE);
-	}).mouseout( function(event) {
-		jQuery(target(event)).removeClass(CLASSES.ACTIVE);
-	}).click(function(event) {
-		jQuery(target(event)).addClass(CLASSES.ACTIVE);
-		select();
-		input.focus();
-		return false;
-	});
 	var listItems,
 		active = -1,
 		data,
-		term = "";
+		term = "",
+		needsInit = true,
+		element,
+		list;
+	
+	// Create results
+	function init() {
+		if (!needsInit)
+			return;
+		element = $("<div/>")
+		.hide()
+		.addClass(options.resultsClass)
+		.css("position", "absolute")
+		.appendTo(document.body);
+	
+		list = $("<ul/>").appendTo(element).mouseover( function(event) {
+			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {
+	            active = $("li", list).removeClass(CLASSES.ACTIVE).index(target(event));
+			    $(target(event)).addClass(CLASSES.ACTIVE);            
+	        }
+		}).click(function(event) {
+			$(target(event)).addClass(CLASSES.ACTIVE);
+			select();
+			// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
+			input.focus();
+			return false;
+		}).mousedown(function() {
+			config.mouseDownOnSelect = true;
+		}).mouseup(function() {
+			config.mouseDownOnSelect = false;
+		});
 		
-	if( options.width > 0 )
-		element.css("width", options.width);
-		
+		if( options.width > 0 )
+			element.css("width", options.width);
+			
+		needsInit = false;
+	} 
+	
 	function target(event) {
 		var element = event.target;
-		while(element.tagName != "LI")
+		while(element && element.tagName != "LI")
 			element = element.parentNode;
+		// more fun with IE, sometimes event.target is empty, just ignore it then
+		if(!element)
+			return [];
 		return element;
 	}
 
 	function moveSelect(step) {
-		active += step;
-		wrapSelection();
-		listItems.removeClass(CLASSES.ACTIVE).eq(active).addClass(CLASSES.ACTIVE);
+		listItems.slice(active, active + 1).removeClass(CLASSES.ACTIVE);
+		movePosition(step);
+        var activeItem = listItems.slice(active, active + 1).addClass(CLASSES.ACTIVE);
+        if(options.scroll) {
+            var offset = 0;
+            listItems.slice(0, active).each(function() {
+				offset += this.offsetHeight;
+			});
+            if((offset + activeItem[0].offsetHeight - list.scrollTop()) > list[0].clientHeight) {
+                list.scrollTop(offset + activeItem[0].offsetHeight - list.innerHeight());
+            } else if(offset < list.scrollTop()) {
+                list.scrollTop(offset);
+            }
+        }
 	};
 	
-	function wrapSelection() {
+	function movePosition(step) {
+		active += step;
 		if (active < 0) {
 			active = listItems.size() - 1;
 		} else if (active >= listItems.size()) {
@@ -570,37 +631,39 @@ jQuery.Autocompleter.Select = function (options, input, select) {
 	}
 	
 	function limitNumberOfItems(available) {
-		return (options.max > 0) && (options.max < available)
+		return options.max && options.max < available
 			? options.max
 			: available;
 	}
 	
-	function dataToDom() {
-		var num = limitNumberOfItems(data.length);
-		for (var i=0; i < num; i++) {
+	function fillList() {
+		list.empty();
+		var max = limitNumberOfItems(data.length);
+		for (var i=0; i < max; i++) {
 			if (!data[i])
 				continue;
-			function highlight(value) {
-				return value.replace(new RegExp("(" + term + ")", "gi"), "<strong>$1</strong>");
-			}
-			jQuery("<li>").html( options.formatItem 
-					? highlight(options.formatItem(data[i].data, i+1, num))
-					: highlight(data[i].value) ).appendTo(list);
+			var formatted = options.formatItem(data[i].data, i+1, max, data[i].value, term);
+			if ( formatted === false )
+				continue;
+			var li = $("<li/>").html( options.highlight(formatted, term) ).addClass(i%2 == 0 ? "ac_even" : "ac_odd").appendTo(list)[0];
+			$.data(li, "ac_data", data[i]);
 		}
 		listItems = list.find("li");
 		if ( options.selectFirst ) {
-			listItems.eq(0).addClass(CLASSES.ACTIVE);
+			listItems.slice(0, 1).addClass(CLASSES.ACTIVE);
 			active = 0;
 		}
+		// apply bgiframe if available
+		if ( $.fn.bgiframe )
+			list.bgiframe();
 	}
 	
 	return {
 		display: function(d, q) {
+			init();
 			data = d;
 			term = q;
-			list.empty();
-			dataToDom();
-			list.bgiframe();
+			fillList();
 		},
 		next: function() {
 			moveSelect(1);
@@ -608,36 +671,74 @@ jQuery.Autocompleter.Select = function (options, input, select) {
 		prev: function() {
 			moveSelect(-1);
 		},
+		pageUp: function() {
+			if (active != 0 && active - 8 < 0) {
+				moveSelect( -active );
+			} else {
+				moveSelect(-8);
+			}
+		},
+		pageDown: function() {
+			if (active != listItems.size() - 1 && active + 8 > listItems.size()) {
+				moveSelect( listItems.size() - 1 - active );
+			} else {
+				moveSelect(8);
+			}
+		},
 		hide: function() {
-			element.hide();
+			element && element.hide();
+			listItems && listItems.removeClass(CLASSES.ACTIVE);
 			active = -1;
 		},
 		visible : function() {
-			return element.is(":visible");
+			return element && element.is(":visible");
 		},
 		current: function() {
 			return this.visible() && (listItems.filter("." + CLASSES.ACTIVE)[0] || options.selectFirst && listItems[0]);
 		},
 		show: function() {
-			// get the position of the input field right now (in case the DOM is shifted)
-			var offset = jQuery(input).offset({scroll: false, border: false});
-			// either use the specified width, or autocalculate based on form element
+			var offset = $(input).offset();
 			element.css({
-				width: options.width > 0 ? options.width : jQuery(input).width(),
-				//height: jQuery(listItems[0]).height() * options.size,
+				width: typeof options.width == "string" || options.width > 0 ? options.width : $(input).width(),
 				top: offset.top + input.offsetHeight,
 				left: offset.left
 			}).show();
-			//active = -1;
-			//listItems.removeClass(CLASSES.ACTIVE);
+            if(options.scroll) {
+                list.scrollTop(0);
+                list.css({
+					maxHeight: options.scrollHeight,
+					overflow: 'auto'
+				});
+				
+                if($.browser.msie && typeof document.body.style.maxHeight === "undefined") {
+					var listHeight = 0;
+					listItems.each(function() {
+						listHeight += this.offsetHeight;
+					});
+					var scrollbarsVisible = listHeight > options.scrollHeight;
+                    list.css('height', scrollbarsVisible ? options.scrollHeight : listHeight );
+					if (!scrollbarsVisible) {
+						// IE doesn't recalculate width when scrollbar disappears
+						listItems.width( list.width() - parseInt(listItems.css("padding-left")) - parseInt(listItems.css("padding-right")) );
+					}
+                }
+                
+            }
 		},
 		selected: function() {
-			return data && data[active];
+			var selected = listItems && listItems.filter("." + CLASSES.ACTIVE).removeClass(CLASSES.ACTIVE);
+			return selected && selected.length && $.data(selected[0], "ac_data");
+		},
+		emptyList: function (){
+			list && list.empty();
+		},
+		unbind: function() {
+			element && element.remove();
 		}
 	};
-}
+};
 
-jQuery.Autocompleter.Selection = function(field, start, end) {
+$.Autocompleter.Selection = function(field, start, end) {
 	if( field.createTextRange ){
 		var selRange = field.createTextRange();
 		selRange.collapse(true);
@@ -654,3 +755,5 @@ jQuery.Autocompleter.Selection = function(field, start, end) {
 	}
 	field.focus();
 };
+
+})(jQuery);
