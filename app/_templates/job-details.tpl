@@ -45,7 +45,7 @@
 				{$job.description}
 				</div><br />
 				{if $job.apply_online == 1 && $CURRENT_PAGE != 'verify'}
-					<div id="apply_online_now"><a href="#" onclick="$('#apply-online').SwitchVertically(10); document.getElementById('apply_name').focus(); window.location.href = '#apply'; return false;">&raquo; Apply now</a><a href="#" name="apply">&nbsp;</a></div>
+					<div id="apply_online_now"><a href="#" onclick="$('#apply-online').toggle(); window.location.href = '#apply'; return false;">&raquo; Apply now</a><a href="#" name="apply">&nbsp;</a></div>
 					{if $smarty.session.apply_successful AND $smarty.session.apply_successful eq -1}
 					<div class="validation-failure">
 						<img src="{$BASE_URL}img/icon-delete.png" alt="" />
@@ -95,7 +95,7 @@
 								<tr>
 									<td colspan="2">
 										<input type="submit" name="submit" id="submit" value="{$translations.apply.submit}" /> {$translations.apply.or}
-										<a href="#" onclick="$('#apply-online').SwitchVertically(10); return false;">{$translations.apply.cancel}</a>
+										<a href="#" onclick="$('#apply-online').toggle(); return false;">{$translations.apply.cancel}</a>
 									</td>
 								</tr>
 							</table>
