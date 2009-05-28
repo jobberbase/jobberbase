@@ -17,7 +17,7 @@
 	{if $editor}
 	<script src="{$BASE_URL_ADMIN}js/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 	{/if}
-	<script src="{$BASE_URL_ADMIN}js/jquery.js" type="text/javascript"></script>
+	<script src="{$BASE_URL}js/jquery.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/functions.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}js/main.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}js/overlay.js" type="text/javascript"></script>
