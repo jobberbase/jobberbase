@@ -98,8 +98,14 @@
 		}
 
 		$smarty->assign('job', $info);
+		
+		$categVarName = $job->GetCategVarname($info['category_id']);
+		
+		$smarty->assign('seo_desc', get_seo_desc($categVarName));
+		$smarty->assign('seo_keys', get_seo_keys($categVarName));
+	
 		$html_title = stripslashes($info['title']) . ' ' . $translations['jobs']['preposition_at'] . ' ' . stripslashes($info['company']) . ' / ' . SITE_NAME;
-		$smarty->assign('current_category', $job->GetCategVarname($info['category_id']));
+		$smarty->assign('current_category', $categVarName);
 		$smarty->assign('back_link', BASE_URL . 'jobs/' . $job->GetCategVarname($info['category_id']) . '/');
 		$template = 'job.tpl';
 	}
