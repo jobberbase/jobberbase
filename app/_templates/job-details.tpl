@@ -20,13 +20,7 @@
 				</div>
 				{/if}
 				<h2>
-					{if $job.type_id == $smarty.const.JOBTYPE_FULLTIME}
-					<img src="{$BASE_URL}img/icon-fulltime.png" alt="full time" />
-					{elseif $job.type_id == $smarty.const.JOBTYPE_PARTTIME}
-					<img src="{$BASE_URL}img/icon-parttime.png" alt="part time" />
-					{elseif $job.type_id == $smarty.const.JOBTYPE_FREELANCE}
-					<img src="{$BASE_URL}img/icon-freelance.png" alt="freelance" />
-					{/if} {$job.title} 
+					<img src="{$BASE_URL}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" /> {$job.title} 
 				</h2>
 				<p>
 					<span class="fading">at</span>

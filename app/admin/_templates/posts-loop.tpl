@@ -21,13 +21,7 @@
 
 	<tr id="item{$job.id}">
 		<td>
-			{if $job.type_id == $smarty.const.JOBTYPE_FULLTIME}
-			<img src="{$BASE_URL}img/icon-fulltime.png" alt="full-time" />
-			{elseif $job.type_id == $smarty.const.JOBTYPE_PARTTIME}
-			<img src="{$BASE_URL}img/icon-parttime.png" alt="part-time" />
-			{elseif $job.type_id == $smarty.const.JOBTYPE_FREELANCE}
-			<img src="{$BASE_URL}img/icon-freelance.png" alt="freelance" />
-			{/if}
+			<img src="{$BASE_URL}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
 			<a href="{$BASE_URL_ADMIN}job/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">at</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">in</span> {$job.location}{/if}
 			<div style="font-size: 12px; margin-top: 5px;">viewed {$job.views_count} times{if $statisticalData[$job.id]}, {$statisticalData[$job.id].numberOfApplications} applicants, last application on {$statisticalData[$job.id].lastApplicationOn}{/if}</div>
 		</td>

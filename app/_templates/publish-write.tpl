@@ -36,13 +36,7 @@
 							<td colspan="2">
 								{section name=tmp2 loop=$types}
 								<input class="no-border" type="radio" name="type_id" id="type_id_{$types[tmp2].id}" value="{$types[tmp2].id}" {if !$job.type_id && !$smarty.post.type_id}{if $types[tmp2].id == 1}checked="checked"{/if}{else}{if $types[tmp2].id == $job.type_id}checked="checked"{/if}{if $types[tmp2].id == $smarty.post.type_id}checked="checked"{/if}{/if} />
-								{if $types[tmp2].id == $smarty.const.JOBTYPE_FULLTIME}
-								<label for="type_id_{$types[tmp2].id}"><img src="{$BASE_URL}img/icon-fulltime.png" alt="full-time" /></label>
-								{elseif $types[tmp2].id == $smarty.const.JOBTYPE_PARTTIME}
-								<label for="type_id_{$types[tmp2].id}"><img src="{$BASE_URL}img/icon-parttime.png" alt="part-time" /></label>
-								{elseif $types[tmp2].id == $smarty.const.JOBTYPE_FREELANCE}
-								<label for="type_id_{$types[tmp2].id}"><img src="{$BASE_URL}img/icon-freelance.png" alt="freelance" /></label>
-								{/if}
+								<label for="type_id_{$types[tmp2].id}"><img src="{$BASE_URL}img/icon-{$types[tmp2].var_name}.png" alt="{$types[tmp2].name}" /></label>
 								{/section}&nbsp;&nbsp;
 								<select name="category_id" id="category_id" tabindex="1">
 									{section name=tmp1 loop=$categories}

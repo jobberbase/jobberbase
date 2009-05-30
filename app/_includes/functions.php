@@ -77,20 +77,6 @@ function get_articles()
 	return $articles;
 }
 
-function get_types()
-{
-	global $db;
-	$types = array();
-	$sql = 'SELECT id, name
-	               FROM types
-	               ORDER BY id ASC';
-	$result = $db->query($sql);
-	while ($row = $result->fetch_assoc())
-	{
-		$types[] = array('id' => $row['id'], 'name' => $row['name']);
-	}
-	return $types;
-}
 
 function get_cities()
 {
@@ -204,5 +190,47 @@ function get_city_by_id($cityID)
 		$city = array('id' => $row['id'], 'name' => $row['name']);
 		
 	return $city;  
+}
+
+
+
+function get_types()
+{
+	global $db;
+	$sql = "select id, name, var_name 
+		FROM types ";
+	$result = $db->query($sql);
+	$types = array();
+	while($row = $result->fetch_assoc())
+	{
+		$types[] = array('id' => $row['id'], 'name' => $row['name'], 'var_name' => $row['var_name']);
+	}
+	return $types;
+}
+
+function get_type_id_by_varname($var_name)
+{
+	global $db;
+	$sql = "select id from types where 
+		var_name = '".$var_name."'";
+	$result = $db->query($sql);
+	$row = $result->fetch_assoc();
+	
+	if ($row)
+		return $row['id'];
+	return false;
+}
+
+function get_type_varname_by_id($id)
+{
+	global $db;
+	$sql = "select var_name from types where 
+		id = '".$id."'";
+	$result = $db->query($sql);
+	$row = $result->fetch_assoc();
+	
+	if ($row)
+		return $row['var_name'];
+	return false;
 }
 ?>

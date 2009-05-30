@@ -204,6 +204,7 @@
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('articles', get_articles());
+	//$smarty->assign('types', get_types());
 	
 	$smarty->assign('CURRENT_PAGE', $page);
 	$smarty->assign('CURRENT_ID', $id);

@@ -5,9 +5,9 @@
 				{if $jobs}
 				<div id="sort-by-type">
 				{$translations.category.display_only}&nbsp; 
-					<a href="{$BASE_URL}jobs/{$current_category}/full-time/" title="{$current_category} full time"><img src="{$BASE_URL}img/icon-fulltime.png" alt="{$current_category} full time" /></a>
-					<a href="{$BASE_URL}jobs/{$current_category}/part-time/" title="{$current_category} part time"><img src="{$BASE_URL}img/icon-parttime.png" alt="{$current_category} part time" /></a>
-					<a href="{$BASE_URL}jobs/{$current_category}/freelance/" title="{$current_category} freelance"><img src="{$BASE_URL}img/icon-freelance.png" alt="{$current_category} freelance" /></a>
+					{section name=tmp loop=$types}
+						<a href="{$BASE_URL}jobs/{$current_category}/{$types[tmp].var_name}/" title="{$current_category} {$types[tmp].name}"><img src="{$BASE_URL}img/icon-{$types[tmp].var_name}.png" alt="{$types[tmp].name}" /></a>
+					{/section}
 				</div><!-- #sort-by-type -->
 				{/if}
 				<h2>

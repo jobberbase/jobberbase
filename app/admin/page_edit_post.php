@@ -60,7 +60,9 @@ if ($id != 0)
 		$jobToEdit['apply'] = '';
 		$jobToEdit['poster_email'] = $_POST['poster_email'];
 		$jobToEdit['apply_online'] = $_POST['apply_online'];
-
+		$jobToEdit['type_var_name'] = get_type_varname_by_id($_POST['type_id']);
+		$jobToEdit['type_id'] = $_POST['type_id'];
+		
 		$jobToEdit['textiledDescription'] = $textile->TextileThis($_POST['description']);
 		$jobToEdit['location_outside_ro'] = $jobToEdit['location_outside_ro_where'];
 		

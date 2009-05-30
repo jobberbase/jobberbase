@@ -16,6 +16,8 @@ class Job
 {
 	var $mId = false;
 	var $mTypeId = false;
+	var $mTypeVarName = false;
+	var $mTypeName = false;
 	var $mCategoryId = false;
 	var $mTitle = false;
 	var $mDescription = false;
@@ -51,9 +53,10 @@ class Job
 			               a.is_temp AS is_temp, a.is_active AS is_active, a.spotlight AS spotlight,
 			               a.views_count AS views_count, a.auth AS auth, a.city_id AS city_id, a.outside_location AS outside_location,
 			               a.poster_email AS poster_email, a.apply_online AS apply_online, b.name AS category_name,
+			               c.var_name as type_var_name, c.name as type_name,
 			               DATE_ADD(created_on, INTERVAL 30 DAY) AS closed_on, DATEDIFF(NOW(), created_on) AS days_old
-			               FROM jobs a, categories b
-			               WHERE a.category_id = b.id AND a.id = ' . $job_id;
+			               FROM jobs a, categories b, types c
+			               WHERE a.category_id = b.id AND c.id = a.type_id AND a.id = ' . $job_id;
 			$result = $db->query($sql);
 			$row = $result->fetch_assoc();
 			if (!empty($row))
@@ -92,6 +95,8 @@ class Job
 				$this->mApplyOnline = $row['apply_online'];
 				$this->mDaysOld = $row['days_old'];
 				$this->mIsSpotlight = $row['spotlight'];
+				$this->mTypeName = $row['type_name'];
+				$this->mTypeVarName = $row['type_var_name'];
 			}
 		}
 	}
@@ -121,7 +126,9 @@ class Job
 								 'apply_online' => $this->mApplyOnline,
 								 'is_active' => $this->mIsActive,
 								 'days_old' => $this->mDaysOld,
-								 'is_spotlight' => $this->mIsSpotlight);
+								 'is_spotlight' => $this->mIsSpotlight,
+								 'type_name' => $this->mTypeName,
+								 'type_var_name' => $this->mTypeVarName);
 		return $job;
 	}
 	
@@ -146,7 +153,9 @@ class Job
 								 'location_outside_ro' => $this->mLocationOutsideRo,
 								 'is_active' => $this->mIsActive,
 								 'days_old' => $this->mDaysOld,
-								 'is_spotlight' => $this->mIsSpotlight);
+								 'is_spotlight' => $this->mIsSpotlight,
+								 'type_name' => $this->mTypeName,
+								 'type_var_name' => $this->mTypeVarName);
 		return $job;
 	}
 
@@ -172,7 +181,9 @@ class Job
 								 'days_old' => $this->mDaysOld,
 								 'is_active' => $this->mIsActive,
 								 'views_count' => $this->mViewsCount,
-								 'is_spotlight' => $this->mIsSpotlight);
+								 'is_spotlight' => $this->mIsSpotlight,
+								 'type_name' => $this->mTypeName,
+								 'type_var_name' => $this->mTypeVarName);
 		return $job;
 	}
 	

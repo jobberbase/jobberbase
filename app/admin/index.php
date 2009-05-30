@@ -158,6 +158,15 @@
 			require_once 'page_categories.php';
 			$flag = 1;
 			break;
+		case 'types':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
+			require_once 'page_types.php';
+			$flag = 1;
+			break;
 		case 'password':
 			if(!isset($_SESSION['AdminId']))
 			{

@@ -59,11 +59,6 @@
 	 */
 	define('MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP', 10);
 	
-	// Type of jobs. Values are the database ids.
-	define('JOBTYPE_FULLTIME', 1);
-	define('JOBTYPE_PARTTIME', 2);
-	define('JOBTYPE_FREELANCE', 3);
-	
 	define('SIDEBAR_CATEGORIES', 'categories');
 	define('SIDEBAR_CITIES', 'cities');
 	
