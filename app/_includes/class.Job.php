@@ -49,7 +49,7 @@ class Job
 			$sanitizer = new Sanitizer;
 			$sql = 'SELECT a.type_id AS type_id, a.category_id AS category_id, a.title AS title, a.description AS description, 
 			               a.company AS company, a.url AS url, a.apply AS apply, 
-			               DATE_FORMAT(a.created_on, \'%d-%m-%Y\') AS created_on, a.created_on AS mysql_date,
+			               DATE_FORMAT(a.created_on, "' . DATE_FORMAT . '") AS created_on, a.created_on AS mysql_date,
 			               a.is_temp AS is_temp, a.is_active AS is_active, a.spotlight AS spotlight,
 			               a.views_count AS views_count, a.auth AS auth, a.city_id AS city_id, a.outside_location AS outside_location,
 			               a.poster_email AS poster_email, a.apply_online AS apply_online, b.name AS category_name,
@@ -1212,7 +1212,7 @@ class Job
 		
 		$statisticalData = array();
 		
-		$sql = 'SELECT job_id, count(id) numberOfApplications,  DATE_FORMAT(max(created_on), \'%d-%m-%Y %H:%i\') lastApplicationOn 
+		$sql = 'SELECT job_id, count(id) numberOfApplications, DATE_FORMAT(max(created_on), "' . DATE_TIME_FORMAT . '") lastApplicationOn 
 				FROM job_applications j 
 				WHERE job_id in (' . $this->buildCommaSeparatedIDsString($jobIDs) . ') GROUP BY job_id'; 
 		$result = $db->query($sql);

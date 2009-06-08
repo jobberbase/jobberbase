@@ -29,7 +29,7 @@ class Stats
 		
 		$totalNumberOfApplications = $row['totalNumberOfApplications'];
 		
-		$sql = 'SELECT DATE_FORMAT(a.created_on, "%d-%m-%Y") AS date, b.title AS title, b.company AS company, a.job_id AS job_id
+		$sql = 'SELECT DATE_FORMAT(a.created_on, "' . DATE_TIME_FORMAT . '") AS date, b.title AS title, b.company AS company, a.job_id AS job_id
 		                        FROM job_applications a, jobs b
 		                        WHERE a.job_id = b.id
 		                        ORDER BY a.created_on DESC limit ' . self::MAKE_STATS_ON_MAX_NUMBER_OF_APPLICATIONS;

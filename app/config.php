@@ -87,7 +87,35 @@
 	 * 
 	 */ 
 	define('SIDEBAR_ONLY_CITIES_WITH_JOBS', false);
-
+	
+	/**
+	 * The format in which dates are displayed. By default, they are shown
+	 * in the %d-%m-%Y format (ie: 29-05-2009), where %d means day, %m means month
+	 * and %Y means 4 digit year.
+	 * 
+	 * This is used to display the date when a job was posted, for example.
+	 *
+	 * Please see the following link for more formatting options:
+	 * 
+	 * http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html#function_date-format
+	 * 
+	 */
+	define('DATE_FORMAT', '%d-%m-%Y');
+	
+	/**
+	 * The format in which times (date + time) are displayed. By default, they are shown in 
+	 * the %d-%m-%Y %H:%i format (ie: 29-05-2009 21:07), where %d means day, %m means month,
+	 * %Y means 4 digit year, %H means hour in 24 hours format and %i means minute.
+	 * 
+	 * This is used mostly in the administration section.
+	 *
+	 * Please see the following link for more formatting options:
+	 * 
+	 * http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html#function_date-format
+	 * 
+	 */
+	define('DATE_TIME_FORMAT','%d-%m-%Y %H:%i');
+	
 	define('APP_PATH',dirname(__FILE__).DIRECTORY_SEPARATOR);
 
   if(isset($_SERVER['SCRIPT_NAME'])) 
