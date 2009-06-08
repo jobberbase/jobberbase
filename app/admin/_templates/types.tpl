@@ -11,8 +11,8 @@
 						<div class="typeWrapper">
 							<a href="#" title="Delete" class="deleteType"><img src="{$BASE_URL}img/icon-delete.png" alt="Edit" /> Delete</a>
 							<label><span>Name:</span><input type="text" size="60" name="name[{$types[tmp]->getId()}]" value="{$types[tmp]->getName()}" /></label>
-							<label><span>Var name:</span><input type="text" size="60" id="nr" name="var_name[{$types[tmp]->getId()}]" value="{$types[tmp]->getVarName()}" /></label>
 							<a href="#" title="Save" class="saveType"><img src="{$BASE_URL}img/disk.png" alt="Save" /> Save</a>
+							<label><span>Var name:</span><input type="text" size="60" id="nr" name="var_name[{$types[tmp]->getId()}]" value="{$types[tmp]->getVarName()}" /></label>
 							<div class="clear"></div>
 						</div>
 					</div>
