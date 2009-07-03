@@ -59,7 +59,7 @@
 							<input type="text" name="keywords" id="keywords" maxlength="30" value="{if $keywords}{$keywords}{else}{$translations.search.default}{/if}" />
 							<span id="indicator" style="display: none;"><img src="{$BASE_URL}img/ajax-loader.gif" alt="" /></span>
 						</div>
-						<label class="suggestionTop">{$translations.search.example}</label>
+						<div><label class="suggestionTop">{$translations.search.example}</label></div>
 					</fieldset>
 				</form>
 			</div><!-- #search -->
