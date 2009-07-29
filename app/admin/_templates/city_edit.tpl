@@ -1,5 +1,5 @@
 {include file="header.tpl"}
-	<form id="city_form" action="{$BASE_URL_ADMIN}cities/{if $action eq 'add'}add{else}edit{/if}" method="post">
+	<form id="city_form" action="{$BASE_URL_ADMIN}cities/{if $action eq 'add'}add/{else}edit/{/if}" method="post">
 		<fieldset>
 			<legend>{if $action eq 'add'}New city{else}Edit city{/if}</legend>
 			{if $errors.name}<em class="form_error">{$errors.name}</em>{/if}
