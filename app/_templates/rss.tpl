@@ -6,7 +6,7 @@
 				{$translations.rss.intro}
 			</p>
 			<ul>
-				<li><a href="{$BASE_URL}rss/toate/">{$translations.rss.all_categories}</a></li>
+				<li><a href="{$BASE_URL}rss/all/">{$translations.rss.all_categories}</a></li>
 				{section name=tmp loop=$categories}
 				<li><a href="{$BASE_URL}rss/{$categories[tmp].var_name}/">{$translations.rss.for} {$categories[tmp].name}</a></li>
 				{/section}
