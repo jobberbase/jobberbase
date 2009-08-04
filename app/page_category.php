@@ -77,6 +77,7 @@
 	$smarty->assign('jobs', $the_jobs);
 	$smarty->assign('types', get_types());
 	$smarty->assign('current_category', $id);
+	$smarty->assign('current_category_name', get_categ_name_by_varname($id));
 
 	$smarty->assign('seo_title', get_seo_title($id));
 	$smarty->assign('seo_desc', get_seo_desc($id));

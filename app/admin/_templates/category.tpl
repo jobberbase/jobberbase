@@ -3,7 +3,7 @@
 		<div id="content">
 			<div id="job-listings">
 				<h2>
-					Jobs for {$current_category}
+					{$translations.category.jobs_for} {$current_category_name}
 				</h2>
 				{include file="posts-loop.tpl"}
 			</div><!-- #job-listings -->

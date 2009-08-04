@@ -107,6 +107,15 @@ function get_categ_id_by_varname($var_name)
 	return $row['id'];
 }
 
+function get_categ_name_by_varname($var_name)
+{
+    global $db;
+    $sql = 'SELECT name FROM categories WHERE var_name = "' . $var_name . '"';
+    $result = $db->query($sql);
+    $row = $result->fetch_assoc();
+    return $row['name'];
+}
+
 function get_city_id_by_asciiname($ascii_name)
 {
 	global $db;

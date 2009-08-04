@@ -83,6 +83,7 @@
 
 	$smarty->assign('jobs', $the_jobs);
 	$smarty->assign('current_category', $id);
+	$smarty->assign('current_category_name', get_categ_name_by_varname($id));
 
 	$html_title = 'Are you looking for ' . $extra . ' ' . $id . ' jobs?';
 	$meta_description = '';
