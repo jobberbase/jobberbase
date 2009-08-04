@@ -44,6 +44,12 @@
 			$flag = 1;
 			break;
 			
+		// cities
+		case 'cities':
+			require_once 'page_cities.php';
+			$flag = 1;
+			break;
+	
 		// per category
 		case 'jobs':
 			require_once 'page_category.php';

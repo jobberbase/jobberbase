@@ -15,6 +15,57 @@ function add_single_quotes($arg)
 	return "'" . addcslashes($arg, "'\\") . "'"; 
 }
 
+function get_cities_cloud()
+{
+	global $db;
+	$city_array = array();
+ 
+	$sql = 	'SELECT c.id, c.name, c.ascii_name, COUNT(*) AS nr
+			 FROM cities c 
+			 INNER JOIN jobs j ON (j.city_id = c.id ) 
+			 WHERE j.is_active = 1 
+			 GROUP BY c.name';
+ 
+	$cities = $db->QueryArray($sql);
+ 
+	foreach ($cities as $city)
+	{
+		$nr = $city['nr'];
+ 
+		if ($nr < 2)
+		{
+			$tag_height = 1;
+		}
+		else if ($nr >= 2 && $nr < 3)
+		{
+			$tag_height = 2;
+		}
+		else if ($nr >= 3 && $nr < 4)
+		{
+			$tag_height = 3;
+		}
+		else if ($nr >= 4 && $nr < 5)
+		{
+			$tag_height = 4;
+		}
+		else if ($nr >= 5 && $nr < 6)
+		{
+			$tag_height = 5;
+		}
+		else if ($nr >= 6)
+		{
+			$tag_height = 6;
+		}
+ 
+		$city_array[] = array('name' => $city['name'],
+		                     'varname' => $city['ascii_name'],
+		                     'count' => $nr,
+		                     'tag_height' => $tag_height);
+	}
+ 
+	return $city_array;
+}
+
 function get_categories()
 {
     global $db;
