@@ -57,7 +57,12 @@
 		}
 
 		$job_flag = true;
+		
 		$url = BASE_URL . 'job/' . $id . '/' . $info['url_title'] . '/';
+		$current_url = 'http://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+		
+		if ($current_url != $url) redirect_to($url, 301);
+		
 		if (!empty($_SESSION['last_viewed_jobs']))
 		{
 			foreach ($_SESSION['last_viewed_jobs'] as $item)
