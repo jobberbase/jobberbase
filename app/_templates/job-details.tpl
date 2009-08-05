@@ -115,15 +115,15 @@
 	$("#frm-apply-online").validate({
 		rules: {
 			apply_name: { required: true },
-			apply_email: { required: true },
+			apply_email: { required: true, email: true },
 			apply_msg: { required: true },
-			apply_url: { required: true }
+			apply_cv: { accept: "pdf|rtf|doc|odt" }
 		},
 		messages: {
 			apply_name: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
 			apply_email: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
 			apply_msg: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
-			apply_url: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />'
+			apply_cv: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />'
 		}
 	});
 	}); 
