@@ -117,7 +117,7 @@ class Paginator
 	    	}
 	    	else
 	    	{
-	    	  $pages = "&nbsp;<a href='".$this->link."/?p=".($page-1)."'>&laquo;</a>&nbsp;";
+	    	  $pages = "&nbsp;<a href='".$this->link."?p=".($page-1)."'>&laquo;</a>&nbsp;";
 	    	}
 	    }
 	    
@@ -150,11 +150,11 @@ class Paginator
 	    {
 	    	if($i==$page)
 	    	{
-	    		$pages .= "&nbsp;<a class='current_page' href='".$this->link."/?p=$i'>$i</a>&nbsp;";
+	    		$pages .= "&nbsp;<a class='current_page' href='".$this->link."?p=$i'>$i</a>&nbsp;";
 	    	}
 	    	else
 	    	{
-	    		$pages .= "&nbsp;<a href='".$this->link."/?p=$i'>$i</a>&nbsp;";
+	    		$pages .= "&nbsp;<a href='".$this->link."?p=$i'>$i</a>&nbsp;";
 	    	}
 	    }
 	    if($total_pages>0)
@@ -165,7 +165,7 @@ class Paginator
 	    	}
 	    	else
 	    	{
-	    	  $pages .= "&nbsp;<a href='".$this->link."/?p=".($page+1)."'>&raquo;</a>&nbsp;";
+	    	  $pages .= "&nbsp;<a href='".$this->link."?p=".($page+1)."'>&raquo;</a>&nbsp;";
 	    	}
 	    }
 		}
