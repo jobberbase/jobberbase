@@ -1,5 +1,5 @@
 				{if $spotlight_jobs}
-			    <h2>Spotlight Jobs</h2>
+			    <h2>{$translations.homepage.spotlight_jobs}</h2>
 			    <table id="job-posts4" class="job-posts4" cellspacing="0">
 			    {foreach item=job from=$spotlight_jobs}
 			        <tr>
