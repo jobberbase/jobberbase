@@ -19,7 +19,7 @@ class Maintenance
 	public function DeleteTemporaryJobs()
 	{
 		global $db;
-		$sql = 'DELETE FROM jobs WHERE DATEDIFF(NOW(), created_on) > 1 AND is_temp = 1 AND is_active = 0';
+		$sql = 'DELETE FROM '.DB_PREFIX.'jobs WHERE DATEDIFF(NOW(), created_on) > 1 AND is_temp = 1 AND is_active = 0';
 		$db->Execute($sql);
 	}
 }

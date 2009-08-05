@@ -13,28 +13,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 			}
 			$db->query('
 				INSERT INTO
-					`categories`
-					(`id`, `category_order`) 
+					'.DB_PREFIX.'categories
+					(id, category_order) 
 				VALUES
 					' . $values . ' 
 				ON DUPLICATE KEY UPDATE 
-					`category_order` = VALUES(`category_order`)
+					category_order = VALUES(category_order)
 			');
 			break;
 		case 'newCategory':
 			$result = $db->query('
 				SELECT 
-					`category_order` 
+					category_order 
 				FROM 
-					`categories` 
+					'.DB_PREFIX.'categories 
 				ORDER BY 
-					`category_order` DESC 
+					category_order DESC 
 				LIMIT 1
 			');
 			$last = $result->fetch_assoc();
             $db->query('
                 INSERT INTO 
-                    `categories` 
+                    '.DB_PREFIX.'categories 
                 VALUES (
                     NULL,
                     \'enter a name\',
@@ -47,11 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
             ');
 			$result = $db->query('
 				SELECT 
-					`id` 
+					id 
 				FROM 
-					`categories` 
+					'.DB_PREFIX.'categories 
 				ORDER BY 
-					`category_order` DESC 
+					category_order DESC 
 				LIMIT 1
 			');
 			$last = $result->fetch_assoc();
@@ -60,11 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 		case 'deleteCategory':
 			$result = $db -> query('
 				SELECT 
-					COUNT(`id`) as total 
+					COUNT(id) as total 
 				FROM 
-					`jobs` 
+					'.DB_PREFIX.'jobs 
 				WHERE 
-					`category_id` = ' . intval($_POST['category']) . '
+					category_id = ' . intval($_POST['category']) . '
 			');
 			$row = $result->fetch_assoc();
 			if ($row['total'] > 0) {
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 			} else {
 				$result = $db->query('
 					DELETE FROM 
-						`categories` 
+						'.DB_PREFIX.'categories 
 					WHERE id = ' . intval($_POST['category']) . '
 					LIMIT 1
 				');
@@ -89,15 +89,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 		case 'saveCategory':
 			$result = $db -> query('
                 UPDATE  
-                    `categories` 
+                    '.DB_PREFIX.'categories 
                 SET 
-                    `var_name` = \'' . $_POST['url'] . '\',
-                    `name` = \'' . $_POST['name'] . '\',
-                    `title` = \'' . $_POST['title'] . '\',
-                    `description` = \'' . $_POST['description'] . '\',
-                    `keywords` = \'' . $_POST['keywords'] . '\'
+                    var_name = "' . $_POST['url'] . '",
+                    name = "' . $_POST['name'] . '",
+                    title = "' . $_POST['title'] . '",
+                    description = "' . $_POST['description'] . '",
+                    keywords = "' . $_POST['keywords'] . '" 
                 WHERE 
-                    `id` = ' . intval($_POST['category']) . '
+                    id = ' . intval($_POST['category']) . '
             ');
              break;
 	}

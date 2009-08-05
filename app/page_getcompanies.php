@@ -1,6 +1,6 @@
 <?php
 	$companies = array();
-	$sql = 'SELECT DISTINCT company FROM jobs ORDER BY company ASC';
+	$sql = 'SELECT DISTINCT company FROM '.DB_PREFIX.'jobs ORDER BY company ASC';
 	$comps = $db->QueryArray($sql);
 	foreach ($comps as $comp)
 	{

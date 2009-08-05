@@ -4,9 +4,9 @@
 	
 	$result = $db->query('
 		SELECT 
-			`url`, `title`, `page_title`
+			url, title, page_title 
 		FROM 
-			pages 
+			'.DB_PREFIX.'pages 
 		ORDER BY 
 			title ASC
 	');
@@ -24,9 +24,9 @@
 				SELECT 
 					* 
 				FROM 
-					pages 
+					'.DB_PREFIX.'pages 
 				WHERE 
-					`url` = \'' . $db->real_escape_string(strip_tags($_app_info['params'][2])) . '\'
+					url = \'' . $db->real_escape_string(strip_tags($_app_info['params'][2])) . '\'
 			');
 			$row = $result->fetch_assoc();
 			if (!empty($row)) {
@@ -37,7 +37,7 @@
 		if ($_app_info['params'][1] == 'delete') {
 			$db->query('
 				DELETE FROM 
-					pages 
+					'.DB_PREFIX.'pages 
 				WHERE 
 					`id` = ' . $row['id'] . '
 			');
@@ -73,9 +73,9 @@
 					SELECT 
 						* 
 					FROM 
-						pages 
+						'.DB_PREFIX.'pages 
 					WHERE 
-						`url` = \'' . $db->real_escape_string($url) . '\' ' .
+						url = \'' . $db->real_escape_string($url) . '\' ' .
 						( $isPage ? '
 						and 
 						id != ' . $row['id'] : '' 
@@ -94,8 +94,8 @@
 			if (count($errors) == 0) {
 				$db->query('
 					REPLACE INTO
-						pages 
-					values
+						'.DB_PREFIX.'pages 
+					VALUES
 						(
 							' . ($isPage ? $row['id'] : 'NULL') . ',
 							\'' . $db->real_escape_string($url) . '\',

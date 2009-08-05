@@ -22,7 +22,7 @@ class Stats
 		global $db;
 		
 		$sql = 'SELECT count(a.job_id) AS totalNumberOfApplications
-		                        FROM job_applications a, jobs b
+		                        FROM '.DB_PREFIX.'job_applications a, '.DB_PREFIX.'jobs b
 		                        WHERE a.job_id = b.id';
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
@@ -30,7 +30,7 @@ class Stats
 		$totalNumberOfApplications = $row['totalNumberOfApplications'];
 		
 		$sql = 'SELECT DATE_FORMAT(a.created_on, "' . DATE_TIME_FORMAT . '") AS date, b.title AS title, b.company AS company, a.job_id AS job_id
-		                        FROM job_applications a, jobs b
+		                        FROM '.DB_PREFIX.'job_applications a, '.DB_PREFIX.'jobs b
 		                        WHERE a.job_id = b.id
 		                        ORDER BY a.created_on DESC limit ' . self::MAKE_STATS_ON_MAX_NUMBER_OF_APPLICATIONS;
 		$result = $db->query($sql);
@@ -40,7 +40,7 @@ class Stats
 			$stats .= '<div>' . $row['date'] . ' <a href="' . BASE_URL . 'job/' . $row['job_id'] . '/">' . $row['title'] . ' la ' . $row['company'] . '</a></div>';
 		
 		$apps_per_day = array();
-		$sql = 'SELECT count(id) AS nr FROM job_applications WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
+		$sql = 'SELECT count(id) AS nr FROM '.DB_PREFIX.'job_applications WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
 		$result = $db->query($sql);
 		
 		while ($row = $result->fetch_assoc())
@@ -64,14 +64,14 @@ class Stats
 	{
 		global $db;
 		
-		$sql = 'SELECT count(id) AS totalNumberOfSearches FROM searches';
+		$sql = 'SELECT count(id) AS totalNumberOfSearches FROM '.DB_PREFIX.'searches';
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		
 		$totalNumberOfSearches = $row['totalNumberOfSearches'];
 		
 		$sql = 'SELECT created_on, keywords
-		                        FROM searches
+		                        FROM '.DB_PREFIX.'searches
 		                        ORDER BY created_on DESC limit ' . self::MAKE_STATS_ON_MAX_NUMBER_OF_SEARCHES;
 		$result = $db->query($sql);
 		
@@ -80,7 +80,7 @@ class Stats
 			$stats .= '<div>' . $row['created_on'] . ' <strong>' . htmlspecialchars($row['keywords']) . '</strong></div>';
 		
 		$numberOfSearchesPerDay = array();
-		$sql = 'SELECT count(id) AS nr FROM searches WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
+		$sql = 'SELECT count(id) AS nr FROM '.DB_PREFIX.'searches WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
 		$result = $db->query($sql);
 
 		while ($row = $result->fetch_assoc())

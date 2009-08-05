@@ -23,7 +23,7 @@ class Feed
 		if ($category != 'all')
 		{
 			$sql = 'SELECT id
-			               FROM categories
+			               FROM '.DB_PREFIX.'categories
 			               WHERE var_name = "' . $category . '"';
 			$result = $db->query($sql);
 			$row = $result->fetch_assoc();

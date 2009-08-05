@@ -42,7 +42,7 @@
 		public function getAllTypes()
 		{
 			global $db;
-			$sql = "select * from types";
+			$sql = 'SELECT * FROM '.DB_PREFIX.'types';
 			$result = $db->query($sql);
 			$i=0;
 			while($row = $result->fetch_assoc())
@@ -62,7 +62,7 @@
 		public function insertType()
 		{
 			global $db;
-			$sql = "insert into types values(null, '".$this->name."', '".$this->varName."')";
+			$sql = 'INSERT INTO '.DB_PREFIX.'types VALUES(null, "'.$this->name.'", "'.$this->varName.'")';
 			$db->query($sql);
 			$this->id = $db->insert_id;
 		}
@@ -70,26 +70,26 @@
 		public function updateType()
 		{
 			global $db;
-			$sql = "update types set var_name =  '".$this->varName."',
-				name = '".$this->name."'
-				where id=$this->id";
+			$sql = 'UPDATE types SET var_name =  "'.$this->varName.'",
+				name = "'.$this->name.'"
+				WHERE id='.$this->id;
 			$db->query($sql);
 		}
 		
 		public function deleteType()
 		{
 			global $db;
-			$sql = "delete from types
-				where id=$this->id";
+			$sql = 'DELETE FROM '.DB_PREFIX.'types
+				WHERE id='.$this->id;
 			$db->query($sql);
 		}
 		
 		public function verifyAreJobs($typeId)
 		{
 			global $db;
-			$sql = "select count(id) as nr from jobs 
-				where type_id = $typeId group by 
-				type_id";
+			$sql = 'SELECT count(id) AS nr FROM '.DB_PREFIX.'jobs 
+				WHERE type_id = '.$typeId.' GROUP BY 
+				type_id';
 			$result = $db->query($sql);
 			
 			if($row = $result->fetch_assoc())

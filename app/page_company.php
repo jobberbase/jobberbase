@@ -1,7 +1,7 @@
 <?php
 	$sanitizer = new Sanitizer();
 	
-	$sql = 'SELECT DISTINCT company FROM jobs';
+	$sql = 'SELECT DISTINCT company FROM '.DB_PREFIX.'jobs';
 	$comps = $db->QueryArray($sql);
 	foreach ($comps as $comp)
 	{

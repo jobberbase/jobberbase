@@ -21,7 +21,7 @@ function get_cities_cloud()
 	$city_array = array();
  
 	$sql = 	'SELECT c.id, c.name, c.ascii_name, COUNT(*) AS nr
-			 FROM cities c 
+			 FROM '.DB_PREFIX.'cities c 
 			 INNER JOIN jobs j ON (j.city_id = c.id ) 
 			 WHERE j.is_active = 1 
 			 GROUP BY c.name';
@@ -71,8 +71,8 @@ function get_categories()
     global $db;
     $categories = array();
     $sql = 'SELECT *
-                   FROM categories
-                   ORDER BY `category_order` ASC';
+                   FROM '.DB_PREFIX.'categories
+                   ORDER BY category_order ASC';
     $result = $db->query($sql);
     while ($row = $result->fetch_assoc())
     {
@@ -85,7 +85,7 @@ function get_seo_title($id)
 {
     global $db;
     $sql = 'SELECT *
-                   FROM categories
+                   FROM '.DB_PREFIX.'categories
                    WHERE var_name = "'.$id.'"';
     $result = $db->query($sql);
     $row = $result->fetch_assoc();
@@ -96,7 +96,7 @@ function get_seo_desc($id)
 {
     global $db;
     $sql = 'SELECT *
-                   FROM categories
+                   FROM '.DB_PREFIX.'categories
                    WHERE var_name = "'.$id.'"';
     $result = $db->query($sql);
     $row = $result->fetch_assoc();
@@ -106,7 +106,7 @@ function get_seo_keys($id)
 {
     global $db;
     $sql = 'SELECT *
-                   FROM categories
+                   FROM '.DB_PREFIX.'categories
                    WHERE var_name = "'.$id.'"';
     $result = $db->query($sql);
     $row = $result->fetch_assoc();
@@ -117,9 +117,9 @@ function get_articles()
 {
 	global $db;
 	$articles = array();
-	$sql = 'SELECT id, `title`, `page_title`, `url`
-	               FROM `pages`
-	               ORDER BY `title` ASC';
+	$sql = 'SELECT id, title, page_title, url 
+	               FROM '.DB_PREFIX.'pages
+	               ORDER BY title ASC';
 	$result = $db->query($sql);
 	while ($row = $result->fetch_assoc())
 	{
@@ -136,7 +136,7 @@ function get_cities()
 	$cities = array();
 	
 	$sql = 'SELECT id, name, ascii_name
-	               FROM cities
+	               FROM '.DB_PREFIX.'cities
 	               ORDER BY id ASC';
 	
 	$result = $db->query($sql);
@@ -152,7 +152,7 @@ function get_cities()
 function get_categ_id_by_varname($var_name)
 {
 	global $db;
-	$sql = 'SELECT id FROM categories WHERE var_name = "' . $var_name . '"';
+	$sql = 'SELECT id FROM '.DB_PREFIX.'categories WHERE var_name = "' . $var_name . '"';
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	return $row['id'];
@@ -161,7 +161,7 @@ function get_categ_id_by_varname($var_name)
 function get_categ_name_by_varname($var_name)
 {
     global $db;
-    $sql = 'SELECT name FROM categories WHERE var_name = "' . $var_name . '"';
+    $sql = 'SELECT name FROM '.DB_PREFIX.'categories WHERE var_name = "' . $var_name . '"';
     $result = $db->query($sql);
     $row = $result->fetch_assoc();
     return $row['name'];
@@ -174,7 +174,7 @@ function get_city_id_by_asciiname($ascii_name)
 	$city = null;
 	
 	$sql = 'SELECT id, name
-	               FROM cities
+	               FROM '.DB_PREFIX.'cities
 	               WHERE ascii_name = "' . $ascii_name . '"';
 
 	$result = $db->query($sql);
@@ -240,7 +240,7 @@ function get_city_by_id($cityID)
 	$city = null;
 	
 	$sql = 'SELECT id, name
-	               FROM cities
+	               FROM '.DB_PREFIX.'cities
 	               WHERE id = ' . $cityID;
 	$result = $db->query($sql);
 	
@@ -257,8 +257,8 @@ function get_city_by_id($cityID)
 function get_types()
 {
 	global $db;
-	$sql = "select id, name, var_name 
-		FROM types ";
+	$sql = 'SELECT id, name, var_name 
+		FROM '.DB_PREFIX.'types ';
 	$result = $db->query($sql);
 	$types = array();
 	while($row = $result->fetch_assoc())
@@ -271,8 +271,8 @@ function get_types()
 function get_type_id_by_varname($var_name)
 {
 	global $db;
-	$sql = "select id from types where 
-		var_name = '".$var_name."'";
+	$sql = 'SELECT id FROM '.DB_PREFIX.'types WHERE 
+		var_name = "'.$var_name.'"';
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	
@@ -284,8 +284,8 @@ function get_type_id_by_varname($var_name)
 function get_type_varname_by_id($id)
 {
 	global $db;
-	$sql = "select var_name from types where 
-		id = '".$id."'";
+	$sql = 'SELECT var_name FROM '.DB_PREFIX.'types WHERE 
+		id = '.$id;
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	

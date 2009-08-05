@@ -181,9 +181,9 @@
 				SELECT 
 					* 
 				FROM 
-					pages 
+					'.DB_PREFIX.'pages 
 				WHERE 
-					`url` = \'' . $db->real_escape_string($page) . '\'
+					url = "' . $db->real_escape_string($page) . '"
 			');
 			$pageData = $result->fetch_assoc();
 			if (is_array($pageData)) {

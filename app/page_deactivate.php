@@ -9,7 +9,7 @@
 		exit;
 	}
 
-	if ($_SERVER['HTTP_REFERER'] == BASE_URL . 'verifica/' . $id . '/' && $id != 0 && $_SERVER['REMOTE_ADDR'] == $_SESSION['user_ip'])
+	if ($_SERVER['HTTP_REFERER'] == BASE_URL . 'verificate/' . $id . '/' && $id != 0 && $_SERVER['REMOTE_ADDR'] == $_SESSION['user_ip'])
 	{
 		$job = new Job($id);
 		if ($job->GetTempStatus() == 1 || $job->GetActiveStatus() == 0)

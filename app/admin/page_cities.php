@@ -266,7 +266,7 @@
 		{
 			global $db;
 			
-			$query = 'UPDATE jobs SET
+			$query = 'UPDATE '.DB_PREFIX.'jobs SET
 					  city_id = -1,
 					  outside_location = "'. $db->real_escape_string($city['name']) .'" 
 					  WHERE 

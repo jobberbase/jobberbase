@@ -11,7 +11,7 @@
  	{
  		global $db;
 		$md5password = md5($password);
-		$sql = "SELECT id FROM admin WHERE username='$username' AND password='$md5password'";
+		$sql = 'SELECT id FROM '.DB_PREFIX.'admin WHERE username="'.$username.'" AND password="'.$md5password.'"';
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		if (!empty($row))

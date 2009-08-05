@@ -22,7 +22,7 @@ class JobApplication
 	{
 		global $db;
 		
-		$sql = 'INSERT INTO job_applications (job_id, created_on, ip)
+		$sql = 'INSERT INTO '.DB_PREFIX.'job_applications (job_id, created_on, ip)
 		                    VALUES (' . $this->mJobId . ', NOW(), "' . $ip . '")';
 		$db->query($sql);
 	}
@@ -32,7 +32,7 @@ class JobApplication
 		global $db;
 		
 		$sql = 'SELECT id
-		               FROM job_applications
+		               FROM '.DB_PREFIX.'job_applications
 		               WHERE ip = "' . $ip . '" AND NOW() < DATE_ADD(created_on,INTERVAL ' . MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP . ' MINUTE)';
 		$result = $db->query($sql);
 		
@@ -51,7 +51,7 @@ class JobApplication
 	public function Count()
 	{
 		global $db;
-		$sql = 'SELECT COUNT(id) AS count FROM job_applications WHERE job_id = ' . $this->mJobId;
+		$sql = 'SELECT COUNT(id) AS count FROM '.DB_PREFIX.'job_applications WHERE job_id = ' . $this->mJobId;
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		return $row['count'];

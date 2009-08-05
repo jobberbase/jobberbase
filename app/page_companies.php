@@ -3,7 +3,7 @@
 	$sanitizer = new Sanitizer();
 	
 	$sql = 'SELECT company, count(id) AS nr
-			FROM jobs
+			FROM '.DB_PREFIX.'jobs
 			WHERE is_temp = 0 AND is_active = 1
 			GROUP BY company
 			ORDER BY company ASC';

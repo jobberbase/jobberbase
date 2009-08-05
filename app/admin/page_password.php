@@ -10,11 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	} else {
 		$result = $db->query('
 			UPDATE 
-				`admin` 
+				'.DB_PREFIX.'admin 
 			SET 
-				`password` = md5(\'' . $db->real_escape_string($_POST['new_password']) . '\') 
+				password = md5(\'' . $db->real_escape_string($_POST['new_password']) . '\') 
 			WHERE 
-				`id` = 1
+				id = 1
 		');
 		$smarty->assign('error', 'Your password has been changed!');
 	}

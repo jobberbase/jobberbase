@@ -16,7 +16,7 @@ class CityDAO
 	{
 		global $db;
 		
-		$sql = 'UPDATE cities
+		$sql = 'UPDATE '.DB_PREFIX.'cities
 				SET name = "' . $city['name'] . '"
 				, ascii_name = "' . $city['ascii_name'] . '"
 				WHERE id = ' . $city['id'];
@@ -28,7 +28,7 @@ class CityDAO
 	{
 		global $db;
 		
-		$sql = 'DELETE from cities
+		$sql = 'DELETE FROM '.DB_PREFIX.'cities
 				WHERE id = ' . $city['id'];
 		
 		$db->query($sql);
@@ -41,7 +41,7 @@ class CityDAO
 		$city = null;
 		
 		$sql = 'SELECT id, name, ascii_name
-		               FROM cities
+		               FROM '.DB_PREFIX.'cities
 		               WHERE id = ' . $cityID;
 		
 		$result = $db->query($sql);
@@ -61,7 +61,7 @@ class CityDAO
 		$city = null;
 		
 		$sql = 'SELECT id, name
-		               FROM cities
+		               FROM '.DB_PREFIX.'cities
 		               WHERE ascii_name = "' . $ascii_name . '"';
 	
 		$result = $db->query($sql);
@@ -77,7 +77,7 @@ class CityDAO
 	{
 		global $db;
 		
-		$sql = 'INSERT into cities SET name = "' . $city['name'] . '", ascii_name = "' . $city['ascii_name'] . '"';
+		$sql = 'INSERT INTO '.DB_PREFIX.'cities SET name = "' . $city['name'] . '", ascii_name = "' . $city['ascii_name'] . '"';
 		
 		$db->query($sql);
 	}
@@ -89,7 +89,7 @@ class CityDAO
 		$cities = array();
 		
 		$sql = 'SELECT id, name, ascii_name
-		               FROM cities
+		               FROM '.DB_PREFIX.'cities
 		               ORDER BY name ASC';
 		
 		$result = $db->query($sql);

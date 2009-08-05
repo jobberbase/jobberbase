@@ -55,7 +55,7 @@ class Job
 			               a.poster_email AS poster_email, a.apply_online AS apply_online, b.name AS category_name,
 			               c.var_name as type_var_name, c.name as type_name,
 			               DATE_ADD(created_on, INTERVAL 30 DAY) AS closed_on, DATEDIFF(NOW(), created_on) AS days_old
-			               FROM jobs a, categories b, types c
+			               FROM '.DB_PREFIX.'jobs a, '.DB_PREFIX.'categories b, '.DB_PREFIX.'types c
 			               WHERE a.category_id = b.id AND c.id = a.type_id AND a.id = ' . $job_id;
 			$result = $db->query($sql);
 			$row = $result->fetch_assoc();
@@ -67,7 +67,7 @@ class Job
 				}	
 				else
 				{
-					$sql = 'SELECT name FROM cities WHERE id = ' . $row['city_id'];
+					$sql = 'SELECT name FROM '.DB_PREFIX.'cities WHERE id = ' . $row['city_id'];
 					$result = $db->query($sql);
 					$row2 = $result->fetch_assoc();
 					$this->mLocation = $row2['name'];
@@ -265,7 +265,7 @@ class Job
 		        $sql_limit = '';        
 		}
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1
 		               ' . $order . ' ' . $sql_limit;
 		$result = $db->query($sql);
@@ -351,7 +351,7 @@ class Job
 		        $sql_limit = '';        
 		}
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1
 		               ' . $order . ' ' . $sql_limit;
 		
@@ -371,7 +371,7 @@ class Job
 		$jobs = array();
 		
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 AND is_temp = 0 AND is_active = 0
 		               ORDER BY created_on DESC LIMIT ' . $offset .' , ' . $rowCount;
 		
@@ -387,7 +387,7 @@ class Job
 	public function getInactiveJobCount()
 	{
 		global $db;
-		$sql = 'SELECT COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 0';
+		$sql = 'SELECT COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 0';
 	
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
@@ -440,7 +440,7 @@ class Job
 		  $sql_limit = '';        
 		}
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 ' . $conditions . ' AND is_temp = 0 
 		               ' . $sql_limit;
 		$result = $db->query($sql);
@@ -513,7 +513,7 @@ class Job
 		}
 		
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1  AND DATEDIFF(NOW(), created_on) < 31
 		               ' . $order . ' ' . $sql_limit;
 		$result = $db->query($sql);
@@ -553,7 +553,7 @@ class Job
 		}
 		
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1
 		               ORDER BY created_on DESC ' . $sql_limit;
 		$result = $db->query($sql);
@@ -577,7 +577,7 @@ class Job
 		}
 		
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 AND is_temp = 0 AND is_active = 1 
 		               ORDER BY views_count DESC ' . $sql_limit;
 		$result = $db->query($sql);
@@ -600,7 +600,7 @@ class Job
 			$sql_limit = 'LIMIT ' . $limit;
 		}
 		$i = 0;
-		$sql = 'SELECT ja.job_id, COUNT(ja.id) as nr FROM job_applications ja, jobs jbs WHERE ja.job_id = jbs.id GROUP BY ja.job_id 
+		$sql = 'SELECT ja.job_id, COUNT(ja.id) as nr FROM '.DB_PREFIX.'job_applications ja, '.DB_PREFIX.'jobs jbs WHERE ja.job_id = jbs.id GROUP BY ja.job_id 
 		               ORDER BY nr DESC ' . $sql_limit;
 		$result = $db->query($sql);
 		while ($row = $result->fetch_assoc())
@@ -642,7 +642,7 @@ class Job
 			foreach ($tmp as $word)
 			{
 				// try to find city based on city_id
-				$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $word . '%"';
+				$sql = 'SELECT id FROM '.DB_PREFIX.'cities WHERE name LIKE "%' . $word . '%"';
 				$result = $db->query($sql);
 				$row = $result->fetch_assoc();
 				if ($row['id'] != '')
@@ -658,7 +658,7 @@ class Job
 				}
 				
 				// try to find city based on postcode or location_details
-				$sql = 'SELECT id FROM jobs WHERE outside_location LIKE "%' . $word . '%"';
+				$sql = 'SELECT id FROM '.DB_PREFIX.'jobs WHERE outside_location LIKE "%' . $word . '%"';
 				$results = $db->QueryArray($sql);
 				if ($db->affected_rows > 0)
 				{
@@ -692,7 +692,7 @@ class Job
 			}
 			if ($kw2 != '')
 			{
-				$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $kw2 . '%"';
+				$sql = 'SELECT id FROM '.DB_PREFIX.'cities WHERE name LIKE "%' . $kw2 . '%"';
 				$result = $db->query($sql);
 				$row = $result->fetch_assoc();
 				if ($row['id'] != '')
@@ -704,7 +704,7 @@ class Job
 			}
 			if ($kw1 == '' && $kw2 == '')
 			{
-				$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $keywords . '%"';
+				$sql = 'SELECT id FROM '.DB_PREFIX.'cities WHERE name LIKE "%' . $keywords . '%"';
 				$result = $db->query($sql);
 				$row = $result->fetch_assoc();
 				if ($row['id'] != '')
@@ -718,7 +718,7 @@ class Job
 		}
 
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE is_temp = 0 AND is_active = 1 AND (' . $conditions . ')
 		               ORDER BY created_on DESC';
 		$result = $db->query($sql);
@@ -736,7 +736,7 @@ class Job
 	{
 		global $db;
 		$sql = 'SELECT id
-		               FROM categories
+		               FROM '.DB_PREFIX.'categories
 		               WHERE var_name = "' . $var_name . '"';
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
@@ -747,7 +747,7 @@ class Job
 	{
 		global $db;
 		$sql = 'SELECT var_name
-		               FROM categories
+		               FROM '.DB_PREFIX.'categories
 		               WHERE id = ' . $categ_id;
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
@@ -758,7 +758,7 @@ class Job
 	{
 		global $db;
 		$sql = 'SELECT id
-		               FROM types
+		               FROM '.DB_PREFIX.'types
 		               WHERE var_name = "' . $var_name . '"';
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
@@ -787,7 +787,7 @@ class Job
 		$ip = $_SERVER['REMOTE_ADDR'];
     //extract number of hits on last hour
     $sql = 'SELECT count(*) AS hits_last_hour '.
-           'FROM hits WHERE job_id = ' . $this->mId . ' AND ip = "' . $ip . '" AND '.
+           'FROM '.DB_PREFIX.'hits WHERE job_id = ' . $this->mId . ' AND ip = "' . $ip . '" AND '.
            'created_on >= DATE_ADD(NOW(),INTERVAL -1 HOUR)';
 		$result = $db->QueryItem($sql);
 		
@@ -795,12 +795,12 @@ class Job
 		if ($result < MAX_VISITS_PER_HOUR)
 		{
 			// update hits table
-			$sql = 'INSERT INTO hits (job_id, created_on, ip)
+			$sql = 'INSERT INTO '.DB_PREFIX.'hits (job_id, created_on, ip)
 			                    VALUES (' . $this->mId . ', NOW(), "' . $ip . '")';
 			$db->query($sql);
 			
 			// update jobs table
-			$sql = 'UPDATE jobs SET views_count = views_count + 1
+			$sql = 'UPDATE '.DB_PREFIX.'jobs SET views_count = views_count + 1
 										 WHERE id = ' . $this->mId;
 			$db->query($sql);	
 		}
@@ -822,7 +822,7 @@ class Job
 		{
 			$params['apply_online'] = 0;
 		}
-		$sql = 'INSERT INTO jobs (type_id, category_id, title, description, company, city_id, url, apply, created_on, is_temp, is_active, 
+		$sql = 'INSERT INTO '.DB_PREFIX.'jobs (type_id, category_id, title, description, company, city_id, url, apply, created_on, is_temp, is_active, 
 			                       views_count, auth, outside_location, poster_email, apply_online)
 		                         VALUES (' . $params['type_id'] . ',
 		                                 ' . $params['category_id'] . ',
@@ -861,7 +861,7 @@ class Job
 			$params['apply_online'] = 0;
 		}
 
-		$sql = 'UPDATE jobs SET type_id = ' . $params['type_id'] . ',
+		$sql = 'UPDATE '.DB_PREFIX.'jobs SET type_id = ' . $params['type_id'] . ',
         										category_id = ' . $params['category_id'] . ',
 										        title = "' . $params['title'] . '",
 										        description = "' . $params['description'] . '",
@@ -882,11 +882,11 @@ class Job
 		global $db;
 		if ($this->CheckPosterEmail())
 		{
-			$sql = 'UPDATE jobs SET is_temp = 0, is_active = 1 WHERE id = ' . $this->mId;
+			$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0, is_active = 1 WHERE id = ' . $this->mId;
 		}
 		else
 		{
-			$sql = 'UPDATE jobs SET is_temp = 0, is_active = 0 WHERE id = ' . $this->mId;
+			$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0, is_active = 0 WHERE id = ' . $this->mId;
 		}
 		$db->query($sql);
 	}
@@ -895,7 +895,7 @@ class Job
 	public function Activate()
 	{
 		global $db;
-		$sql = 'UPDATE jobs SET is_active = 1 WHERE id = ' . $this->mId;
+		$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_active = 1 WHERE id = ' . $this->mId;
 		$db->query($sql);
 	}
 	
@@ -903,7 +903,7 @@ class Job
 	public function Deactivate()
 	{
 		global $db;
-		$sql = 'UPDATE jobs SET is_active = 0 WHERE id = ' . $this->mId;
+		$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_active = 0 WHERE id = ' . $this->mId;
 		$db->query($sql);
 	}
 	
@@ -911,7 +911,7 @@ class Job
     public function SpotlightActivate()
     {
         global $db;
-        $sql = 'UPDATE jobs SET spotlight = 1 WHERE id = ' . $this->mId;
+        $sql = 'UPDATE '.DB_PREFIX.'jobs SET spotlight = 1 WHERE id = ' . $this->mId;
         $db->query($sql);
     }
     
@@ -919,7 +919,7 @@ class Job
     public function SpotlightDeactivate()
     {
         global $db;
-        $sql = 'UPDATE jobs SET spotlight = 0 WHERE id = ' . $this->mId;
+        $sql = 'UPDATE '.DB_PREFIX.'jobs SET spotlight = 0 WHERE id = ' . $this->mId;
         $db->query($sql);
     }
 	
@@ -927,7 +927,7 @@ class Job
 	public function Extend()
 	{
 		global $db;
-		$sql = 'UPDATE jobs SET created_on = NOW(), is_active = 1 WHERE id = ' . $this->mId;
+		$sql = 'UPDATE '.DB_PREFIX.'jobs SET created_on = NOW(), is_active = 1 WHERE id = ' . $this->mId;
 		if ($db->query($sql))
 		{
 			return true;
@@ -942,7 +942,7 @@ class Job
 	public function MarkTemporary()
 	{
 		global $db;
-		$sql = 'UPDATE jobs SET is_temp = 1 WHERE id = ' . $this->mId;
+		$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 1 WHERE id = ' . $this->mId;
 		$db->query($sql);
 	}
 	
@@ -950,7 +950,7 @@ class Job
 	public function Delete()
 	{
 		global $db;
-		$sql = 'DELETE FROM jobs WHERE id = ' . $this->mId;
+		$sql = 'DELETE FROM '.DB_PREFIX.'jobs WHERE id = ' . $this->mId;
 		$db->query($sql);
 	}
 	
@@ -961,16 +961,16 @@ class Job
 			
 		$db->autocommit(FALSE);
 		
-		$sql = 'DELETE FROM hits WHERE job_id  = ' . $this->mId;
+		$sql = 'DELETE FROM '.DB_PREFIX.'hits WHERE job_id  = ' . $this->mId;
 		$res = $db->query($sql);	
 		
-		$sql = 'DELETE FROM job_applications WHERE job_id  = ' . $this->mId;
+		$sql = 'DELETE FROM '.DB_PREFIX.'job_applications WHERE job_id  = ' . $this->mId;
 		$res = $res && $db->query($sql);
 		
-		$sql = 'DELETE FROM spam_reports WHERE job_id  = ' . $this->mId;
+		$sql = 'DELETE FROM '.DB_PREFIX.'spam_reports WHERE job_id  = ' . $this->mId;
 		$res = $res && $db->query($sql);
 
-		$sql = 'DELETE FROM jobs WHERE id  = ' . $this->mId;
+		$sql = 'DELETE FROM '.DB_PREFIX.'jobs WHERE id  = ' . $this->mId;
 		$res = $res && $db->query($sql);
 		
 		if($res != false)
@@ -1012,7 +1012,7 @@ class Job
 	public function RecordHit($referer, $ip)
 	{
 		global $db;
-		$sql = 'INSERT INTO api_requests (created_on, referer, ip, job_id)
+		$sql = 'INSERT INTO '.DB_PREFIX.'api_requests (created_on, referer, ip, job_id)
 		                    VALUES (NOW(), "' . $referer . '", "' . $ip . '", ' . $this->mId . ')';
 		$db->query($sql);
 	}
@@ -1033,7 +1033,7 @@ class Job
 				$type_id = $type;
 			}
 			
-			$condition .= ' AND type_id = ' . $type_id;
+			$condition .= ' AND '.DB_PREFIX.'type_id = ' . $type_id;
 		}
 		
 		if ($categ)
@@ -1047,10 +1047,10 @@ class Job
 				$categ_id = $categ;
 			}
 			
-			$condition .= ' AND category_id = ' . $categ_id;
+			$condition .= ' AND '.DB_PREFIX.'category_id = ' . $categ_id;
 		}
 
-		$sql = 'SELECT COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1' . $condition;
+		$sql = 'SELECT COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1' . $condition;
 		
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
@@ -1060,7 +1060,7 @@ class Job
 	public function IsValidCategory($categ)
 	{
 		global $db;
-		$sql = 'SELECT id FROM categories WHERE var_name = "' . $categ . '"';
+		$sql = 'SELECT id FROM '.DB_PREFIX.'categories WHERE var_name = "' . $categ . '"';
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		if (!empty($row))
@@ -1078,7 +1078,7 @@ class Job
 	{
 		global $db;
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE city_id = ' . $city_id;
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
@@ -1097,7 +1097,7 @@ class Job
 		global $db;
 		$jobsCountPerCategory = array();
 		
-		$sql = 'SELECT category_id, COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1 GROUP BY category_id'; 
+		$sql = 'SELECT category_id, COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1 GROUP BY category_id'; 
 		$result = $db->query($sql);
 		
 		while ($row = $result->fetch_assoc())
@@ -1123,7 +1123,7 @@ class Job
 		global $db;
 		$jobsCountPerCity = array();
 		
-		$sql = 'SELECT city_id, COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1 GROUP BY city_id'; 
+		$sql = 'SELECT city_id, COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1 GROUP BY city_id'; 
 		$result = $db->query($sql);
 		
 		while ($row = $result->fetch_assoc())
@@ -1172,7 +1172,7 @@ class Job
 			$condition .= ' AND type_id = ' . $type_id;
 		}
 		
-		$sql = 'SELECT COUNT(id) AS total FROM jobs WHERE is_temp = 0 AND is_active = 1 and city_id = '. $city_id . $condition;
+		$sql = 'SELECT COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1 and city_id = '. $city_id . $condition;
 
 		$result = $db->query($sql);
 		
@@ -1185,7 +1185,7 @@ class Job
 	public function CheckPosterEmail()
 	{
 		global $db;
-		$sql = 'SELECT poster_email FROM jobs 
+		$sql = 'SELECT poster_email FROM '.DB_PREFIX.'jobs 
 		                  WHERE poster_email = "' . strtolower($this->mPosterEmail) . '" AND id <> ' . $this->mId . ' AND is_temp = 0
  		                        AND (is_active = 1 OR (is_active = 0 AND DATEDIFF(NOW(), created_on) > 30))'; 
 		$result = $db->query($sql);
@@ -1213,7 +1213,7 @@ class Job
 		$statisticalData = array();
 		
 		$sql = 'SELECT job_id, count(id) numberOfApplications, DATE_FORMAT(max(created_on), "' . DATE_TIME_FORMAT . '") lastApplicationOn 
-				FROM job_applications j 
+				FROM '.DB_PREFIX.'job_applications j 
 				WHERE job_id in (' . $this->buildCommaSeparatedIDsString($jobIDs) . ') GROUP BY job_id'; 
 		$result = $db->query($sql);
 		

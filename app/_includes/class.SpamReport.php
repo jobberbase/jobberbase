@@ -28,7 +28,7 @@ class SpamReport
 			$this->mIp = $_SERVER['REMOTE_ADDR'];
 			$this->mJobId = $job_id;
 			$sql = 'SELECT id
-			               FROM spam_reports
+			               FROM '.DB_PREFIX.'spam_reports
 			               WHERE job_id = ' . $this->mJobId . ' AND ip = "' . $this->mIp . '" AND DATE_ADD(the_time, INTERVAL ' . REPORT_POST_AGAIN_AFTER . ' MINUTE) > NOW()';
 			$result = $db->query($sql);
 			$row = $result->fetch_assoc();
@@ -53,7 +53,7 @@ class SpamReport
 		global $db;
 		if ($this->mCanReport)
 		{
-			$sql = 'INSERT INTO spam_reports (the_time, ip, job_id)
+			$sql = 'INSERT INTO '.DB_PREFIX.'spam_reports (the_time, ip, job_id)
 			                    VALUES (NOW(), "' . $this->mIp . '", ' . $this->mJobId . ')';
 			if ($db->query($sql))
 			{
@@ -80,7 +80,7 @@ class SpamReport
 	{
 		global $db;
 		$sql = 'SELECT COUNT(id) AS total
-		               FROM spam_reports
+		               FROM '.DB_PREFIX.'spam_reports
 		               WHERE job_id = ' . $this->mJobId;
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();

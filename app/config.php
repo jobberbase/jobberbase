@@ -20,6 +20,7 @@
 		define('DB_USER', 'root');
 		define('DB_PASS', '');
 		define('DB_NAME', 'jobberbase');
+		define('DB_PREFIX', '');
 		define('LOCATION', 'local');
 		define('ENVIRONMENT', 'dev');
 	}
@@ -31,6 +32,7 @@
 		define('DB_PASS', '');
 		define('DB_NAME', 'jobberbase');
 		define('LOCATION', 'online');
+		define('DB_PREFIX', '');
 		define('ENVIRONMENT', 'prod');
 	}
 

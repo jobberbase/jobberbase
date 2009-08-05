@@ -22,7 +22,7 @@ class SearchKeywords
 	public function Save()
 	{
 		global $db;
-		$sql = 'INSERT INTO searches (keywords, created_on) VALUES ("' . $this->mKeywords . '", NOW())';
+		$sql = 'INSERT INTO '.DB_PREFIX.'searches (keywords, created_on) VALUES ("' . $this->mKeywords . '", NOW())';
 		$db->query($sql);
 	}
 }

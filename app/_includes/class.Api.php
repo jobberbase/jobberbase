@@ -123,7 +123,7 @@ class Api
 
 		$jobs = array();
 		$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE is_temp = 0 AND is_active = 1 AND 
 												 created_on > DATE_SUB("' . $this->mParams['since'] . '", INTERVAL 1 DAY)
 		               ORDER BY created_on DESC';
