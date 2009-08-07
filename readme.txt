@@ -11,7 +11,7 @@ jobberBase on Google Code: http://code.google.com/p/jobberbase/
 
 2. Create a new database and import db/jobberbase.sql into it.
 
-3. Open config.php and update the following constants so they suit your environment:
+3. Rename config_default.php to config.php and update the following constants so they suit your environment:
    - DB_HOST, DB_USER, DB_PASS, DB_NAME, NOTIFY_EMAIL, ADMIN_EMAIL, SITE_NAME
 
 4. Following directories need write access:
