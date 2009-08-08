@@ -18,15 +18,15 @@
 			<div id="contact-form">
 				<div id="contact-form-contents">
 					<form id="apply-online" method="post" action="{$BASE_URL}{$page.url}/">
-						<label for="apply_name">{$translations.contact.name_label}:</label><br />
+						<label for="contact_name">{$translations.contact.name_label}:</label><br />
 						<input {if $errors.contact_name}class="error"{/if} type="text" name="contact_name" id="contact_name" maxlength="50" size="30" value="{$smarty.post.contact_name}" />
 						<span class="validation-error">{if $errors.contact_name}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
 						<br /><br />
-						<label for="apply_email">{$translations.contact.email_label}:</label><br />
+						<label for="contact_email">{$translations.contact.email_label}:</label><br />
 						<input {if $errors.contact_email}class="error"{/if} type="text" name="contact_email" id="contact_email" maxlength="50" size="30" value="{$smarty.post.contact_email}" />
 						<span class="validation-error">{if $errors.contact_email}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
 						<br /><br />
-						<label for="apply_msg">{$translations.contact.message_label}:</label><br />
+						<label for="contact_msg">{$translations.contact.message_label}:</label><br />
 						<textarea {if $errors.contact_msg}class="error"{/if} name="contact_msg" id="contact_msg" cols="50" rows="8">{$smarty.post.contact_msg}</textarea>
 						<span class="validation-error">{if $errors.contact_msg}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
 						<br /><br />
@@ -45,7 +45,7 @@
 				$("#apply-online").validate({
 					rules: {
 						contact_name: { required: true },
-						contact_email: { required: true },
+						contact_email: { required: true, email: true },
 						contact_msg: { required: true }
 					},
 					messages: {
