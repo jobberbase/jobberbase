@@ -47,7 +47,7 @@
 				<li><a href="{$BASE_URL}{$articles.contact.url}/" title="{$articles.contact.page_title}">Contact</a></li>
 			</ul>
 			<div id="the_feed">
-				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}img/bt-rss.gif" alt="{$translations.header.contact_alt}" /></a>
+				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}img/bt-rss.png" alt="{$translations.header.contact_alt}" /></a>
 			</div>
 		</div><!-- #header -->
 		
