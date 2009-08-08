@@ -31,6 +31,6 @@
 		$jobs['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $jobs['description']);
 	}
 	$smarty->assign('job', $jobs);
-	$html_title = stripslashes($jobs['title']) . ' la ' . stripslashes($jobs['company']) . ' / ' . SITE_NAME;
+	$html_title = stripslashes($jobs['title']) . ' at ' . stripslashes($jobs['company']) . ' / ' . SITE_NAME;
 	$template = 'publish-verify.tpl';
 ?>
