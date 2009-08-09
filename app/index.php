@@ -141,6 +141,7 @@
 			break;
 			
 		case 'sitemap':
+			$html_title = 'Sitemap';
 			$template = 'sitemap.tpl';
 			$flag = 1;
 			break;
