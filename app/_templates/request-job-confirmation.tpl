@@ -17,7 +17,7 @@
 			</div>
 			<br />
 			<p>
-				<a href="{$BASE_URL}jobul-ideal/">&laquo; try again</a>?
+				<a href="{$BASE_URL}ideal-job/">&laquo; try again</a>?
 			</p>
 			{/if}
 		</div><!-- /content -->
