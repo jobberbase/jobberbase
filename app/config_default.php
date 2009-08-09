@@ -41,7 +41,7 @@
 	define('ADMIN_EMAIL','YOUR_EMAIL_HERE@gmail.com');
 	define('SITE_NAME', 'jobberBase');
 
-	define('MAX_CV_SIZE', 3000000); // approx. 3 mb
+	define('MAX_CV_SIZE', 3145728); // 3mb limitation.
 	define('FILE_UPLOAD_DIR', 'uploads/');
 	define('JOBS_PER_PAGE', 50);
 	
