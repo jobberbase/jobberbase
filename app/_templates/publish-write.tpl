@@ -115,7 +115,6 @@
 													<ol>
 														<li>first</li>
 														<li>second</li>
-
 														<li>third</li>
 													</ol>
 												</td>
