@@ -10,11 +10,9 @@
 </div><!-- #no-ads -->
 {/if}
 {foreach item=job from=$jobs}
-	<tr>
+	<tr {cycle values='class="alt",'}>
 		<td>
-			
 			<img src="{$BASE_URL}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
-			
 			<a href="{$BASE_URL}job/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
 		</td>
 		<td class="time-posted"><img src="{$BASE_URL}img/clock.gif" alt="" /> {$job.created_on}</td>
@@ -24,12 +22,3 @@
 <br/>
 {$pages}
 {/if}
-{literal}
-<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$(".job-posts tr").mouseover(function() {$(this).addClass("over");}).mouseout(function() {$(this).removeClass("over");});
-		$(".job-posts tr:odd").addClass("alt");
-	});
-</script>
-{/literal}

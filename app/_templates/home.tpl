@@ -16,7 +16,7 @@
 				<h2>{$translations.homepage.recent_jobs}</h2>
 				<table id="job-posts" class="job-posts" cellspacing="0">
 				{foreach item=job from=$latest_jobs}
-					<tr>
+					<tr {cycle values='class="alt",'}>
 						<td>
 							<img src="{$BASE_URL}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
 							<a href="{$BASE_URL}job/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
@@ -31,7 +31,7 @@
 				<h3>{$translations.homepage.popular_jobs}</h3>
 				<table id="job-posts3" class="job-posts" cellspacing="0">
 				{foreach item=job from=$most_applied_to_jobs}
-					<tr>
+					<tr {cycle values='class="alt",'}>
 						<td>
 							<img src="{$BASE_URL}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
 							<a href="{$BASE_URL}job/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
