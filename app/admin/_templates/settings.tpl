@@ -34,29 +34,28 @@
 								{assign var=setting_description value=$setting.setting_description}
 								{assign var=setting_value value=$setting.setting_value}
 								{assign var=field_type value=$setting.field_type}
-								{assign var=site_id value=$setting.site_id}
 								<tr {cycle values='class="input_alt",'}>
 								<td valign='top' class='settingsform_title'>{$setting_title}:</td>
 								<td valign='top' class='settingsform_input'>
 									{if $field_type.0 == 'text_area'}
-										<textarea class="settingsform_text_area{if $errors.$setting_name != ''} error{/if}" name="{$setting_name}" {if $site_id == 1}disabled="true"{/if}>{$setting_value}</textarea>
+										<textarea class="settingsform_text_area{if $errors.$setting_name != ''} error{/if}" name="{$setting_name}">{$setting_value}</textarea>
 									{elseif $field_type.0 == 'radiobutton'}
 										{section name=tmp2 loop=$field_type start=1}
-											<input type="radio" name="{$setting_name}" value="{$field_type[tmp2]}" {if $site_id == 1}disabled="true"{/if} {if $field_type[tmp2] == $setting_value}checked="checked"{/if} />{$field_type[tmp2]}
+											<input type="radio" name="{$setting_name}" value="{$field_type[tmp2]}" {if $field_type[tmp2] == $setting_value}checked="checked"{/if} />{$field_type[tmp2]}
 										{/section}
 									{elseif $field_type.0 == 'select'}
-										<select {if $errors.$setting_name != ''}class="error"{/if} name="{$setting_name}" {if $site_id == 1}disabled="true"{/if}>
+										<select {if $errors.$setting_name != ''}class="error"{/if} name="{$setting_name}">
 										{section name=tmp2 loop=$field_type start=1}
 											<option value="{$field_type[tmp2]}" {if $field_type[tmp2] == $setting_value}selected="selected"{/if}>{$field_type[tmp2]}</option>
 										{/section}
 										</select>
 									{elseif $field_type.0 == 'checkbox'}
-										<input {if $errors.$setting_name != ''}class="error"{/if}" type="checkbox" name="{$setting_name}[]" value="_hidden" {if $site_id == 1}disabled="true"{/if} style="display:none;" checked="checked"/>
+										<input {if $errors.$setting_name != ''}class="error"{/if} type="checkbox" name="{$setting_name}[]" value="_hidden" style="display:none;" checked="checked"/>
 										{section name=tmp2 loop=$field_type start=1}
-											<input type="checkbox" name="{$setting_name}[]" value="{$field_type[tmp2]}" {if $site_id == 1}disabled="true"{/if} {if in_array($field_type[tmp2], $setting_value)}checked="checked"{/if} />{$field_type[tmp2]}<br />
+											<input type="checkbox" name="{$setting_name}[]" value="{$field_type[tmp2]}" {if in_array($field_type[tmp2], $setting_value)}checked="checked"{/if} />{$field_type[tmp2]}<br />
 										{/section}
 									{else}
-										<input class="settingsform_text_field{if $errors.$setting_name != ''} error{/if}" type="text" 	name="{$setting_name}" value="{$setting_value}" {if $site_id == 1}disabled="true"{/if}/>
+										<input class="settingsform_text_field{if $errors.$setting_name != ''} error{/if}" type="text" 	name="{$setting_name}" value="{$setting_value}"/>
 									{/if}
 									{if $errors.$setting_name != ''}<span class="validation-error"><img src="{$BASE_URL}img/icon-delete.png" alt="" /></span>{/if}
 								</td>
