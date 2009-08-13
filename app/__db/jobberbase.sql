@@ -434,3 +434,91 @@ INSERT INTO `types` (`id`, `name`, `var_name`) VALUES
 (1, 'Full-time', 'fulltime'),
 (2, 'Part-time', 'parttime'),
 (3, 'Freelance', 'freelance');
+
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Aug 13, 2009 at 11:54 AM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `jobberbase`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) DEFAULT NULL,
+  `setting_name` varchar(64) DEFAULT NULL,
+  `setting_title` varchar(255) NOT NULL,
+  `setting_description` text,
+  `setting_value` longtext,
+  `field_type` text,
+  `validation` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `category_id`, `setting_name`, `setting_title`, `setting_description`, `setting_value`, `field_type`, `validation`) VALUES
+(1, 1, 'site_name', 'Site name', 'The name of your JobBoard, used in various templates.', 'Jobberbase', '', 'not_empty'),
+(2, 1, 'admin_email', 'Admin Email', 'The email companies will receive mail from.', 'admin@localhost.cc', '', 'not_empty|is_email'),
+(3, 1, 'notify_email', 'Notify Email', 'The email for receiving new job postings.', 'admin@localhost.cc', '', 'not_empty|is_email'),
+(4, 1, 'theme', 'Theme', 'Pick the theme to use for the frontend.', 'default', 'available_themes', 'not_empty'),
+(5, 1, 'html_title', 'HTML Title', 'The HTML title for the homepage.', 'Jobberbase', '', ''),
+(6, 1, 'meta_keywords', 'Site keywords', 'Meta Keywords. Useful for Search Engine Optimization (separate by comma).', '', '', ''),
+(7, 1, 'meta_description', 'Site description', 'Meta Description Tag. Useful for Search Engine Optimization.', '', 'text_area', ''),
+(8, 1, 'max_cv_size', 'Max CV filesize', 'The maximum filesize for uploaded CV''s in bytes', '3145728', '', 'not_empty|is_number'),
+(9, 1, 'file_upload_dir', 'Upload Directory', 'Upload directory to temporarily save CV''s. Must be writable.', 'uploads/', '', 'not_empty'),
+(10, 1, 'apply_delay', 'Apply delay', 'The number of minutes that must pass between applications from the same IP address', '0', '', 'not_empty|is_nummer'),
+(11, 1, 'date_format', 'Date format', 'The format in which dates are displayed. %d = day, %m = month, %Y = 4 digit year.', '%d-%m-%Y', NULL, 'not_empty'),
+(12, 1, 'date_time_format', 'Date / Time format', 'The format in which times are displayed. %d = day, %m = month, %Y = 4 digit year, %H = 24-hour and %i = minute.', '%d-%m-%Y %H:%i', NULL, 'not_empty'),
+(13, 1, 'sidebar_show_what', 'Sidebar Shortlist', 'Either cities or categories can be shown in the sidebar', 'cities', 'select|categories|cities', 'not_empty|is_alpha'),
+(14, 1, 'sidebar_only_cities_with_jobs', 'Sidebar only non-empty Cities', 'Should the sidebar cities (if enabled) only show those that actually contain jobs?', 'yes', 'radiobutton|yes|no', 'non_empty'),
+(15, 2, 'jobs_per_page', 'Jobs per page', 'The amount of jobs per page, before pagination is called.', '50', '', 'not_empty|is_number'),
+(16, 2, 'jobs_per_search', 'Jobs per search', 'The amount of jobs per page when searching.', '25', '', 'not_empty|is_number'),
+(17, 2, 'spotlight_jobs', 'Spotlight Jobs #', 'Amount of Spotlight Jobs to display on the front page.', '3', NULL, 'not_empty|is_number'),
+(18, 2, 'latest_jobs', 'Latest Jobs #', 'Amount of latest jobs to show on the front page.', '7', NULL, 'not_empty|is_number'),
+(19, 2, 'most_applied_jobs', 'Most Applied to #', 'Amount of most-applied-to jobs to show on the front page.', '7', NULL, 'not_empty|is_number'),
+(20, 2, 'search_method', 'Search Method', 'Choose which search method to use. ''Alternate'' checks every keyword to appear in either the title, description or cityname.', 'alternate', 'radiobutton|classic|alternate', 'not_empty|is_alpha'),
+(21, 3, 'url_cities', 'Cities Cloud', 'The URL for the City Cloud page.', 'cities', '', 'not_empty|is_url_string'),
+(22, 3, 'url_companies', 'Companies Cloud', 'The URL for the Company Cloud page.', 'companies', '', 'not_empty|is_url_string'),
+(23, 3, 'url_job', 'Job Details', 'The URL for the Job Details page.', 'job', '', 'not_empty|is_url_string'),
+(24, 3, 'url_jobs', 'Jobs per Category', 'The URL for the Jobs per Category pages.', 'jobs', '', 'not_empty|is_url_string'),
+(25, 3, 'url_jobs_at_company', 'Jobs per Company', 'The URL for the Jobs per Company pages.', 'jobs-at', '', 'not_empty|is_url_string'),
+(26, 3, 'url_jobs_in_city', 'Jobs per City', 'The URL for the Jobs per City pages.', 'jobs-in', '', 'not_empty|is_url_string');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `settings_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `var_name` varchar(255) NOT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `settings_categories`
+--
+
+INSERT INTO `settings_categories` (`id`, `name`, `var_name`, `description`) VALUES
+(1, 'Main Settings', 'main', 'The main settings for your JobberBase installation. This includes settings such as site name, meta-tags etc.'),
+(3, 'URL Rewrite Settings', 'url-rewrite', 'You can easily change the structure of various URLs with these settings.'),
+(2, 'Search / Pagination Settings', 'search-and-pagination', 'Settings that change the amount of jobs to display per page and which search method to use.');
