@@ -49,7 +49,7 @@
 		if (!empty($outside_referer))
 		{
 			$job->RecordHit(base64_decode($outside_referer), $_SERVER['REMOTE_ADDR']);
-			redirect_to(BASE_URL . 'job/' . $id . '/' . $info['url_title'] . '/');
+			redirect_to(BASE_URL . URL_JOB .'/' . $id . '/' . $info['url_title'] . '/');
 		}
 		else
 		{
@@ -58,7 +58,7 @@
 
 		$job_flag = true;
 		
-		$url = BASE_URL . 'job/' . $id . '/' . $info['url_title'] . '/';
+		$url = BASE_URL . URL_JOB .'/' . $id . '/' . $info['url_title'] . '/';
 		$current_url = 'http://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 		
 		if ($current_url != $url) redirect_to($url, 301);
@@ -111,7 +111,7 @@
 	
 		$html_title = stripslashes($info['title']) . ' ' . $translations['jobs']['preposition_at'] . ' ' . stripslashes($info['company']) . ' / ' . SITE_NAME;
 		$smarty->assign('current_category', $categVarName);
-		$smarty->assign('back_link', BASE_URL . 'jobs/' . $job->GetCategVarname($info['category_id']) . '/');
+		$smarty->assign('back_link', BASE_URL . URL_JOBS . '/' . $job->GetCategVarname($info['category_id']) . '/');
 		$template = 'job.tpl';
 	}
 	else

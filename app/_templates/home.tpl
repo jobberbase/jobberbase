@@ -5,7 +5,7 @@
 			        <tr>
 			            <td>
 			               <img src="{$BASE_URL}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
-			                <a href="{$BASE_URL}job/{$job.id}/{$job.url_title}" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
+			                <a href="{$BASE_URL}{$URL_JOB}/{$job.id}/{$job.url_title}" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
 			            </td>
 			            <td class="spotlight-image"><img src="{$BASE_URL}img/icon-spotlight.png" alt="" /></td>
 			        </tr>
@@ -19,7 +19,7 @@
 					<tr {cycle values='class="alt",'}>
 						<td>
 							<img src="{$BASE_URL}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
-							<a href="{$BASE_URL}job/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
+							<a href="{$BASE_URL}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
 						</td>
 						<td class="time-posted"><img src="{$BASE_URL}img/clock.gif" alt="" /> {$job.created_on}</td>
 					</tr>
@@ -34,7 +34,7 @@
 					<tr {cycle values='class="alt",'}>
 						<td>
 							<img src="{$BASE_URL}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
-							<a href="{$BASE_URL}job/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
+							<a href="{$BASE_URL}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.location == 'Anywhere'}, {$job.location}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
 						</td>
 						<td class="time-posted"><strong>{$job.apps}</strong> {$translations.homepage.applicants}</td>
 					</tr>

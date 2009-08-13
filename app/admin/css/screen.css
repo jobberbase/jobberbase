@@ -37,3 +37,10 @@ div.draggingItem div.categoryHandle{background:#E86857}
 #city_form input{border:1px solid #ccc; padding:5px; font-size:12px; font-family:Helvetica,Arial,sans-serif}
 #city_form label{display:block; margin-top:5px}
 #city_form label span{clear:left; display:block; float:left; font-weight:bold; width:70px}
+.category_name{font-size:16px; font-weight:bold;}
+.category_box{margin:5px;}
+.settingsform_title{width:135px;}
+.settingsform_input{width:360px;}
+.settingsform_text_field{width:300px;}
+.settingsform_text_area{width: 300px;height:88px;}
+.settingsform_description{font-size:10px;font-style:italic;}

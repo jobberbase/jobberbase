@@ -55,7 +55,7 @@
 		$smarty->assign('jobs_count', $jobCount);
 	}
 	$paginator = new Paginator($jobCount, JOBS_PER_PAGE, @$_REQUEST['p']);
-	$paginator->setLink(BASE_URL . "jobs/$id");
+	$paginator->setLink(BASE_URL . URL_JOBS . "/$id");
 	$paginator->paginate();
 	
 	$firstLimit = $paginator->getFirstLimit();

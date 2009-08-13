@@ -5,9 +5,9 @@
 				{if $jobs}
 				<div id="sort-by-type">
 				{$translations.category.display_only}&nbsp; 
-					<a href="{$BASE_URL}jobs-in/{$city_ascii_name}/full-time/" title="{$current_category} fulltime"><img src="{$BASE_URL}img/icon-fulltime.png" alt="{$current_category} fulltime" /></a>
-					<a href="{$BASE_URL}jobs-in/{$city_ascii_name}/part-time/" title="{$current_category} parttime"><img src="{$BASE_URL}img/icon-parttime.png" alt="{$current_category} parttime" /></a>
-					<a href="{$BASE_URL}jobs-in/{$city_ascii_name}/freelance/" title="{$current_category} freelance"><img src="{$BASE_URL}img/icon-freelance.png" alt="{$current_category} freelance" /></a>
+					<a href="{$BASE_URL}{$URL_JOBS_IN_CITY}/{$city_ascii_name}/full-time/" title="{$current_category} fulltime"><img src="{$BASE_URL}img/icon-fulltime.png" alt="{$current_category} fulltime" /></a>
+					<a href="{$BASE_URL}{$URL_JOBS_IN_CITY}/{$city_ascii_name}/part-time/" title="{$current_category} parttime"><img src="{$BASE_URL}img/icon-parttime.png" alt="{$current_category} parttime" /></a>
+					<a href="{$BASE_URL}{$URL_JOBS_IN_CITY}/{$city_ascii_name}/freelance/" title="{$current_category} freelance"><img src="{$BASE_URL}img/icon-freelance.png" alt="{$current_category} freelance" /></a>
 				</div><!-- #sort-by-type -->
 				{/if}
 				<h2>

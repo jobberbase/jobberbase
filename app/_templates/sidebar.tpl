@@ -16,13 +16,13 @@
 			<div id="stats">
 				<strong>{$jobs_count_all} total jobs</strong>
 				<br />
-				{if $smarty.const.SIDEBAR_SHOW_WHAT == SIDEBAR_CATEGORIES}
+				{if $smarty.const.SIDEBAR_SHOW_WHAT == 'categories'}
 					{foreach item=job from=$jobs_count_all_categs}
-					<strong>{$job.categ_count}</strong> for <a href="{$BASE_URL}jobs/{$job.categ_varname}/">{$job.categ_name}</a><br />
+					<strong>{$job.categ_count}</strong> for <a href="{$BASE_URL}{$URL_JOBS}/{$job.categ_varname}/">{$job.categ_name}</a><br />
 					{/foreach}
 				{else}
 					{foreach item=job from=$jobs_count_per_city}
-					<strong>{$job.jobs_in_city}</strong> {$translations.jobscity.sidebar_jobs_in} <a href="{$BASE_URL}jobs-in/{$job.city_ascii_name}/">{$job.city_name}</a><br />
+					<strong>{$job.jobs_in_city}</strong> {$translations.jobscity.sidebar_jobs_in} <a href="{$BASE_URL}{$URL_JOBS_IN_CITY}/{$job.city_ascii_name}/">{$job.city_name}</a><br />
 					{/foreach}
 				{/if}
 			</div><!-- #stats -->

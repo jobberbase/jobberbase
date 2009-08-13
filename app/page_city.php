@@ -33,7 +33,7 @@
 		exit;
 	}
 	
-	$paginatorLink = BASE_URL . "jobs-in/$city_ascii_name";
+	$paginatorLink = BASE_URL . URL_JOBS_IN_CITY . "/$city_ascii_name";
 	
 	if (isset($extra))
 		$paginatorLink .= "/$extra";

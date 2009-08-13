@@ -9,7 +9,7 @@
 		// if visitor comes from an outside website, record the referer
 		
 		$job_flag = true;
-		$url = BASE_URL . 'job/' . $id . '/' . $info['url_title'] . '/';
+		$url = BASE_URL . URL_JOB .'/' . $id . '/' . $info['url_title'] . '/';
 		
 		
 		$app = new JobApplication($id);
@@ -35,11 +35,11 @@
 			if(strcmp(end($currentLinksPage), 'home') == 0)
 				$smarty->assign('back_link', BASE_URL . 'home/');
 			else
-				$smarty->assign('back_link', BASE_URL . 'jobs/' . $job->GetCategVarname($info['category_id']) . '/');
+				$smarty->assign('back_link', BASE_URL . URL_JOBS . '/' . $job->GetCategVarname($info['category_id']) . '/');
 		}
 		else
 		{
-			$smarty->assign('back_link', BASE_URL . 'jobs/' . $job->GetCategVarname($info['category_id']) . '/');
+			$smarty->assign('back_link', BASE_URL . URL_JOBS . '/' . $job->GetCategVarname($info['category_id']) . '/');
 		}
 		$smarty->assign('current_category', $job->GetCategVarname($info['category_id']));
 		

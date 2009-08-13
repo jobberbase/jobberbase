@@ -26,7 +26,7 @@
 		$j = new Job($id);
 		if ($j->GetTempStatus() != 1 || $j->GetActiveStatus() != 0)
 		{
-			redirect_to(BASE_URL . 'job/' . $id . '/');
+			redirect_to(BASE_URL . URL_JOB .'/' . $id . '/');
 			exit;
 		}
 	}

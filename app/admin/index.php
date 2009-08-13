@@ -99,7 +99,7 @@
 			$flag = 1;
 			break;
 
-		case 'job':
+		case URL_JOB:
 			if(!isset($_SESSION['AdminId']))
 			{
 				redirect_to(BASE_URL);
@@ -109,7 +109,7 @@
 			$flag = 1;
 			break;
 
-		case 'jobs':
+		case URL_JOBS:
 			if(!isset($_SESSION['AdminId']))
 			{
 				redirect_to(BASE_URL);
@@ -178,6 +178,15 @@
 			$template = 'password.tpl';
 			$flag = 1;
 			break;
+		case 'settings':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
+			require_once 'page_settings.php';
+			$flag = 1;
+			break;
 		case 'edit-post':
 			if(!isset($_SESSION['AdminId']))
 			{
@@ -232,6 +241,14 @@
 	
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
+
+	//Add the dynamic URL defitions to SMARTY
+	$smarty->assign('URL_JOB', URL_JOB);
+	$smarty->assign('URL_JOBS', URL_JOBS);
+	$smarty->assign('URL_CITIES', URL_CITIES);
+	$smarty->assign('URL_COMPANIES', URL_COMPANIES);
+	$smarty->assign('URL_JOBS_IN_CITY', URL_JOBS_IN_CITY);
+	$smarty->assign('URL_JOBS_AT_COMPANY', URL_JOBS_AT_COMPANY);
 	
 	$smarty->assign('CURRENT_PAGE', $page);
 	$smarty->assign('CURRENT_ID', $id);

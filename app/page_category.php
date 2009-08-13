@@ -58,7 +58,7 @@
 		$smarty->assign('jobs_count', $jobCount);
 	}
 	
-	$paginatorLink = BASE_URL . "jobs/$id";
+	$paginatorLink = BASE_URL . URL_JOBS . "/$id";
 	
 	if (isset($extra))
 		$paginatorLink .= "/$extra";

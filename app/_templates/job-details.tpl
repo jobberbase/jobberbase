@@ -9,7 +9,7 @@
 					{$translations.apply.old_ad}
 				</div>
 				{/if}
-				{if $CURRENT_PAGE == 'job'}
+				{if $CURRENT_PAGE == $URL_JOB}
 				<div id="applied-to-job">
 					{$job.applied_count}
 					{if $job.applied_count != 1}

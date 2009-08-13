@@ -9,14 +9,14 @@
 							<dd><a href="#" rel="{$BASE_URL}post/">Post a job</a></dd>
 							<dd><a href="#" rel="{$BASE_URL}ideal-job/">Ideal job</a></dd>
 							<dd><a href="#" rel="{$BASE_URL}rss/">RSS Feed</a></dd>
-							<dd><a href="#" rel="{$BASE_URL}companies/">Companies</a></dd>
+							<dd><a href="#" rel="{$BASE_URL}{$URL_COMPANIES}/">Companies</a></dd>
 							<dt><strong>Categories</strong></dt>
 							{section name=tmp loop=$categories}
-							<dd><a href="#" rel="{$BASE_URL}jobs/{$categories[tmp].var_name}/">{$categories[tmp].name}</a></dd>
+							<dd><a href="#" rel="{$BASE_URL}{$URL_JOBS}/{$categories[tmp].var_name}/">{$categories[tmp].name}</a></dd>
 							{/section}
 							<dt><strong>Pages</strong></dt>
 							{foreach from=$pages item=page}
-							<dd><a href="#" rel="{$BASE_URL}jobs/{$page.url}/">{$page.title}</a></dd>
+							<dd><a href="#" rel="{$BASE_URL}{$URL_JOBS}/{$page.url}/">{$page.title}</a></dd>
 							{/foreach}
 						</dl>
 					</div>

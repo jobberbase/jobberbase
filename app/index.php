@@ -45,25 +45,25 @@
 			break;
 			
 		// cities
-		case 'cities':
+		case URL_CITIES:
 			require_once 'page_cities.php';
 			$flag = 1;
 			break;
 	
 		// per category
-		case 'jobs':
+		case URL_JOBS:
 			require_once 'page_category.php';
 			$flag = 1;
 			break;
 			
 		// per company
-		case 'jobs-at':
+		case URL_JOBS_AT_COMPANY:
 			require_once 'page_company.php';
 			$flag = 1;
 			break;
 			
 		// per city
-		case 'jobs-in':
+		case URL_JOBS_IN_CITY:
 			require_once 'page_city.php';
 			$flag = 1;
 			break;
@@ -75,7 +75,7 @@
 			break;
 						
 		// job post page, with the job's details
-		case 'job':
+		case URL_JOB:
 			require_once 'page_job.php';
 			$flag = 1;
 			break;
@@ -116,7 +116,7 @@
 		case 'confirm':
       $flag =1;
       $job = new Job($id);
-      $job_title = BASE_URL . 'job/' . $job->mId . '/' . $job->mUrlTitle . '/';
+      $job_title = BASE_URL . URL_JOB .'/' . $job->mId . '/' . $job->mUrlTitle . '/';
       $smarty->assign('auth', $job->GetAuth());
       $smarty->assign('job_url', $job_title);
       $smarty->assign('first_time_post', $extra);
@@ -147,7 +147,7 @@
 			break;
 			
 		// companies
-		case 'companies':
+		case URL_COMPANIES:
 			require_once 'page_companies.php';
 			$flag = 1;
 			break;
@@ -217,6 +217,14 @@
 	$smarty->assign('CURRENT_ID', $id);
 	$smarty->assign('BASE_URL', BASE_URL);
 	$smarty->assign('HTTP_REFERER', $_SERVER['HTTP_REFERER']);
+
+	//Add the dynamic URL defitions to SMARTY
+	$smarty->assign('URL_JOB', URL_JOB);
+	$smarty->assign('URL_JOBS', URL_JOBS);
+	$smarty->assign('URL_CITIES', URL_CITIES);
+	$smarty->assign('URL_COMPANIES', URL_COMPANIES);
+	$smarty->assign('URL_JOBS_IN_CITY', URL_JOBS_IN_CITY);
+	$smarty->assign('URL_JOBS_AT_COMPANY', URL_JOBS_AT_COMPANY);
 	
 	if (isset($html_title) && $html_title != '')
 		$smarty->assign('html_title', $html_title);

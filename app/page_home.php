@@ -1,12 +1,12 @@
 <?php
-	define('NUMBER_OF_MOST_APPLIED_TO_JOBS_TO_GET', 7);
-	define('NUMBER_OF_LATEST_JOBS_TO_GET', 7);
-	define('NUMBER_OF_SPOTLIGHT_JOBS_TO_GET', 3);
+	define('NUMBER_OF_MOST_APPLIED_TO_JOBS_TO_GET', $settings['most_applied_jobs']);
+	define('NUMBER_OF_LATEST_JOBS_TO_GET', $settings['latest_jobs']);
+	define('NUMBER_OF_SPOTLIGHT_JOBS_TO_GET', $settings['spotlight_jobs']);
 
 	// get jobs
 	$smarty->assign('jobs_count_all', $job->CountJobs());
 
-	if (SIDEBAR_SHOW_WHAT == SIDEBAR_CATEGORIES)
+	if (SIDEBAR_SHOW_WHAT == 'categories')
 	{
 		$smarty->assign('jobs_count_all_categs', $job->GetJobsCountForAllCategs());
 	}
@@ -23,9 +23,9 @@
 
 	$smarty->assign('current_category', 'home');
 
-	$smarty->assign('seo_title', $translations['homepage']['seo_title']);
-	$smarty->assign('seo_desc', $translations['homepage']['seo_description']);
-	$smarty->assign('seo_keys', $translations['homepage']['seo_keywords']);
+	$smarty->assign('seo_title', $settings['html_title']);
+	$smarty->assign('seo_desc', $settings['meta_description']);
+	$smarty->assign('seo_keys', $settings['meta_keywords']);
 	
 	$template = 'index.tpl';
 ?>

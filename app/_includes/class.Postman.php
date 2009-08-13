@@ -73,7 +73,7 @@ class Postman
 	public function MailPublishToAdmin($data)
 	{
 		$msg = '';
-		$job_title = BASE_URL . 'job/' . $data['id'] . '/' . $data['url_title'] . '/';
+		$job_title = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
 		$subject = "[" . SITE_NAME . "]" . $job_title;
 		
 		if ($data['check_poster_email'] == 0)
@@ -134,7 +134,7 @@ class Postman
 	// Send mail to admin when someone posts a new spam word
 	public function MailReportSpam($data)
 	{
-		$job_title = BASE_URL . 'job/' . $data['id'] . '/' . $data['url_title'] . '/';
+		$job_title = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
 		$subject = '[SPAM on ' . SITE_NAME . '] ' . $job_title;
 		$msg .= "Following ad was reported as false/spam:\n--\n\n";
 		$msg .= $job_title;

@@ -110,7 +110,7 @@ if ($id != 0)
 				
 				$jobCategName = $job->GetCategVarname($category_id);
 				
-				redirect_to(BASE_URL . 'jobs/' . $jobCategName . '/');
+				redirect_to(BASE_URL . URL_JOBS . '/' . $jobCategName . '/');
 				exit;
 			}
 		}

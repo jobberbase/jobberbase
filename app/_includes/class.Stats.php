@@ -37,7 +37,7 @@ class Stats
 		
 		$stats = '';
 		while ($row = $result->fetch_assoc())
-			$stats .= '<div>' . $row['date'] . ' <a href="' . BASE_URL . 'job/' . $row['job_id'] . '/">' . $row['title'] . ' la ' . $row['company'] . '</a></div>';
+			$stats .= '<div>' . $row['date'] . ' <a href="' . BASE_URL . URL_JOB .'/' . $row['job_id'] . '/">' . $row['title'] . ' la ' . $row['company'] . '</a></div>';
 		
 		$apps_per_day = array();
 		$sql = 'SELECT count(id) AS nr FROM '.DB_PREFIX.'job_applications WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';

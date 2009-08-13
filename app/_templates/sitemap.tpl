@@ -6,7 +6,7 @@
 			<h4>{$translations.sitemap.jobs}:</h4>
 			<ul>
 				{section name=tmp loop=$categories}
-        		<li id="{$categories[tmp].var_name}"><a href="{$BASE_URL}jobs/{$categories[tmp].var_name}/" title="{$categories[tmp].var_name}">{$categories[tmp].name}</a></li>
+        		<li id="{$categories[tmp].var_name}"><a href="{$BASE_URL}{$URL_JOBS}/{$categories[tmp].var_name}/" title="{$categories[tmp].var_name}">{$categories[tmp].name}</a></li>
 				{/section}
 			</ul>
 			<h4>{$translations.sitemap.use}:</h4>
@@ -17,7 +17,7 @@
 			</ul>
 			<h4>{$translations.sitemap.more}:</h4>
 			<ul>
-				<li><a href="{$BASE_URL}companies/" title="{$translations.footer.companies_title}">{$translations.footer.companies}</a></li>
+				<li><a href="{$BASE_URL}{$URL_COMPANIES}/" title="{$translations.footer.companies_title}">{$translations.footer.companies}</a></li>
 				{foreach from=$articles item=article}
 				<li><a href="{$BASE_URL}{$article.url}/" title="{$article.page_title}">{$article.title}</a></li>
 				{/foreach}

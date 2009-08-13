@@ -6,7 +6,7 @@
 		
 			<div id="job-listings"></div><!-- #job-listings -->
 			{include file="job-details.tpl"}
-			{if $CURRENT_PAGE == 'job'}
+			{if $CURRENT_PAGE == $URL_JOB}
 			<div id="job-bottom">
 				<div id="job-post-utils">
 				

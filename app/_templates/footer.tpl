@@ -14,8 +14,8 @@
 			</div>
 			<div id="footer-col3">
 				{$translations.footer.column_misc}:<br />
-				<a href="{$BASE_URL}companies/" title="{$translations.footer.companies_title}">{$translations.footer.companies}</a><br />
-				<a href="{$BASE_URL}cities/" title="{$translations.footer.cities_title}">{$translations.footer.cities}</a><br />
+				<a href="{$BASE_URL}{$URL_COMPANIES}/" title="{$translations.footer.companies_title}">{$translations.footer.companies}</a><br />
+				<a href="{$BASE_URL}{$URL_CITIES}/" title="{$translations.footer.cities_title}">{$translations.footer.cities}</a><br />
 				<a href="{$BASE_URL}sitemap/" title="{$translations.sitemap.title}">{$translations.sitemap.title}</a><br />
 			</div>
 			<div id="footer-copyright">

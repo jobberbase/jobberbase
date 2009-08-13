@@ -50,6 +50,7 @@
 				<li {if $current_category == 'stats'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}stats/">Stats</a></li>
 				<li {if $current_category == 'cities'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}cities/list/">Cities</a></li>
 				<li {if $current_category == 'types'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}types/">Job types</a></li>
+				<li {if $current_category == 'settings'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}settings/">Settings</a></li>
 				<li {if $current_category == 'password'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}password/">Change your password</a></li>
 				<li><a href="{$BASE_URL_ADMIN}logout/">Logout &raquo;</a></li>
 			</ul>
@@ -60,7 +61,7 @@
     	{if $isAuthenticated == 1}
      		 <ul>
 				{section name=tmp loop=$categories}
-       		<li id="{$categories[tmp].var_name}" {if $current_category == $categories[tmp].var_name}class="selected"{/if}><a href="{$BASE_URL_ADMIN}jobs/{$categories[tmp].var_name}/" title="{$categories[tmp].var_name}"><span>{$categories[tmp].name}</span><span class="cnr">&nbsp;</span></a></li>
+       		<li id="{$categories[tmp].var_name}" {if $current_category == $categories[tmp].var_name}class="selected"{/if}><a href="{$BASE_URL_ADMIN}{$URL_JOBS}/{$categories[tmp].var_name}/" title="{$categories[tmp].var_name}"><span>{$categories[tmp].name}</span><span class="cnr">&nbsp;</span></a></li>
 				{/section}
     		 </ul>
     	{/if}
