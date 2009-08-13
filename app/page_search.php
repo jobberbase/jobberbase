@@ -1,6 +1,14 @@
 <?php
+	if (isset($_GET['p'])) $start_page = $_GET['p'];
+	else $start_page = 1;
+ 
 	if ($id != '')
 	{
+		$tmp = explode('|', $id);
+ 
+		if (isset($tmp[1])) $url_query = trim($tmp[1]);
+		else $url_query = $id;
+ 
 		$id = urldecode($id);
 	}
 	 
@@ -11,6 +19,7 @@
 	
 	if (key_exists('keywords', $_POST)) {
 		$requestKeywords = str_replace('"', '', urldecode($_POST['keywords']));
+		$url_query = trim($_POST['keywords']);
 	}
 
 	if ($id != '' && !strstr($id, '|'))
@@ -64,7 +73,7 @@
 	else
 	{
 		$keywords = trim($keywords);
-		$smarty->assign('jobs', $job->Search($keywords));
+		$smarty->assign('jobs', $job->Search($keywords, $url_query, $start_page));
 	}
 	// if user hit enter after entering a search query, we know this causes a 
 	// synchronous HTTP redirect, so apply a different template
@@ -93,5 +102,10 @@
 	{
 		$smarty->assign('keywords', stripslashes($keywords));
 		$template = 'posts-loop.tpl';
+	}
+	
+	if (isset($_SESSION['search_pagination']))
+	{
+		$smarty->assign('pages', $_SESSION['search_pagination']);
 	}
 ?>

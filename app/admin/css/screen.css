@@ -40,7 +40,8 @@ div.draggingItem div.categoryHandle{background:#E86857}
 #city_form label span{clear:left; display:block; float:left; font-weight:bold; width:70px}
 .category_name{font-size:16px; font-weight:bold;}
 .category_box{margin:5px;}
-.settingsform_title{width:135px;}
+.input_alt{background-color:#ebebeb}
+.settingsform_title{width:150px;}
 .settingsform_input{width:360px;}
 .settingsform_text_field{width:300px;}
 .settingsform_text_area{width: 300px;height:88px;}
@@ -99,7 +100,7 @@ div#categs-nav ul li.selected a span.cnr{background-position:right 0px; cursor:p
 #stats{color:#777; font-size:11px}
 .info{color:#888}
 table#job-posts, table#job-posts2, table#job-posts3{width:100%}
-table#job-posts tr.alt td, table#job-posts2 tr.alt td, table#job-posts3 tr.alt td{background:#ebebeb}
+table#job-posts tr.alt td, table#job-posts2 tr.alt td, table#job-posts3 tr.alt td{background-color:#ebebeb}
 table#job-posts td, table#job-posts2 td, table#job-posts3 td{padding:5px; border-bottom:1px solid #ddd}
 table#job-posts a:link, table#job-posts a:visited, table#job-posts2 a:link, table#job-posts2 a:visited, table#job-posts3 a:link, table#job-posts3 a:visited{color:#09C; padding:2px}
 table#job-posts a:hover, table#job-posts2 a:hover, table#job-posts3 a:hover{background-color:#09C; color:#fff; text-decoration:none; padding:2px}

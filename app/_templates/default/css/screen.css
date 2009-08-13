@@ -70,7 +70,7 @@ div#categs-nav ul li.selected a span.cnr{background-position:right 0px; cursor:p
 #ideas ul li{margin-bottom:5px}
 .info{color:#888}
 table#job-posts, table#job-posts2, table#job-posts3{width:100%}
-table#job-posts tr.alt td, table#job-posts2 tr.alt td, table#job-posts3 tr.alt td{background:#ebebeb}
+table#job-posts tr.alt td, table#job-posts2 tr.alt td, table#job-posts3 tr.alt td{background-color:#ebebeb}
 table#job-posts td, table#job-posts2 td, table#job-posts3 td{padding:5px; border-bottom:1px solid #ddd}
 table#job-posts a:link, table#job-posts a:visited, table#job-posts2 a:link, table#job-posts2 a:visited, table#job-posts3 a:link, table#job-posts3 a:visited{color:#09C; padding:2px}
 table#job-posts a:hover, table#job-posts2 a:hover, table#job-posts3 a:hover{background-color:#09C; color:#fff; text-decoration:none; padding:2px}

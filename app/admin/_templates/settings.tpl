@@ -35,9 +35,9 @@
 								{assign var=setting_value value=$setting.setting_value}
 								{assign var=field_type value=$setting.field_type}
 								{assign var=site_id value=$setting.site_id}
-								<tr>
+								<tr {cycle values='class="input_alt",'}>
 								<td valign='top' class='settingsform_title'>{$setting_title}:</td>
-								<td class="settingsform_input">
+								<td valign='top' class='settingsform_input'>
 									{if $field_type.0 == 'text_area'}
 										<textarea class="settingsform_text_area{if $errors.$setting_name != ''} error{/if}" name="{$setting_name}" {if $site_id == 1}disabled="true"{/if}>{$setting_value}</textarea>
 									{elseif $field_type.0 == 'radiobutton'}
