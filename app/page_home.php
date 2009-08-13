@@ -12,7 +12,8 @@
 	}
 	else
 	{
-		$smarty->assign('jobs_count_per_city', $job->GetJobsCountPerCity(SIDEBAR_ONLY_CITIES_WITH_JOBS));
+		SIDEBAR_ONLY_CITIES_WITH_JOBS == 'yes' ? $only_with_jobs = true : $only_with_jobs = false;
+		$smarty->assign('jobs_count_per_city', $job->GetJobsCountPerCity($only_with_jobs));
 	}
 
 	$smarty->assign('most_applied_to_jobs', $job->GetMostAppliedToJobs(NUMBER_OF_MOST_APPLIED_TO_JOBS_TO_GET));
