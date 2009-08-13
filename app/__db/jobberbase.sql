@@ -435,23 +435,6 @@ INSERT INTO `types` (`id`, `name`, `var_name`) VALUES
 (2, 'Part-time', 'parttime'),
 (3, 'Freelance', 'freelance');
 
--- phpMyAdmin SQL Dump
--- version 3.2.0.1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Aug 13, 2009 at 11:54 AM
--- Server version: 5.1.36
--- PHP Version: 5.3.0
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
---
--- Database: `jobberbase`
---
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `settings`
 --
