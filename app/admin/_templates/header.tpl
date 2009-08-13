@@ -12,7 +12,6 @@
 	{else}
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/" />
 	{/if}
-	<link rel="stylesheet" href="{$BASE_URL}css/screen.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="{$BASE_URL_ADMIN}css/screen.css" type="text/css" media="screen" />
 	{if $editor}
 	<script src="{$BASE_URL_ADMIN}js/tiny_mce/tiny_mce.js" type="text/javascript"></script>

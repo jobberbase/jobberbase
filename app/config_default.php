@@ -141,8 +141,8 @@
 	
 	// Setup Smarty
 	$smarty = new Smarty();
-	$smarty->template_dir = APP_PATH . '_templates/';
-	$smarty->compile_dir = APP_PATH . '_templates/_cache/';
+	$smarty->template_dir = APP_PATH . '_templates/' . THEME . '/';
+	$smarty->compile_dir = APP_PATH . '_templates/' . THEME . '/_cache/';
 	
 	// Create Textile object
 	$textile = new Textile;

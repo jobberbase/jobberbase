@@ -34,7 +34,7 @@ class JobberSettings
 				$themes = array( 0 => 'select');
 				$dir = APP_PATH.'_templates/';
 				if ($dh = opendir($dir)) {
-				    while (($file = readdir($dh)) !== false) { if (filetype($dir . $file) != 'file' && $file != '.' && $file != '..') $themes[] = $file; }
+				    while (($file = readdir($dh)) !== false) { if (filetype($dir . $file) != 'file' && $file != '.' && $file != '..' && $file != '.svn' && $file != '_cache') $themes[] = $file; }
 					closedir($dh);
 				}
 				$field_type = $themes;

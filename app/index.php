@@ -213,6 +213,7 @@
 	$smarty->assign('articles', get_articles());
 	//$smarty->assign('types', get_types());
 	
+	$smarty->assign('THEME', $settings['theme']);
 	$smarty->assign('CURRENT_PAGE', $page);
 	$smarty->assign('CURRENT_ID', $id);
 	$smarty->assign('BASE_URL', BASE_URL);

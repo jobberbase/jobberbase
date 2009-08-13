@@ -50,6 +50,7 @@
 	$smarty->assign("pages",$paginator->pages_link);
 
 	$smarty->assign('jobs', $the_jobs);
+	$smarty->assign('types', get_types());
 	$smarty->assign('city_name', $city['name']);
 	$smarty->assign('city_ascii_name', $city_ascii_name);
 

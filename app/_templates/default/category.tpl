@@ -6,7 +6,7 @@
 				<div id="sort-by-type">
 				{$translations.category.display_only}&nbsp; 
 					{section name=tmp loop=$types}
-						<a href="{$BASE_URL}{$URL_JOBS}/{$current_category}/{$types[tmp].var_name}/" title="{$current_category} {$types[tmp].name}"><img src="{$BASE_URL}img/icon-{$types[tmp].var_name}.png" alt="{$types[tmp].name}" /></a>
+						<a href="{$BASE_URL}{$URL_JOBS}/{$current_category}/{$types[tmp].var_name}/" title="{$current_category} {$types[tmp].name}"><img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$types[tmp].var_name}.png" alt="{$types[tmp].name}" /></a>
 					{/section}
 				</div><!-- #sort-by-type -->
 				{/if}

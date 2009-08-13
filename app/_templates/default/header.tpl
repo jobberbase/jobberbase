@@ -12,8 +12,8 @@
 	{else}
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/" />
 	{/if}
-	<link rel="stylesheet" href="{$BASE_URL}css/screen.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="{$BASE_URL}css/print.css" media="print" type="text/css" />
+	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/screen.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/print.css" media="print" type="text/css" />
 	<script src="{$BASE_URL}js/jquery.js" type="text/javascript"></script>
 	<!--[if !IE]><script src="{$BASE_URL}js/jquery.history.js" type="text/javascript"></script><![endif]-->
  	<script src="{$BASE_URL}js/jquery.form.js" type="text/javascript"></script>

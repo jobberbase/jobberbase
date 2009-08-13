@@ -9,9 +9,9 @@
 					<div class="typeItem" rel="{$types[tmp]->getId()}">
 						<div class="typeHandle"></div>
 						<div class="typeWrapper">
-							<a href="#" title="Delete" class="deleteType"><img src="{$BASE_URL}img/icon-delete.png" alt="Edit" /> Delete</a>
+							<a href="#" title="Delete" class="deleteType"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="Edit" /> Delete</a>
 							<label><span>Name:</span><input type="text" size="60" name="name[{$types[tmp]->getId()}]" value="{$types[tmp]->getName()}" /></label>
-							<a href="#" title="Save" class="saveType"><img src="{$BASE_URL}img/disk.png" alt="Save" /> Save</a>
+							<a href="#" title="Save" class="saveType"><img src="{$BASE_URL_ADMIN}img/disk.png" alt="Save" /> Save</a>
 							<label><span>Var name:</span><input type="text" size="60" id="nr" name="var_name[{$types[tmp]->getId()}]" value="{$types[tmp]->getVarName()}" /></label>
 							<div class="clear"></div>
 						</div>
