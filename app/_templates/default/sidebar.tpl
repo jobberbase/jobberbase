@@ -14,11 +14,11 @@
 			{if $CURRENT_PAGE == ''}
 			<br />
 			<div id="stats">
-				<strong>{$jobs_count_all} total jobs</strong>
+				<strong>{$jobs_count_all} {$translations.homepage.sidebar_totaljobs}</strong>
 				<br />
 				{if $smarty.const.SIDEBAR_SHOW_WHAT == 'categories'}
 					{foreach item=job from=$jobs_count_all_categs}
-					<strong>{$job.categ_count}</strong> for <a href="{$BASE_URL}{$URL_JOBS}/{$job.categ_varname}/">{$job.categ_name}</a><br />
+					<strong>{$job.categ_count}</strong> {$translations.homepage.sidebar_for} <a href="{$BASE_URL}{$URL_JOBS}/{$job.categ_varname}/">{$job.categ_name}</a><br />
 					{/foreach}
 				{else}
 					{foreach item=job from=$jobs_count_per_city}
