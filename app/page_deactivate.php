@@ -15,7 +15,7 @@
 		if ($job->GetTempStatus() == 1 || $job->GetActiveStatus() == 0)
 		{
 			$info = $job->Deactivate();
-			$_SESSION['status'] = $translations['jobs']['confirmation_success'];
+			$_SESSION['status'] = $translations['jobs']['confirmation_error'];
 			redirect_to(BASE_URL);
 			exit;
 		}
