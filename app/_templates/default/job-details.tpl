@@ -85,6 +85,23 @@
 										<div class="suggestion">{$translations.apply.cv_info}</div>
 									</td>
 								</tr>
+								{if $ENABLE_RECAPTCHA == 'yes'}
+									<tr>
+										<td valign="top"><label>Anti-Spam</label></td>
+										<td>
+											{literal}
+											<script type="text/javascript">
+											  var RecaptchaOptions = {
+											    theme : 'white',
+											    tabindex : 9
+											  };
+											</script>
+											{/literal}
+											{$the_captcha} <span class="validation-error">{if $smarty.session.apply_errors.captcha}
+											<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
+										</td>
+									</tr>
+								{/if}
 								<tr><td colspan="2">&nbsp;</td></tr>
 								<tr>
 									<td colspan="2">
