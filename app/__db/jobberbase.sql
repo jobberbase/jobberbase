@@ -486,8 +486,6 @@ INSERT INTO `settings` (`id`, `category_id`, `setting_name`, `setting_title`, `s
 (29, 4, 'captcha_public_key', 'Captcha Public Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PUBLIC_KEY', NULL, NULL),
 (30, 4, 'captcha_private_key', 'Captcha Private Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PRIVATE_KEY', NULL, NULL);
 
--- --------------------------------------------------------
-
 --
 -- Table structure for table `settings_categories`
 --
@@ -509,3 +507,35 @@ INSERT INTO `settings_categories` (`id`, `name`, `var_name`, `description`) VALU
 (2, 'Search / Pagination Settings', 'search-and-pagination', 'Settings that change the amount of jobs to display per page and which search method to use.'),
 (3, 'URL Rewrite Settings', 'url-rewrite', 'You can easily change the structure of various URLs with these settings.'),
 (4, 'ReCaptcha Anti-Spam', 'anti-spam', 'JobberBase has built-in support for ReCaptcha. Before you can enable this, you''ll need to register a free key at recaptcha.net.');
+
+--
+-- Table structure for table `links`
+--
+
+CREATE TABLE IF NOT EXISTS `links` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `menu` varchar(255) NOT NULL,
+  `link_order` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `links`
+--
+
+INSERT INTO `links` (`id`, `url`, `name`, `title`, `menu`, `link_order`) VALUES
+(1, 'ideal-job', 'The Ideal Job', 'Let us know what the ideal job is.', 'primary', 1),
+(2, 'widgets', 'Site widget', 'Would you like to display our latest jobs on your site?', 'primary', 2),
+(3, 'about', 'About Us', 'More information about us.', 'primary', 3),
+(4, 'contact', 'Contact', 'Don''t hesitate to contact us!', 'primary', 4),
+(5, 'post', 'Post a new job', 'Post a new job for free!', 'footer1', 5),
+(6, 'widgets', 'Site widget', 'Would you like to display our latest jobs on your site?', 'footer1', 6),
+(7, 'rss', 'RSS Feeds', 'An overview of all our available RSS Feeds.', 'footer1', 7),
+(8, 'about', 'About Us', 'More information about us.', 'footer2', 8),
+(9, 'contact', 'Contact', 'Don''t hesitate to contact us!', 'footer2', 9),
+(10, 'companies', 'Companies', 'An overview of all available companies.', 'footer3', 10),
+(11, 'cities', 'Cities', 'An overview of all available cities.', 'footer3', 11),
+(12, 'sitemap', 'Sitemap', 'Sitemap.', 'footer3', 12);

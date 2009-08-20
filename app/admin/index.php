@@ -178,6 +178,15 @@
 			$template = 'password.tpl';
 			$flag = 1;
 			break;
+		case 'links':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
+			require_once 'page_links.php';
+			$flag = 1;
+			break;
 		case 'settings':
 			if(!isset($_SESSION['AdminId']))
 			{

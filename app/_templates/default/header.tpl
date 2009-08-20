@@ -38,13 +38,13 @@
 		<div id="header">
 			<h1 id="logo"><a href="{$BASE_URL}" title="{$translations.header.title}">{$translations.header.name}</a></h1>
 			<ul id="top">
-				<li><a href="{$BASE_URL}ideal-job/" title="{$translations.header.ideal_job_title}">{$translations.header.ideal_job}</a></li>
-				<li>&bull;</li>
-				<li><a href="{$BASE_URL}{$articles.widgets.url}/" title="{$articles.widgets.page_title}">{$articles.widgets.title}</a></li>
-				<li>&bull;</li>
-				<li><a href="{$BASE_URL}{$articles.about.url}/" title="{$articles.about.page_title}">{$articles.about.title}</a></li>
-				<li>&bull;</li>
-				<li><a href="{$BASE_URL}{$articles.contact.url}/" title="{$articles.contact.page_title}">Contact</a></li>
+				{if $navigation.primary != ''}
+					{section name=tmp loop=$navigation.primary}
+						{if $i==1}<li>&bull;</li>{/if}
+						<li><a href="{if $navigation.primary[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.primary[tmp].url}/" title="{$navigation.primary[tmp].title}" >{$navigation.primary[tmp].name}</a></li>
+						{assign var=i value=1}
+					{/section}
+				{/if}
 			</ul>
 			<div id="the_feed">
 				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}_templates/{$THEME}/img/bt-rss.png" alt="{$translations.header.contact_alt}" /></a>

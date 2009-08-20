@@ -19,7 +19,7 @@ em{font-style:italic}
 /* The default styling starts */
 body{background:#fff url(../img/bg-body.png) repeat-x top left; color:#444; font:62.5% /1.5 Arial,Helvetica,sans-serif; text-align:center; line-height:1.5}
 div#skip{display:none}
-div#container{width:950px; text-align:left; font-size:1.2em; min-height:100%; height:auto !important; height:100%; margin:0 auto 0em}
+div#container{width:950px; text-align:left; font-size:1.2em; min-height:700px; height:auto !important; height:100%; margin:0 auto 0em}
 div#header{height:120px; width:950px; position:relative}
 div#header h1#logo{width:390px; height:82px; position:absolute; top:25px; left:20px}
 div#header h1#logo a{width:390px; height:82px; outline:0; background:url(../img/jobber-logo.gif) 0 0 no-repeat; text-indent:-1000em; float:left}

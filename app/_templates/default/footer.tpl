@@ -3,20 +3,27 @@
 		<div id="footer-contents">
 			<div id="footer-col1">
 				{$translations.footer.column_use}:<br />
-				<a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a><br />
-				<a href="{$BASE_URL}{$articles.widgets.url}/" title="{$articles.widgets.page_title}">{$articles.widgets.title}</a><br />
-				<a href="{$BASE_URL}rss/" title="{$translations.footer.rss_title}">{$translations.footer.rss}</a><br />
+				{if $navigation.footer1 != ''}
+					{section name=tmp loop=$navigation.footer1}
+						<a href="{if $navigation.footer1[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.footer1[tmp].url}/" title="{$navigation.footer1[tmp].title}" >{$navigation.footer1[tmp].name}</a><br />
+					{/section}
+				{/if}
 			</div>
 			<div id="footer-col2">
 				{$translations.footer.column_find}:<br />
-				<a href="{$BASE_URL}{$articles.about.url}/" title="{$articles.about.page_title}">{$articles.about.title}</a><br />
-				<a href="{$BASE_URL}{$articles.contact.url}/" title="{$articles.contact.page_title}">Contact</a>
+				{if $navigation.footer2 != ''}
+					{section name=tmp loop=$navigation.footer2}
+						<a href="{if $navigation.footer2[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.footer2[tmp].url}/" title="{$navigation.footer2[tmp].title}" >{$navigation.footer2[tmp].name}</a><br />
+					{/section}
+				{/if}
 			</div>
 			<div id="footer-col3">
 				{$translations.footer.column_misc}:<br />
-				<a href="{$BASE_URL}{$URL_COMPANIES}/" title="{$translations.footer.companies_title}">{$translations.footer.companies}</a><br />
-				<a href="{$BASE_URL}{$URL_CITIES}/" title="{$translations.footer.cities_title}">{$translations.footer.cities}</a><br />
-				<a href="{$BASE_URL}sitemap/" title="{$translations.sitemap.title}">{$translations.sitemap.title}</a><br />
+				{if $navigation.footer3 != ''}
+					{section name=tmp loop=$navigation.footer3}
+						<a href="{if $navigation.footer3[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.footer3[tmp].url}/" title="{$navigation.footer3[tmp].title}" >{$navigation.footer3[tmp].name}</a><br />
+					{/section}
+				{/if}
 			</div>
 			<div id="footer-copyright">
 				{$translations.footer.powered_by}

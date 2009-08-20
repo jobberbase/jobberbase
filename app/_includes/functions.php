@@ -128,6 +128,38 @@ function get_articles()
 	return $articles;
 }
 
+function get_navigation($menu = false)
+{
+	global $db;
+	
+	$conditions = '';
+	
+	if (isset($menu) && ($menu == 'primary' || $menu == 'secondary' || $menu == 'footer1' || $menu == 'footer2' || $menu == 'footer3'))
+		$conditions = ' WHERE menu = \''.$menu.'\'';
+	
+	$navigation = array();
+
+	$sql = 'SELECT id, url, name, title, menu
+				FROM '.DB_PREFIX.'links
+				' . $conditions . '
+				ORDER BY link_order ASC';
+
+	$result = $db->query($sql);
+	while ($row = $result->fetch_assoc())
+	{
+		$url_check = substr($row['url'], 0, 4);
+		if ($url_check == 'http' || $url_check == 'www.') $outside = 1; else $outside = 0; 
+		
+		$navigation[$row['menu']][] = array(
+										'id' => $row['id'],
+										'url' => $row['url'],
+										'name' => $row['name'],
+										'title' => $row['title'],
+										'menu' => $row['menu'],
+										'outside' => $outside);
+	}
+	return $navigation;
+}
 
 function get_cities()
 {

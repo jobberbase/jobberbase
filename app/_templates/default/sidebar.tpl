@@ -1,6 +1,15 @@
 			{if $CURRENT_PAGE != ''}
 			<a href="{$BASE_URL}" title="{$translations.header.title}">&laquo; {$translations.header.home}</a><br />
 			{/if}
+
+			{if $navigation.secondary != ''}
+			<h4>{$translations.sidebar.menu_title}</h4>
+			<ul>
+				{section name=tmp loop=$navigation.secondary}
+					<li><a href="{if $navigation.secondary[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.secondary[tmp].url}/" title="{$navigation.secondary[tmp].title}" >{$navigation.secondary[tmp].name}</a></li>
+				{/section}
+			{/if}
+			</ul>
 			
 			{if $smarty.session.last_viewed_jobs}
 			<h4>{$translations.header.seen_recently}</h4>

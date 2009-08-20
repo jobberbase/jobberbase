@@ -114,14 +114,14 @@
 			break;
 			
 		case 'confirm':
-      $flag =1;
-      $job = new Job($id);
-      $job_title = BASE_URL . URL_JOB .'/' . $job->mId . '/' . $job->mUrlTitle . '/';
-      $smarty->assign('auth', $job->GetAuth());
-      $smarty->assign('job_url', $job_title);
-      $smarty->assign('first_time_post', $extra);
-      $template = 'publish-confirmation.tpl';
-      break;
+			$flag =1;
+			$job = new Job($id);
+			$job_title = BASE_URL . URL_JOB .'/' . $job->mId . '/' . $job->mUrlTitle . '/';
+			$smarty->assign('auth', $job->GetAuth());
+			$smarty->assign('job_url', $job_title);
+			$smarty->assign('first_time_post', $extra);
+			$template = 'publish-confirmation.tpl';
+			break;
 			
 		// deactivate a post
 		case 'deactivate':
@@ -211,7 +211,7 @@
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('articles', get_articles());
-	//$smarty->assign('types', get_types());
+	$smarty->assign('navigation', get_navigation());
 	
 	$smarty->assign('THEME', $settings['theme']);
 	$smarty->assign('CURRENT_PAGE', $page);
