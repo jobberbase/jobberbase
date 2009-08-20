@@ -164,24 +164,18 @@
 					{
 						$cityID = $_POST['cityID'];
 						
-						// the user tried to delete the 'Anywhere' city which is not allowed
-						if ($cityID == -1)
-							echo 0;
-						else
+						$city = $this->getCityByID($cityID);
+						
+						if ($city)
 						{
-							$city = $this->getCityByID($cityID);
+							$this->updateJobsForCityDeletion($city);
 							
-							if ($city)
-							{
-								$this->updateJobsForCityDeletion($city);
-								
-								$this->deleteCity($city);
-								
-								echo 1;
-							}
-							else
-								echo 0;
+							$this->deleteCity($city);
+							
+							echo 1;
 						}
+						else
+							echo 0;
 						
 						exit;
 					}
@@ -267,7 +261,7 @@
 			global $db;
 			
 			$query = 'UPDATE '.DB_PREFIX.'jobs SET
-					  city_id = -1,
+					  city_id = NULL,
 					  outside_location = "'. $db->real_escape_string($city['name']) .'" 
 					  WHERE 
 					  city_id = ' . $city['id'];
