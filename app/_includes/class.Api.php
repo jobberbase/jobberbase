@@ -73,8 +73,8 @@ class Api
 			var html = "<ul class=\"" + css_class + "\">";
 			for (j = 0; j < jobs.length; j++)
 			{
-				//html += "<li><a target=\"_blank\" href=\"' . JOBBER_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " la " + jobs[j].company + "</a></li>";
-				html += "<li><a target=\"_blank\" href=\"' . JOBBER_URL . 'job/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " (" + jobs[j].location + ")</a></li>";
+				//html += "<li><a target=\"_blank\" href=\"' . JOBBER_URL . URL_JOB . '/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " la " + jobs[j].company + "</a></li>";
+				html += "<li><a target=\"_blank\" href=\"' . JOBBER_URL . URL_JOB . '/" + jobs[j].id + "/" + jobs[j].url_title + "/' . $this->mReferer . '/\">" + jobs[j].title + " (" + jobs[j].location + ")</a></li>";
 			}
 			html += "</ul>";
 			
@@ -125,7 +125,7 @@ class Api
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
 		               WHERE is_temp = 0 AND is_active = 1 AND 
-												 created_on > DATE_SUB("' . $this->mParams['since'] . '", INTERVAL 1 DAY)
+						created_on > DATE_SUB("' . $this->mParams['since'] . '", INTERVAL 1 DAY)
 		               ORDER BY created_on DESC';
 		$result = $db->query($sql);
 
@@ -147,23 +147,11 @@ class Api
 		$response .= '<jobs>';
 		foreach ($jobs as $job)
 		{
-			if ($job['type_id'] == JOBTYPE_FULLTIME)
-			{
-				$type = 'Full-time';
-			}
-			else if ($job['type_id'] == JOBTYPE_PARTTIME)
-			{
-				$type = 'Part-time';
-			}
-			else if ($job['type_id'] == JOBTYPE_FREELANCE)
-			{
-				$type = 'Freelance';
-			}
 			$response .= '<job>';
 			$response .= '<title>' . base64_encode(htmlspecialchars($job['title'], ENT_QUOTES)) . '</title>';
 			$response .= '<job_url>' . JOBBER_URL . 'job/' . $job['id'] . '/' . $job['url_title'] . '/</job_url>';
 			$response .= '<job_city>' . $job['location'] . '</job_city>';
-			$response .= '<job_type>' . $type . '</job_type>';
+			$response .= '<job_type>' . $job['type_name'] . '</job_type>';
 			$response .= '<job_category>' . $job['category_name'] . '</job_category>';
 			
 			$response .= '<description>';
