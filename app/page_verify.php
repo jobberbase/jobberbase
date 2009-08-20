@@ -20,17 +20,16 @@
 		}
 	}
 	
-	$jobs = $job->GetInfo();
-	if (strstr($jobs['description'], '*'))
+	$jobInfo = $job->GetInfo();
+	if (strstr($jobInfo['description'], '*'))
 	{
-		$jobs['description'] = $textile->TextileThis($jobs['description']);	
+		$jobInfo['description'] = $textile->TextileThis($jobInfo['description']);	
 	}
 	else
 	{
-		//$jobs['description'] = nl2br($jobs['description']);
-		$jobs['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $jobs['description']);
+		$jobInfo['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $jobInfo['description']);
 	}
-	$smarty->assign('job', $jobs);
-	$html_title = stripslashes($jobs['title']) . ' at ' . stripslashes($jobs['company']) . ' / ' . SITE_NAME;
+	$smarty->assign('job', $jobInfo);
+	$html_title = stripslashes($jobInfo['title']) . ' at ' . stripslashes($jobInfo['company']) . ' / ' . SITE_NAME;
 	$template = 'publish-verify.tpl';
 ?>
