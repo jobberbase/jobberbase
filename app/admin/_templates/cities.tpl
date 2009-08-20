@@ -15,9 +15,7 @@
 					</td>
 					<td width="200">
 						<a href="{$BASE_URL_ADMIN}cities/prepare-edit/{$city.id}/" title="Edit"><img src="{$BASE_URL_ADMIN}img/page_white_edit.png" alt="Edit" /> Edit</a>
-						{if $city.id != -1}
-							<a href="javascript:void(0);" title="Delete" onclick="jobberBase.deleteCity('{$BASE_URL_ADMIN}cities/delete/', {$city.id})"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="Edit" /> Delete</a>
-						{/if}
+						<a href="javascript:void(0);" title="Delete" onclick="jobberBase.deleteCity('{$BASE_URL_ADMIN}cities/delete/', {$city.id})"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="Edit" /> Delete</a>
 					</td>
 				</tr>
 				{/foreach}
