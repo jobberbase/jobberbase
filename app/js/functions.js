@@ -158,7 +158,7 @@
 							linkElement.setAttribute('title', 'deactivate');
 							linkElement.setAttribute('onclick', deactivateJobFunction);
 							linkElement.onclick = deactivateJobFunction;
-							linkElement.innerHTML = '<img src="'+Jobber.jobber_url+'img/icon_deactivate.gif" alt="deactivate" />';
+							linkElement.innerHTML = '<img src="'+Jobber.jobber_url+'admin/img/icon_deactivate.gif" alt="deactivate" />';
 							linkElement.id = 'deactivateLink'+job_id;
 						}	
 					}
@@ -229,7 +229,7 @@
 							linkElement.setAttribute('title', 'deactivate-spotlight');
                             linkElement.setAttribute('onclick', deactivateSpotlightFunction);
                             linkElement.onclick = deactivateSpotlightFunction; 
-                            linkElement.innerHTML = '<img src="'+Jobber.jobber_url+'img/icon_spotlight_deactivate.gif" alt="deactivate" />';
+                            linkElement.innerHTML = '<img src="'+Jobber.jobber_url+'admin/img/icon_spotlight_deactivate.gif" alt="deactivate" />';
                             linkElement.id = 'deactivateSpotlight'+job_id;
                         }    
                     }
@@ -256,7 +256,7 @@
 						linkElement.setAttribute('title', 'activate-spotlight');							
                         linkElement.setAttribute('onclick', activateSpotlightFunction);
                         linkElement.onclick = activateSpotlightFunction;
-                        linkElement.innerHTML = '<img src="'+Jobber.jobber_url+'img/icon_spotlight_activate.gif" alt="activate" />';
+                        linkElement.innerHTML = '<img src="'+Jobber.jobber_url+'admin/img/icon_spotlight_activate.gif" alt="activate" />';
                         linkElement.id = 'activateSpotlight'+job_id;
                     }
               }

@@ -20,7 +20,7 @@
 				</div>
 				<p></p>
 				<p>
-					<a href="#" title="Add new type"><img src="{$BASE_URL}img/add.png" alt="Add new job type" /> Add new job type</a></p>
+					<a href="#" title="Add new type"><img src="{$BASE_URL_ADMIN}img/add.png" alt="Add new job type" /> Add new job type</a></p>
 		</div><!-- #content -->
 
 {include file="footer.tpl"}

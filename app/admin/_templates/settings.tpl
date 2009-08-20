@@ -57,7 +57,7 @@
 									{else}
 										<input class="settingsform_text_field{if $errors.$setting_name != ''} error{/if}" type="text" 	name="{$setting_name}" value="{$setting_value}"/>
 									{/if}
-									{if $errors.$setting_name != ''}<span class="validation-error"><img src="{$BASE_URL}img/icon-delete.png" alt="" /></span>{/if}
+									{if $errors.$setting_name != ''}<span class="validation-error"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" /></span>{/if}
 								</td>
 								<td class="settingsform_description">{$setting_description}</td>
 								</tr>

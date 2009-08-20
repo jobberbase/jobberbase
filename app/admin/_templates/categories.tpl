@@ -19,7 +19,7 @@
 				</div>
 				<p></p>
 				<p>
-					<a href="#" title="Add new category"><img src="{$BASE_URL}img/add.png" alt="Add new category" /> Add new category</a></p>
+					<a href="#" title="Add new category"><img src="{$BASE_URL_ADMIN}img/add.png" alt="Add new category" /> Add new category</a></p>
 		</div><!-- #content -->
 
 {include file="footer.tpl"}
