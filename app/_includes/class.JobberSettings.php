@@ -15,7 +15,7 @@ class JobberSettings
 	{
 		global $db;
 		
-		$sql = 'SELECT * FROM settings';
+		$sql = 'SELECT * FROM '.DB_PREFIX.'settings';
 		$result = $db->query($sql);
 		
 		$settings = array();
@@ -60,7 +60,7 @@ class JobberSettings
 	{
 	    global $db;
 	    $sql = 'SELECT id, name, var_name, description  
-				FROM settings_categories 
+				FROM '.DB_PREFIX.'settings_categories 
 				ORDER BY id ASC';
 	    $result = $db->query($sql);
 	    
@@ -77,7 +77,7 @@ class JobberSettings
 	{
 		global $db;
 	    $sql = 'SELECT name 
-				FROM settings_categories 
+				FROM '.DB_PREFIX.'settings_categories 
 				WHERE id = ' . $id;
 	    $result = $db->query($sql);
 	    $row = $result->fetch_assoc();
@@ -88,7 +88,7 @@ class JobberSettings
 	{
 		global $db;
 	    $sql = 'SELECT id 
-				FROM settings_categories 
+				FROM '.DB_PREFIX.'settings_categories 
 				WHERE var_name = "' . $var_name . '"';
 	    $result = $db->query($sql);
 	    $row = $result->fetch_assoc();
@@ -139,7 +139,7 @@ class JobberSettings
 	{
 		global $db;
 		$sql = 'SELECT setting_name
-				FROM settings
+				FROM '.DB_PREFIX.'settings
 				WHERE category_id = ' . $category_id;
 		$result = $db->query($sql);
 		
@@ -166,7 +166,7 @@ class JobberSettings
 			
 			if ($setting_value != $settings[$setting_name]['setting_value'])
 			{
-				$sql = 'UPDATE settings SET setting_value = "' . $setting_value . '" WHERE setting_name = "' . $setting_name . '"';
+				$sql = 'UPDATE '.DB_PREFIX.'settings SET setting_value = "' . $setting_value . '" WHERE setting_name = "' . $setting_name . '"';
 				$db->query($sql);
 			}
 			$i++;
