@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 		<div id="content">
-				<h2>Change your password</h2>
+				<h3 class="page-heading">Change your password</h3>
 				
 				<form id="publish_form" action="{$smarty.server.REQUEST_URI}" method="post">
 					<fieldset>

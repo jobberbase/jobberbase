@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 		<div id="content">
-				<h2>Pages</h2>
+				<h3 class="page-heading">Pages</h3>
 				<table id="job-posts" class="job-posts" cellspacing="0">
 					{foreach from=$pages item=page}
 					<tr>

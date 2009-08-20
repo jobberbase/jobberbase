@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 
 	<div id="content">
-			<h2>Cities</h2>
+			<h3 class="page-heading">Cities</h3>
 			<table id="job-posts" cellspacing="0">
 				{if $cities|@count > 50}
 					<p>

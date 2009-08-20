@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 		<div id="content">
-				<h2>Categories</h2>
+				<h3 class="page-heading">Categories</h3>
 				<div id="categoriesContainer">
 				{foreach from=$categories item=category}
 					<div class="categoryItem" rel="{$category.id}">

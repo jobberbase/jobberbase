@@ -1,5 +1,7 @@
 {include file="header.tpl"}
 
+<h3 class="page-heading">{if $job.id == 0}Post job{else}Edit job{/if}</h3>
+
 		{if $show_preview}
 			{include file="edit-post-preview.tpl"}
 		{/if}
@@ -22,7 +24,7 @@
 
 			<form id="publish_form" method="post" action="{$BASE_URL_ADMIN}edit-post/{if $job.id neq 0}{$job.id}/{/if}">
 				<fieldset>
-					<legend>{if $job.id == 0}Post job{else}Edit job{/if}</legend>
+					<legend>Job Details</legend>
 					<table border="0" cellspacing="2" cellpadding="2">
 						<tr>
 							<td colspan="2">
