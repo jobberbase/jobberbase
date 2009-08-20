@@ -150,8 +150,7 @@ INSERT INTO `cities` (`id`, `name`, `ascii_name`) VALUES
 (69, 'Tulcea', 'Tulcea'),
 (70, 'Turda', 'Turda'),
 (71, 'Vaslui', 'Vaslui'),
-(72, 'Zalau', 'Zalau'),
-(-1, 'Anywhere', 'Anywhere');
+(72, 'Zalau', 'Zalau');
 
 -- --------------------------------------------------------
 
@@ -186,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `title` varchar(100) default '',
   `description` text,
   `company` varchar(150) default '',
-  `city_id` int(11) NOT NULL,
+  `city_id` int(11),
   `url` varchar(150) default NULL,
   `apply` varchar(200) default '',
   `created_on` timestamp NOT NULL default '0000-00-00 00:00:00',
