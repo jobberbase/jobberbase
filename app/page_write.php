@@ -94,8 +94,14 @@
 			}
 			if (!isset($city_id))
 			{
-				$city_id = -1;
+				$city_id = 0;
 			}
+			else
+			{
+				// if a city is selected, we must clear the 'other' location
+				$location_outside_ro_where = '';
+			}
+			
 			$data = array('company' => $company,
 			              'url' => $url,
 			              'title' => $title,
@@ -103,13 +109,15 @@
 			              'category_id' => $category_id,
 			              'type_id' => $type_id,
 			              'description' => $description,
-						  			'location_outside_ro_where' => $location_outside_ro_where,
-						  			'is_temp' => 1,
-						  			'is_active' => 0,
+			  			  'location_outside_ro_where' => $location_outside_ro_where,
+			  			  'is_temp' => 1,
+			  			  'is_active' => 0,
 			              'apply' => '',
 			              'poster_email' => $poster_email,
 			              'apply_online' => $apply_online);
+			
 			$id = $job->Create($data);
+			
 			redirect_to(BASE_URL . 'verify/' . $id . '/');
 			exit;
 		}
@@ -155,13 +163,20 @@
 		if (empty($errors))
 		{
 			$job = new Job($job_id);
+			
 			if (!strstr($url, 'http://'))
 			{
 				$url = 'http://' . $url;
 			}
+			
 			if (!isset($city_id))
 			{
-				$city_id = -1;
+				$city_id = 0;
+			}
+			else
+			{
+				// if a city is selected, we must clear the 'other' location
+				$location_outside_ro_where = '';
 			}
 
 			$data = array('company' => $company,
@@ -184,7 +199,6 @@
 			}
 			else
 			{
-				// $dd = '';
 				$add = '';
 			}
 			redirect_to(BASE_URL . 'verify/' . $job_id . '/' . $add);

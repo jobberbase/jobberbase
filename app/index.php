@@ -68,6 +68,11 @@
 			$flag = 1;
 			break;
 			
+		case 'jobs-in-other-cities':
+			require_once 'page_other_cities.php';
+			$flag = 1;
+			break;
+			
 		// search results
 		case 'search':
 			require_once 'page_search.php';

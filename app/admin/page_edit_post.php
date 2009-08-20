@@ -42,7 +42,7 @@ if ($id != 0)
 
 		// we didn't receive a city (when the cities combo is disabled)
 		if (!isset($_POST['city_id']))
-			$city_id = -1;
+			$city_id = 0;
 		else
 		{
 			$city_id = $_POST['city_id'];
@@ -66,14 +66,20 @@ if ($id != 0)
 		$jobToEdit['textiledDescription'] = $textile->TextileThis($_POST['description']);
 		$jobToEdit['location_outside_ro'] = $jobToEdit['location_outside_ro_where'];
 		
-		if ($isCitySelected)
+		$is_location_anywhere = $jobToEdit['city_id'] == 0 && $jobToEdit['location_outside_ro'] == '';
+		$jobToEdit['is_location_anywhere'] = $is_location_anywhere;
+		
+		if (!$is_location_anywhere)
 		{
-			$city = get_city_by_id($city_id);
-			
-			$jobToEdit['location'] = $city['name'];
+			if ($isCitySelected)
+			{
+				$city = get_city_by_id($city_id);
+				
+				$jobToEdit['location'] = $city['name'];
+			}
+			else
+				$jobToEdit['location'] = $jobToEdit['location_outside_ro'];
 		}
-		else
-			$jobToEdit['location'] = $jobToEdit['location_outside_ro'];
 			
 		// no errors
 		if (empty($errors))
@@ -102,6 +108,7 @@ if ($id != 0)
 				}
 				else
 				{
+					// a job posted by the admin is active from the beginning
 					$data['is_temp'] = 0;
 					$data['is_active'] = 1;
 					

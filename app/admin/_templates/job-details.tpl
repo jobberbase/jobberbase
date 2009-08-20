@@ -25,8 +25,8 @@
 					{else}
 					<strong>{$job.company}</strong>
 					{/if}
-					{if $job.location == 'Anywhere'}
-					<strong>({$job.location})</strong>
+					{if $job.is_location_anywhere}
+					<strong>({$translations.jobs.location_anywhere})</strong>
 					{else}
 					<span class="fading">in</span> <strong>{$job.location}</strong>
 					{/if}

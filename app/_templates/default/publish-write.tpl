@@ -57,11 +57,12 @@
 							<td valign="top">{$translations.publish.location_label}:</td>
 							<td>
 								<select name="city_id" id="city_id" tabindex="3" {if $job.location_outside_ro != '' OR $smarty.post.location_outside_ro_where != ''}disabled="disabled"{/if}>
+									<option value="0">{$translations.jobs.location_anywhere}</option>
 									{section name="c" loop=$cities}
-									<option value="{$cities[c].id}" {if $smarty.post.city_id == $cities[c].id || $job.city_id == $cities[c].id}selected="selected"{else}{if $user_city.id == $cities[c].id AND !$smarty.post.city_id AND !$job.city_id}selected="selected"{/if}{/if}>{if $cities[c].id == -1}-- {$cities[c].name} --{else}{$cities[c].name}{/if}</option>
+									<option value="{$cities[c].id}" {if $smarty.post.city_id == $cities[c].id || $job.city_id == $cities[c].id}selected="selected"{else}{if $user_city.id == $cities[c].id AND !$smarty.post.city_id AND !$job.city_id}selected="selected"{/if}{/if}>{$cities[c].name}</option>
 									{/section}
 								</select>
-								<a id="other_location_label" href="#" onclick="Jobber.HandleLocationOutsideRo(); return false;">{if $job.location_outside_ro != '' OR $smarty.post.location_outside_ro_where != ''}{$translations.publish.country}{else}{$translations.publish.other}{/if}</a>
+								<a id="other_location_label" href="#" onclick="Jobber.HandleLocationOutsideRo(); return false;">{if $job.location_outside_ro != '' OR $smarty.post.location_outside_ro_where != ''}{$translations.publish.location_pick_from_list}{else}{$translations.publish.other}{/if}</a>
 								<div id="location_outside_ro" {if $job.location_outside_ro != '' OR $smarty.post.location_outside_ro_where != ''}style="display: block;"{else}style="display: none;"{/if}>
 									{$translations.publish.where} <input type="text" name="location_outside_ro_where" id="location_outside_ro_where" size="50" maxlength="140" {if $job.location_outside_ro != ''}value="{$job.location}"{/if}{if $smarty.post.location_outside_ro_where != ''}value="{$smarty.post.location_outside_ro_where}"{/if} />
 									<div class="suggestion">{$translations.publish.where_info}</div>

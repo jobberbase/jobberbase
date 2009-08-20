@@ -3,19 +3,9 @@
 {/if}
 {if $no_categ != 1}
 <table id="job-posts" class="job-posts" cellspacing="0">
-{if $keywords}
-	<tr><td colspan="3" class="search_results_label">
-		Search results for <strong>{$keywords}</strong>:
-	</td></tr>
-{/if}
 {if !$jobs}
 <div id="no-ads">
-	{if $CURRENT_PAGE != 'search'}
-	{$translations.jobs.no_job} <strong>{$current_category_name}</strong>.<br />
 	<a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a>
-	{else}
-	{$translations.jobs.no_job_found}<br />
-	{/if}
 </div><!-- #no-ads -->
 {/if}
 {foreach item=job from=$jobs}

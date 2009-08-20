@@ -20,7 +20,7 @@
 				</div>
 				{/if}
 				<h2>
-					<img src="{$BASE_URL}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" /> {$job.title} 
+					<img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" /> {$job.title} 
 				</h2>
 				<p>
 					<span class="fading">at</span>
@@ -29,8 +29,8 @@
 					{else}
 					<strong>{$job.company}</strong>
 					{/if}
-					{if $job.location == 'Anywhere'}
-					<strong>({$job.location})</strong>
+					{if $job.is_location_anywhere}
+					<strong>({$translations.jobs.location_anywhere})</strong>
 					{else}
 					<span class="fading">{$translations.homepage.in}</span> <strong>{$job.location}</strong>
 					{/if}
