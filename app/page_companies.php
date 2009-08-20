@@ -13,31 +13,7 @@
 	foreach ($comps as $company)
 	{
 		$nr = $company['nr'];
-		
-		if ($nr < 2)
-		{
-			$tag_height = 1;
-		}
-		else if ($nr >= 2 && $nr < 3)
-		{
-			$tag_height = 2;
-		}
-		else if ($nr >= 3 && $nr < 4)
-		{
-			$tag_height = 3;
-		}
-		else if ($nr >= 4 && $nr < 5)
-		{
-			$tag_height = 4;
-		}
-		else if ($nr >= 5 && $nr < 6)
-		{
-			$tag_height = 5;
-		}
-		else if ($nr >= 6)
-		{
-			$tag_height = 6;
-		}
+		$tag_height = get_clould_tag_height($nr);
 		
 		$companies[] = array('name' => $company['company'], 
 		                     'varname' => $sanitizer->sanitize_title_with_dashes($company['company']), 
