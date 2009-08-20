@@ -10,7 +10,7 @@
 				{/section}
 			{/if}
 			{if $settings_form != ''}
-				{if $category_name !=  ''}<h3 class="page-heading">{$category_name}</h3>{/if}
+				{if $category_name !=  ''}<h3 class="page-heading">{$category_name}<span class="back_to_overview"><a href='{$BASE_URL_ADMIN}settings' title='Back to overview'>&laquo; Back to overview</a></span></h3>{/if}
 				<form id="publish_form" method="post" action="{$BASE_URL_ADMIN}settings/{$CURRENT_ID}">
 					{if $errors != ''}
 						<fieldset class="error">

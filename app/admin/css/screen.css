@@ -46,6 +46,8 @@ div.draggingItem div.categoryHandle{background:#E86857}
 .settingsform_text_field{width:300px;}
 .settingsform_text_area{width: 300px;height:88px;}
 .settingsform_description{font-size:10px;font-style:italic;}
+.back_to_overview{float:right;margin-right:5px;margin-top:2px}
+.back_to_overview a{font-size:14px}
 /* Copy of Default CSS as Admin should have its own theme files + Cleaned some*/
 /* Reset */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit}

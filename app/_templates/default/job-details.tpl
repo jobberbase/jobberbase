@@ -42,7 +42,7 @@
 					<div id="apply_online_now"><a href="#" onclick="$('#apply-online').toggle(); window.location.href = '#apply'; return false;">&raquo; Apply now</a><a href="#" name="apply">&nbsp;</a></div>
 					{if $smarty.session.apply_successful AND $smarty.session.apply_successful eq -1}
 					<div class="validation-failure">
-						<img src="{$BASE_URL}img/icon-delete.png" alt="" />
+						<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />
 						{if $smarty.session.apply_allowed AND $smarty.session.apply_allowed eq -1}
 							{$translations.apply.error_apply_timeout_not_passed|replace:'%minutes%':$smarty.const.MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP}
 						{elseif $smarty.session.apply_mail_sent AND $smarty.session.apply_mail_sent eq -1}
@@ -60,28 +60,28 @@
 									<td><label for="apply_name">{$translations.apply.name_label}:</label></td>
 									<td>
 										<input {if $smarty.session.apply_errors.apply_name}class="error"{/if} type="text" name="apply_name" id="apply_name" maxlength="50" size="30" value="{$smarty.session.apply_fields.apply_name}" />
-										<span class="validation-error">{if $smarty.session.apply_errors.apply_name}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
+										<span class="validation-error">{if $smarty.session.apply_errors.apply_name}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>	
 									</td>
 								</tr>
 								<tr>
 									<td><label for="apply_email">{$translations.apply.email_label}:</label></td>
 									<td>
 										<input {if $smarty.session.apply_errors.apply_email}class="error"{/if} type="text" name="apply_email" id="apply_email" maxlength="50" size="30" value="{$smarty.session.apply_fields.apply_email}" />
-										<span class="validation-error">{if $smarty.session.apply_errors.apply_email}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
+										<span class="validation-error">{if $smarty.session.apply_errors.apply_email}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>	
 									</td>
 								</tr>
 								<tr>
 									<td valign="top"><label for="apply_msg">{$translations.apply.message_label}:</label></td>
 									<td>
 										<textarea {if $smarty.session.apply_errors.apply_msg}class="error"{/if} name="apply_msg" id="apply_msg" cols="60" rows="15">{$smarty.session.apply_fields.apply_msg}</textarea>
-										<span class="validation-error">{if $smarty.session.apply_errors.apply_msg}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
+										<span class="validation-error">{if $smarty.session.apply_errors.apply_msg}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>	
 									</td>
 								</tr>
 								<tr>
 									<td valign="top"><label for="apply_cv">{$translations.apply.cv_label}:</label></td>
 									<td>
 										<input type="file" name="apply_cv" id="apply_cv" />
-										<span class="validation-error">{if $smarty.session.apply_errors.apply_cv}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>	
+										<span class="validation-error">{if $smarty.session.apply_errors.apply_cv}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>	
 										<div class="suggestion">{$translations.apply.cv_info}</div>
 									</td>
 								</tr>
@@ -120,10 +120,10 @@
 			apply_cv: { accept: "pdf|rtf|doc|odt" }
 		},
 		messages: {
-			apply_name: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
-			apply_email: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
-			apply_msg: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
-			apply_cv: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />'
+			apply_name: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />',
+			apply_email: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />',
+			apply_msg: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />',
+			apply_cv: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />'
 		}
 	});
 	}); 

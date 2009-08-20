@@ -194,11 +194,11 @@
 							poster_email: { required: true }
 						},
 						messages: {
-							company: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
-							title: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
-							location: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
-							description: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
-							poster_email: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />'
+							company: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />',
+							title: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />',
+							location: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />',
+							description: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />',
+							poster_email: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />'
 						}
 					});	
 				}
