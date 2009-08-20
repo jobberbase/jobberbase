@@ -1,20 +1,5 @@
 <?php
-	if ($extra == 'full-time')
-	{
-		$type_id = JOBTYPE_FULLTIME;
-	}
-	else if ($extra == 'part-time')
-	{
-		$type_id = JOBTYPE_PARTTIME;
-	}
-	else if ($extra == 'freelance')
-	{
-		$type_id = JOBTYPE_FREELANCE;
-	}
-	else
-	{
-		$type_id = false;
-	}
+	$type_id = get_type_id_by_varname($extra);
 	
 	$city_ascii_name = urldecode($id);
 	
