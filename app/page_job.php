@@ -1,4 +1,7 @@
 <?php
+	$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
+	$smarty->assign('ENABLE_RECAPTCHA', ENABLE_RECAPTCHA);
+
 	$job_flag = false;
 	$count = 0;
 	
