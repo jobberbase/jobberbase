@@ -54,24 +54,15 @@ class Job
 			               a.views_count AS views_count, a.auth AS auth, a.city_id AS city_id, a.outside_location AS outside_location,
 			               a.poster_email AS poster_email, a.apply_online AS apply_online, b.name AS category_name,
 			               c.var_name as type_var_name, c.name as type_name,
-			               DATE_ADD(created_on, INTERVAL 30 DAY) AS closed_on, DATEDIFF(NOW(), created_on) AS days_old
-			               FROM '.DB_PREFIX.'jobs a, '.DB_PREFIX.'categories b, '.DB_PREFIX.'types c
+			               DATE_ADD(created_on, INTERVAL 30 DAY) AS closed_on, DATEDIFF(NOW(), created_on) AS days_old, cit.name AS city_name
+			               FROM '.DB_PREFIX.'jobs a LEFT JOIN '.DB_PREFIX.'cities cit on a.city_id = cit.id, '.DB_PREFIX.'categories b, '.DB_PREFIX.'types c
 			               WHERE a.category_id = b.id AND c.id = a.type_id AND a.id = ' . $job_id;
+			
 			$result = $db->query($sql);
 			$row = $result->fetch_assoc();
+			
 			if (!empty($row))
 			{
-				if ($row['city_id'] == -1 && $row['outside_location'] != '') 
-				{
-					$this->mLocation = $row['outside_location'];
-				}	
-				else
-				{
-					$sql = 'SELECT name FROM '.DB_PREFIX.'cities WHERE id = ' . $row['city_id'];
-					$result = $db->query($sql);
-					$row2 = $result->fetch_assoc();
-					$this->mLocation = $row2['name'];
-				}	
 				$this->mId = $job_id;
 				$this->mTypeId = $row['type_id'];
 				$this->mCategoryId = $row['category_id'];
@@ -89,6 +80,7 @@ class Job
 				$this->mAuth = $row['auth'];
 				$this->mCityId = $row['city_id'];
 				$this->mMySqlDate = $row['mysql_date'];
+				$this->mLocation = $this->GetLocation($row);
 				$this->mLocationOutsideRo = $row['outside_location'];
 				$this->mPosterEmail = $row['poster_email'];
 				$this->mUrlTitle = $sanitizer->sanitize_title_with_dashes($this->mTitle . ' at ' . $this->mCompany);
@@ -105,86 +97,84 @@ class Job
 	public function GetInfo()
 	{
 		$job = array('id' => $this->mId,
-			           'type_id' => $this->mTypeId,
-			           'category_id' => $this->mCategoryId,
-			           'category_name' => $this->mCategoryName,
-								 'company' => stripslashes($this->mCompany),
-								 'url' => stripslashes($this->mUrl),
-								 'title' => stripslashes($this->mTitle),
-								 'url_title' => stripslashes($this->mUrlTitle),
-								 'location' => $this->mLocation,
-								 'description' => stripslashes($this->mDescription),
-								 'created_on' => stripslashes($this->mCreatedOn),
-								 'closed_on' => stripslashes($this->mClosedOn),
-								 'apply' => stripslashes($this->mApply),
-								 'views_count' => $this->mViewsCount,
-								 'auth' => $this->mAuth,
-								 'city_id' => $this->mCityId,
-								 'mysql_date' => $this->mMySqlDate,
-								 'location_outside_ro' => $this->mLocationOutsideRo,
-								 'poster_email' => $this->mPosterEmail,
-								 'apply_online' => $this->mApplyOnline,
-								 'is_active' => $this->mIsActive,
-								 'days_old' => $this->mDaysOld,
-								 'is_spotlight' => $this->mIsSpotlight,
-								 'type_name' => $this->mTypeName,
-								 'type_var_name' => $this->mTypeVarName);
+		             'type_id' => $this->mTypeId,
+		             'category_id' => $this->mCategoryId,
+		             'category_name' => $this->mCategoryName,
+					 'company' => stripslashes($this->mCompany),
+					 'url' => stripslashes($this->mUrl),
+					 'title' => stripslashes($this->mTitle),
+					 'url_title' => stripslashes($this->mUrlTitle),
+					 'location' => $this->mLocation,
+					 'location_outside_ro' => $this->mLocationOutsideRo,
+					 'is_location_anywhere' => $this->IsLocationAnywhere(),
+					 'description' => stripslashes($this->mDescription),
+					 'created_on' => stripslashes($this->mCreatedOn),
+					 'closed_on' => stripslashes($this->mClosedOn),
+					 'apply' => stripslashes($this->mApply),
+					 'views_count' => $this->mViewsCount,
+					 'auth' => $this->mAuth,
+					 'city_id' => $this->mCityId,
+					 'mysql_date' => $this->mMySqlDate,
+					 'poster_email' => $this->mPosterEmail,
+					 'apply_online' => $this->mApplyOnline,
+					 'is_active' => $this->mIsActive,
+					 'days_old' => $this->mDaysOld,
+					 'is_spotlight' => $this->mIsSpotlight,
+					 'type_name' => $this->mTypeName,
+					 'type_var_name' => $this->mTypeVarName);
+		
 		return $job;
 	}
 	
-	// Get a job post's basic information
-	public function GetBasicInfo()
-	{
-		$job = array('id' => $this->mId,
-			           'type_id' => $this->mTypeId,
-			           'category_id' => $this->mCategoryId,
- 			           'category_name' => $this->mCategoryName,
-								 'company' => stripslashes($this->mCompany),
-								 'url' => stripslashes($this->mUrl),
-								 'title' => stripslashes($this->mTitle),
-								 'url_title' => stripslashes($this->mUrlTitle),
-								 'location' => $this->mLocation,
-								 'description' => stripslashes($this->mDescription),
-								 'created_on' => stripslashes($this->mCreatedOn),
-								 'closed_on' => stripslashes($this->mClosedOn),
-								 'apply' => stripslashes($this->mApply),
-								 'city_id' => $this->mCityId,
-								 'mysql_date' => $this->mMySqlDate,
-								 'location_outside_ro' => $this->mLocationOutsideRo,
-								 'is_active' => $this->mIsActive,
-								 'days_old' => $this->mDaysOld,
-								 'is_spotlight' => $this->mIsSpotlight,
-								 'type_name' => $this->mTypeName,
-								 'type_var_name' => $this->mTypeVarName);
-		return $job;
-	}
-
 	// Get a job post's basic information for admin
 	public function GetBasicInfoAdmin()
 	{
 		$job = array('id' => $this->mId,
-			           'type_id' => $this->mTypeId,
-			           'category_id' => $this->mCategoryId,
- 			           'category_name' => $this->mCategoryName,
-								 'company' => stripslashes($this->mCompany),
-								 'url' => stripslashes($this->mUrl),
-								 'title' => stripslashes($this->mTitle),
-								 'url_title' => stripslashes($this->mUrlTitle),
-								 'location' => $this->mLocation,
-								 'description' => stripslashes($this->mDescription),
-								 'created_on' => stripslashes($this->mCreatedOn),
-								 'closed_on' => stripslashes($this->mClosedOn),
-								 'apply' => stripslashes($this->mApply),
-								 'city_id' => $this->mCityId,
-								 'mysql_date' => $this->mMySqlDate,
-								 'location_outside_ro' => $this->mLocationOutsideRo,
-								 'days_old' => $this->mDaysOld,
-								 'is_active' => $this->mIsActive,
-								 'views_count' => $this->mViewsCount,
-								 'is_spotlight' => $this->mIsSpotlight,
-								 'type_name' => $this->mTypeName,
-								 'type_var_name' => $this->mTypeVarName);
+			         'type_id' => $this->mTypeId,
+			         'category_id' => $this->mCategoryId,
+ 			         'category_name' => $this->mCategoryName,
+					 'company' => stripslashes($this->mCompany),
+					 'url' => stripslashes($this->mUrl),
+					 'title' => stripslashes($this->mTitle),
+					 'url_title' => stripslashes($this->mUrlTitle),
+					 'location' => $this->mLocation,
+					 'location_outside_ro' => $this->mLocationOutsideRo,
+					 'is_location_anywhere' => $this->IsLocationAnywhere(),
+					 'description' => stripslashes($this->mDescription),
+					 'created_on' => stripslashes($this->mCreatedOn),
+					 'closed_on' => stripslashes($this->mClosedOn),
+					 'apply' => stripslashes($this->mApply),
+					 'city_id' => $this->mCityId,
+					 'mysql_date' => $this->mMySqlDate,
+					 'days_old' => $this->mDaysOld,
+					 'is_active' => $this->mIsActive,
+					 'views_count' => $this->mViewsCount,
+					 'is_spotlight' => $this->mIsSpotlight,
+					 'type_name' => $this->mTypeName,
+					 'type_var_name' => $this->mTypeVarName);
+		
 		return $job;
+	}
+	
+	private function GetLocation($resultSetRow)
+	{
+		$location = '';
+		
+		if ($resultSetRow['city_id'] != NULL) 
+		{
+			$location = $resultSetRow['city_name'];
+		}	
+		elseif ($resultSetRow['outside_location'] != '')
+		{
+			$location = $resultSetRow['outside_location'];
+		}
+		
+		return $location;
+	}
+	
+	private function IsLocationAnywhere()
+	{
+		return $this->mCityId == 0 && $this->mLocationOutsideRo == '';
 	}
 	
 	// Get all job posts (optionally from a specific type and/or category)
@@ -520,7 +510,7 @@ class Job
 		while ($row = $result->fetch_assoc())
 		{
 			$current_job = new Job($row['id']);
-			$jobs[] = $current_job->GetBasicInfo();
+			$jobs[] = $current_job->GetInfo();
 		}
 		return $jobs;
 	}
@@ -818,7 +808,7 @@ class Job
 			while (($current_loop < $total_loop) && ($current_loop < ($max_loop )))
 			{
 				$current_job = new Job($id_array[$start_count]);
-				$jobs[] = $current_job->GetBasicInfo();
+				$jobs[] = $current_job->GetInfo();
 				$current_loop++;
 				$start_count++;
 			}
@@ -907,9 +897,10 @@ class Job
 	public function Create($params)
 	{
 		global $db;
-		if ($params['city_id'] == '')
+		
+		if ($params['city_id'] == '' || $params['city_id'] == 0)
 		{
-			$params['city_id'] = -1;
+			$params['city_id'] = 'NULL';
 		}
 		if ($params['apply_online'] == 'on')
 		{
@@ -940,14 +931,10 @@ class Job
 	{
 		global $db;
 
-		/*if ($params['city_id'] == '')
+		if ($params['city_id'] == '' || $params['city_id'] == 0)
 		{
-			$params['city_id'] = -1;
+			$params['city_id'] = 'NULL';
 		}
-		else
-		{
-			$params['location_outside_ro_where'] = '';
-		}*/
 
 		if ($params['apply_online'] == 'on')
 		{
@@ -1170,25 +1157,6 @@ class Job
 		}
 	}
 	
-	// Check if there are any jobs in the selected city
-	public function AnyJobsForCity($city_id)
-	{
-		global $db;
-		$sql = 'SELECT id
-		               FROM '.DB_PREFIX.'jobs
-		               WHERE city_id = ' . $city_id;
-		$result = $db->query($sql);
-		$row = $result->fetch_assoc();
-		if (!empty($row))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
 	public function GetJobsCountForAllCategs()
 	{
 		global $db;
@@ -1252,8 +1220,16 @@ class Job
 	{
 		global $db;
 		
-		$jobsCountPerCity = array();
 		$condition = '';
+		
+		if ($city_id)
+		{
+			$condition = ' AND city_id = ' . $city_id;
+		}
+		else
+		{
+			$condition = ' AND city_id IS NULL';
+		}
 		
 		if ($type)
 		{
@@ -1269,13 +1245,67 @@ class Job
 			$condition .= ' AND type_id = ' . $type_id;
 		}
 		
-		$sql = 'SELECT COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1 and city_id = '. $city_id . $condition;
+		$sql = 'SELECT COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1'. $condition;
 
 		$result = $db->query($sql);
 		
 		$row = $result->fetch_assoc();
 		
 		return $row['total'];
+	}
+	
+	public function GetNumberOfJobsInOtherCities()
+	{
+		global $db;
+		
+		$sql = 'SELECT COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1 AND city_id IS NULL';
+
+		$result = $db->query($sql);
+		
+		$row = $result->fetch_assoc();
+		
+		return $row['total'];
+	}
+	
+	public function GetPaginatedJobsForOtherCities($type_id = false, $firstLimit = false, $lastLimit = false)
+	{
+		global $db;
+		$jobs = array();
+		$conditions = '';
+		
+		// if $type_id is, in fact, the type's var_name, 
+		// get the type's id
+		if (!is_numeric($type_id))
+		{
+			$type_id = $this->GetTypeId($type_id);
+		}
+		
+		if (is_numeric($type_id) && $type_id != 0)
+		{
+			$conditions .= ' AND type_id = ' . $type_id;
+		}
+
+		if ($firstLimit >= 0 && $lastLimit >= 0)
+		{
+			$sql_limit = 'LIMIT ' . $firstLimit .', ' . $lastLimit;
+		}
+		else
+		{
+		        $sql_limit = '';        
+		}
+		
+		$sql = 'SELECT id
+		               FROM '.DB_PREFIX.'jobs
+		               WHERE city_id IS NULL' . $conditions . ' AND is_temp = 0 AND is_active = 1
+		               ORDER BY created_on DESC ' . $sql_limit;
+		
+		$result = $db->query($sql);
+		while ($row = $result->fetch_assoc())
+		{
+			$current_job = new Job($row['id']);
+			$jobs[] = $current_job->GetInfo();
+		}
+		return $jobs;
 	}
 	
 	// Check if the poster of this post has posted before with this e-mail address
