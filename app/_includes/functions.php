@@ -30,40 +30,45 @@ function get_cities_cloud()
  
 	foreach ($cities as $city)
 	{
-		$nr = $city['nr'];
- 
-		if ($nr < 2)
-		{
-			$tag_height = 1;
-		}
-		else if ($nr >= 2 && $nr < 3)
-		{
-			$tag_height = 2;
-		}
-		else if ($nr >= 3 && $nr < 4)
-		{
-			$tag_height = 3;
-		}
-		else if ($nr >= 4 && $nr < 5)
-		{
-			$tag_height = 4;
-		}
-		else if ($nr >= 5 && $nr < 6)
-		{
-			$tag_height = 5;
-		}
-		else if ($nr >= 6)
-		{
-			$tag_height = 6;
-		}
+		$numberOfJobs = $city['nr'];
  
 		$city_array[] = array('name' => $city['name'],
 		                     'varname' => $city['ascii_name'],
-		                     'count' => $nr,
-		                     'tag_height' => $tag_height);
+		                     'count' => $numberOfJobs,
+		                     'tag_height' => get_clould_tag_height($numberOfJobs));
 	}
  
 	return $city_array;
+}
+
+function get_clould_tag_height($numberOfItems)
+{
+	if ($numberOfItems < 2)
+	{
+		$tag_height = 1;
+	}
+	else if ($numberOfItems >= 2 && $numberOfItems < 3)
+	{
+		$tag_height = 2;
+	}
+	else if ($numberOfItems >= 3 && $numberOfItems < 4)
+	{
+		$tag_height = 3;
+	}
+	else if ($numberOfItems >= 4 && $numberOfItems < 5)
+	{
+		$tag_height = 4;
+	}
+	else if ($numberOfItems >= 5 && $numberOfItems < 6)
+	{
+		$tag_height = 5;
+	}
+	else if ($numberOfItems >= 6)
+	{
+		$tag_height = 6;
+	}
+	
+	return $tag_height;
 }
 
 function get_categories()
