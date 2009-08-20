@@ -61,7 +61,7 @@ class JobberSettings
 	    global $db;
 	    $sql = 'SELECT id, name, var_name, description  
 				FROM settings_categories 
-				ORDER BY name ASC';
+				ORDER BY id ASC';
 	    $result = $db->query($sql);
 	    
 	    $settings_category = array();

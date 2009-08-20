@@ -73,6 +73,7 @@
 	require_once '_includes/function.printr.php';
 	require_once '_includes/function.escape.php';
 	require_once '_includes/functions.php';
+	require_once '_includes/recaptchalib.php';
 	require_once '_includes/class.phpmailer.php';
 	require_once '_includes/class.Postman.php';
 	require_once '_includes/class.Textile.php';
@@ -133,6 +134,9 @@
 	define('SEARCH_METHOD', $settings['search_method']);
 	define('SEARCH_RESULTS_PER_PAGE', $settings['jobs_per_search']);
 	define('SEARCH_AMOUNT_PAGES', '8'); //Max. pages to display (must be an even number!)
+	define('ENABLE_RECAPTCHA', $settings['enable_recaptcha']);
+	define('CAPTCHA_PUBLIC_KEY', $settings['captcha_public_key']);
+	define('CAPTCHA_PRIVATE_KEY', $settings['captcha_private_key']);
 	
 	// Setup Smarty
 	$smarty = new Smarty();

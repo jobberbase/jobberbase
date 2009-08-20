@@ -6,6 +6,13 @@
 	$errors = array();
 
 	// validation
+	if (ENABLE_RECAPTCHA == 'yes')
+	{
+		$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
+		$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
+		$_POST["recaptcha_response_field"]);
+		if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
+	}
 	if ($apply_name == '')
 	{
 		$errors['apply_name'] = $translations['apply']['name_error'];

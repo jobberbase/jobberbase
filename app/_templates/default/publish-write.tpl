@@ -153,6 +153,21 @@
 						</tr>
 					</table>
 				</fieldset>
+				{if $ENABLE_RECAPTCHA == 'yes'}
+				<fieldset>
+					<legend>{$translations.captcha.captcha_title}</legend>
+					{literal}
+					<script type="text/javascript">
+					  var RecaptchaOptions = {
+					    theme : 'white',
+					    tabindex : 9
+					  };
+					</script>
+					{/literal}
+					{$the_captcha} <span class="validation-error">{if $errors.captcha}
+					<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
+				</fieldset>
+				{/if}
 				<fieldset><input type="submit" name="submit" id="submit" value="{$translations.publish.step1_submit}" /></fieldset>
 				<fieldset class="hidden">
 					<input type="checkbox" name="apply_online" id="apply_online" checked="checked" />

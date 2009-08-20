@@ -481,7 +481,10 @@ INSERT INTO `settings` (`id`, `category_id`, `setting_name`, `setting_title`, `s
 (23, 3, 'url_job', 'Job Details', 'The URL for the Job Details page.', 'job', '', 'not_empty|is_url_string'),
 (24, 3, 'url_jobs', 'Jobs per Category', 'The URL for the Jobs per Category pages.', 'jobs', '', 'not_empty|is_url_string'),
 (25, 3, 'url_jobs_at_company', 'Jobs per Company', 'The URL for the Jobs per Company pages.', 'jobs-at', '', 'not_empty|is_url_string'),
-(26, 3, 'url_jobs_in_city', 'Jobs per City', 'The URL for the Jobs per City pages.', 'jobs-in', '', 'not_empty|is_url_string');
+(26, 3, 'url_jobs_in_city', 'Jobs per City', 'The URL for the Jobs per City pages.', 'jobs-in', '', 'not_empty|is_url_string'),
+(28, 4, 'enable_recaptcha', 'Enable ReCaptcha', 'Before enabling ReCaptcha, make sure to add your private and public key.', 'no', 'radiobutton|yes|no', 'not_empty'),
+(29, 4, 'captcha_public_key', 'Captcha Public Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PUBLIC_KEY', NULL, NULL),
+(30, 4, 'captcha_private_key', 'Captcha Private Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PRIVATE_KEY', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -503,5 +506,6 @@ CREATE TABLE IF NOT EXISTS `settings_categories` (
 
 INSERT INTO `settings_categories` (`id`, `name`, `var_name`, `description`) VALUES
 (1, 'Main Settings', 'main', 'The main settings for your JobberBase installation. This includes settings such as site name, meta-tags etc.'),
+(2, 'Search / Pagination Settings', 'search-and-pagination', 'Settings that change the amount of jobs to display per page and which search method to use.'),
 (3, 'URL Rewrite Settings', 'url-rewrite', 'You can easily change the structure of various URLs with these settings.'),
-(2, 'Search / Pagination Settings', 'search-and-pagination', 'Settings that change the amount of jobs to display per page and which search method to use.');
+(4, 'ReCaptcha Anti-Spam', 'anti-spam', 'JobberBase has built-in support for ReCaptcha. Before you can enable this, you''ll need to register a free key at recaptcha.net.');

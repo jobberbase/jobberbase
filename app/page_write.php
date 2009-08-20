@@ -1,4 +1,8 @@
 <?php
+
+	$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
+	$smarty->assign('ENABLE_RECAPTCHA', ENABLE_RECAPTCHA);
+	
 	$later_edit = false;
 	if ($id != 0)
 	{
@@ -57,6 +61,13 @@
 		$_SESSION['referer'] = BASE_URL . 'post/';
 		
 		// validation
+		if (ENABLE_RECAPTCHA == 'yes')
+		{
+			$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
+			$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
+			$_POST["recaptcha_response_field"]);
+			if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
+		}
 		if ($company == '')
 		{
 			$errors['company'] = $translations['jobs']['name_error'];
@@ -116,7 +127,13 @@
 		$_SESSION['referer'] = BASE_URL . 'post/';
 		
 		// validation
-		$errors = array();
+		if (ENABLE_RECAPTCHA == 'yes')
+		{
+			$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
+			$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
+			$_POST["recaptcha_response_field"]);
+			if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
+		}
 		if ($company == '')
 		{
 			$errors['company'] = $translations['jobs']['company_error'];
