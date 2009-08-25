@@ -35,13 +35,13 @@ function get_cities_cloud()
 		$city_array[] = array('name' => $city['name'],
 		                     'varname' => $city['ascii_name'],
 		                     'count' => $numberOfJobs,
-		                     'tag_height' => get_clould_tag_height($numberOfJobs));
+		                     'tag_height' => get_cloud_tag_height($numberOfJobs));
 	}
  
 	return $city_array;
 }
 
-function get_clould_tag_height($numberOfItems)
+function get_cloud_tag_height($numberOfItems)
 {
 	if ($numberOfItems < 2)
 	{

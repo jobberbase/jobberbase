@@ -12,7 +12,7 @@
 	
 	$numberOfJobsInOtherCities = $job->GetNumberOfJobsInOtherCities();
 	$smarty->assign('jobs_count_in_other_cities', $numberOfJobsInOtherCities);
-	$smarty->assign('jobs_count_in_other_cities_tag_height', get_clould_tag_height($numberOfJobsInOtherCities));
+	$smarty->assign('jobs_count_in_other_cities_tag_height', get_cloud_tag_height($numberOfJobsInOtherCities));
 	
 	$totalNumberOfJobs = 0;
 	

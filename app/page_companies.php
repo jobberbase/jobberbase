@@ -13,7 +13,7 @@
 	foreach ($comps as $company)
 	{
 		$nr = $company['nr'];
-		$tag_height = get_clould_tag_height($nr);
+		$tag_height = get_cloud_tag_height($nr);
 		
 		$companies[] = array('name' => $company['company'], 
 		                     'varname' => $sanitizer->sanitize_title_with_dashes($company['company']), 
