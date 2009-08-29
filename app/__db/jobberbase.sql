@@ -483,7 +483,15 @@ INSERT INTO `settings` (`id`, `category_id`, `setting_name`, `setting_title`, `s
 (26, 3, 'url_jobs_in_city', 'Jobs per City', 'The URL for the Jobs per City pages.', 'jobs-in', '', 'not_empty|is_url_string'),
 (28, 4, 'enable_recaptcha', 'Enable ReCaptcha', 'Before enabling ReCaptcha, make sure to add your private and public key.', 'no', 'radiobutton|yes|no', 'not_empty'),
 (29, 4, 'captcha_public_key', 'Captcha Public Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PUBLIC_KEY', NULL, NULL),
-(30, 4, 'captcha_private_key', 'Captcha Private Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PRIVATE_KEY', NULL, NULL);
+(30, 4, 'captcha_private_key', 'Captcha Private Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PRIVATE_KEY', NULL, NULL),
+(31, 5, 'mailer_mailer', 'Mailer', 'Send mails with PHP''s mail() function or through SMTP' , 'smtp', 'select|mail|smtp', 'not_empty'),
+(32, 5, 'mailer_encoding', 'Mail encoding', 'The mail''s encoding (default is utf-8, change only if it is not working correctly)', 'utf-8', '', 'not_empty'),
+(33, 5, 'mailer_smtp_host', 'SMTP host name', 'Host name (for example, smtp.example.com)', '', '', ''),
+(34, 5, 'mailer_smtp_port', 'SMTP port', 'Port (default is 25, change only if you know what you are doing)', '25', '', 'not_empty|is_number'),
+(35, 5, 'mailer_smtp_requires_authentication', 'SMTP authentication','Is authentication required for SMTP?','no','radiobutton|yes|no','not_empty'),
+(36, 5, 'mailer_smtp_secure_connection_prefix', 'SMTP secure connection prefix', 'SMTP secure connection prefix. Leave empty if not specified for your host.', '', 'select||ssl|tls', ''),
+(37, 5, 'mailer_smtp_username', 'SMTP user name', 'User name (for example, user@example.com)', '', '', ''),
+(38, 5, 'mailer_smtp_password', 'SMTP password', 'Password', '', '', '');
 
 --
 -- Table structure for table `settings_categories`
@@ -505,7 +513,8 @@ INSERT INTO `settings_categories` (`id`, `name`, `var_name`, `description`) VALU
 (1, 'Main Settings', 'main', 'The main settings for your JobberBase installation. This includes settings such as site name, meta-tags etc.'),
 (2, 'Search / Pagination Settings', 'search-and-pagination', 'Settings that change the amount of jobs to display per page and which search method to use.'),
 (3, 'URL Rewrite Settings', 'url-rewrite', 'You can easily change the structure of various URLs with these settings.'),
-(4, 'ReCaptcha Anti-Spam', 'anti-spam', 'JobberBase has built-in support for ReCaptcha. Before you can enable this, you''ll need to register a free key at recaptcha.net.');
+(4, 'ReCaptcha Anti-Spam', 'anti-spam', 'JobberBase has built-in support for ReCaptcha. Before you can enable this, you''ll need to register a free key at recaptcha.net.'),
+(5, 'Mailer Settings', 'mail', 'You can setup the route through which emails are sent (SMTP, for example).');
 
 --
 -- Table structure for table `links`
