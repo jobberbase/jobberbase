@@ -11,21 +11,28 @@
 
 class Postman
 {
-	var $mAdminEmail = ADMIN_EMAIL;
-	
 	function __construct()
 	{ }
 
 	// Send a job post to a friend
 	public function MailSendToFriend($friend_email, $my_email)
 	{
-		$subject = 'I\'m recommending you a job ad';
 		$msg = $_SERVER['HTTP_REFERER'];
 		$msg .= "\n\n---\nYou've received this e-mail from " . $my_email;
+		
+		$subject = 'I\'m recommending you a job ad';
 
 		if ($friend_email != '' && $my_email != '' && validate_email($friend_email) && validate_email($my_email))
 		{
-			if (mail($friend_email, $subject, $msg, 'From: ' . $my_email))
+			$mailer = $this->getConfiguredMailer();
+			
+			$mailer->SetFrom($my_email);
+    		$mailer->AddAddress($friend_email);
+			$mailer->Subject = $subject;
+			$mailer->Body = $this->nl2br($msg);
+			$mailer->AltBody = $msg;
+			
+			if ($mailer->Send())
 			{
 				return true;
 			}
@@ -43,23 +50,25 @@ class Postman
 	// Send email to company when applying online
 	public function MailApplyOnline($data)
 	{
-		$extra = '\n\n---\nThis e-mail is an application sent from ' . $_SERVER['HTTP_REFERER'];
-	
-		$mail = new PHPMailer();
+		$mailer = $this->getConfiguredMailer();
+		
+		$msg = $data['apply_msg'];
+		$msg .= "\n\n---\nThis e-mail is an application sent from " . $_SERVER['HTTP_REFERER'];
 
-		$mail->From     = stripslashes($data['apply_email']);
-		$mail->FromName = stripslashes($data['apply_name']);
+		$subject = "[" . SITE_NAME . "] I wish to apply for '" . $data['job_title'] . "'";
 
-    $mail->Body    = str_replace(array('\r\n', '\r', '\n'), '<br />', stripslashes($data['apply_msg']) . $extra);
-    $mail->AltBody = $data['apply_msg'] . $extra;
-		$mail->Subject = "[" . SITE_NAME . "] I wish to apply for '" . $data['job_title'] . "'";
-    $mail->AddAddress($data['company_email'], $data['company_name']);
-		if ($data['attachment_path'])
+    	$mailer->SetFrom($data['apply_email'], $data['apply_name']);
+    	$mailer->AddAddress($data['company_email'], $data['company_name']);
+    	$mailer->Subject = $subject;
+    	$mailer->Body = $this->nl2br($msg);
+    	$mailer->AltBody = $msg;
+    	
+		if ($data['attachment_filename'] != '')
 		{
-    	$mail->AddAttachment($data['attachment_path'], $data['attachment_filename']);
+    		$mailer->AddAttachment($data['attachment_path'], $data['attachment_filename']);
 		}
 
-		if ($mail->Send())
+		if ($mailer->Send())
 		{
 			return true;
 		}
@@ -74,54 +83,83 @@ class Postman
 	{
 		$msg = '';
 		$job_title = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
-		$subject = "[" . SITE_NAME . "]" . $job_title;
 		
 		if ($data['check_poster_email'] == 0)
 		{
 			$msg .= "Activate ad: " . BASE_URL . "activate/" . $data['id'] . "/" . $data['auth'] . "/";
 			$msg .= "\n\n\n";
 		}
+		
 		$msg .= $job_title;
 		$msg .= "\n\n" . $data['title'] . " at " . $data['company'];
 		$msg .= "\n\n" . $data['description'];
 		$msg .= "\n\nURL: " . $data['url'];
-		$msg .= "\n\n---\Published by: " . $data['poster_email'];
+		$msg .= "\n\n---\nPublished by: " . $data['poster_email'];
 		$msg .= "\n---\nEdit: " . BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\nDeactivate: " . BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\n\n---\nIP: " . $_SERVER['REMOTE_ADDR'];
 		$msg .= "\nDate: " . $data['created_on'];
-		mail(NOTIFY_EMAIL, $subject, $msg, "From: " . SITE_NAME . " <" . NOTIFY_EMAIL . ">");
+		
+		$subject = '[' . SITE_NAME . ']' . $job_title;
+		
+		$mailer = $this->getConfiguredMailer();
+			
+		$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
+    	$mailer->AddAddress(NOTIFY_EMAIL);
+		$mailer->Subject = $subject;
+		$mailer->Body = $this->nl2br($msg);
+		$mailer->AltBody = $msg;
+		
+		$mailer->Send();
 	}
 	
 	// Send mail to user when posting first time (thus the post needs to be moderated)
 	public function MailPublishPendingToUser($poster_email)
 	{
-		$subject = 'Your ad on ' . SITE_NAME;
 		$msg = "Hello! :)\n\n";
 		$msg .= "We apologize for the inconvenience, but since this is the first time you post with this e-mail address, we need to manually verify it.";
 		$msg .= "\nThank you for your patience, as the ad should be published ASAP. We'll send you an e-mail when that happens!";
 		$msg .= "\n\nFrom now on, every ad you post with this e-mail address will instantly be published.";
 		$msg .= "\n\n---\n\nThank you for using our service!\nThe Team";
 		
+		$subject = "Your ad on " . SITE_NAME;
+		
 		if ($poster_email != '' && validate_email($poster_email))
 		{
-			mail($poster_email, $subject, $msg, "From: " . SITE_NAME . " <" . NOTIFY_EMAIL . ">");	
+			$mailer = $this->getConfiguredMailer();
+			
+			$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
+	    	$mailer->AddAddress($poster_email);
+			$mailer->Subject = $subject;
+			$mailer->Body = $this->nl2br($msg);
+			$mailer->AltBody = $msg;
+			
+			$mailer->Send();
 		}
 	}
 	
 	// Send mail to user when a post is published
 	public function MailPublishToUser($data, $url=BASE_URL)
 	{
-		$subject = 'Your ad on ' . SITE_NAME . ' was published';
 		$msg = "Hello! :)\n\n";
 		$msg .= "Your ad was published and is available at: " . $url . "job/" . $data['id'] . "/" . $data['url_title'] . "/";
 		$msg .= "\n\n---\nEdit it: " . $url . "post/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\nDeactivate it: " . $url . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\n\n---\n\nThank you for using our service!\nThe " . SITE_NAME . " Team";
 		
+		$subject = 'Your ad on ' . SITE_NAME . ' was published';
+		
 		if ($data['poster_email'] != '' && validate_email($data['poster_email']))
 		{
-			mail($data['poster_email'], $subject, $msg, "From: " . SITE_NAME . " <" . NOTIFY_EMAIL . ">");	
+			$mailer = $this->getConfiguredMailer();
+			
+			$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
+	    	$mailer->AddAddress($data['poster_email']);
+			$mailer->Subject = $subject;
+			$mailer->Body = $this->nl2br($msg);
+			$mailer->AltBody = $msg;
+			
+			$mailer->Send();
 		}
 	}
 	
@@ -135,7 +173,9 @@ class Postman
 	public function MailReportSpam($data)
 	{
 		$job_title = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
-		$subject = '[SPAM on ' . SITE_NAME . '] ' . $job_title;
+		
+		$msg = '';
+		
 		$msg .= "Following ad was reported as false/spam:\n--\n\n";
 		$msg .= $job_title;
 		$msg .= "\n\n" . $data['title'] . " at " . $data['company'];
@@ -146,7 +186,17 @@ class Postman
 		$msg .= "\n---\nIP: " . $_SERVER['REMOTE_ADDR'];
 		$msg .= "\nDate: " . $data['created_on'];
 		
-		mail(NOTIFY_EMAIL, $subject, $msg, "From: " . SITE_NAME . " <" . NOTIFY_EMAIL . ">");
+		$subject = '[SPAM on ' . SITE_NAME . '] ' . $job_title;
+		
+		$mailer = $this->getConfiguredMailer();
+			
+		$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
+    	$mailer->AddAddress(NOTIFY_EMAIL);
+		$mailer->Subject = $subject;
+		$mailer->Body = $this->nl2br($msg);
+		$mailer->AltBody = $msg;
+		
+		$mailer->Send();
 	}
 	
 	public function MailContact($name, $email, $msg)
@@ -155,8 +205,16 @@ class Postman
 		$msg .= "\nDate: " . date('Y-m-d H:i');
 
 		$subject = "[" . SITE_NAME . "] contact";
-
-		if (mail(NOTIFY_EMAIL, $subject, $msg, "From: $name <$email>"))
+		
+		$mailer = $this->getConfiguredMailer();
+			
+		$mailer->SetFrom($email, $name);
+    	$mailer->AddAddress(NOTIFY_EMAIL);
+		$mailer->Subject = $subject;
+		$mailer->Body = $this->nl2br($msg);
+		$mailer->AltBody = $msg;
+		
+		if($mailer->Send())
 		{
 			return true;
 		}
@@ -164,6 +222,38 @@ class Postman
 		{
 			return false;
 		}	
-	}	
+	}
+
+	private function getConfiguredMailer()
+	{
+		global $settings;
+		
+		$mailer = new PHPMailer();
+		$mailer->Mailer = $settings['mailer_mailer'];
+		$mailer->CharSet = $settings['mailer_encoding'];
+		$mailer->SMTPDebug = true;
+		
+		if($settings['mailer_mailer'] == 'smtp')
+		{
+			$mailer->Host = $settings['mailer_smtp_host'];
+			$mailer->Port = $settings['mailer_smtp_port'];
+
+			if ($settings['mailer_smtp_requires_authentication'] == 'yes')
+			{
+				$mailer->SMTPAuth = true;
+				$mailer->SMTPSecure = $settings['mailer_smtp_secure_connection_prefix'];
+				
+				$mailer->Username = $settings['mailer_smtp_username'];
+				$mailer->Password = $settings['mailer_smtp_password'];
+			}
+		}
+		
+		return $mailer;
+	}
+	
+	private function nl2br($text)
+	{
+		return str_replace(array("\r\n", "\r", "\n"), "<br />", $text);
+	}
 }
 ?>
