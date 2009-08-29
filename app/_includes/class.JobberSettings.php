@@ -15,7 +15,7 @@ class JobberSettings
 	{
 		global $db;
 		
-		$sql = 'SELECT * FROM '.DB_PREFIX.'settings';
+		$sql = 'SELECT * FROM '.DB_PREFIX.'settings ORDER BY id ASC';
 		$result = $db->query($sql);
 		
 		$settings = array();
