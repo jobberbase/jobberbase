@@ -484,7 +484,7 @@ INSERT INTO `settings` (`id`, `category_id`, `setting_name`, `setting_title`, `s
 (28, 4, 'enable_recaptcha', 'Enable ReCaptcha', 'Before enabling ReCaptcha, make sure to add your private and public key.', 'no', 'radiobutton|yes|no', 'not_empty'),
 (29, 4, 'captcha_public_key', 'Captcha Public Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PUBLIC_KEY', NULL, NULL),
 (30, 4, 'captcha_private_key', 'Captcha Private Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PRIVATE_KEY', NULL, NULL),
-(31, 5, 'mailer_mailer', 'Mailer', 'Send mails with PHP''s mail() function or through SMTP' , 'smtp', 'select|mail|smtp', 'not_empty'),
+(31, 5, 'mailer_mailer', 'Mailer', 'Send mails with PHP''s mail() function or through SMTP' , 'mail', 'select|mail|smtp', 'not_empty'),
 (32, 5, 'mailer_encoding', 'Mail encoding', 'The mail''s encoding (default is utf-8, change only if it is not working correctly)', 'utf-8', '', 'not_empty'),
 (33, 5, 'mailer_smtp_host', 'SMTP host name', 'Host name (for example, smtp.example.com)', '', '', ''),
 (34, 5, 'mailer_smtp_port', 'SMTP port', 'Port (default is 25, change only if you know what you are doing)', '25', '', 'not_empty|is_number'),
