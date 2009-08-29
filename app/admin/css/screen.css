@@ -2,6 +2,7 @@
 #header ul{position:absolute; right:0; top:100px}
 #header ul li{float:left; padding-left:20px}
 #header ul li.selected{font-weight:bold}
+#header span.version {color:#0099CC; font-weight:bold; position:absolute; right:0px;}
 #publish_form .text_field{width:700px}
 #publish_form .textarea_field_small{width:340px}
 #publish_form .textarea_field{width:700px}

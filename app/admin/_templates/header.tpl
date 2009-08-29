@@ -39,7 +39,10 @@
 			</div><!-- #status -->
 		{/if}
 		<div id="header">
-			<div><a href="{$BASE_URL}">&laquo; back to site</a></div>
+			<div>
+				<a href="{$BASE_URL}">&laquo; back to site</a>
+				<span class="version">v {$smarty.const.JOBBERBASE_VERSION}</span>
+			</div>
 			<h1 id="logo"><a href="{$BASE_URL_ADMIN}home/" title="IT jobs">jobber</a></h1>
 			{if $isAuthenticated == 1}
 			<ul>

@@ -12,6 +12,8 @@
 	error_reporting(E_ALL ^ E_STRICT);
 	
 	date_default_timezone_set('Europe/Bucharest');
+	
+	define('JOBBERBASE_VERSION', '1.8');
 
 	// MySQL + misc settings for local environment
 	if ($_SERVER['SERVER_NAME'] == 'localhost')
