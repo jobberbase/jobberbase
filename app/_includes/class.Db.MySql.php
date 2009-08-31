@@ -26,28 +26,34 @@ class Db
 {
         var $link = null;
 
-	function __construct($server='localhost',$user='root',$pass='',$db='test')
+	function __construct($host, $username, $passwd, $dbname, $port)
 	{
+		$this->link = mysql_connect($host . ':' . $port, $username, $passwd);
 
-            $args = func_get_args();
+		/* Throw an error if the connection fails */ 
+		if(!$this->link)
+		{
+			if(ENVIRONMENT == 'dev')
+			{
+				throw new ConnectException(mysql_error(), mysql_errno());
+			} 
+			else
+			{
+				throw new Exception('Cannot connect');   
+			}
+		}
 
-            $this->link = mysql_connect($server,$user,$pass);
-
-            /* Throw an error if the connection fails */ 
-            if(!$this->link) {
-                if(ENVIRONMENT == 'dev') {
-                    throw new ConnectException(mysql_error(), mysql_errno()); 
-                } else {
-                    throw new Exception('Cannot connect');   
-                }
-            } 
-            if(!mysql_select_db($db,$this->link)) {
-                if(ENVIRONMENT == 'dev') {
-                    throw new ConnectException(mysql_error($this->link), mysql_errno($this->link));
-                } else {
-                    throw new ConnectException('Cannot select db');
-                }
-            }
+		if(!mysql_select_db($dbname,$this->link))
+		{
+			if(ENVIRONMENT == 'dev')
+			{
+				throw new ConnectException(mysql_error($this->link), mysql_errno($this->link));
+			}
+			else
+			{
+				throw new ConnectException('Cannot select db');
+			}
+		}
 	}
 	
 	public function query($query)

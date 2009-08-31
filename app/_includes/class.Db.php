@@ -15,13 +15,11 @@ class QueryException extends Exception {}
 
 class Db extends mysqli
 {
-	function __construct()
+	function __construct($host, $username, $passwd, $dbname, $port)
 	{
-	  /* Pass all arguments passed to the constructor on to the parent's constructor */ 
-	  $args = func_get_args(); 
-	  eval("parent::__construct(" . join(',', array_map('add_single_quotes', $args)) . ");");
+		parent::__construct($host, $username, $passwd, $dbname, $port);
 
-	  /* Throw an error if the connection fails */ 
+	    /* Throw an error if the connection fails */ 
 		if(mysqli_connect_error() && ENVIRONMENT == 'dev')
 		{
 			throw new ConnectException(mysqli_connect_error(), mysqli_connect_errno()); 
