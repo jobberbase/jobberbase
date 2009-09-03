@@ -377,26 +377,6 @@ INSERT INTO `types` (`id`, `name`, `var_name`) VALUES
 CREATE TABLE IF NOT EXISTS `settings` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `category_id` int(11) DEFAULT NULL,
-  `setting_name` varchar(64) DEFAULT NULL,
-  `setting_title` varchar(255) NOT NULL,
-  `setting_description` text,
-  `setting_value` longtext,
-  `field_type` text,
-  `validation` text,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
-
---
--- Dumping data for table `settings`
---
-
---
--- Table structure for table `settings`
---
-
-CREATE TABLE IF NOT EXISTS `settings` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `category_id` int(11) DEFAULT NULL,
   `name` varchar(64) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text,
