@@ -390,44 +390,66 @@ CREATE TABLE IF NOT EXISTS `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `category_id`, `setting_name`, `setting_title`, `setting_description`, `setting_value`, `field_type`, `validation`) VALUES
-(1, 1, 'site_name', 'Site name', 'The name of your JobBoard, used in various templates.', 'Jobberbase', '', 'not_empty'),
-(2, 1, 'admin_email', 'Admin Email', 'The email companies will receive mail from.', 'admin@localhost.cc', '', 'not_empty|is_email'),
-(3, 1, 'notify_email', 'Notify Email', 'The email for receiving new job postings.', 'admin@localhost.cc', '', 'not_empty|is_email'),
-(4, 1, 'theme', 'Theme', 'Pick the theme to use for the frontend.', 'default', 'available_themes', 'not_empty'),
-(5, 1, 'html_title', 'HTML Title', 'The HTML title for the homepage.', 'Jobberbase', '', ''),
-(6, 1, 'meta_keywords', 'Site keywords', 'Meta Keywords. Useful for Search Engine Optimization (separate by comma).', '', '', ''),
-(7, 1, 'meta_description', 'Site description', 'Meta Description Tag. Useful for Search Engine Optimization.', '', 'text_area', ''),
-(8, 1, 'max_cv_size', 'Max CV filesize', 'The maximum filesize for uploaded CV''s in bytes', '3145728', '', 'not_empty|is_number'),
-(9, 1, 'file_upload_dir', 'Upload Directory', 'Upload directory to temporarily save CV''s. Must be writable.', 'uploads/', '', 'not_empty'),
-(10, 1, 'apply_delay', 'Apply delay', 'The number of minutes that must pass between applications from the same IP address', '0', '', 'not_empty|is_nummer'),
-(11, 1, 'date_format', 'Date format', 'The format in which dates are displayed. %d = day, %m = month, %Y = 4 digit year.', '%d-%m-%Y', NULL, 'not_empty'),
-(12, 1, 'date_time_format', 'Date / Time format', 'The format in which times are displayed. %d = day, %m = month, %Y = 4 digit year, %H = 24-hour and %i = minute.', '%d-%m-%Y %H:%i', NULL, 'not_empty'),
-(13, 1, 'sidebar_show_what', 'Sidebar Shortlist', 'Either cities or categories can be shown in the sidebar', 'cities', 'select|categories|cities', 'not_empty|is_alpha'),
-(14, 1, 'sidebar_only_cities_with_jobs', 'Sidebar only non-empty Cities', 'Should the sidebar cities (if enabled) only show those that actually contain jobs?', 'yes', 'radiobutton|yes|no', 'non_empty'),
-(15, 2, 'jobs_per_page', 'Jobs per page', 'The amount of jobs per page, before pagination is called.', '50', '', 'not_empty|is_number'),
-(16, 2, 'jobs_per_search', 'Jobs per search', 'The amount of jobs per page when searching.', '25', '', 'not_empty|is_number'),
-(17, 2, 'spotlight_jobs', 'Spotlight Jobs #', 'Amount of Spotlight Jobs to display on the front page.', '3', NULL, 'not_empty|is_number'),
-(18, 2, 'latest_jobs', 'Latest Jobs #', 'Amount of latest jobs to show on the front page.', '7', NULL, 'not_empty|is_number'),
-(19, 2, 'most_applied_jobs', 'Most Applied to #', 'Amount of most-applied-to jobs to show on the front page.', '7', NULL, 'not_empty|is_number'),
-(20, 2, 'search_method', 'Search Method', 'Choose which search method to use. ''Alternate'' checks every keyword to appear in either the title, description or cityname.', 'alternate', 'radiobutton|classic|alternate', 'not_empty|is_alpha'),
-(21, 3, 'url_cities', 'Cities Cloud', 'The URL for the City Cloud page.', 'cities', '', 'not_empty|is_url_string'),
-(22, 3, 'url_companies', 'Companies Cloud', 'The URL for the Company Cloud page.', 'companies', '', 'not_empty|is_url_string'),
-(23, 3, 'url_job', 'Job Details', 'The URL for the Job Details page.', 'job', '', 'not_empty|is_url_string'),
-(24, 3, 'url_jobs', 'Jobs per Category', 'The URL for the Jobs per Category pages.', 'jobs', '', 'not_empty|is_url_string'),
-(25, 3, 'url_jobs_at_company', 'Jobs per Company', 'The URL for the Jobs per Company pages.', 'jobs-at', '', 'not_empty|is_url_string'),
-(26, 3, 'url_jobs_in_city', 'Jobs per City', 'The URL for the Jobs per City pages.', 'jobs-in', '', 'not_empty|is_url_string'),
-(28, 4, 'enable_recaptcha', 'Enable ReCaptcha', 'Before enabling ReCaptcha, make sure to add your private and public key.', 'no', 'radiobutton|yes|no', 'not_empty'),
-(29, 4, 'captcha_public_key', 'Captcha Public Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PUBLIC_KEY', NULL, NULL),
-(30, 4, 'captcha_private_key', 'Captcha Private Key', 'You can register these keys for free at recaptcha.net.', '12345_YOUR_PRIVATE_KEY', NULL, NULL),
-(31, 5, 'mailer_mailer', 'Mailer', 'Send mails with PHP''s mail() function or through SMTP' , 'mail', 'select|mail|smtp', 'not_empty'),
-(32, 5, 'mailer_encoding', 'Mail encoding', 'The mail''s encoding (default is utf-8, change only if it is not working correctly)', 'utf-8', '', 'not_empty'),
-(33, 5, 'mailer_smtp_host', 'SMTP host name', 'Host name (for example, smtp.example.com)', '', '', ''),
-(34, 5, 'mailer_smtp_port', 'SMTP port', 'Port (default is 25, change only if you know what you are doing)', '25', '', 'not_empty|is_number'),
-(35, 5, 'mailer_smtp_requires_authentication', 'SMTP authentication','Is authentication required for SMTP?','no','radiobutton|yes|no','not_empty'),
-(36, 5, 'mailer_smtp_secure_connection_prefix', 'SMTP secure connection prefix', 'SMTP secure connection prefix. Leave empty if not specified for your host.', '', 'select||ssl|tls', ''),
-(37, 5, 'mailer_smtp_username', 'SMTP user name', 'User name (for example, user@example.com)', '', '', ''),
-(38, 5, 'mailer_smtp_password', 'SMTP password', 'Password', '', '', '');
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) DEFAULT NULL,
+  `name` varchar(64) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text,
+  `data_type` varchar(255) DEFAULT NULL,
+  `input_type` varchar(255) DEFAULT NULL,
+  `input_options` text,
+  `validation` text,
+  `value` longtext,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `category_id`, `name`, `title`, `description`, `data_type`, `input_type`, `input_options`, `validation`, `value`) VALUES
+(1, 1, 'site_name', 'Site name', 'The name of your JobBoard, used in various templates.', NULL, NULL, NULL, 'not_empty', 'Jobberbase'),
+(2, 1, 'admin_email', 'Admin Email', 'The email companies will receive mail from.', NULL, NULL, NULL, 'not_empty|is_email', 'admin@localhost.cc'),
+(3, 1, 'notify_email', 'Notify Email', 'The email for receiving new job postings.', NULL, NULL, NULL, 'not_empty|is_email', 'admin@localhost.cc'),
+(4, 1, 'theme', 'Theme', 'Pick the theme to use for the frontend.', NULL, 'available_themes', NULL, 'not_empty', 'default'),
+(5, 1, 'html_title', 'HTML Title', 'The HTML title for the homepage.', NULL, NULL, NULL, NULL, NULL),
+(6, 1, 'meta_keywords', 'Site keywords', 'Meta Keywords. Useful for Search Engine Optimization (separate by comma).', NULL, NULL, NULL, NULL, NULL),
+(7, 1, 'meta_description', 'Site description', 'Meta Description Tag. Useful for Search Engine Optimization.', NULL, 'text_area', NULL, NULL, NULL),
+(8, 1, 'max_cv_size', 'Max CV filesize', 'The maximum filesize for uploaded CV''s in bytes', NULL, NULL, NULL, 'not_empty|is_number', '3145728'),
+(9, 1, 'file_upload_dir', 'Upload Directory', 'Upload directory to temporarily save CV''s. Must be writable.', NULL, NULL, NULL, 'not_empty', 'uploads/'),
+(10, 1, 'apply_delay', 'Apply delay', 'The number of minutes that must pass between applications from the same IP address', NULL, NULL, NULL, 'not_empty|is_nummer', '0'),
+(11, 1, 'date_format', 'Date format', 'The format in which dates are displayed. %d = day, %m = month, %Y = 4 digit year.', NULL, NULL, NULL, 'not_empty', '%d-%m-%Y'),
+(12, 1, 'date_time_format', 'Date / Time format', 'The format in which times are displayed. %d = day, %m = month, %Y = 4 digit year, %H = 24-hour and %i = minute.', NULL, NULL, NULL, 'not_empty', '%d-%m-%Y %H:%i'),
+(13, 1, 'sidebar_show_what', 'Sidebar Shortlist', 'Either cities or categories can be shown in the sidebar', NULL, 'select', 'categories|cities', 'not_empty|is_alpha', 'cities'),
+(14, 1, 'sidebar_only_cities_with_jobs', 'Sidebar only non-empty Cities', 'Should the sidebar cities (if enabled) only show those that actually contain jobs?', 'boolean', 'radiobutton', 'no|yes', 'non_empty', '1'),
+(15, 2, 'jobs_per_page', 'Jobs per page', 'The amount of jobs per page, before pagination is called.', 'integer', NULL, NULL, 'not_empty', '50'),
+(16, 2, 'jobs_per_search', 'Jobs per search', 'The amount of jobs per page when searching.', 'integer', NULL, NULL, 'not_empty', '25'),
+(17, 2, 'spotlight_jobs', 'Spotlight Jobs #', 'Amount of Spotlight Jobs to display on the front page.', 'integer', NULL, NULL, 'not_empty', '3'),
+(18, 2, 'latest_jobs', 'Latest Jobs #', 'Amount of latest jobs to show on the front page.', 'integer', NULL, NULL, 'not_empty', '7'),
+(19, 2, 'most_applied_jobs', 'Most Applied to #', 'Amount of most-applied-to jobs to show on the front page.', 'integer', NULL, NULL, 'not_empty', '7'),
+(20, 2, 'search_method', 'Search Method', 'Choose which search method to use. ''Alternate'' checks every keyword to appear in either the title, description or cityname.', NULL, 'radiobutton', 'classic|alternate', NULL, 'classic'),
+(21, 3, 'url_cities', 'Cities Cloud', 'The URL for the City Cloud page.', NULL, NULL, NULL, 'not_empty|is_url_string', 'cities'),
+(22, 3, 'url_companies', 'Companies Cloud', 'The URL for the Company Cloud page.', NULL, NULL, NULL, 'not_empty|is_url_string', 'companies'),
+(23, 3, 'url_job', 'Job Details', 'The URL for the Job Details page.', NULL, NULL, NULL, 'not_empty|is_url_string', 'job'),
+(24, 3, 'url_jobs', 'Jobs per Category', 'The URL for the Jobs per Category pages.', NULL, NULL, NULL, 'not_empty|is_url_string', 'jobs'),
+(25, 3, 'url_jobs_at_company', 'Jobs per Company', 'The URL for the Jobs per Company pages.', NULL, NULL, NULL, 'not_empty|is_url_string', 'jobs-at'),
+(26, 3, 'url_jobs_in_city', 'Jobs per City', 'The URL for the Jobs per City pages.', NULL, NULL, NULL, 'not_empty|is_url_string', 'jobs-in'),
+(28, 4, 'enable_recaptcha', 'Enable ReCaptcha', 'Before enabling ReCaptcha, make sure to add your private and public key.', 'boolean', 'radiobutton', 'no|yes', NULL, '0'),
+(29, 4, 'captcha_public_key', 'Captcha Public Key', 'You can register these keys for free at recaptcha.net.', NULL, NULL, NULL, NULL, '12345_YOUR_PUBLIC_KEY'),
+(30, 4, 'captcha_private_key', 'Captcha Private Key', 'You can register these keys for free at recaptcha.net.', NULL, NULL, NULL, NULL, '12345_YOUR_PRIVATE_KEY'),
+(31, 5, 'mailer_mailer', 'Mailer', 'Send mails with PHP''s mail() function or through SMTP', NULL, 'select', 'mail|smtp', 'not_empty', 'mail'),
+(32, 5, 'mailer_encoding', 'Mail encoding', 'The mail''s encoding (default is utf-8, change only if it is not working correctly)', NULL, NULL, NULL, 'not_empty', 'utf-8'),
+(33, 5, 'mailer_smtp_host', 'SMTP host name', 'Host name (for example, smtp.example.com)', NULL, NULL, NULL, NULL, NULL),
+(34, 5, 'mailer_smtp_port', 'SMTP port', 'Port (default is 25, change only if you know what you are doing)', 'integer', NULL, NULL, 'not_empty', '25'),
+(35, 5, 'mailer_smtp_requires_authentication', 'SMTP authentication', 'Is authentication required for SMTP?', 'boolean', 'radiobutton', 'no|yes', NULL, '0'),
+(36, 5, 'mailer_smtp_secure_connection_prefix', 'SMTP secure connection prefix', 'SMTP secure connection prefix. Leave empty if not specified for your host.', NULL, 'select', 'ssl|tls', NULL, NULL),
+(37, 5, 'mailer_smtp_username', 'SMTP user name', 'User name (for example, user@example.com)', NULL, NULL, NULL, NULL, NULL),
+(38, 5, 'mailer_smtp_password', 'SMTP password', 'Password', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Table structure for table `settings_categories`

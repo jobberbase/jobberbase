@@ -29,37 +29,44 @@
 						<legend>Settings</legend>
 						<table border="0" cellspacing="2" cellpadding="2">
 							{foreach from=$settings_form item=setting}
-								{assign var=setting_name value=$setting.setting_name}
-								{assign var=setting_title value=$setting.setting_title}
-								{assign var=setting_description value=$setting.setting_description}
-								{assign var=setting_value value=$setting.setting_value}
-								{assign var=field_type value=$setting.field_type}
+								{assign var=name value=$setting.name}
+								{assign var=title value=$setting.title}
+								{assign var=description value=$setting.description}
+								{assign var=value value=$setting.value}
+								{assign var=data_type value=$setting.data_type}
+								{assign var=input_type value=$setting.input_type}
+								{assign var=input_options value=$setting.input_options}
 								<tr {cycle values='class="input_alt",'}>
-								<td valign='top' class='settingsform_title'>{$setting_title}:</td>
+								<td valign='top' class='settingsform_title'>{$title}:</td>
 								<td valign='top' class='settingsform_input'>
-									{if $field_type.0 == 'text_area'}
-										<textarea class="settingsform_text_area{if $errors.$setting_name != ''} error{/if}" name="{$setting_name}">{$setting_value}</textarea>
-									{elseif $field_type.0 == 'radiobutton'}
-										{section name=tmp2 loop=$field_type start=1}
-											<input type="radio" name="{$setting_name}" value="{$field_type[tmp2]}" {if $field_type[tmp2] == $setting_value}checked="checked"{/if} />{$field_type[tmp2]}
-										{/section}
-									{elseif $field_type.0 == 'select'}
-										<select {if $errors.$setting_name != ''}class="error"{/if} name="{$setting_name}">
-										{section name=tmp2 loop=$field_type start=1}
-											<option value="{$field_type[tmp2]}" {if $field_type[tmp2] == $setting_value}selected="selected"{/if}>{$field_type[tmp2]}</option>
+									{if $input_type == 'text_area'}
+										<textarea class="settingsform_text_area{if $errors.$name != ''} error{/if}" name="{$name}">{$value}</textarea>
+									{elseif $input_type == 'radiobutton'}
+										{if $data_type == 'boolean'}
+											<input type="radio" name="{$name}" value="0" {if $value == 0}checked="checked"{/if} />{if $input_options[0]}{$input_options[0]}{else}0{/if}
+											<input type="radio" name="{$name}" value="1" {if $value == 1}checked="checked"{/if} />{if $input_options[1]}{$input_options[1]}{else}1{/if}
+										{else}
+											{section name=tmp2 loop=$input_options}
+												<input type="radio" name="{$name}" value="{$input_options[tmp2]}" {if $input_options[tmp2] == $value}checked="checked"{/if} />{$input_options[tmp2]}
+											{/section}
+										{/if}
+									{elseif $input_type == 'select'}
+										<select {if $errors.$name != ''}class="error"{/if} name="{$name}">
+										{section name=tmp2 loop=$input_options}
+											<option value="{$input_options[tmp2]}" {if $input_options[tmp2] == $value}selected="selected"{/if}>{$input_options[tmp2]}</option>
 										{/section}
 										</select>
-									{elseif $field_type.0 == 'checkbox'}
-										<input {if $errors.$setting_name != ''}class="error"{/if} type="checkbox" name="{$setting_name}[]" value="_hidden" style="display:none;" checked="checked"/>
-										{section name=tmp2 loop=$field_type start=1}
-											<input type="checkbox" name="{$setting_name}[]" value="{$field_type[tmp2]}" {if in_array($field_type[tmp2], $setting_value)}checked="checked"{/if} />{$field_type[tmp2]}<br />
+									{elseif $input_type == 'checkbox'}
+										<input {if $errors.$name != ''}class="error"{/if} type="checkbox" name="{$name}[]" value="_hidden" style="display:none;" checked="checked"/>
+										{section name=tmp2 loop=$input_options}
+											<input type="checkbox" name="{$name}[]" value="{$input_options[tmp2]}" {if in_array($input_options[tmp2], $value)}checked="checked"{/if} />{$input_options[tmp2]}<br />
 										{/section}
 									{else}
-										<input class="settingsform_text_field{if $errors.$setting_name != ''} error{/if}" type="text" 	name="{$setting_name}" value="{$setting_value}"/>
+										<input class="settingsform_text_field{if $errors.$name != ''} error{/if}" type="text" 	name="{$name}" value="{$value}"/>
 									{/if}
-									{if $errors.$setting_name != ''}<span class="validation-error"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" /></span>{/if}
+									{if $errors.$name != ''}<span class="validation-error"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" /></span>{/if}
 								</td>
-								<td class="settingsform_description">{$setting_description}</td>
+								<td class="settingsform_description">{$description}</td>
 								</tr>
 								</label>
 							{/foreach}

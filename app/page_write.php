@@ -61,7 +61,7 @@
 		$_SESSION['referer'] = BASE_URL . 'post/';
 		
 		// validation
-		if (ENABLE_RECAPTCHA == 'yes')
+		if (ENABLE_RECAPTCHA)
 		{
 			$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
 			$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
@@ -135,7 +135,7 @@
 		$_SESSION['referer'] = BASE_URL . 'post/';
 		
 		// validation
-		if (ENABLE_RECAPTCHA == 'yes')
+		if (ENABLE_RECAPTCHA)
 		{
 			$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
 			$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],

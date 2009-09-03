@@ -21,20 +21,17 @@
 		// Looping all given fields and values
 		foreach ($settings_form as $setting)
 		{
-			// If a field didn't appear in $_POST, it must've been set to global
-			if (!isset($_POST[$setting['setting_name']])) $_POST[$setting['setting_name']] = "_global";
-			
 			// If field value is an array, convert it to a string for DB storage
-			if (is_array($_POST[$setting['setting_name']]))
+			if (is_array($_POST[$setting['name']]))
 			{
 				$a = 0; $new_value = '';
-				while($a < count($_POST[$setting['setting_name']]))
+				while($a < count($_POST[$setting['name']]))
 				{
-					if ($_POST[$setting['setting_name']][$a] != '_hidden' && $new_value == '') $new_value .= $_POST[$setting['setting_name']][$a];
-					elseif ($_POST[$setting['setting_name']][$a] != '_hidden' ) $new_value .= '|' . $_POST[$setting['setting_name']][$a];
+					if ($_POST[$setting['name']][$a] != '_hidden' && $new_value == '') $new_value .= $_POST[$setting['name']][$a];
+					elseif ($_POST[$setting['name']][$a] != '_hidden' ) $new_value .= '|' . $_POST[$setting['name']][$a];
 					$a++;
 				}
-				$_POST[$setting['setting_name']] = $new_value;
+				$_POST[$setting['name']] = $new_value;
 			}
 			
 			// Validate the fields if needed
@@ -42,21 +39,20 @@
 			{
 				$a = 0; while($a < count($setting['validation']))
 				{
-					if ($_POST[$setting['setting_name']] != '_global')
-					{
-						if ($setting['validation'][$a] == 'not_empty')
-							$fv->isEmpty($setting['setting_name']);
-						if ($setting['validation'][$a] == 'is_number')
-							$fv->isNumber($setting['setting_name']);
-						if ($setting['validation'][$a] == 'is_url_string')
-							$fv->isUrlString($setting['setting_name']);
-						if ($setting['validation'][$a] == 'is_email')
-							$fv->isEmailAddress($setting['setting_name']);
-					}
+					if ($setting['validation'][$a] == 'not_empty')
+						$fv->isEmpty($setting['name']);
+					if ($setting['validation'][$a] == 'is_number' || $setting['data_type'][$a] == 'integer')
+						$fv->isNumber($setting['name']);
+					if ($setting['validation'][$a] == 'is_url_string')
+						$fv->isUrlString($setting['name']);
+					if ($setting['validation'][$a] == 'is_email')
+						$fv->isEmailAddress($setting['name']);
 					$a++;
 				}
 			}
-			$setting_array[] = array('setting_name'=> $setting['setting_name'], 'setting_value' => $_POST[$setting['setting_name']]);
+			if ($setting['data_type'] == 'integer') $fv->isNumber($setting['name']);
+
+			$setting_array[] = array('name'=> $setting['name'], 'value' => $_POST[$setting['name']]);
 		}
 		
 		if ($fv->isError())
@@ -64,14 +60,14 @@
 			// Give the fields their changed input, so the user doesn't need to type it in again
 			foreach ($settings_form as $setting)
 			{
-				if ($setting['field_type'][0] == 'checkbox')
+				if ($setting['input_type'] == 'checkbox')
 				{
-					$new_value = explode('|', $_POST[$setting['setting_name']]);
-					$settings_form[$setting['setting_name']]['setting_value'] = $new_value;
+					$new_value = explode('|', $_POST[$setting['name']]);
+					$settings_form[$setting['name']]['value'] = $new_value;
 				}
 				else
 				{
-					$settings_form[$setting['setting_name']]['setting_value'] = $_POST[$setting['setting_name']];
+					$settings_form[$setting['name']]['value'] = $_POST[$setting['name']];
 				}
 			}
 			

@@ -154,7 +154,7 @@
 						</tr>
 					</table>
 				</fieldset>
-				{if $ENABLE_RECAPTCHA == 'yes'}
+				{if $ENABLE_RECAPTCHA}
 				<fieldset>
 					<legend>{$translations.captcha.captcha_title}</legend>
 					{literal}

@@ -85,7 +85,7 @@
 										<div class="suggestion">{$translations.apply.cv_info}</div>
 									</td>
 								</tr>
-								{if $ENABLE_RECAPTCHA == 'yes'}
+								{if $ENABLE_RECAPTCHA}
 									<tr>
 										<td valign="top"><label>Anti-Spam</label></td>
 										<td>

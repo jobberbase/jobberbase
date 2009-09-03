@@ -238,7 +238,7 @@ class Postman
 			$mailer->Host = $settings['mailer_smtp_host'];
 			$mailer->Port = $settings['mailer_smtp_port'];
 
-			if ($settings['mailer_smtp_requires_authentication'] == 'yes')
+			if ($settings['mailer_smtp_requires_authentication'])
 			{
 				$mailer->SMTPAuth = true;
 				$mailer->SMTPSecure = $settings['mailer_smtp_secure_connection_prefix'];

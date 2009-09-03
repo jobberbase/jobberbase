@@ -23,32 +23,37 @@ class JobberSettings
 		while ($row = $result->fetch_assoc())
 		{
 			// Setting temporary variable names for the 'value' and 'fieldtype' fields
-			$setting_value = $row['setting_value']; 
-			$field_type = explode('|', $row['field_type']);
+			$value = $row['value']; 
+			$data_type = $row['data_type'];
+			$input_type = $row['input_type'];
+			$input_options = $row['input_options'];
 			$validation = explode('|', $row['validation']); 
 				
 			// Apply certain actions on special fields 
-			if ($field_type[0] == 'checkbox') $setting_value = explode('|', $setting_value);
-			elseif ($field_type[0] == 'available_themes')
+			if ($input_type == 'checkbox' || $input_type == 'select' || $input_type == 'radiobutton') $input_options = explode('|', $input_options);
+			elseif ($input_type == 'available_themes')
 			{
-				$themes = array( 0 => 'select');
+				$input_type = 'select';	$themes = array();
 				$dir = APP_PATH.'_templates/';
 				if ($dh = opendir($dir)) {
 				    while (($file = readdir($dh)) !== false) { if (filetype($dir . $file) != 'file' && $file != '.' && $file != '..' && $file != '.svn' && $file != '_cache') $themes[] = $file; }
 					closedir($dh);
 				}
-				$field_type = $themes;
+				$input_options = $themes;
 			}
+			if ($data_type == 'boolean' && $value != 1) $value = false;
 				
 			// Add the row to the setting array
-			$settings[$row['setting_name']] = array(
-				'setting_name' => $row['setting_name'], 
-				'setting_title' => $row['setting_title'], 
-				'setting_description' => $row['setting_description'], 
-				'setting_value' => $setting_value, 
-				'category_id' => $row['category_id'], 
-				'field_type' => $field_type, 
-				'validation' => $validation
+			$settings[$row['name']] = array(
+				'name' => $row['name'], 
+				'title' => $row['title'], 
+				'description' => $row['description'],
+				'data_type' => $data_type,
+				'input_type' => $input_type,
+				'input_options' => $input_options,
+				'validation' => $validation,
+				'value' => $value, 
+				'category_id' => $row['category_id'] 
 				);
 		}
 		
@@ -119,7 +124,7 @@ class JobberSettings
 				if (!empty($settings[$setting_names[$i]]) && $advanced == true) 
 					$settings_array[$setting_names[$i]] = $settings[$setting_names[$i]];
 				elseif (!empty($settings[$setting_names[$i]]))
-					$settings_array[$setting_names[$i]] = $settings[$setting_names[$i]]['setting_value'];
+					$settings_array[$setting_names[$i]] = $settings[$setting_names[$i]]['value'];
 				$i++;
 			}
 			return $settings_array;
@@ -128,7 +133,7 @@ class JobberSettings
 		{
 			foreach ($settings as $setting)
 			{
-				$settings_array[$setting['setting_name']] = $setting['setting_value'];
+				$settings_array[$setting['name']] = $setting['value'];
 			}
 			return $settings_array;
 		}
@@ -138,14 +143,14 @@ class JobberSettings
 	public function GetSettingsByCategory($category_id, $advanced = false)
 	{
 		global $db;
-		$sql = 'SELECT setting_name
+		$sql = 'SELECT name
 				FROM '.DB_PREFIX.'settings
 				WHERE category_id = ' . $category_id;
 		$result = $db->query($sql);
 		
 		$settings_list = array();
 		
-		while ($row = $result->fetch_assoc()) {	$settings_list[] = $row['setting_name']; }
+		while ($row = $result->fetch_assoc()) {	$settings_list[] = $row['name']; }
 
 		$settings = $this->GetSettings($settings_list, $advanced);
 
@@ -161,12 +166,12 @@ class JobberSettings
 		while($i < count($settings_array))
 		{
 			// Escape field value to avoid SQL injection
-			$setting_value = $db->real_escape_string(strip_tags($settings_array[$i]['setting_value']));
-			$setting_name = $settings_array[$i]['setting_name'];
+			$value = $db->real_escape_string(strip_tags($settings_array[$i]['value']));
+			$name = $settings_array[$i]['name'];
 			
-			if ($setting_value != $settings[$setting_name]['setting_value'])
+			if ($value != $settings[$name]['value'])
 			{
-				$sql = 'UPDATE '.DB_PREFIX.'settings SET setting_value = "' . $setting_value . '" WHERE setting_name = "' . $setting_name . '"';
+				$sql = 'UPDATE '.DB_PREFIX.'settings SET value = "' . $value . '" WHERE name = "' . $name . '"';
 				$db->query($sql);
 			}
 			$i++;
