@@ -100,7 +100,7 @@
 	// Setup database connection
 	try 
 	{
-		$db = new Db(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+		$db = new Db(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 		$db->Execute('SET NAMES UTF8');
 	}
 	catch(ConnectException $exception) 
