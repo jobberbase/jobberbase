@@ -100,13 +100,13 @@ class JobberSettings
 		return $row['id'];
 	}
 
-	public function GetSetting($setting_name, $advanced = false)
+	public function GetSetting($name, $advanced = false)
 	{
 		$settings = $this->mSettings;
-		if (!empty($settings[$setting_name]))
+		if (!empty($settings[$name]))
 		{
-			if ($advanced == true) return $settings[$setting_name];
-			else return $settings[$setting_name]['setting_value'];
+			if ($advanced == true) return $settings[$name];
+			else return $settings[$name]['value'];
 		}
 		else
 			return false;
