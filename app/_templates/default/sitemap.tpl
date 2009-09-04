@@ -11,7 +11,9 @@
 			</ul>
 			<h4>{$translations.sitemap.use}:</h4>
 			<ul>
-				<li><a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a></li>
+				{if $smarty.const.ENABLE_NEW_JOBS}
+					<li><a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a></li>
+				{/if}
 				<li><a href="{$BASE_URL}widgets/" title="{$translations.footer.widgets_title}">{$translations.footer.widgets}</a></li>
 				<li><a href="{$BASE_URL}rss/" title="{$translations.footer.title}">{$translations.footer.rss}</a></li>
 			</ul>

@@ -156,12 +156,12 @@ function get_navigation($menu = false)
 		if ($url_check == 'http' || $url_check == 'www.') $outside = 1; else $outside = 0; 
 		
 		$navigation[$row['menu']][] = array(
-										'id' => $row['id'],
-										'url' => $row['url'],
-										'name' => $row['name'],
-										'title' => $row['title'],
-										'menu' => $row['menu'],
-										'outside' => $outside);
+								'id' => $row['id'],
+								'url' => $row['url'],
+								'name' => $row['name'],
+								'title' => $row['title'],
+								'menu' => $row['menu'],
+								'outside' => $outside);
 	}
 	return $navigation;
 }

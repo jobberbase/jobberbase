@@ -40,9 +40,11 @@
 			<ul id="top">
 				{if $navigation.primary != ''}
 					{section name=tmp loop=$navigation.primary}
-						{if $i==1}<li>&bull;</li>{/if}
-						<li><a href="{if $navigation.primary[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.primary[tmp].url}/" title="{$navigation.primary[tmp].title}" >{$navigation.primary[tmp].name}</a></li>
-						{assign var=i value=1}
+						{if $smarty.const.ENABLE_NEW_JOBS || (!$smarty.const.ENABLE_NEW_JOBS && $navigation.primary[tmp].url != 'post')}
+							{if $i==1}<li>&bull;</li>{/if}
+							<li><a href="{if $navigation.primary[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.primary[tmp].url}/" title="{$navigation.primary[tmp].title}" >{$navigation.primary[tmp].name}</a></li>
+							{assign var=i value=1}
+						{/if}
 					{/section}
 				{/if}
 			</ul>
@@ -63,15 +65,17 @@
 					</fieldset>
 				</form>
 			</div><!-- #search -->
+			{if $smarty.const.ENABLE_NEW_JOBS}
 			<div class="addJob">
 				<a href="{$BASE_URL}post/" title="{$translations.search.title}" class="add">{$translations.search.submit}</a>
 			</div><!-- .addJob -->
+			{/if}
 		</div><!-- #box -->
 		
     <div id="categs-nav">
       <ul>
 				{section name=tmp loop=$categories}
-        <li id="{$categories[tmp].var_name}" {if $current_category == $categories[tmp].var_name}class="selected"{/if}><a href="{$BASE_URL}{$URL_JOBS}/{$categories[tmp].var_name}/" title="{$categories[tmp].var_name}"><span>{$categories[tmp].name}</span><span class="cnr">&nbsp;</span></a></li>
+        			<li id="{$categories[tmp].var_name}" {if $current_category == $categories[tmp].var_name}class="selected"{/if}><a href="{$BASE_URL}{$URL_JOBS}/{$categories[tmp].var_name}/" title="{$categories[tmp].var_name}"><span>{$categories[tmp].name}</span><span class="cnr">&nbsp;</span></a></li>
 				{/section}
     	</ul>
 		</div><!-- #categs-nav -->

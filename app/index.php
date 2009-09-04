@@ -102,23 +102,27 @@
 			
 		// create/edit a job post
 		case 'post':
+			if(!ENABLE_NEW_JOBS) { redirect_to(BASE_URL); exit; }
 			require_once 'page_write.php';
 			$flag = 1;
 			break;
 		
 		// verify the posted job
 		case 'verify':
+			if(!ENABLE_NEW_JOBS) { redirect_to(BASE_URL); exit; }
 			require_once 'page_verify.php';
 			$flag = 1;
 			break;
 	
 		// actually publish the job post
 		case 'publish':
+			if(!ENABLE_NEW_JOBS) { redirect_to(BASE_URL); exit; }
 			require_once 'page_publish.php';
 			$flag = 1;
 			break;
 			
 		case 'confirm':
+			if(!ENABLE_NEW_JOBS) { redirect_to(BASE_URL); exit; }
 			$flag =1;
 			$job = new Job($id);
 			$job_title = BASE_URL . URL_JOB .'/' . $job->mId . '/' . $job->mUrlTitle . '/';

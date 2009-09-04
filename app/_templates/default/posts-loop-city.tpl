@@ -5,8 +5,10 @@
 <table id="job-posts" class="job-posts" cellspacing="0">
 {if !$jobs}
 <div id="no-ads">
-	{$translations.jobscity.no_jobs_in} <strong>{$city_name}</strong>.<br />
-	<a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a>
+	{$translations.jobscity.no_jobs_in} <strong>{$city_name}</strong>.
+	{if $smarty.const.ENABLE_NEW_JOBS}
+		<br /><a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a>
+	{/if}
 </div><!-- #no-ads -->
 {/if}
 {foreach item=job from=$jobs}
