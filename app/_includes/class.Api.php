@@ -107,8 +107,8 @@ class Api
 		foreach ($this->mJobs as $job)
 		{
 			$response .= '<job>';
-			$response .= '<title><![CDATA[' . $job['title'] . ' la ' . $job['company'] . ']]></title>';
-			$response .= '<url>' . JOBBER_URL . 'job/' . $job['id'] . '/' . $job['url_title'] . '/</url>';
+			$response .= '<title><![CDATA[' . $job['title'] . ' at ' . $job['company'] . ']]></title>';
+			$response .= '<url>' . JOBBER_URL . URL_JOB . $job['id'] . '/' . $job['url_title'] . '/</url>';
 			$response .= '<date>' . $job['created_on'] . '</date>';
 			$response .= '</job>';
 		}
@@ -149,7 +149,7 @@ class Api
 		{
 			$response .= '<job>';
 			$response .= '<title>' . base64_encode(htmlspecialchars($job['title'], ENT_QUOTES)) . '</title>';
-			$response .= '<job_url>' . JOBBER_URL . 'job/' . $job['id'] . '/' . $job['url_title'] . '/</job_url>';
+			$response .= '<job_url>' . JOBBER_URL . URL_JOB . $job['id'] . '/' . $job['url_title'] . '/</job_url>';
 			$response .= '<job_city>' . $job['location'] . '</job_city>';
 			$response .= '<job_type>' . $job['type_name'] . '</job_type>';
 			$response .= '<job_category>' . $job['category_name'] . '</job_category>';
