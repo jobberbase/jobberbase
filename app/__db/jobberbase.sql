@@ -407,7 +407,7 @@ INSERT INTO `settings` (`id`, `category_id`, `name`, `title`, `description`, `da
 (12, 1, 'date_time_format', 'Date / Time format', 'The format in which times are displayed. %d = day, %m = month, %Y = 4 digit year, %H = 24-hour and %i = minute.', NULL, NULL, NULL, 'not_empty', '%d-%m-%Y %H:%i'),
 (13, 1, 'sidebar_show_what', 'Sidebar Shortlist', 'Either cities or categories can be shown in the sidebar', NULL, 'select', 'categories|cities', 'not_empty|is_alpha', 'cities'),
 (14, 1, 'sidebar_only_cities_with_jobs', 'Sidebar only non-empty Cities', 'Should the sidebar cities (if enabled) only show those that actually contain jobs?', 'boolean', 'radiobutton', 'no|yes', 'non_empty', '1'),
-(15, 1, 'enable_new_jobs', 'Enable Job Posting', 'By turning this off, the only way to add jobs is through the admin-panel.', 'boolean', 'radiobutton', 'no|yes', NULL, '0'),
+(15, 1, 'enable_new_jobs', 'Enable Job Posting', 'By turning this off, the only way to add jobs is through the admin-panel.', 'boolean', 'radiobutton', 'no|yes', NULL, '1'),
 (16, 2, 'jobs_per_page', 'Jobs per page', 'The amount of jobs per page, before pagination is called.', 'integer', NULL, NULL, 'not_empty', '50'),
 (17, 2, 'jobs_per_search', 'Jobs per search', 'The amount of jobs per page when searching.', 'integer', NULL, NULL, 'not_empty', '25'),
 (18, 2, 'spotlight_jobs', 'Spotlight Jobs #', 'Amount of Spotlight Jobs to display on the front page.', 'integer', NULL, NULL, 'not_empty', '3'),
