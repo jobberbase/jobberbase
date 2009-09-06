@@ -15,7 +15,7 @@
 			{/if}
 			<br /><br />
 			<p>
-			{$translations.jobscity.total}: <strong>{$total_number_of_jobs}</strong> JOBS
+			{$translations.jobscity.total}: <strong>{$total_number_of_jobs}</strong> {$translations.jobscity.jobs}
 			</p>
 		</div>
 		<!-- /content -->

@@ -11,7 +11,7 @@
 				</div><!-- #sort-by-type -->
 				{/if}
 				<h2>
-					JOBS
+					{$translations.jobscity.jobs_in_other_cities}
 				</h2>
 				{include file="posts-loop-other-cities.tpl"}
 			</div><!-- #job-listings -->
