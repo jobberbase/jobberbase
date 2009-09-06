@@ -6,7 +6,7 @@
 			{if $CURRENT_PAGE == $URL_JOB}
 			<div id="job-bottom">
 				<div id="job-post-utils">
-					<a href="{$back_link}" title="home">&laquo; {$translations.notfound.back}</a><br />
+					<a href="{$back_link}" title="category home">&laquo; {$translations.notfound.back}</a><br />
 					{$translations.jobs.report_fake} <a href="#" onclick="Jobber.ReportSpam('{$BASE_URL}report-spam/', {$job.id}); return false;" title="report fake ad">{$translations.jobs.report_it}</a>
 					&nbsp;&nbsp;<span id="report-spam-response"></span><br />
 					<a href="#" onclick="Jobber.SendToFriend.showHide(); return false;" title="{$translations.recommend.title}">{$translations.recommend.title}</a>
