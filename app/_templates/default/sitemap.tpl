@@ -20,6 +20,7 @@
 			<h4>{$translations.sitemap.more}:</h4>
 			<ul>
 				<li><a href="{$BASE_URL}{$URL_COMPANIES}/" title="{$translations.footer.companies_title}">{$translations.footer.companies}</a></li>
+				<li><a href="{$BASE_URL}{$URL_CITIES}/" title="{$translations.footer.cities_title}">{$translations.footer.cities}</a></li>
 				{foreach from=$articles item=article}
 				<li><a href="{$BASE_URL}{$article.url}/" title="{$article.page_title}">{$article.title}</a></li>
 				{/foreach}
