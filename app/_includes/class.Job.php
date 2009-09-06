@@ -1117,7 +1117,7 @@ class Job
 				$type_id = $type;
 			}
 			
-			$condition .= ' AND '.DB_PREFIX.'type_id = ' . $type_id;
+			$condition .= ' AND type_id = ' . $type_id;
 		}
 		
 		if ($categ)
@@ -1131,7 +1131,7 @@ class Job
 				$categ_id = $categ;
 			}
 			
-			$condition .= ' AND '.DB_PREFIX.'category_id = ' . $categ_id;
+			$condition .= ' AND category_id = ' . $categ_id;
 		}
 
 		$sql = 'SELECT COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1' . $condition;
