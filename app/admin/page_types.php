@@ -40,3 +40,4 @@ $type->getAllTypes();
 $types = $type->getTypesArray();
 $smarty->assign('types', $types);
 $smarty->assign('current_category', 'types');
+?>
