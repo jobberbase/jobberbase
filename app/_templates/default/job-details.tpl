@@ -4,9 +4,9 @@
 					{$translations.apply.success}
 				</div>
 				{/if}
-				{if $job.days_old > 40}
+				{if $job.days_old > $smarty.const.OLD_JOB_NOTIFY}
 				<div id="old-ad">
-					{$translations.apply.old_ad}
+					{$translations.apply.old_ad|replace:'%days%':$smarty.const.OLD_JOB_NOTIFY}
 				</div>
 				{/if}
 				{if $CURRENT_PAGE == $URL_JOB}
