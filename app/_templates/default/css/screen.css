@@ -186,7 +186,9 @@ div.icon-freelance{background:url(../img/icon-freelance.png) no-repeat;}
 #job-listings .current_page{font-weight:bold; border:1px solid #ccc; padding:1px 2px 1px 2px}
 /* Job loops */
 .row {background-color:#ebebeb}
-.row-spot {background-color:#fffad4; padding:5px; border:1px solid #ddd; margin-top:-1px}
-.row, .row-alt {padding:5px; border-bottom:1px solid #ddd}
-.time-posted {font-size:11px; color:#888888; float:right}
-.spotlight-image {background-image:url(../img/icon-spotlight.png); margin:4px; height:11px; width:77px; display:inline-block; float:right}
+.row, .row-alt {border-bottom:1px solid #ddd;}
+.row-spot {background-color:#fffad4; border:1px solid #ddd; margin-top:-1px;}
+.row, .row-alt , .row-spot{ padding:5px; width:740px; height:20px}
+.row-info{float:left; height:20px; overflow: hidden; width:650px;}
+.time-posted {font-size:11px; color:#888888; float:right; padding-right:5px;}
+.spotlight-image {background-image:url(../img/icon-spotlight.png); background-repeat:no-repeat; margin:4px; height:11px; width:77px; float:right; padding-right:5px;}
