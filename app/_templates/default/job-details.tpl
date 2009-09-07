@@ -37,7 +37,8 @@
 				</p>
 				<div id="job-description">
 				{$job.description}
-				</div><br />
+				</div>
+				<br />{include file="company-posts-loop.tpl"}<br />
 				{if $job.apply_online == 1 && $CURRENT_PAGE != 'verify'}
 					<div id="apply_online_now"><a href="#" onclick="$('#apply-online').toggle(); window.location.href = '#apply'; return false;">&raquo; Apply now</a><a href="#" name="apply">&nbsp;</a></div>
 					{if $smarty.session.apply_successful AND $smarty.session.apply_successful eq -1}
@@ -52,7 +53,7 @@
 						{/if}
 					</div>
 					{/if}
-				
+			
 					<div id="apply-online" {if $smarty.session.apply_successful AND $smarty.session.apply_successful eq -1}style="display: block;"{else}style="display: none;"{/if}>
 						<form id="frm-apply-online" method="post" enctype="multipart/form-data" action="{$BASE_URL}apply-online/">
 							<table>

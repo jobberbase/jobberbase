@@ -1,4 +1,5 @@
 <?php
+	$sanitizer = new Sanitizer();
 	$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
 	$smarty->assign('ENABLE_RECAPTCHA', ENABLE_RECAPTCHA);
 
@@ -104,7 +105,14 @@
 			//$info['description'] = nl2br($info['description']);
 			$info['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $info['description']);
 		}
-
+		
+		// ######### list other jobs by the same company #########
+		$compjobs = $job->ApiGetJobsByCompany($info['company'], 5, false);
+		$sanitizedcomp = $sanitizer->sanitize_title_with_dashes($info['company']);
+		$smarty->assign('compjobs', $compjobs);
+		$smarty->assign('jobsat', $sanitizedcomp);
+		// ######### list other jobs by the same company #########
+		
 		$smarty->assign('job', $info);
 		
 		$categVarName = $job->GetCategVarname($info['category_id']);
