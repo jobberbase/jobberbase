@@ -48,6 +48,8 @@
 							{$translations.apply.error_apply_timeout_not_passed|replace:'%minutes%':$smarty.const.MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP}
 						{elseif $smarty.session.apply_mail_sent AND $smarty.session.apply_mail_sent eq -1}
 							{$translations.apply.error_sending_mail}
+						{elseif $smarty.session.apply_errors.apply_cv}
+							{$smarty.session.apply_errors.apply_cv}
 						{else}
 							{$translations.apply.errro_apply_data_invalid}
 						{/if}
@@ -82,7 +84,7 @@
 									<td valign="top"><label for="apply_cv">{$translations.apply.cv_label}:</label></td>
 									<td>
 										<input type="file" name="apply_cv" id="apply_cv" />
-										<span class="validation-error">{if $smarty.session.apply_errors.apply_cv}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>	
+										<span class="validation-error">{if $smarty.session.apply_errors.apply_cv}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" title="{$smarty.session.apply_errors.apply_cv}" />{/if}</span>	
 										<div class="suggestion">{$translations.apply.cv_info}</div>
 									</td>
 								</tr>
