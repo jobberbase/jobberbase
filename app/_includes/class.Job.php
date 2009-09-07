@@ -635,7 +635,7 @@ class Job
 				foreach ($tmp as $word)
 				{
 					// try to find city based on city_id
-					$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $word . '%"';
+					$sql = 'SELECT id FROM '.DB_PREFIX.'cities WHERE name LIKE "%' . $word . '%"';
 					$result = $db->query($sql);
 					$row = $result->fetch_assoc();
 					if ($row['id'] != '')
@@ -651,7 +651,7 @@ class Job
 					}
  
 					// try to find city based on postcode or location_details
-					$sql = 'SELECT id FROM jobs WHERE outside_location LIKE "%' . $word . '%"';
+					$sql = 'SELECT id FROM '.DB_PREFIX.'jobs WHERE outside_location LIKE "%' . $word . '%"';
 					$results = $db->QueryArray($sql);
 					if ($db->affected_rows > 0)
 					{
@@ -685,7 +685,7 @@ class Job
 				}
 				if ($kw2 != '')
 				{
-					$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $kw2 . '%"';
+					$sql = 'SELECT id FROM '.DB_PREFIX.'cities WHERE name LIKE "%' . $kw2 . '%"';
 					$result = $db->query($sql);
 					$row = $result->fetch_assoc();
 					if ($row['id'] != '')
@@ -697,7 +697,7 @@ class Job
 				}
 				if ($kw1 == '' && $kw2 == '')
 				{
-					$sql = 'SELECT id FROM cities WHERE name LIKE "%' . $keywords . '%"';
+					$sql = 'SELECT id FROM '.DB_PREFIX.'cities WHERE name LIKE "%' . $keywords . '%"';
 					$result = $db->query($sql);
 					$row = $result->fetch_assoc();
 					if ($row['id'] != '')
@@ -711,7 +711,7 @@ class Job
 			}
  
 			$sql = 'SELECT id
-		               FROM jobs
+		               FROM '.DB_PREFIX.'jobs
 		               WHERE is_temp = 0 AND is_active = 1 AND (' . $conditions . ')
 		               ORDER BY created_on DESC';
 			$result = $db->query($sql);
@@ -733,7 +733,7 @@ class Job
 		    for ($i=0; $i < count($keywords_r); $i++)
 		    {
 		      $sql = 'SELECT id
-		                     FROM cities
+		                     FROM '.DB_PREFIX.'cities
 		                     WHERE name LIKE "%'. $keywords_r[$i] .'%"
 		                     ORDER BY ID ASC';
 		      $result = $db->query($sql);
@@ -762,7 +762,7 @@ class Job
 		    }
  
 			$sql = 'SELECT id
-					FROM jobs
+					FROM '.DB_PREFIX.'jobs
 					WHERE is_temp = 0 AND is_active = 1 '. $conditions .'
 					ORDER BY created_on DESC';
 			$result = $db->query($sql);			
