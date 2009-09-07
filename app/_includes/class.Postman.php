@@ -231,7 +231,6 @@ class Postman
 		$mailer = new PHPMailer();
 		$mailer->Mailer = $settings['mailer_mailer'];
 		$mailer->CharSet = $settings['mailer_encoding'];
-		$mailer->SMTPDebug = true;
 		
 		if($settings['mailer_mailer'] == 'smtp')
 		{
