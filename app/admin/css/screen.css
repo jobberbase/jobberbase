@@ -133,6 +133,7 @@ input.error, textarea.error{border:1px solid red !important}
 #job-details .label{color:#555; font-weight:bold}
 #job-details .fading{color:#aaa}
 #job-details ul{margin:0 0 10px 15px; list-style-type:disc}
+#job-details ol{margin:0 0 10px 15px;}
 #job-bottom{background-color:#f0f0f0; padding:2px; font-size:14px; height:50px}
 #number-views{float:right; display:inline; font-size:11px; color:#777}
 #job-post-utils{float:left; display:inline; font-size:11px; color:#888}
