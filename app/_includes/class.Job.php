@@ -903,7 +903,7 @@ class Job
 		{
 			$params['city_id'] = 'NULL';
 		}
-		if ($params['apply_online'] == 'on')
+		if ($params['apply_online'] == 1)
 		{
 			$params['apply_online'] = 1;
 		}
@@ -937,7 +937,7 @@ class Job
 			$params['city_id'] = 'NULL';
 		}
 
-		if ($params['apply_online'] == 'on')
+		if ($params['apply_online'] == 1)
 		{
 			$params['apply_online'] = 1;
 		}

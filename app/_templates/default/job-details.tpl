@@ -38,7 +38,7 @@
 				<div id="job-description">
 				{$job.description}
 				</div>
-				<br />{include file="company-posts-loop.tpl"}<br />
+				<br />
 				{if $job.apply_online == 1 && $CURRENT_PAGE != 'verify'}
 					<div id="apply_online_now"><a href="#" onclick="$('#apply-online').toggle(); window.location.href = '#apply'; return false;">&raquo; Apply now</a><a href="#" name="apply">&nbsp;</a></div>
 					{if $smarty.session.apply_successful AND $smarty.session.apply_successful eq -1}
@@ -115,6 +115,7 @@
 						</form>
 					</div><!-- #apply-online -->
 				{/if}
+			<br />{include file="company-posts-loop.tpl"}
 			</div><!-- #job-details -->
 {literal}
 	<script type="text/javascript">

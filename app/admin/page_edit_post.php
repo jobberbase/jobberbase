@@ -37,6 +37,15 @@ if ($id != 0)
 		
 		if ($_POST['poster_email'] == '')
 			$errors['poster_email'] = $translations['jobs']['email_error'];
+		
+		if (isset($_POST['apply_online']) && $_POST['apply_online'] == 'on')
+		{
+			$_POST['apply_online'] = 1;
+		}
+		else
+		{
+			$_POST['apply_online'] = 0;
+		}
 
 		$isCitySelected = false;
 

@@ -169,9 +169,9 @@
 					<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
 				</fieldset>
 				{/if}
+				<fieldset><input type="checkbox" name="apply_online" id="apply_online" {if $job.apply_online == 1 || $is_apply == 1}checked="checked"{/if}{if !isset($job.apply_online) && !isset($is_apply)}checked="checked"{/if} />{$translations.publish.apply_online}</input></fieldset>
 				<fieldset><input type="submit" name="submit" id="submit" value="{$translations.publish.step1_submit}" /></fieldset>
-				<fieldset class="hidden">
-					<input type="checkbox" name="apply_online" id="apply_online" checked="checked" />
+				<fieldset class="hidden">					
 					<input type="hidden" name="action" {if $job.id || $smarty.session.later_edit}value="edit"{else}value="publish"{/if} />
 					{if $smarty.session.later_edit}<input type="hidden" name="auth" value="{$smarty.session.later_edit}" />{/if}
 					{if $job.id}<input type="hidden" name="job_id" value="{$job.id}" />{/if}

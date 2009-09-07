@@ -150,13 +150,12 @@
 						</tr>
 					</table>
 				</fieldset>
-			
+				<fieldset><input type="checkbox" name="apply_online" id="apply_online" {if $job.apply_online == 1 || $job.id == 0}checked="checked"{/if}{if !isset($job.apply_online)}checked="checked"{/if} />{$translations.publish.apply_online}</input></fieldset>
 				<fieldset>
 					<input type="button" id="save" {if $job.id == 0}value="Post"{else}value="Save"{/if} />
 					<input type="button" id="preview" value="Preview" />
 				</fieldset>
 				<fieldset class="hidden">
-					<input type="checkbox" name="apply_online" id="apply_online" checked="checked" />
 					<input type="hidden" name="show_preview" id="show_preview" value="false" />
 					<input type="hidden" name="job_id" value="{$job.id}" />
 				</fieldset>

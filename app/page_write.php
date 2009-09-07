@@ -84,6 +84,15 @@
 		{
 			$errors['poster_email'] = $translations['jobs']['email_error'];
 		}
+		
+		if (isset($apply_online) && $apply_online == 'on')
+		{
+			$apply_online = 1;
+		}
+		else
+		{
+			$apply_online = 0;
+		}
 
 		// no errors, go to review page
 		if (empty($errors))
@@ -157,6 +166,15 @@
 		if ($poster_email == '')
 		{
 			$errors['poster_email'] = $translations['jobs']['job_email_error'];
+		}
+		
+		if (isset($apply_online) && $apply_online == 'on')
+		{
+			$apply_online = 1;
+		}
+		else
+		{
+			$apply_online = 0;
 		}
 		
 		// no errors, go to review page
@@ -235,6 +253,10 @@
 	{
 		$html_title = $translations['jobs']['title_new'] . ' / ' . SITE_NAME;
 	}
-
+	
+	if (isset($apply_online))
+	{
+		$smarty->assign('is_apply', $apply_online);
+	}
 	$template = 'publish-write.tpl';
 ?>
