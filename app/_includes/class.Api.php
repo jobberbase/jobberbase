@@ -29,10 +29,6 @@ class Api
 			{
 				$this->mJobs = $job->ApiGetJobsByCompany($params['company'], $params['count']);
 			}
-			else if ($action == 'getJobs4JobJob')
-			{
-				$this->mParams = $params;
-			}
 			
 			$this->mResponse = $response;
 			$url = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'';
@@ -151,7 +147,6 @@ class Api
 		}
 
 		return $unicode;
-	}
-	
+	}	
 }
 ?>
