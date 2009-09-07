@@ -116,61 +116,6 @@ class Api
 		return $response;
 	}
 	
-	// custom API for jobjob.ro
-	private function ApiGetJobs4JobJob()
-	{
-		global $db;
-
-		$jobs = array();
-		$sql = 'SELECT id
-		               FROM '.DB_PREFIX.'jobs
-		               WHERE is_temp = 0 AND is_active = 1 AND 
-						created_on > DATE_SUB("' . $this->mParams['since'] . '", INTERVAL 1 DAY)
-		               ORDER BY created_on DESC';
-		$result = $db->query($sql);
-
-		while ($row = $result->fetch_assoc())
-		{
-			$current_job = new Job($row['id']);
-			$jobs[] = $current_job->GetBasicInfo();
-		}
-		return $jobs;
-	}
-	
-	// Return result as XML specially formatted for jobjob.ro
-	public function ReturnXml4JobJob()
-	{
-		$jobs = $this->ApiGetJobs4JobJob($this->mParams['since']);
-
-		header('Content-Type: text/xml; charset=UTF-8');
-		$response = '<?xml version="1.0" encoding="utf-8"?>';
-		$response .= '<jobs>';
-		foreach ($jobs as $job)
-		{
-			$response .= '<job>';
-			$response .= '<title>' . base64_encode(htmlspecialchars($job['title'], ENT_QUOTES)) . '</title>';
-			$response .= '<job_url>' . JOBBER_URL . URL_JOB . $job['id'] . '/' . $job['url_title'] . '/</job_url>';
-			$response .= '<job_city>' . $job['location'] . '</job_city>';
-			$response .= '<job_type>' . $job['type_name'] . '</job_type>';
-			$response .= '<job_category>' . $job['category_name'] . '</job_category>';
-			
-			$response .= '<description>';
-			$response .= '<summary>' . base64_encode($job['description']) . '</summary>';
-			$response .= '</description>';
-			
-			$response .= '<posted_date>' . $job['mysql_date'] . '</posted_date>';
-			
-			$response .= '<company>';
-			$response .= '<name>' . htmlspecialchars($job['company'], ENT_QUOTES) . '</name>';
-			$response .= '<url>' . htmlspecialchars($job['url'], ENT_QUOTES) . '</url>';
-		  $response .= '</company>';
-		
-			$response .= '</job>';
-		}
-		$response .= '</jobs>';
-		return $response;
-	}
-	
 	public function utf8_uri_encode($utf8_string, $length = 0) 
 	{
 		$unicode = '';

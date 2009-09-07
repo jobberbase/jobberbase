@@ -18,16 +18,5 @@
 			$api->Display();
 			exit;
 			break;
-
-		case 'getJobs4JobJob':
-			if (!isset($since))
-			{
-				$since = date('Y-m-d');
-			}
-			$params = array('since' => $since, 'response' => 'xml');
-			$api = new Api('getJobs4JobJob', $params, 'xml');
-			echo $api->ReturnXml4JobJob();
-			exit;
-			break;
 	}
 ?>

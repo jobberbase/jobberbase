@@ -3,7 +3,7 @@
 <head>
 	<title>jobberBase API test</title>
 	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-	<script src="/api/api.php?action=getJobs&amp;type=0&amp;category=0&amp;count=5&amp;random=1&amp;days_behind=7&amp;response=js" type="text/javascript"></script>
+	<script src="api.php?action=getJobs&amp;type=0&amp;category=0&amp;count=5&amp;random=1&amp;days_behind=7&amp;response=js" type="text/javascript"></script>
 	<style>
 		ul.jobber-list {
 			list-style-type: none;
