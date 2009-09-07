@@ -4,7 +4,7 @@
 <legend>Login</legend>
 <table border="0" cellspacing="2" cellpadding="2">
 	{if $errors.incorrect}<tr><td colspan="3"><span class="validation-error"><img
-			src="{$BASE_URL}img/icon-delete.png" alt="" />{$errors.incorrect}</span></td>
+			src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" />{$errors.incorrect}</span></td>
 		</tr>
 	{/if}
 	<tr>
@@ -13,7 +13,7 @@
 			type="text" name="username" id="username" size="40"
 			value="{$smarty.post.username}" />
 		<span class="validation-error">{if $errors.username}<img
-			src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span></td>
+			src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" />{/if}</span></td>
 	</tr>
 	<tr>
 		<td class="publish-label">Password:</td>
@@ -21,7 +21,7 @@
 			type="password" name="password" id="password" size="40"
 			value="" />
 		<span class="validation-error">{if $errors.password}<img
-			src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span></td>
+			src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" />{/if}</span></td>
 	</tr>
 	
 	

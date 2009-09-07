@@ -9,13 +9,13 @@
 			<br />
 			{if $filter_error}
 			<div class="validation-failure">
-				<img src="{$BASE_URL}img/icon-delete.png" alt="" />
+				<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />
 				{$filter_error}
 			</div>
 			{/if}
 			{if $errors}
 			<div class="validation-failure">
-				<img src="{$BASE_URL}img/icon-delete.png" alt="" />
+				<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />
 				{$translations.publish.form_error}
 			</div>
 			{/if}
@@ -68,14 +68,14 @@
 						<tr>
 							<td class="publish-label">{$translations.idealjob.name_label}:</td>
 							<td><input {if $errors.name}class="error"{/if} type="text" name="name" id="name" size="40" value="{$smarty.post.name}" />
-							<span class="validation-error">{if $errors.name}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>
+							<span class="validation-error">{if $errors.name}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>
 							</td>
 						</tr> 
 						<tr>
 							<td class="publish-label">{$translations.idealjob.email_label}:</td>
 							<td>
 								<input {if $errors.email}class="error"{/if} type="text" name="email" id="email" size="40" value="{$smarty.post.email}" />
-								<span class="validation-error">{if $errors.email}<img src="{$BASE_URL}img/icon-delete.png" alt="" />{/if}</span>
+								<span class="validation-error">{if $errors.email}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>
 							</td>
 						</tr>
 					</table>
@@ -99,8 +99,8 @@
 							email: { required: true }
 						},
 						messages: {
-							name: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />',
-							email: ' <img src="{/literal}{$BASE_URL}{literal}img/icon-delete.png" alt="" />'
+							name: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />',
+							email: ' <img src="{/literal}{$BASE_URL}_templates/{$THEME}/{literal}img/icon-delete.png" alt="" />'
 						}
 					});	
 				}

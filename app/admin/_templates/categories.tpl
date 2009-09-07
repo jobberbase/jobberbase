@@ -6,7 +6,7 @@
 					<div class="categoryItem" rel="{$category.id}">
 						<div class="categoryHandle"></div>
 						<div class="categoryWrapper">
-							<a href="#" title="Delete" class="deleteCategory"><img src="{$BASE_URL}img/icon-delete.png" alt="Edit" /> Delete</a>
+							<a href="#" title="Delete" class="deleteCategory"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="Edit" /> Delete</a>
 							<label><span>Name:</span><input type="text" size="60" name="name[{$category.id}]" value="{$category.name}" /></label>
 							<a href="#" title="Save" class="saveCategory"><img src="{$BASE_URL}img/disk.png" alt="Save" /> Save</a>
 							<label><span>Title:</span><input type="text" size="60" name="title[{$category.id}]" value="{$category.title}" /></label>
