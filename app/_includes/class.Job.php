@@ -615,7 +615,8 @@ class Job
 		if (SEARCH_METHOD == 'classic')
 		{
 			$kw1 = $kw2 = $extra_conditions = '';
- 
+			$found_city = false;
+			
 			if (strstr($keywords, ',') || strstr($keywords, ', '))
 			{
 				$tmp = explode(',', $keywords);

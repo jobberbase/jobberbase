@@ -2,9 +2,9 @@
 		<div id="content">
 				<h3 class="page-heading">Job Types</h3>
 				<div id="typesContainer">
-				Note: Var name must not contain spaces or other special chars.<br />
+				<strong>Note:</strong> Var name must not contain spaces or other special chars.<br />
 				The icon is named icon_varname.png and has to be uploaded in the  
-				'img' folder situated in your jobberbase root folder.<br />
+				'img' subdirectory situated in your themes directory under '_templates' folder.<br />
 				{section name=tmp loop=$types}
 					<div class="typeItem" rel="{$types[tmp]->getId()}">
 						<div class="typeHandle"></div>
