@@ -84,6 +84,10 @@
 		{
 			$errors['poster_email'] = $translations['jobs']['email_error'];
 		}
+		if (!validate_email($poster_email))
+		{
+			$errors['poster_email'] = $translations['jobs']['email_invalid'];
+		}
 		
 		if (isset($apply_online) && $apply_online == 'on')
 		{
