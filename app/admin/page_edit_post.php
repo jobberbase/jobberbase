@@ -38,6 +38,9 @@ if ($id != 0)
 		if ($_POST['poster_email'] == '')
 			$errors['poster_email'] = $translations['jobs']['email_error'];
 		
+		if (!validate_email($_POST['poster_email']))
+			$errors['poster_email'] = $translations['jobs']['email_invalid'];
+		
 		if (isset($_POST['apply_online']) && $_POST['apply_online'] == 'on')
 		{
 			$_POST['apply_online'] = 1;
