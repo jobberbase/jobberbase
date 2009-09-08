@@ -142,7 +142,7 @@ class Postman
 	public function MailPublishToUser($data, $url=BASE_URL)
 	{
 		$msg = "Hello! :)\n\n";
-		$msg .= "Your ad was published and is available at: " . $url . "job/" . $data['id'] . "/" . $data['url_title'] . "/";
+		$msg .= "Your ad was published and is available at: " . $url . URL_JOB ."/" . $data['id'] . "/" . $data['url_title'] . "/";
 		$msg .= "\n\n---\nEdit it: " . $url . "post/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\nDeactivate it: " . $url . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
 		$msg .= "\n\n---\n\nThank you for using our service!\nThe " . SITE_NAME . " Team";
