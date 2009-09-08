@@ -49,7 +49,6 @@
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$reserved = array(
 				'post',
-				'ideal-job',
 				'rss',
 				'companies',
 				'search',
