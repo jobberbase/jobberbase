@@ -167,122 +167,6 @@ CREATE TABLE IF NOT EXISTS `job_applications` (
 -- Dumping data for table `job_applications`
 --
 
-
--- --------------------------------------------------------
-
---
--- Table structure for table `job_params`
---
-
-CREATE TABLE IF NOT EXISTS `job_params` (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `value` varchar(50) NOT NULL,
-  `categ` varchar(20) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
-
---
--- Dumping data for table `job_params`
---
-
-INSERT INTO `job_params` (`id`, `value`, `categ`) VALUES
-(1, 'php/mysql', 'know-how'),
-(2, '.net', 'know-how'),
-(3, 'xhtml/css', 'know-how'),
-(4, 'graphic design', 'know-how'),
-(5, 'small team', 'company'),
-(6, 'large company', 'company'),
-(7, 'ruby/rails', 'know-how'),
-(8, 'oracle', 'know-how'),
-(9, 'c/c++/c#', 'know-how'),
-(10, 'javascript/ajax', 'know-how'),
-(11, 'java', 'know-how'),
-(12, 'flash', 'know-how'),
-(13, 'junior', 'level'),
-(14, 'senior', 'level'),
-(15, 'full-time', 'type'),
-(16, 'part-time', 'type'),
-(17, 'freelance', 'type'),
-(18, 'sysadmin', 'know-how'),
-(19, 'linux/server admin', 'know-how'),
-(20, 'erp/sap', 'know-how'),
-(21, 'copywriting/editare', 'know-how'),
-(22, 'seo/sem', 'know-how'),
-(23, 'manager', 'know-how'),
-(24, 'work from home', 'company'),
-(25, 'work at the office', 'company'),
-(28, 'internship', 'type'),
-(29, 'medium', 'level'),
-(30, 'python', 'know-how'),
-(31, 'bonuses', 'company'),
-(32, 'training', 'company');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `job_requests`
---
-
-CREATE TABLE IF NOT EXISTS `job_requests` (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `created_on` datetime NOT NULL,
-  `ip` varchar(15) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `job_requests`
---
-
-INSERT INTO `job_requests` (`id`, `name`, `email`, `created_on`, `ip`) VALUES
-(1, 'asdf', 'me@filipcte.ro', '2008-01-30 00:10:28', '127.0.0.1'),
-(2, 'asdf', 'me@filipcte.ro', '2008-01-30 00:10:48', '127.0.0.1'),
-(3, 'asdf', 'me@filipcte.ro', '2008-01-30 00:11:56', '127.0.0.1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `job_requests_params`
---
-
-CREATE TABLE IF NOT EXISTS `job_requests_params` (
-  `request_id` int(10) unsigned NOT NULL,
-  `param_id` int(10) unsigned NOT NULL,
-  KEY `request_id` (`request_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `job_requests_params`
---
-
-INSERT INTO `job_requests_params` (`request_id`, `param_id`) VALUES
-(1, 17),
-(1, 31),
-(1, 5),
-(1, 32),
-(1, 10),
-(1, 1),
-(1, 3),
-(1, 14),
-(2, 17),
-(2, 31),
-(2, 5),
-(2, 32),
-(2, 10),
-(2, 1),
-(2, 3),
-(2, 14),
-(3, 17),
-(3, 31),
-(3, 5),
-(3, 32),
-(3, 10),
-(3, 1),
-(3, 3),
-(3, 14);
-
 -- --------------------------------------------------------
 
 --
@@ -475,15 +359,14 @@ CREATE TABLE IF NOT EXISTS `links` (
 --
 
 INSERT INTO `links` (`id`, `url`, `name`, `title`, `menu`, `link_order`) VALUES
-(1, 'ideal-job', 'The Ideal Job', 'Let us know what the ideal job is.', 'primary', 1),
-(2, 'widgets', 'Site widget', 'Would you like to display our latest jobs on your site?', 'primary', 2),
-(3, 'about', 'About Us', 'More information about us.', 'primary', 3),
-(4, 'contact', 'Contact', 'Don''t hesitate to contact us!', 'primary', 4),
-(5, 'post', 'Post a new job', 'Post a new job for free!', 'footer1', 5),
-(6, 'widgets', 'Site widget', 'Would you like to display our latest jobs on your site?', 'footer1', 6),
-(7, 'rss', 'RSS Feeds', 'An overview of all our available RSS Feeds.', 'footer1', 7),
-(8, 'about', 'About Us', 'More information about us.', 'footer2', 8),
-(9, 'contact', 'Contact', 'Don''t hesitate to contact us!', 'footer2', 9),
-(10, 'companies', 'Companies', 'An overview of all available companies.', 'footer3', 10),
-(11, 'cities', 'Cities', 'An overview of all available cities.', 'footer3', 11),
-(12, 'sitemap', 'Sitemap', 'Sitemap.', 'footer3', 12);
+(1, 'widgets', 'Site widget', 'Would you like to display our latest jobs on your site?', 'primary', 1),
+(2, 'about', 'About Us', 'More information about us.', 'primary', 2),
+(3, 'contact', 'Contact', 'Don''t hesitate to contact us!', 'primary', 3),
+(4, 'post', 'Post a new job', 'Post a new job for free!', 'footer1', 4),
+(5, 'widgets', 'Site widget', 'Would you like to display our latest jobs on your site?', 'footer1', 5),
+(6, 'rss', 'RSS Feeds', 'An overview of all our available RSS Feeds.', 'footer1', 6),
+(7, 'about', 'About Us', 'More information about us.', 'footer2', 7),
+(8, 'contact', 'Contact', 'Don''t hesitate to contact us!', 'footer2', 8),
+(9, 'companies', 'Companies', 'An overview of all available companies.', 'footer3', 9),
+(10, 'cities', 'Cities', 'An overview of all available cities.', 'footer3', 10),
+(11, 'sitemap', 'Sitemap', 'Sitemap.', 'footer3', 11);

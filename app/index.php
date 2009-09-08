@@ -166,12 +166,6 @@
 			$flag = 1;
 			break;
 			
-		// the ideal job
-		case 'ideal-job':
-			require_once 'page_request.php';
-			$flag = 1;
-			break;
-
 		case 'job-unavailable':
 			$html_title = 'Unavailable job / ' . SITE_NAME;
 			$template = 'no-job.tpl';
