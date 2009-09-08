@@ -34,7 +34,6 @@ div#box div#search fieldset label{float:left; clear:both; display:block; font-si
 div#box .addJob{position:absolute; right:17px; top:28px}
 div#box .addJob a.add{display:block; width:182px; height:53px; text-indent:-1000em; background:url(../img/bt-post.png) no-repeat 0 0}
 div#box .addJob a.add:hover{background:url(../img/bt-post.png) no-repeat -182px 0}
-div#request-job a{font-weight:bold; font-size:14px; text-align:right}
 div#promo{margin-top:10px}
 div#promo a:hover{background:#fff}
 .search_results_label{color:#888; background-color:transparent; font-size:1.1em}
@@ -169,19 +168,6 @@ div#sort-by-type a:hover{background:#fff}
 #textile-suggestions table{margin-top:5px; width:80%; font-size:11px}
 #textile-suggestions table th{border-bottom:2px solid #bbb; font-weight:bold}
 #textile-suggestions table td{border-bottom:1px solid #ccc}
-div.icon-fulltime, div.icon-parttime, div.icon-freelance{margin-top:3px; height:11px; width:47px; display:inline}
-div.icon-fulltime{background:url(../img/icon-fulltime.png) no-repeat;}
-div.icon-parttime{background:url(../img/icon-parttime.png) no-repeat;}
-div.icon-freelance{background:url(../img/icon-freelance.png) no-repeat;}
-.req-params-item{background-color:#edfaff; padding:3px; margin-bottom:5px; display:inline; line-height:1.9}
-#req-left{float:left; display:inline; width:160px}
-#req-middle{float:left; display:inline; width:160px; margin-left:30px}
-#req-right{float:left; display:inline; width:160px; margin-left:30px}
-#req-right2{float:left; display:inline; width:160px; margin-left:30px}
-#req-left input, #req-middle input, #req-right input, #req-right2 input{border:0}
-#home-promo{background:url(../img/home-banner-bg.png) no-repeat; width:757px; height:66px; margin-top:12px; text-align:center; padding-top:8px}
-#home-promo div{color:#0897C6; font-size:20px}
-#home-promo a{text-decoration:underline; font-size:14px}
 /* paginator */
 #job-listings .current_page{font-weight:bold; border:1px solid #ccc; padding:1px 2px 1px 2px}
 /* Job loops */
