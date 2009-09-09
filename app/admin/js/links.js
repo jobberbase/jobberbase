@@ -6,11 +6,11 @@
 				'<div class="linkWrapper">',
 					'<a href="#" title="Delete" class="deleteLink"><img src="',
 					'',
-					'admin/img/icon-delete.png" alt="Edit" /> Delete</a>',
+					'img/icon-delete.png" alt="Edit" /> Delete</a>',
 					'<label><span>Name:</span><input type="text" size="60" name="name[]" value="New link" /></label>',
 					'<a href="#" title="Save" class="saveLink"><img src="',
 					'',
-					'admin/img/disk.png" alt="Save" /> Save</a>',
+					'img/disk.png" alt="Save" /> Save</a>',
 					'<label><span>Url:</span><input type="text" size="60" name="url[]" value="http://" /></label>',
 					'<label><span>Title:</span><input type="text" size="60" name="title[]" value="" /></label>',
 				'</div>',
@@ -191,8 +191,8 @@
 			if (saving === true) {
 				return false;
 			}
-			linkTemplate[4] = Jobber.jobber_url;
-			linkTemplate[8] = Jobber.jobber_url;
+			linkTemplate[4] = Jobber.jobber_admin_url;
+			linkTemplate[8] = Jobber.jobber_admin_url;
 			var el = $('#linksContainer')
 					.append(linkTemplate.join(''))
 					.find('div.linkItem:last')

@@ -6,7 +6,7 @@
 				'<div class="categoryWrapper">',
 					'<a href="#" title="Delete" class="deleteCategory"><img src="',
 					'',
-					'img/icon-delete.png" alt="Edit" /> Delete</a>',
+					'img/icon-delete.png" alt="" /> Delete</a>',
 					'<label><span>Name:</span><input type="text" size="60" name="name[]" value="New category" /></label>',
 					'<a href="#" title="Save" class="saveCategory"><img src="',
 					'',
@@ -217,8 +217,8 @@
 			if (saving === true) {
 				return false;
 			}
-			categoryTemplate[4] = Jobber.jobber_url;
-			categoryTemplate[8] = Jobber.jobber_url;
+			categoryTemplate[4] = Jobber.jobber_admin_url;
+			categoryTemplate[8] = Jobber.jobber_admin_url;
 			var el = $('#categoriesContainer')
 					.append(categoryTemplate.join(''))
 					.find('div.categoryItem:last')

@@ -6,13 +6,13 @@
 				'<div class="typeWrapper">',
 					'<a href="#" title="Delete" class="deleteType"><img src="',
 					'',
-					'admin/img/icon-delete.png" alt="Edit" /> Delete</a>',
+					'img/icon-delete.png" alt="Edit" /> Delete</a>',
 					'<label><span>Name:</span><input type="text" size="60" name="name[]" value="New type" /></label>',
-					'<label><span>Var name:</span><input type="text" id="nr" size="60" name="var_name[]" value="0" /></label>',
-					
 					'<a href="#" title="Save" class="saveType"><img src="',
 					'',
-					'admin/img/disk.png" alt="Save" /> Save</a><div class="clear"></div>',
+					'img/disk.png" alt="Save" /> Save</a>',
+					'<label><span>Var name:</span><input type="text" id="nr" size="60" name="var_name[]" value="0" /></label>',
+					'<div class="clear"></div>',
 				'</div>',
 			'</div>'
 		];
@@ -216,8 +216,8 @@
 			if (saving === true) {
 				return false;
 			}
-			categoryTemplate[4] = Jobber.jobber_url;
-			categoryTemplate[9] = Jobber.jobber_url;
+			categoryTemplate[4] = Jobber.jobber_admin_url;
+			categoryTemplate[8] = Jobber.jobber_admin_url;
 			var el = $('#typesContainer')
 					.append(categoryTemplate.join(''))
 					.find('div.typeItem:last')
