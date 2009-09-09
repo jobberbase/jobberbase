@@ -10,7 +10,7 @@
 		//]]>
 	</script>
 	{/literal}
-	<div id="overlay"><img src="{$BASE_URL}img/ajax-loader.gif" /></div>
+	<div id="overlay"><img src="{$BASE_URL_ADMIN}img/ajax-loader.gif" /></div>
 	<div id="messagesContainer"></div>
 </body>
 </html>
