@@ -1044,8 +1044,6 @@ class Job
 	{
 		global $db;
 			
-		$db->autocommit(FALSE);
-		
 		$sql = 'DELETE FROM '.DB_PREFIX.'hits WHERE job_id  = ' . $this->mId;
 		$res = $db->query($sql);	
 		
@@ -1058,15 +1056,6 @@ class Job
 		$sql = 'DELETE FROM '.DB_PREFIX.'jobs WHERE id  = ' . $this->mId;
 		$res = $res && $db->query($sql);
 		
-		if($res != false)
-		{
-			$db->commit();
-		}
-		else
-		{
-			$db->rollback();
-		}
-		$db->autocommit(TRUE);
 		return ($res==false)?$res:true;
 	}
 	public function MakeValidUrl($string)
