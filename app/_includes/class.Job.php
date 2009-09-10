@@ -525,7 +525,7 @@ class Job
 		
 		if ($company)
 		{
-			$conditions .= ' AND company LIKE "' . $company . '"';
+			$conditions .= ' AND company LIKE "' . $db->real_escape_string($company) . '"';
 		}
 		
 		if ($for_feed)
