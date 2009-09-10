@@ -40,7 +40,7 @@
 								<td valign='top' class='settingsform_title'>{$title}:</td>
 								<td valign='top' class='settingsform_input'>
 									{if $input_type == 'text_area'}
-										<textarea class="settingsform_text_area{if $errors.$name != ''} error{/if}" name="{$name}">{$value}</textarea>
+										<textarea class="settingsform_text_area{if $errors.$name != ''} error{/if}" name="{$name}">{$value|escape}</textarea>
 									{elseif $input_type == 'radiobutton'}
 										{if $data_type == 'boolean'}
 											<input type="radio" name="{$name}" value="0" {if $value == 0}checked="checked"{/if} />{if $input_options[0]}{$input_options[0]}{else}0{/if}
@@ -62,7 +62,7 @@
 											<input type="checkbox" name="{$name}[]" value="{$input_options[tmp2]}" {if in_array($input_options[tmp2], $value)}checked="checked"{/if} />{$input_options[tmp2]}<br />
 										{/section}
 									{else}
-										<input class="settingsform_text_field{if $errors.$name != ''} error{/if}" type="text" 	name="{$name}" value="{$value}"/>
+										<input class="settingsform_text_field{if $errors.$name != ''} error{/if}" type="text" name="{$name}" value="{$value|escape}"/>
 									{/if}
 									{if $errors.$name != ''}<span class="validation-error"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" /></span>{/if}
 								</td>
