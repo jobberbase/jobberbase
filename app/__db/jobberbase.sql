@@ -287,7 +287,7 @@ INSERT INTO `settings` (`id`, `category_id`, `name`, `title`, `description`, `da
 (8, 1, 'max_cv_size', 'Max CV filesize', 'The maximum filesize for uploaded CV''s in bytes (Update accordingly in translations.ini)', NULL, NULL, NULL, 'not_empty|is_number', '3145728'),
 (9, 1, 'file_upload_dir', 'Upload Directory', 'Upload directory to temporarily save CV''s. Must be writable.', NULL, NULL, NULL, 'not_empty', 'uploads/'),
 (10, 1, 'apply_delay', 'Apply delay', 'The number of minutes that must pass between applications from the same IP address', NULL, NULL, NULL, 'not_empty|is_number', '0'),
-(11, 1, 'old-job-notify', 'Old Job Notify', 'No. of days after which a job should be reported as old. Use 0 to disable this functionality.', 'integer', NULL, NULL, 'not_empty','40'),
+(11, 1, 'old_job_notify', 'Old Job Notify', 'No. of days after which a job should be reported as old. Use 0 to disable this functionality.', 'integer', NULL, NULL, 'not_empty','40'),
 (12, 1, 'date_format', 'Date format', 'The format in which dates are displayed. %d = day, %m = month, %Y = 4 digit year.', NULL, NULL, NULL, 'not_empty', '%d-%m-%Y'),
 (13, 1, 'date_time_format', 'Date / Time format', 'The format in which times are displayed. %d = day, %m = month, %Y = 4 digit year, %H = 24-hour and %i = minute.', NULL, NULL, NULL, 'not_empty', '%d-%m-%Y %H:%i'),
 (14, 1, 'sidebar_show_what', 'Sidebar Shortlist', 'Either cities or categories can be shown in the sidebar', NULL, 'select', 'categories|cities', 'not_empty|is_alpha', 'cities'),

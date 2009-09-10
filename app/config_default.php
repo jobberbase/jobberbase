@@ -123,7 +123,7 @@
 	define('MAX_CV_SIZE', $settings['max_cv_size']);
 	define('FILE_UPLOAD_DIR', $settings['file_upload_dir']);
 	define('MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP', $settings['apply_delay']);
-	define('OLD_JOB_NOTIFY', $settings['old-job-notify']);
+	define('OLD_JOB_NOTIFY', $settings['old_job_notify']);
 	define('ENABLE_NEW_JOBS', $settings['enable_new_jobs']);
 	define('JOBS_PER_PAGE', $settings['jobs_per_page']);
 	define('SIDEBAR_SHOW_WHAT', $settings['sidebar_show_what']);
