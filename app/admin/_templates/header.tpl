@@ -21,7 +21,7 @@
 	<script src="{$BASE_URL_ADMIN}js/main.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}js/overlay.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}js/messages.js" type="text/javascript"></script>
-	<script src="{$BASE_URL}js/jquery.validate.pack.js" type="text/javascript" charset="iso-8859-1"></script>
+	<script src="{$BASE_URL}js/jquery.validate.min.js" type="text/javascript"></script>
 	{foreach from=$js item=j}
 	<script src="{$BASE_URL_ADMIN}js/{$j}.js" type="text/javascript"></script>
 	{/foreach}
