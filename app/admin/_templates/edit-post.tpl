@@ -42,7 +42,7 @@
 						<tr>
 							<td class="publish-label" valign="top">{$translations.publish.title_label}:</td>
 							<td>
-								<input {if $errors.title}class="error"{/if} type="text" name="title" id="title" tabindex="2" size="50" value="{if $job.title}{$job.title}{else}{$smarty.post.title}{/if}" />
+								<input {if $errors.title}class="error"{/if} type="text" name="title" id="title" tabindex="2" size="50" value="{if $job.title}{$job.title|escape}{else}{$smarty.post.title|escape}{/if}" />
 								{if $errors.title}<span class="validation-error"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" /></span>{/if}
 								<div class="{$translations.publish.title_info}"></div>
 							</td>
@@ -58,7 +58,7 @@
 								</select>
 								<a id="other_location_label" href="#" onclick="Jobber.HandleLocationOutsideRo(); return false;">{if $job.location_outside_ro != ''}pick one from the list{else}other{/if}</a>
 								<div id="location_outside_ro" {if $job.location_outside_ro != ''}style="display: block;"{else}style="display: none;"{/if}>
-									{$translations.publish.where} <input type="text" name="location_outside_ro_where" id="location_outside_ro_where" size="50" maxlength="140" {if $job.location_outside_ro != ''}value="{$job.location_outside_ro}"{/if} />
+									{$translations.publish.where} <input type="text" name="location_outside_ro_where" id="location_outside_ro_where" size="50" maxlength="140" {if $job.location_outside_ro != ''}value="{$job.location_outside_ro|escape}"{/if} />
 									<div class="suggestion">{$translations.publish.where_info}</div>
 								</div>
 							</td>
@@ -128,7 +128,7 @@
 					<table border="0" cellspacing="2" cellpadding="2">
 						<tr>
 							<td class="publish-label">{$translations.publish.name_label}:</td>
-							<td><input {if $errors.company}class="error"{/if} tabindex="6" type="text" name="company" id="company" size="40" value="{if $job.company}{$job.company}{else}{$smarty.post.company}{/if}" />
+							<td><input {if $errors.company}class="error"{/if} tabindex="6" type="text" name="company" id="company" size="40" value="{if $job.company}{$job.company|escape}{else}{$smarty.post.company|escape}{/if}" />
 							<span class="validation-error">{if $errors.company}<img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" />{/if}</span>
 							</td>
 						</tr> 
