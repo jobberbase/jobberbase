@@ -166,7 +166,7 @@ class JobberSettings
 		while($i < count($settings_array))
 		{
 			// Escape field value to avoid SQL injection
-			$value = $db->real_escape_string(strip_tags($settings_array[$i]['value']));
+			$value = $db->real_escape_string($settings_array[$i]['value']);
 			$name = $settings_array[$i]['name'];
 			
 			if ($value != $settings[$name]['value'])
