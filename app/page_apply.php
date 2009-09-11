@@ -50,7 +50,7 @@
 
 		$data = array('apply_email' => $apply_email,
 		              'apply_name' => $apply_name,
-		              'apply_msg' => $apply_msg,
+		              'apply_msg' => strip_tags($apply_msg),
 		              'company_email' => $j->mPosterEmail,
 		              'company_name' => $j->mCompany,
 		              'job_title' => $j->mTitle,
