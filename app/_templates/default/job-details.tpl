@@ -40,7 +40,7 @@
 				</div>
 				<br />
 				{if $job.apply_online == 1 && $CURRENT_PAGE != 'verify'}
-					<div id="apply_online_now"><a href="#" onclick="$('#apply-online').toggle(); window.location.href = '#apply'; return false;">&raquo; Apply now</a></div>
+					<div id="apply_online_now"><a href="#" onclick="$('#apply-online').toggle(); window.location.href = '#apply'; return false;" name="apply">&raquo; Apply now</a></div>
 					{if $smarty.session.apply_successful AND $smarty.session.apply_successful eq -1}
 					<div class="validation-failure">
 						<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />
