@@ -83,10 +83,11 @@ CREATE TABLE IF NOT EXISTS `cities` (
 --
 
 INSERT INTO `cities` (`id`, `name`, `ascii_name`) VALUES
-(1, 'Adjud', 'Adjud'),
-(2, 'Deva', 'Deva'),
-(3, 'Mangalia', 'Mangalia'),
-(4, 'Zalau', 'Zalau');
+(1, 'London', 'London'),
+(2, 'Buenos Aires', 'Buenos-Aires'),
+(3, 'New York', 'New-York'),
+(4, 'Tokyo', 'Tokyo'),
+(5, 'Cairo', 'Cairo');
 
 -- --------------------------------------------------------
 
@@ -104,9 +105,6 @@ CREATE TABLE IF NOT EXISTS `hits` (
 --
 -- Dumping data for table `hits`
 --
-
-INSERT INTO `hits` (`job_id`, `created_on`, `ip`) VALUES
-(11, '2008-08-20 02:36:27', '::1');
 
 -- --------------------------------------------------------
 
