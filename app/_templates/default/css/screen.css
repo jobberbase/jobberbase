@@ -14,7 +14,7 @@ blockquote:before, blockquote:after, q:before, q:after{content:""}
 blockquote, q{quotes:""""}
 strong{font-weight:bold}
 body, html{height:100%}
-pre, code{font-family:Courier,Arial,sans-serif; background:#eaeaea; padding:5px}
+pre, code{font-family:Courier,Arial,sans-serif; background:#eaeaea; padding:5px; white-space:normal}
 em{font-style:italic}
 /* The default styling starts */
 body{background:#fff url(../img/bg-body.png) repeat-x top left; color:#444; font:62.5% /1.5 Arial,Helvetica,sans-serif; text-align:center; line-height:1.5}
