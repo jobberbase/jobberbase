@@ -155,6 +155,12 @@
 			$flag = 1;
 			break;
 			
+		case 'widget':
+			$html_title = 'Widgets - ' . SITE_NAME;
+			$template = 'widgets.tpl';
+			$flag = 1;
+			break;		
+		
 		// companies
 		case URL_COMPANIES:
 			require_once 'page_companies.php';
