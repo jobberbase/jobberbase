@@ -17,7 +17,7 @@
 function escape($what)
 {
 	global $db;
-	$escaped = array();
+
 	foreach ($what as $variable => $value)
 	{
 		if (is_string($value) || is_numeric($value))
