@@ -15,6 +15,8 @@
 	// Process a form (if given) to save the settings
 	if (!empty($_POST))
 	{
+		escape($_POST);
+		
 		$fv = new FormValidator();
 		$setting_array = array();
 		
@@ -22,16 +24,16 @@
 		foreach ($settings_form as $setting)
 		{
 			// If field value is an array, convert it to a string for DB storage
-			if (is_array($_POST[$setting['name']]))
+			if (is_array($GLOBALS[$setting['name']]))
 			{
 				$a = 0; $new_value = '';
-				while($a < count($_POST[$setting['name']]))
+				while($a < count($GLOBALS[$setting['name']]))
 				{
-					if ($_POST[$setting['name']][$a] != '_hidden' && $new_value == '') $new_value .= $_POST[$setting['name']][$a];
-					elseif ($_POST[$setting['name']][$a] != '_hidden' ) $new_value .= '|' . $_POST[$setting['name']][$a];
+					if ($GLOBALS[$setting['name']][$a] != '_hidden' && $new_value == '') $new_value .= $GLOBALS[$setting['name']][$a];
+					elseif ($GLOBALS[$setting['name']][$a] != '_hidden' ) $new_value .= '|' . $GLOBALS[$setting['name']][$a];
 					$a++;
 				}
-				$_POST[$setting['name']] = $new_value;
+				$GLOBALS[$setting['name']] = $new_value;
 			}
 			
 			// Validate the fields if needed
@@ -52,7 +54,7 @@
 			}
 			if ($setting['data_type'] == 'integer') $fv->isNumber($setting['name']);
 
-			$setting_array[] = array('name'=> $setting['name'], 'value' => $_POST[$setting['name']]);
+			$setting_array[] = array('name'=> $setting['name'], 'value' => $GLOBALS[$setting['name']]);
 		}
 		
 		if ($fv->isError())
@@ -62,12 +64,12 @@
 			{
 				if ($setting['input_type'] == 'checkbox')
 				{
-					$new_value = explode('|', $_POST[$setting['name']]);
+					$new_value = explode('|', $GLOBALS[$setting['name']]);
 					$settings_form[$setting['name']]['value'] = $new_value;
 				}
 				else
 				{
-					$settings_form[$setting['name']]['value'] = $_POST[$setting['name']];
+					$settings_form[$setting['name']]['value'] = $GLOBALS[$setting['name']];
 				}
 			}
 			

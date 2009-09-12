@@ -30,7 +30,8 @@ class JobberSettings
 			$validation = explode('|', $row['validation']); 
 				
 			// Apply certain actions on special fields 
-			if ($input_type == 'checkbox' || $input_type == 'select' || $input_type == 'radiobutton') $input_options = explode('|', $input_options);
+			if ($input_type == 'checkbox' || $input_type == 'select' || $input_type == 'radiobutton')
+				$input_options = explode('|', $input_options);
 			elseif ($input_type == 'available_themes')
 			{
 				$input_type = 'select';	$themes = array();
@@ -52,7 +53,7 @@ class JobberSettings
 				'input_type' => $input_type,
 				'input_options' => $input_options,
 				'validation' => $validation,
-				'value' => $value, 
+				'value' => stripslashes($value), 
 				'category_id' => $row['category_id'] 
 				);
 		}
@@ -165,8 +166,7 @@ class JobberSettings
 		
 		while($i < count($settings_array))
 		{
-			// Escape field value to avoid SQL injection
-			$value = $db->real_escape_string($settings_array[$i]['value']);
+			$value = $settings_array[$i]['value'];
 			$name = $settings_array[$i]['name'];
 			
 			if ($value != $settings[$name]['value'])
