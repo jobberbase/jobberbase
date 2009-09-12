@@ -155,7 +155,7 @@
 			$flag = 1;
 			break;
 			
-		case 'widget':
+		case 'widgets':
 			$html_title = 'Widgets - ' . SITE_NAME;
 			$template = 'widgets.tpl';
 			$flag = 1;
