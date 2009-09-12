@@ -174,7 +174,7 @@ function get_cities()
 	
 	$sql = 'SELECT id, name, ascii_name
 	               FROM '.DB_PREFIX.'cities
-	               ORDER BY id ASC';
+	               ORDER BY name ASC';
 	
 	$result = $db->query($sql);
 	
