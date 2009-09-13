@@ -54,15 +54,15 @@ class Paginator
    */
   function paginate()
   {
-
     $total_items = $this->itemsCount;
     
-
     if( $this->items_per_page == "" || $this->items_per_page == "0" || $this->items_per_page == 0 )
     {
       $this->items_per_page = 10;
     }
+
     $page = 1;
+
     if (isset($this->current_page) && $this->current_page!="" && is_numeric($this->current_page))
     {
     	$page = $this->current_page;
@@ -76,6 +76,7 @@ class Paginator
     {
     	$total_pages = intval($total_items / $this->items_per_page) + 1;
     }
+    
     if( $page > $total_pages )
     {
     	$page = 1;
@@ -91,39 +92,28 @@ class Paginator
     $pages = "";
     if(is_numeric($this->itemsCount))
     {
-      /*foreach ($this->items as $key => $item)
-      {
-        $i++;
-      	if( ( $i > $this->items_per_page * ($page-1) ) && ( $i <= $this->items_per_page * $page ) )
-      	{
-      	}
-      	else
-      	{
-      		continue;
-      	}
-      	$temp[] = $item;
-      }*/
-    $this->firstLimit = $this->items_per_page * ($page-1);
-    $this->lastLimit =  $this->items_per_page * $page;
+	    $this->firstLimit = $this->items_per_page * ($page-1);
+	    $this->lastLimit =  $this->items_per_page * $page;
     }
-   // $this->current_items = $temp;
-		if ($total_pages != 1)
-		{
+    
+	if ($total_pages != 1)
+	{
 	    if($total_pages>0)
 	    {
 	    	if( $page == 1 )
 	    	{
-					$pages = "&nbsp;";
+				$pages = "&nbsp;";
 	    	}
 	    	else
 	    	{
-	    	  $pages = "&nbsp;<a href='".$this->link."?p=".($page-1)."'>&laquo;</a>&nbsp;";
+	    		$pages = "&nbsp;<a href='".$this->link."?p=".($page-1)."'>&laquo;</a>&nbsp;";
 	    	}
 	    }
 	    
         $numberOfPages = 7;
         $beginPages = array(1, 2, 3);
         $endPages = array($total_pages, $total_pages - 1, $total_pages - 2, $total_pages - 3);
+        
         if ($total_pages > $numberOfPages) 
         {
             if (in_array($page, $beginPages)) 
@@ -139,13 +129,14 @@ class Paginator
             {
                 $beginI = $page - 3;
                 $endI = $page + 3;
-            } // end if
+            }
         } 
         else 
         {
             $beginI = 1;
             $endI = $total_pages;
-        } // end if	    
+        }
+        
 	    for($i=$beginI;$i<=$endI;$i++)
 	    {
 	    	if($i==$page)
@@ -157,6 +148,7 @@ class Paginator
 	    		$pages .= "&nbsp;<a href='".$this->link."?p=$i'>$i</a>&nbsp;";
 	    	}
 	    }
+	    
 	    if($total_pages>0)
 	    {
 	    	if( $page == $total_pages )
@@ -168,17 +160,13 @@ class Paginator
 	    	  $pages .= "&nbsp;<a href='".$this->link."?p=".($page+1)."'>&raquo;</a>&nbsp;";
 	    	}
 	    }
-		}
-		else
-		{
-			$pages = '';
-		}
+	}
+	else
+	{
+		$pages = '';
+	}
+	
     $this->pages_link = $pages;
-
-    //return $this->current_items;
   }
-
-
 }
-
 ?>
