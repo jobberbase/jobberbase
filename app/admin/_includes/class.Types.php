@@ -70,7 +70,7 @@
 		public function updateType()
 		{
 			global $db;
-			$sql = 'UPDATE types SET var_name =  "'.$this->varName.'",
+			$sql = 'UPDATE '.DB_PREFIX.'types SET var_name =  "'.$this->varName.'",
 				name = "'.$this->name.'"
 				WHERE id='.$this->id;
 			$db->query($sql);
