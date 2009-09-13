@@ -52,7 +52,6 @@
 		// if visitor comes from an outside website, record the referer
 		if (!empty($outside_referer))
 		{
-			$job->RecordHit(base64_decode($outside_referer), $_SERVER['REMOTE_ADDR']);
 			redirect_to(BASE_URL . URL_JOB .'/' . $id . '/' . $info['url_title'] . '/');
 		}
 		else

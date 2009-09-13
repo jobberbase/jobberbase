@@ -1082,15 +1082,6 @@ class Job
 		return $auth;
 	}
 	
-	// Record each outside hit
-	public function RecordHit($referer, $ip)
-	{
-		global $db;
-		$sql = 'INSERT INTO '.DB_PREFIX.'api_requests (created_on, referer, ip, job_id)
-		                    VALUES (NOW(), "' . $referer . '", "' . $ip . '", ' . $this->mId . ')';
-		$db->query($sql);
-	}
-	
 	public function CountJobs($categ = false, $type = false)
 	{
 		global $db;
