@@ -1,5 +1,40 @@
 ######## jobberBase changelog ########
 
+version 1.8 (?)
+	* new: settings are now configurable from the admin panel (Settings menu item) (chronos)
+	* new: job types are no longer hardcoded, they can be edited/added/deleted from the admin section (links)
+	* new: added database prefix support for hostings which allow only one database (chronos)
+	* new: support for multiple themes (skins) (chronos)
+	* new: city cloud page, similar to company cloud (chronos)
+	* new: possibility to change some default URLs like /jobs, /job, /jobs-in, /jobs-at thus allowing better localization (chronos)
+	* new: anti-spam (recaptcha) for post/apply pages (disabled by default) (chronos)
+	* new: replaced the static navigation with 5 dynamic areas, which can be edited and ordered in the administration panel (Links menu item) (chronos)
+	* new: list other jobs by same company on job details page (redjumpsuit, navjot)
+	* new: added an alternate search method (should behave better than the classic one; configurable from the admin panel) (chronos)
+	* fixed: a 404 error was thrown on some hostings when pressing the Save button on the New/Edit city page
+	* fixed: the category name is displayed now instead of the var_name (chronos)
+	* fixed: emails are now properly encoded
+	* fixed: deleting a job is no longer done inside a transaction because it was failing for many users
+	* fixed: allow " chars in job title, other location, company name - fixes http://code.google.com/p/jobberbase/issues/detail?id=9
+	* fixed: deactivated jobs that had applications were still shown on start page, in the "Most applied to jobs" section
+	* enh: upgraded jquery + plugins, tinyMCE, smarty, phpmailer, textile (fixes the list bug) to latest versions
+	* enh: removed interface.js, browser_detect.js, jquery.autocomplete.js because they are no longer needed
+	* enh: the start page should load slightly faster because the initial download size has been reduced by minifying the javascript files
+	* enh: better validation on post/apply page
+	* enh: cleaned up CSS (evertsemeijn)
+	* enh: refactored the handling of the 'Anywhere' city (job.city_id is now nullable; removed "Anywhere" from the cities table - it's now in the translation file)
+	* enh: allow to define the database port in config.php
+	* enh: display the jobberbase version in the admin panel
+	* enh: the format used to display the date when a job was posted is no longer hardcoded (it can be edited from the admin settings panel)
+	* enh: refactored code to send all emails with phpmailer (more consistent)
+	* enh: allowing users to post from the main site is now configurable from the admin panel (Settings menu item) (chronos)
+	* enh: email sending settings (encoding, SMTP host, port, username, password etc.) are taken from configuration
+	* enh: the number of days after which a job becomes old is now configurable from the admin panel (navjot)
+	* enh: widgets page improved (it now has its own template; the domain url changes dynamically) (navjot)
+	* removed: removed the ideal-jobs feature as nobody found using it (navjot)
+	* removed: removed the word "jobber" from the background image (evertsemeijn)
+	* a lot more smaller fixes and enhancements ;)
+	
 version 1.7 (16/05/2009), tribute to putypuruty (http://www.jobberbase.com/forum/user19.html):
 	* new: add/edit/delete cities from the admin section (see http://www.jobberbase.com/forum/post3500.html#p3500 for how to integrate this into an existing 1.6 version)
 	* new: allow to post a job from the admin section (see http://www.jobberbase.com/forum/post4673.html#p4673 for how to integrate this into an existing 1.6 version)
