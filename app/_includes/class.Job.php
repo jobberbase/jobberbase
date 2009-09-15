@@ -590,8 +590,8 @@ class Job
 			$sql_limit = 'LIMIT ' . $limit;
 		}
 		$i = 0;
-		$sql = 'SELECT ja.job_id, COUNT(ja.id) as nr FROM '.DB_PREFIX.'job_applications ja, '.DB_PREFIX.'jobs jbs WHERE ja.job_id = jbs.id GROUP BY ja.job_id 
-		               ORDER BY nr DESC ' . $sql_limit;
+		$sql = 'SELECT ja.job_id, COUNT(ja.id) as nr FROM '.DB_PREFIX.'job_applications ja, '.DB_PREFIX.'jobs jbs WHERE ja.job_id = jbs.id 
+		               and jbs.is_temp = 0 AND jbs.is_active = 1 GROUP BY ja.job_id ORDER BY nr DESC ' . $sql_limit;
 		$result = $db->query($sql);
 		while ($row = $result->fetch_assoc())
 		{
