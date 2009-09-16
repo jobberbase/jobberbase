@@ -1,8 +1,11 @@
-######## Useful links ########
+######## Useful info ########
 
 The blog: http://www.jobberbase.com/blog/
 The community (bug reports, fixes, etc.): http://www.jobberbase.com/forum/
+Wiki (customisation guide, installation problems, faqs and themes details): http://www.jobberbase.com/wiki/
 jobberBase on Google Code: http://code.google.com/p/jobberbase/
+Follow us on twitter: http://twitter.com/jobberbase
+E-mail us at: hello@jobberbase.com
 
 =========================================================================================================
 
@@ -60,29 +63,6 @@ Make sure you change your password after logging into your admin panel.
 
 =========================================================================================================
 
-######## If it still doesn't work ########
+ENJOY!
 
-You may e-mail the author at filipcte@gmail.com. But please don't forget to write a detailed description of 
-what you tried to do and what doesn't work. Thank you! :)
-
-You can also ask for support at forums at http://www.jobberbase.com/forum/
-
-Also visit Jobberbase wiki for customisation guide, installation problems, faqs and themes details: http://www.jobberbase.com/wiki/
-
-=========================================================================================================
-
-######## Disclaimer, bugs and other issues ########
-
-If you find any bugs (cause there are), try fixing them. If you do fix them, I'd love to hear from you!
-
-=========================================================================================================
-
-######## Author contact info ########
-
-You may find me on the web at http://www.filipcte.com/ or via e-mail: filipcte@gmail.com
-
-P.S. your donations via PayPal are very much appreciated!
-
-=========================================================================================================
-
--- last updated: 6:43PM (GMT), September 13, 2009
+-- last updated: 6:58AM (GMT), September 15, 2009
