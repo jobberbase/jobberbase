@@ -1,6 +1,6 @@
 ######## jobberBase changelog ########
 
-version 1.8 (?)
+version 1.8 (15/09/2009)
 	* new: settings are now configurable from the admin panel (Settings menu item) (chronos)
 	* new: job types are no longer hardcoded, they can be edited/added/deleted from the admin section (links)
 	* new: added database prefix support for hostings which allow only one database (chronos)
