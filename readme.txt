@@ -65,4 +65,4 @@ Make sure you change your password after logging into your admin panel.
 
 ENJOY!
 
--- last updated: 6:58AM (GMT), September 15, 2009
+-- last updated: 6:58AM (GMT), September 16, 2009
