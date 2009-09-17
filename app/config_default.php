@@ -13,7 +13,7 @@
 	
 	date_default_timezone_set('Europe/Bucharest');
 	
-	define('JOBBERBASE_VERSION', '1.8');
+	define('JOBBERBASE_VERSION', '1.9 dev');
 
 	// MySQL + misc settings for local environment
 	if ($_SERVER['SERVER_NAME'] == 'localhost')
