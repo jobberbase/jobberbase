@@ -66,7 +66,7 @@
 			</div><!-- #search -->
 			{if $smarty.const.ENABLE_NEW_JOBS}
 			<div class="addJob">
-				<a href="{$BASE_URL}post/" title="{$translations.search.title}" class="add">{$translations.search.submit}</a>
+				<a href="{$BASE_URL}post/" title="{$translations.search.submit_title}" class="add">{$translations.search.submit}</a>
 			</div><!-- .addJob -->
 			{/if}
 		</div><!-- #box -->
