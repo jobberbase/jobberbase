@@ -82,7 +82,7 @@
 		else
 		{
 			$jobber_settings->UpdateSettings($setting_array);
-			redirect_to(BASE_URL.'settings/'.$id);
+			redirect_to(BASE_URL.'settings/'. $id . '/');
 		}
 	} 
 	

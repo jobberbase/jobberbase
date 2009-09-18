@@ -3,28 +3,28 @@
 				{if $links == ''}
 					<h3 class="page-heading">Navigation Links</h3>
 					<div class="category_box">
-						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/primary'>Primary Menu &raquo;</a></span>
+						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/primary/'>Primary Menu &raquo;</a></span>
 						<span class="category_description"><br/>The primary menu for your Jobberbase theme. By default this menu is located at the top.</span>
 					</div>
 					<div class="category_box">
-						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/secondary'>Secondary Menu &raquo;</a></span>
+						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/secondary/'>Secondary Menu &raquo;</a></span>
 						<span class="category_description"><br/>The secondary menu for your Jobberbase theme. By default this menu is located in the sidebar.</span>
 					</div>
 					<br />
 					<div class="category_box">
-						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/footer1'>Footer Column 1 &raquo;</a></span>
+						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/footer1/'>Footer Column 1 &raquo;</a></span>
 						<span class="category_description"><br/>The default footer holds 3 columns with links.</span>
 					</div>
 					<div class="category_box">
-						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/footer2'>Footer Column 2 &raquo;</a></span>
+						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/footer2/'>Footer Column 2 &raquo;</a></span>
 						<span class="category_description"><br/>The default footer holds 3 columns with links.</span>
 					</div>
 					<div class="category_box">
-						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/footer3'>Footer Column 3 &raquo;</a></span>
+						<span class="category_name"><a href='{$BASE_URL_ADMIN}links/footer3/'>Footer Column 3 &raquo;</a></span>
 						<span class="category_description"><br/>The default footer holds 3 columns with links.</span>
 					</div>
 				{else}
-					<h3 class="page-heading">{$menu_name}<span class="back_to_overview"><a href='{$BASE_URL_ADMIN}links' title='Back to overview'>&laquo; Back to overview</a></span></h3>
+					<h3 class="page-heading">{$menu_name}<span class="back_to_overview"><a href='{$BASE_URL_ADMIN}links/' title='Back to overview'>&laquo; Back to overview</a></span></h3>
 					<div id="linksContainer">
 					{foreach from=$links item=menu}
 						{section name=tmp loop=$menu}

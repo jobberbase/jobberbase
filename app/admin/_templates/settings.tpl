@@ -4,14 +4,14 @@
 				<h3 class="page-heading">Settings Overview</h3>
 				{section name=tmp loop=$settings_categories}
 					<div class="category_box">
-						<span class="category_name"><a href='{$BASE_URL_ADMIN}settings/{$settings_categories[tmp].var_name}'>{$settings_categories[tmp].name} &raquo;</a></span>
+						<span class="category_name"><a href="{$BASE_URL_ADMIN}settings/{$settings_categories[tmp].var_name}/">{$settings_categories[tmp].name} &raquo;</a></span>
 						<span class="category_description">{if $settings_categories[tmp].description != ''}<br />{$settings_categories[tmp].description}{/if}</span>
 					</div>
 				{/section}
 			{/if}
 			{if $settings_form != ''}
-				{if $category_name !=  ''}<h3 class="page-heading">{$category_name}<span class="back_to_overview"><a href='{$BASE_URL_ADMIN}settings' title='Back to overview'>&laquo; Back to overview</a></span></h3>{/if}
-				<form id="publish_form" method="post" action="{$BASE_URL_ADMIN}settings/{$CURRENT_ID}">
+				{if $category_name !=  ''}<h3 class="page-heading">{$category_name}<span class="back_to_overview"><a href='{$BASE_URL_ADMIN}settings/' title='Back to overview'>&laquo; Back to overview</a></span></h3>{/if}
+				<form id="publish_form" method="post" action="{$BASE_URL_ADMIN}settings/{$CURRENT_ID}/">
 					{if $errors != ''}
 						<fieldset class="error">
 							<legend>Error Messages</legend>
@@ -74,7 +74,7 @@
 					</fieldset>
 					<fieldset>
 						<input type="hidden" name="action" value="update_settings" />
-						<input type="submit" id="save" value="Save" /> or <a href="{$BASE_URL_ADMIN}settings">cancel</a>
+						<input type="submit" id="save" value="Save" /> or <a href="{$BASE_URL_ADMIN}settings/">cancel</a>
 					</fieldset>
 				</form>
 			{/if}
