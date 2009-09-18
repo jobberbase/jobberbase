@@ -5,7 +5,6 @@
     <meta name="description" content="{if $seo_desc}{$seo_desc}{else}{$meta_description}{/if}" />
     <meta name="keywords" content="{if $seo_keys}{$seo_keys}{else}{$meta_keywords}{/if}" />
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="author" content="Filip Cherecheş-Toşa (http://www.filipcte.ro)" />
 	<link rel="shortcut icon" href="{$BASE_URL}favicon.ico" type="image/x-icon" />
 	{if $CURRENT_PAGE == '' || $CURRENT_PAGE != 'jobs'}
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/all/" />

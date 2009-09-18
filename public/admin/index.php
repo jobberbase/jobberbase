@@ -8,17 +8,16 @@
  *             (see license.txt).
  */
 
-	session_start();
-	if(!file_exists('config.php')) {
-	   die('[index.php] config.php not found, please rename config.default.php to config.php');
+	if(!file_exists('config.php')) 
+	{
+	   die('[index.php] config.php not found');
 	}
+	
 	require_once 'config.php';
 	
-	$page = (isset($_app_info['params'][0]) ? $db->real_escape_string($_app_info['params'][0]) : '');
-	$id = (isset($_app_info['params'][1]) ? $db->real_escape_string($_app_info['params'][1]) : 0);
-	$extra = (isset($_app_info['params'][2]) ? $db->real_escape_string($_app_info['params'][2]) : '');
-	if (file_exists(APP_PATH . '_includes' . DIRECTORY_SEPARATOR . 'translations.ini')) {
-		$translations = parse_ini_file(APP_PATH . '_includes' . DIRECTORY_SEPARATOR . 'translations.ini', true);
+	
+	if (file_exists(APP_PATH . '_translations' . DIRECTORY_SEPARATOR . 'translations_' . LANG_CODE . '.ini')) {
+		$translations = parse_ini_file(APP_PATH . '_translations' . DIRECTORY_SEPARATOR . 'translations_' . LANG_CODE . '.ini', true);
 		$smarty->assign('translations', $translations);
 	} else {
 		trigger_error('Unable to find the translations file!');

@@ -6,22 +6,28 @@
  * @license    You are free to edit and use this work, but it would be nice if you always referenced the original author ;)
  *             (see license.txt).
  */
-
-	session_start();
-	if(!file_exists('config.php')) {
-	   die('[index.php] config.php not found, please rename config.default.php to config.php');
-	}
-	require_once 'config.php';
 	
-	$page = (isset($_app_info['params'][0]) ? $db->real_escape_string($_app_info['params'][0]) : '');
-	$id = (isset($_app_info['params'][1]) ? $db->real_escape_string($_app_info['params'][1]) : 0);
-	$extra = (isset($_app_info['params'][2]) ? $db->real_escape_string($_app_info['params'][2]) : '');
-	if (file_exists(APP_PATH . '_includes' . DIRECTORY_SEPARATOR . 'translations.ini')) {
-		$translations = parse_ini_file(APP_PATH . '_includes' . DIRECTORY_SEPARATOR . 'translations.ini', true);
+	// config
+	if(!file_exists('_config/config.php')) 
+	{
+	   die('[index.php] _config/config.php not found');
+	}
+	
+	require_once '_config/config.php';
+
+	define('BASE_URL', APP_URL);
+	
+	// include translation file
+	if (file_exists(APP_PATH . '_translations' . DIRECTORY_SEPARATOR . 'translations_' . LANG_CODE . '.ini')) 
+	{
+		$translations = parse_ini_file(APP_PATH . '_translations' . DIRECTORY_SEPARATOR . 'translations_' . LANG_CODE . '.ini', true);
 		$smarty->assign('translations', $translations);
-	} else {
+	} 
+	else 
+	{
 		trigger_error('Unable to find the translations file!');
 	}
+	
 	
 	$flag = 0;
 	
@@ -30,10 +36,10 @@
 	$meta_description = '';
 	$meta_keywords = '';
 	
-	if(!isset($_SERVER['HTTP_REFERER'])) {
+	if(!isset($_SERVER['HTTP_REFERER'])) 
+	{
 	   $_SERVER['HTTP_REFERER'] = '';
 	}
-	
 	
 	
 	switch($page)

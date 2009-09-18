@@ -64,7 +64,7 @@
 									{else}
 										<input class="settingsform_text_field{if $errors.$name != ''} error{/if}" type="text" name="{$name}" value="{$value|escape}"/>
 									{/if}
-									{if $errors.$name != ''}<span class="validation-error"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" /></span>{/if}
+									{if $errors.$name != ''}<span class="validation-error"><img src="{$BASE_URL}_templates/default/img/icon-delete.png" alt="" /></span>{/if}
 								</td>
 								<td class="settingsform_description">{$description}</td>
 								</tr>

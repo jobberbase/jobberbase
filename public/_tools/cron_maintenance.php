@@ -7,11 +7,11 @@
  *             (see license.txt).
  */
 
-	require_once 'config.php';
-	require_once '_includes/class.Maintenance.php';
+	require_once '../_config/config.php';
+	require_once APP_PATH . '_includes/class.Maintenance.php';
 
 	$janitor = new Maintenance();
-	
+
 	// delete temporary posts older than 2 days
 	$janitor->DeleteTemporaryJobs();
 ?>

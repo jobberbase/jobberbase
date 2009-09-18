@@ -5,7 +5,6 @@
 	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
 	<meta name="description" content="{$meta_description}" />
 	<meta name="keywords" content="{$meta_keywords}" />
-	<meta name="author" content="Filip Cherecheş-Toşa (http://www.filipcte.ro)" />
 	<link rel="shortcut icon" href="{$BASE_URL}favicon.ico" type="image/x-icon" />
 	{if $CURRENT_PAGE == '' || $CURRENT_PAGE != 'jobs'}
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/all/" />
@@ -44,7 +43,7 @@
 					<span class="version">v {$smarty.const.JOBBERBASE_VERSION}</span>
 				{/if}
 			</div>
-			<h1 id="logo"><a href="{$BASE_URL_ADMIN}home/" title="IT jobs">jobber</a></h1>
+			<h1 id="logo"><a href="{$BASE_URL_ADMIN}home/" title="admin home">admin</a></h1>
 			{if $isAuthenticated == 1}
 			<ul>
 				<li {if $current_category == 'edit-post'}class="selected"{/if}><a href="{$BASE_URL_ADMIN}edit-post/">Post a job</a></li>

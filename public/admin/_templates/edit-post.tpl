@@ -11,13 +11,13 @@
 			<br />
 			{if $filter_error}
 			<div class="validation-failure">
-				<img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" />
+				<img src="{$BASE_URL}_templates/default/img/icon-delete.png" alt="" />
 				{$filter_error}
 			</div>
 			{/if}
 			{if $errors}
 			<div class="validation-failure">
-				<img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" />
+				<img src="{$BASE_URL}_templates/default/img/icon-delete.png" alt="" />
 				{$translations.publish.form_error}
 			</div>
 			{/if}
@@ -30,7 +30,7 @@
 							<td colspan="2">
 								{section name=tmp2 loop=$types}
 								<input class="no-border" type="radio" name="type_id" id="type_id_{$types[tmp2].id}" value="{$types[tmp2].id}" {if !$job.type_id && !$smarty.post.type_id}{if $types[tmp2].id == 1}checked="checked"{/if}{else}{if $types[tmp2].id == $job.type_id}checked="checked"{/if}{if $types[tmp2].id == $smarty.post.type_id}checked="checked"{/if}{/if} />
-								<label for="type_id_{$types[tmp2].id}"><img src="{$BASE_URL_ADMIN}img/icon-{$types[tmp2].var_name}.png" alt="{$types[tmp2].name}" /></label>
+								<label for="type_id_{$types[tmp2].id}"><img src="{$BASE_URL}_templates/default/img/icon-{$types[tmp2].var_name}.png" alt="{$types[tmp2].name}" /></label>
 								{/section}&nbsp;&nbsp;
 								<select name="category_id" id="category_id" tabindex="1">
 									{section name=tmp1 loop=$categories}
@@ -43,7 +43,7 @@
 							<td class="publish-label" valign="top">{$translations.publish.title_label}:</td>
 							<td>
 								<input {if $errors.title}class="error"{/if} type="text" name="title" id="title" tabindex="2" size="50" value="{if $job.title}{$job.title|escape}{else}{$smarty.post.title|escape}{/if}" />
-								{if $errors.title}<span class="validation-error"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" /></span>{/if}
+								{if $errors.title}<span class="validation-error"><img src="{$BASE_URL}_templates/default/img/icon-delete.png" alt="" /></span>{/if}
 								<div class="{$translations.publish.title_info}"></div>
 							</td>
 						</tr>
@@ -66,7 +66,7 @@
 						<tr>
 							<td valign="top">{$translations.publish.description_label}:</td>
 							<td><textarea {if $errors.description}class="error"{/if} tabindex="4" name="description" id="description" cols="80" rows="15">{if $job.description}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
-								{if $errors.description}<span class="validation-error"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" /></span>{/if}
+								{if $errors.description}<span class="validation-error"><img src="{$BASE_URL}_templates/default/img/icon-delete.png" alt="" /></span>{/if}
 								<div class="suggestion">
 									<a target="_blank" href="http://www.textism.com/tools/textile/" onclick="$('#textile-suggestions').toggle(); return false;">{$translations.publish.description_info}</a></div>
 								<div id="textile-suggestions" style="display: none;">
@@ -129,7 +129,7 @@
 						<tr>
 							<td class="publish-label">{$translations.publish.name_label}:</td>
 							<td><input {if $errors.company}class="error"{/if} tabindex="6" type="text" name="company" id="company" size="40" value="{if $job.company}{$job.company|escape}{else}{$smarty.post.company|escape}{/if}" />
-							<span class="validation-error">{if $errors.company}<img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" />{/if}</span>
+							<span class="validation-error">{if $errors.company}<img src="{$BASE_URL}_templates/default/img/icon-delete.png" alt="" />{/if}</span>
 							</td>
 						</tr> 
 						<tr>
@@ -142,7 +142,7 @@
 							<td class="publish-label">{$translations.publish.email_label}<br /><strong>({$translations.publish.email_info1})</strong>:</td>
 							<td>
 								<input {if $errors.poster_email}class="error"{/if} tabindex="8" type="text" name="poster_email" id="poster_email" size="40" value="{if $job.poster_email}{$job.poster_email}{else}{$smarty.post.poster_email}{/if}" />
-								<span class="validation-error">{if $errors.poster_email}<img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="" />{/if}</span>
+								<span class="validation-error">{if $errors.poster_email}<img src="{$BASE_URL}_templates/default/img/icon-delete.png" alt="" />{/if}</span>
 								<div class="suggestion">
 									{$translations.publish.email_info2}
 								</div>

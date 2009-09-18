@@ -16,7 +16,7 @@
 				</div>
 				{/if}
 				<h2>
-					<img src="{$BASE_URL_ADMIN}img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" /> {$job.title} 
+					<img src="{$BASE_URL}_templates/default/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" /> {$job.title} 
 				</h2>
 				<p>
 					<span class="fading">at</span>
