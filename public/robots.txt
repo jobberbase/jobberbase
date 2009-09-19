@@ -7,3 +7,4 @@ Disallow: /_templates
 Disallow: /js
 Disallow: /uploads
 Disallow: /admin
+Disallow: /_config
