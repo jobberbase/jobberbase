@@ -27,9 +27,9 @@
 
 	$smarty->assign('current_category', 'home');
 
-	$smarty->assign('seo_title', htmlentities($settings['html_title']));
-	$smarty->assign('seo_desc', htmlentities($settings['meta_description']));
-	$smarty->assign('seo_keys', htmlentities($settings['meta_keywords']));
+	$smarty->assign('seo_title', htmlspecialchars($settings['html_title']));
+	$smarty->assign('seo_desc', htmlspecialchars($settings['meta_description']));
+	$smarty->assign('seo_keys', htmlspecialchars($settings['meta_keywords']));
 	
 	$template = 'index.tpl';
 ?>
