@@ -214,12 +214,12 @@ class Job
 		
 		if ($days_behind > 0)
 		{
-			$conditions .=' AND DATEDIFF(NOW(), created_on) <= ' . $days_behind;
+			$conditions .=' AND created_on >= DATE_SUB(NOW(), INTERVAL ' . $days_behind . ' DAY)';
 		}
 		
 		if ($for_feed)
 		{
-			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
+			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
 		}
 		
 		if ($city_id && is_numeric($city_id))
@@ -304,12 +304,12 @@ class Job
 		
 		if ($days_behind > 0)
 		{
-			$conditions .=' AND DATEDIFF(NOW(), created_on) <= ' . $days_behind;
+			$conditions .=' AND created_on >= DATE_SUB(NOW(), INTERVAL ' . $days_behind . ' DAY)';
 		}
 		
 		if ($for_feed)
 		{
-			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
+			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
 		}
 		
 		if ($city_id && is_numeric($city_id))
@@ -475,12 +475,12 @@ class Job
 		
 		if ($days_behind > 0)
 		{
-			$conditions .=' AND DATEDIFF(NOW(), created_on) <= ' . $days_behind;
+			$conditions .=' AND created_on >= DATE_SUB(NOW(), INTERVAL ' . $days_behind . ' DAY)';
 		}
 		
 		if ($for_feed)
 		{
-			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
+			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
 		}
 		
 		if ($city_id && is_numeric($city_id))
@@ -504,7 +504,7 @@ class Job
 		
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
-		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1  AND DATEDIFF(NOW(), created_on) < 31
+		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1  AND created_on > DATE_SUB(NOW(), INTERVAL 31 DAY)
 		               ' . $order . ' ' . $sql_limit;
 		$result = $db->query($sql);
 		while ($row = $result->fetch_assoc())
@@ -530,7 +530,7 @@ class Job
 		
 		if ($for_feed)
 		{
-			$conditions .= ' AND NOW()>DATE_ADD(created_on,INTERVAL 10 MINUTE)';
+			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
 		}
 		
 		if ($limit > 0)
@@ -1295,7 +1295,7 @@ class Job
 		global $db;
 		$sql = 'SELECT poster_email FROM '.DB_PREFIX.'jobs 
 		                  WHERE poster_email = "' . strtolower($this->mPosterEmail) . '" AND id <> ' . $this->mId . ' AND is_temp = 0
- 		                        AND (is_active = 1 OR (is_active = 0 AND DATEDIFF(NOW(), created_on) > 30))'; 
+ 		                        AND (is_active = 1 OR (is_active = 0 AND created_on) < DATE_SUB(NOW(), INTERVAL 30 DAY))'; 
 		$result = $db->query($sql);
 				
 		$row = $result->fetch_assoc();

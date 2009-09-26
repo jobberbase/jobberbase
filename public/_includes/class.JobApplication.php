@@ -33,19 +33,12 @@ class JobApplication
 		
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'job_applications
-		               WHERE ip = "' . $ip . '" AND NOW() < DATE_ADD(created_on,INTERVAL ' . MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP . ' MINUTE)';
+		               WHERE ip = "' . $ip . '" AND DATE_SUB(NOW(), INTERVAL ' . MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP . ' MINUTE) < created_on';
 		$result = $db->query($sql);
 		
 		$row = $result->fetch_assoc();
 		
-		if (empty($row))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return empty($row);
 	}
 	
 	public function Count()

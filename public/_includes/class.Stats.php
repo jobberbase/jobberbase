@@ -40,7 +40,7 @@ class Stats
 			$stats .= '<div>' . $row['date'] . ' <a href="' . BASE_URL . URL_JOB .'/' . $row['job_id'] . '/">' . $row['title'] . ' la ' . $row['company'] . '</a></div>';
 		
 		$apps_per_day = array();
-		$sql = 'SELECT count(id) AS nr FROM '.DB_PREFIX.'job_applications WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
+		$sql = 'SELECT count(id) AS nr FROM '.DB_PREFIX.'job_applications WHERE created_on > DATE_SUB(NOW(), INTERVAL 8 DAY) GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
 		$result = $db->query($sql);
 		
 		while ($row = $result->fetch_assoc())
@@ -80,7 +80,7 @@ class Stats
 			$stats .= '<div>' . $row['created_on'] . ' <strong>' . htmlspecialchars($row['keywords']) . '</strong></div>';
 		
 		$numberOfSearchesPerDay = array();
-		$sql = 'SELECT count(id) AS nr FROM '.DB_PREFIX.'searches WHERE DATEDIFF(NOW(), created_on) < 8 GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
+		$sql = 'SELECT count(id) AS nr FROM '.DB_PREFIX.'searches WHERE created_on > DATE_SUB(NOW(), INTERVAL 8 DAY) GROUP BY DATE_FORMAT(created_on, "%Y-%m-%d")';
 		$result = $db->query($sql);
 
 		while ($row = $result->fetch_assoc())
