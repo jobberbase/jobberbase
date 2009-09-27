@@ -13,7 +13,6 @@
 	       $_SESSION['search_keywords'] = array();
 	}
 	
-	
 	for ($i = 0; $i < count($_SESSION['search_results']); $i++)
 	{
 		if ($_SESSION['search_results'][$i]['id'] == $id)
@@ -101,7 +100,6 @@
 		}
 		else
 		{
-			//$info['description'] = nl2br($info['description']);
 			$info['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $info['description']);
 		}
 		
@@ -114,14 +112,15 @@
 		
 		$smarty->assign('job', $info);
 		
-		$categVarName = $job->GetCategVarname($info['category_id']);
+		$category = get_category_by_id($info['category_id']);
 		
-		$smarty->assign('seo_desc', get_seo_desc($categVarName));
-		$smarty->assign('seo_keys', get_seo_keys($categVarName));
+		$smarty->assign('seo_title', stripslashes($info['title']) . ' ' . $translations['jobs']['preposition_at'] . ' ' . stripslashes($info['company']) . ' / ' . SITE_NAME);
+		$smarty->assign('seo_desc', $category['description']);
+		$smarty->assign('seo_keys', $category['keywords']);
 	
-		$html_title = stripslashes($info['title']) . ' ' . $translations['jobs']['preposition_at'] . ' ' . stripslashes($info['company']) . ' / ' . SITE_NAME;
-		$smarty->assign('current_category', $categVarName);
-		$smarty->assign('back_link', BASE_URL . URL_JOBS . '/' . $job->GetCategVarname($info['category_id']) . '/');
+		$smarty->assign('current_category', $category['var_name']);
+		$smarty->assign('back_link', BASE_URL . URL_JOBS . '/' . $category['var_name'] . '/');
+		
 		$template = 'job.tpl';
 	}
 	else

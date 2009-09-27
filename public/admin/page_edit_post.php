@@ -127,9 +127,9 @@ if ($id != 0)
 					$job->Create($data);
 				}
 				
-				$jobCategName = $job->GetCategVarname($category_id);
+				$category = get_category_by_id($category_id);
 				
-				redirect_to(BASE_URL . URL_JOBS . '/' . $jobCategName . '/');
+				redirect_to(BASE_URL . URL_JOBS . '/' . $category['var_name'] . '/');
 				exit;
 			}
 		}
