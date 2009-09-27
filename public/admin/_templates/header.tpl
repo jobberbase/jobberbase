@@ -6,21 +6,16 @@
 	<meta name="description" content="{$meta_description}" />
 	<meta name="keywords" content="{$meta_keywords}" />
 	<link rel="shortcut icon" href="{$BASE_URL}favicon.ico" type="image/x-icon" />
-	{if $CURRENT_PAGE == '' || $CURRENT_PAGE != 'jobs'}
-	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/all/" />
-	{else}
-	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/" />
-	{/if}
 	<link rel="stylesheet" href="{$BASE_URL_ADMIN}css/screen.css" type="text/css" media="screen" />
 	{if $editor}
 	<script src="{$BASE_URL_ADMIN}js/tiny_mce/tiny_mce.js" type="text/javascript"></script>
 	{/if}
 	<script src="{$BASE_URL}js/jquery.js" type="text/javascript"></script>
+	<script src="{$BASE_URL}js/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}js/functions.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}js/main.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}js/overlay.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}js/messages.js" type="text/javascript"></script>
-	<script src="{$BASE_URL}js/jquery.validate.min.js" type="text/javascript"></script>
 	{foreach from=$js item=j}
 	<script src="{$BASE_URL_ADMIN}js/{$j}.js" type="text/javascript"></script>
 	{/foreach}
