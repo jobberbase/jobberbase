@@ -219,6 +219,7 @@ class Job
 		
 		if ($for_feed)
 		{
+			// job was posted more than 10 minutes ago
 			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
 		}
 		
@@ -267,90 +268,57 @@ class Job
 		return $jobs;
 	}
 	
-	// Get all job posts (optionally from a specific type and/or category)
-	// $type_id: freelance/fulltime/parttime
-	// $categ_id: programatori/designeri/etc.
-	// $limit: (int) how many results
-	// $random: (1/0) randomize results?
-	// $days_behind: (int) only get results from last N days
-	// $for_feed: (boolean) is this request from rss feed?
-	public function GetJobsPaginate($type_id = false, $categ_id = false, $firstLimit = false, $lastLimit=false, $random, $days_behind, $for_feed = false, $city_id = false, $type_id = false)
+	public function GetPaginatedJobsForCategory($categoryID, $startIndex, $numberOfJobsToGet, $jobTypeID)
 	{
 		global $db;
 		$jobs = array();
-		$conditions = '';
 		
-		// if $categ_id is, in fact, the category's var_name, 
-		// get the categs id
-		if (!is_numeric($categ_id))
-		{
-			$categ_id = $this->GetCategId($categ_id);
-		}
-		// if $type_id is, in fact, the type's var_name, 
-		// get the type's id
-		if (!is_numeric($type_id))
-		{
-			$type_id = $this->GetTypeId($type_id);
-		}
-		
-		if (is_numeric($type_id) && $type_id != 0)
-		{
-			$conditions .= ' AND type_id = ' . $type_id;
-		}
-		if (is_numeric($categ_id) && $categ_id != 0)
-		{
-			$conditions .= ' AND category_id = ' . $categ_id;
-		}
-		
-		if ($days_behind > 0)
-		{
-			$conditions .=' AND created_on >= DATE_SUB(NOW(), INTERVAL ' . $days_behind . ' DAY)';
-		}
-		
-		if ($for_feed)
-		{
-			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
-		}
-		
-		if ($city_id && is_numeric($city_id))
-		{
-			$conditions .= ' AND city_id = ' . $city_id;
-		}
-		
-		if ($type_id && is_numeric($type_id))
-		{
-			$conditions .= ' AND type_id = ' . $type_id;
-		}
-
-		if ($random == 1)
-		{
-			$order = ' ORDER BY RAND() ';
-		}
-		else
-		{
-			$order = ' ORDER BY created_on DESC ';
-		}
-
-		
-		if ($firstLimit >= 0 && $lastLimit >= 0)
-		{
-			$sql_limit = 'LIMIT ' . $firstLimit .', ' . $lastLimit;
-		}
-		else
-		{
-		        $sql_limit = '';        
-		}
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
-		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1
-		               ' . $order . ' ' . $sql_limit;
+		               WHERE category_id = ' . $categoryID . ' AND is_temp = 0 AND is_active = 1';
+		
+		if ($jobTypeID != 0)
+		{
+			$sql .= ' AND type_id = ' . $jobTypeID;
+		}
+		
+		$sql .= ' ORDER BY created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
 		
 		$result = $db->query($sql);
+		
 		while ($row = $result->fetch_assoc())
 		{
 			$current_job = new Job($row['id']);
 			$jobs[] = $current_job->GetInfo();
 		}
+		
+		return $jobs;
+	}
+	
+	public function GetPaginatedJobsForCity($cityID, $startIndex, $numberOfJobsToGet, $jobTypeID)
+	{
+		global $db;
+		$jobs = array();
+		
+		$sql = 'SELECT id
+		               FROM '.DB_PREFIX.'jobs
+		               WHERE city_id = ' . $cityID . ' AND is_temp = 0 AND is_active = 1';
+		
+		if ($jobTypeID != 0)
+		{
+			$sql .= ' AND type_id = ' . $jobTypeID;
+		}
+		
+		$sql .= ' ORDER BY created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
+		
+		$result = $db->query($sql);
+		
+		while ($row = $result->fetch_assoc())
+		{
+			$current_job = new Job($row['id']);
+			$jobs[] = $current_job->GetInfo();
+		}
+		
 		return $jobs;
 	}
 	
@@ -480,6 +448,7 @@ class Job
 		
 		if ($for_feed)
 		{
+			// job was posted more than 10 minutes ago
 			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
 		}
 		
@@ -530,6 +499,7 @@ class Job
 		
 		if ($for_feed)
 		{
+			// job was posted more than 10 minutes ago
 			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
 		}
 		
@@ -831,17 +801,6 @@ class Job
 		return $row['id'];
 	}
 	
-	public function GetCategVarname($categ_id)
-	{
-		global $db;
-		$sql = 'SELECT var_name
-		               FROM '.DB_PREFIX.'categories
-		               WHERE id = ' . $categ_id;
-		$result = $db->query($sql);
-		$row = $result->fetch_assoc();
-		return $row['var_name'];
-	}
-	
 	public function GetTypeId($var_name)
 	{
 		global $db;
@@ -1120,22 +1079,6 @@ class Job
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		return $row['total'];	
-	}
-	
-	public function IsValidCategory($categ)
-	{
-		global $db;
-		$sql = 'SELECT id FROM '.DB_PREFIX.'categories WHERE var_name = "' . $categ . '"';
-		$result = $db->query($sql);
-		$row = $result->fetch_assoc();
-		if (!empty($row))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
 	}
 	
 	public function GetJobsCountForAllCategs()
