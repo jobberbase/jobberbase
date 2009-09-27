@@ -31,7 +31,7 @@
 	$lastLimit = $paginator->getLastLimit();
 	
 	$the_jobs = array();
-	$the_jobs = $job->GetJobsPaginate(0, $id, $firstLimit, JOBS_PER_PAGE, 0, 0, false, $city_id, $type_id);
+	$the_jobs = $job->GetPaginatedJobsForCity($city_id, $firstLimit, JOBS_PER_PAGE, $type_id);
 	$smarty->assign("pages",$paginator->pages_link);
 
 	$smarty->assign('jobs', $the_jobs);
