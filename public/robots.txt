@@ -1,0 +1,10 @@
+# robots.txt
+
+User-agent: *
+Disallow: /_includes
+Disallow: /_includes/smarty
+Disallow: /_templates
+Disallow: /js
+Disallow: /uploads
+Disallow: /admin
+Disallow: /_config
