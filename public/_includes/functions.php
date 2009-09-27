@@ -86,38 +86,6 @@ function get_categories()
     return $categories;
 }
 
-function get_seo_title($id)
-{
-    global $db;
-    $sql = 'SELECT *
-                   FROM '.DB_PREFIX.'categories
-                   WHERE var_name = "'.$id.'"';
-    $result = $db->query($sql);
-    $row = $result->fetch_assoc();
-    return $row['title'];
-}
-
-function get_seo_desc($id)
-{
-    global $db;
-    $sql = 'SELECT *
-                   FROM '.DB_PREFIX.'categories
-                   WHERE var_name = "'.$id.'"';
-    $result = $db->query($sql);
-    $row = $result->fetch_assoc();
-    return $row['description'];
-}
-function get_seo_keys($id)
-{
-    global $db;
-    $sql = 'SELECT *
-                   FROM '.DB_PREFIX.'categories
-                   WHERE var_name = "'.$id.'"';
-    $result = $db->query($sql);
-    $row = $result->fetch_assoc();
-    return $row['keywords'];
-}
-
 function get_articles()
 {
 	global $db;
@@ -289,8 +257,6 @@ function get_city_by_id($cityID)
 	return $city;  
 }
 
-
-
 function get_types()
 {
 	global $db;
@@ -329,5 +295,48 @@ function get_type_varname_by_id($id)
 	if ($row)
 		return $row['var_name'];
 	return false;
+}
+
+function get_category_by_var_name($var_name)
+{
+	global $db;
+	$category = null;
+	
+	$sql = 'SELECT *
+	               FROM '.DB_PREFIX.'categories
+	               WHERE var_name = "' . $var_name . '"';
+	
+	$result = $db->query($sql);
+	$row = $result->fetch_assoc();
+	
+	if ($row)
+		$category = build_category_from_result_set_row($row);
+	
+	return $category;
+}
+
+function get_category_by_id($id)
+{
+	global $db;
+	$category = null;
+	
+	$sql = 'SELECT *
+	               FROM '.DB_PREFIX.'categories
+	               WHERE id = ' . $id;
+	
+	$result = $db->query($sql);
+	$row = $result->fetch_assoc();
+	
+	if ($row)
+		$category = build_category_from_result_set_row($row);
+	
+	return $category;
+}
+
+function build_category_from_result_set_row($row)
+{
+	return array('id' => $row['id'], 'name' => $row['name'], 'var_name' => $row['var_name'], 
+			     'title' => $row['title'], 'description' => $row['description'],
+			     'keywords' => $row['keywords'], 'category_order' => $row['category_order']);
 }
 ?>
