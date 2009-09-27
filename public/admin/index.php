@@ -258,6 +258,7 @@
 	$smarty->assign('URL_JOBS_IN_CITY', URL_JOBS_IN_CITY);
 	$smarty->assign('URL_JOBS_AT_COMPANY', URL_JOBS_AT_COMPANY);
 	
+	$smarty->assign('THEME', $settings['theme']);
 	$smarty->assign('CURRENT_PAGE', $page);
 	$smarty->assign('CURRENT_ID', $id);
 	$smarty->assign('CURRENT_DIRECTORY', CURRENT_DIRECTORY);
