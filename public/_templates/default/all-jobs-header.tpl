@@ -6,19 +6,18 @@
 				<div id="sort-by-type">
 				{$translations.category.display_only}&nbsp; 
 					{section name=tmp loop=$types}
-						<!--Doesn't seem to be type-support for cities yet-->
-						<a href="{$BASE_URL}{$URL_JOBS_IN_CITY}/{$city_ascii_name}/{$types[tmp].var_name}/" title="{$current_category} {$types[tmp].name}"><img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$types[tmp].var_name}.png" alt="{$types[tmp].name}" /></a>
+						<a href="{$BASE_URL}{$URL_JOBS}/{$types[tmp].var_name}/" title="{$types[tmp].name}"><img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$types[tmp].var_name}.png" alt="{$types[tmp].name}" /></a>
 					{/section}
 				</div><!-- #sort-by-type -->
 				{/if}
 				<h2>
-					{$translations.jobscity.jobs_in} {$city_name}
+					{$translations.alljobs.all_jobs}
 				</h2>
 				{if $jobs}
 					{include file="jobs-list.tpl"}
 				{else}
 					<div id="no-ads">
-						{$translations.jobscity.no_jobs_in} <strong>{$city_name}</strong>.
+						{$translations.alljobs.no_jobs}
 						{if $smarty.const.ENABLE_NEW_JOBS}
 							<br /><a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a>
 						{/if}

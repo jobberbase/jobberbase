@@ -178,3 +178,4 @@ div#sort-by-type a:hover{background:#fff}
 .row-info{float:left; height:20px; overflow: hidden; width:650px;}
 .time-posted {font-size:11px; color:#888888; float:right; padding-right:5px;}
 .spotlight-image {background-image:url(../img/icon-spotlight.png); background-repeat:no-repeat; margin:4px; height:11px; width:77px; float:right; padding-right:5px;}
+#view_all {font-weight:bold;margin-top:5px;padding-left:5px;}

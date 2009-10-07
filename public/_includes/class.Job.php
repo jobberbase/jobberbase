@@ -322,6 +322,33 @@ class Job
 		return $jobs;
 	}
 	
+	public function GetPaginatedJobs($startIndex, $numberOfJobsToGet, $jobTypeID = 0)
+	{
+		global $db;
+		$jobs = array();
+		
+		$sql = 'SELECT id
+		               FROM '.DB_PREFIX.'jobs
+		               WHERE is_temp = 0 AND is_active = 1';
+		
+		if ($jobTypeID != 0)
+		{
+			$sql .= ' AND type_id = ' . $jobTypeID;
+		}
+		
+		$sql .= ' ORDER BY created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
+		
+		$result = $db->query($sql);
+		
+		while ($row = $result->fetch_assoc())
+		{
+			$current_job = new Job($row['id']);
+			$jobs[] = $current_job->GetInfo();
+		}
+		
+		return $jobs;
+	}
+	
 	//Get all inactive jobs for admin 
 	public function GetInactiveJobs($offset, $rowCount)
 	{
@@ -1079,6 +1106,17 @@ class Job
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
 		return $row['total'];	
+	}
+	
+	public function CountJobsOfType($type_id)
+	{
+		global $db;
+
+		$sql = 'SELECT COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1 AND type_id = ' . $type_id;
+		
+		$result = $db->query($sql);
+		$row = $result->fetch_assoc();
+		return $row['total'];
 	}
 	
 	public function GetJobsCountForAllCategs()

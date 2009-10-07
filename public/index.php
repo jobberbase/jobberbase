@@ -58,7 +58,7 @@
 	
 		// per category
 		case URL_JOBS:
-			require_once 'page_category.php';
+			require_once 'page_jobs.php';
 			$flag = 1;
 			break;
 			
