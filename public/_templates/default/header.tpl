@@ -1,5 +1,5 @@
 {if $CURRENT_PAGE == 'page-unavailable' || $CURRENT_PAGE == 'job-unavailable'}
-{php}header("HTTP/1.0 404 Not Found");{/php}
+	{php}header("HTTP/1.0 404 Not Found");{/php}
 {/if}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -10,9 +10,9 @@
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
 	<link rel="shortcut icon" href="{$BASE_URL}favicon.ico" type="image/x-icon" />
 	{if $CURRENT_PAGE == '' || $CURRENT_PAGE != 'jobs'}
-	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/all/" />
+		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/all/" />
 	{else}
-	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/" />
+		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/" />
 	{/if}
 	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/screen.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/print.css" media="print" type="text/css" />
@@ -50,7 +50,7 @@
 				{/if}
 			</ul>
 			<div id="the_feed">
-				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}_templates/{$THEME}/img/bt-rss.png" alt="{$translations.header.contact_alt}" /></a>
+				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}_templates/{$THEME}/img/bt-rss.png" alt="{$translations.header.rss_alt}" /></a>
 			</div>
 		</div><!-- #header -->
 		
@@ -74,14 +74,14 @@
 		</div><!-- #box -->
 		
     <div id="categs-nav">
-      <ul>
-				{section name=tmp loop=$categories}
-        			<li id="{$categories[tmp].var_name}" {if $current_category == $categories[tmp].var_name}class="selected"{/if}><a href="{$BASE_URL}{$URL_JOBS}/{$categories[tmp].var_name}/" title="{$categories[tmp].name}"><span>{$categories[tmp].name}</span><span class="cnr">&nbsp;</span></a></li>
-				{/section}
+    	<ul>
+			{section name=tmp loop=$categories}
+				<li id="{$categories[tmp].var_name}" {if $current_category == $categories[tmp].var_name}class="selected"{/if}><a href="{$BASE_URL}{$URL_JOBS}/{$categories[tmp].var_name}/" title="{$categories[tmp].name}"><span>{$categories[tmp].name}</span><span class="cnr">&nbsp;</span></a></li>
+			{/section}
     	</ul>
-		</div><!-- #categs-nav -->
-		<div class="clear"></div>
+	</div><!-- #categs-nav -->
+	<div class="clear"></div>
 		
-		<div id="sidebar">
-			{include file="sidebar.tpl"}
-		</div><!-- #sidebar -->
+	<div id="sidebar">
+		{include file="sidebar.tpl"}
+	</div><!-- #sidebar -->
