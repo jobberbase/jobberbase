@@ -31,7 +31,7 @@ div#box div#search fieldset input{background:transparent url(../img/bg-search.pn
 div#box div#search fieldset input:focus, div#search fieldset input:hover{background:transparent url(../img/bg-search.png) -296px 0 no-repeat}
 div#box div#search fieldset label{float:left; clear:both; display:block; font-size:0.9em; color:#666; background-color:transparent}
 div#box .addJob{position:absolute; right:17px; top:28px}
-div#box .addJob a.add{display:block; width:182px; height:53px; text-indent:-1000em; background:url(../img/bt-post.png) no-repeat 0 0}
+div#box .addJob a.add{display:block; width:182px; height:47px; text-indent:-1000em; background:url(../img/bt-post.png) no-repeat 0 0}
 div#box .addJob a.add:hover{background:url(../img/bt-post.png) no-repeat -182px 0}
 #content{width:755px; padding-right:10px}
 #content p{margin:0 0 10px 0; padding:0}
