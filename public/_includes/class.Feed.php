@@ -15,20 +15,20 @@ require_once 'class.RssWriter.php';
 class Feed
 {
 	var $mCategoryId = false;
-	var $mCategoryVarName = false;
+	var $mCategoryName = false;
 	
 	function __construct($category = false)
 	{
 		global $db;
 		if ($category != 'all')
 		{
-			$sql = 'SELECT id
+			$sql = 'SELECT id, name
 			               FROM '.DB_PREFIX.'categories
 			               WHERE var_name = "' . $category . '"';
 			$result = $db->query($sql);
 			$row = $result->fetch_assoc();
 			$this->mCategoryId = $row['id'];
-			$this->mCategoryVarName = $category;
+			$this->mCategoryName = $row['name'];
 			return 1;
 		}
 		else if ($category == 'all')
@@ -57,7 +57,7 @@ class Feed
 		}
 		else
 		{
-			$properties['description'] = 'Latest jobs for ' . ucwords($this->mCategoryVarName);
+			$properties['description'] = 'Latest jobs for ' . ucwords($this->mCategoryName);
 		}
 		$properties['link'] = BASE_URL;
 		$properties['title'] = SITE_NAME;
