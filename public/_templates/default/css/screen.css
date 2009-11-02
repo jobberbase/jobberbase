@@ -112,8 +112,6 @@ td.send-to-friend-address-label{width:90px}
 .big{width:61px; height:61px; line-height:61px; font-size:20px}
 .small{width:45px; height:45px; font-weight:bold; font-size:16px; line-height:45px}
 fieldset.no-border{border:0; padding:0}
-div.ok-response{color:green}
-div.not-ok-response{color:red}
 #location_outside_ro{margin-top:5px}
 #job-description{border-top:1px solid #ddd; border-bottom:1px solid #ddd; padding:10px 0 10px 0}
 /* TYPOGRAPHY */
