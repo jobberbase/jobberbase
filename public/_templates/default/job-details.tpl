@@ -6,7 +6,7 @@
 				{/if}
 				{if ($job.days_old > $smarty.const.OLD_JOB_NOTIFY) && ($smarty.const.OLD_JOB_NOTIFY > 0)}
 				<div id="old-ad">
-					{$translations.apply.old_ad|replace:'%days%':$smarty.const.OLD_JOB_NOTIFY}
+					{$translator->translate("apply.old_ad", $smarty.const.OLD_JOB_NOTIFY)}
 				</div>
 				{/if}
 				{if $CURRENT_PAGE == $URL_JOB}
@@ -23,7 +23,7 @@
 					<img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" /> {$job.title} 
 				</h2>
 				<p>
-					<span class="fading">at</span>
+					<span class="fading">{$translations.jobs.preposition_at}</span>
 					{if $job.url && $job.url != 'http://'}
 					<a href="{$job.url}">{$job.company}</a>
 					{else}
@@ -45,7 +45,7 @@
 					<div class="validation-failure">
 						<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />
 						{if $smarty.session.apply_allowed AND $smarty.session.apply_allowed eq -1}
-							{$translations.apply.error_apply_timeout_not_passed|replace:'%minutes%':$smarty.const.MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP}
+							{$translator->translate("apply.error_apply_timeout_not_passed", $smarty.const.MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP)}
 						{elseif $smarty.session.apply_mail_sent AND $smarty.session.apply_mail_sent eq -1}
 							{$translations.apply.error_sending_mail}
 						{elseif $smarty.session.apply_errors.apply_cv}

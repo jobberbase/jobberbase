@@ -28,6 +28,7 @@
 	
 	
 	// Function and classes includes
+	require_once APP_PATH . '_includes/class.Translator.php';
 	require_once APP_PATH . '_includes/function.validate_email.php';
 	require_once APP_PATH . '_includes/function.redirect_to.php';
 	require_once APP_PATH . '_includes/function.printr.php';

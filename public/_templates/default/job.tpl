@@ -12,8 +12,9 @@
 					<a href="#" onclick="Jobber.SendToFriend.showHide(); return false;" title="{$translations.recommend.title}">{$translations.recommend.title}</a>
 				</div><!-- #job-post-utils -->
 				<div id="number-views">
-					{$translations.jobs.published_at} <strong>{$job.created_on}</strong><br />
-					{$translations.jobs.viewed}: <strong>{$job.views_count}</strong> {$translations.jobs.times}
+					{$translator->translate("jobs.published_at", "<strong>`$job.created_on`</strong>")}
+					<br />
+					{$translator->translate("jobs.viewed", "<strong>`$job.views_count`</strong>")}
 				</div><!-- #number-views -->
 				<div class="clear"></div>
 			</div><!-- #job-bottom -->

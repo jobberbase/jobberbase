@@ -17,17 +17,14 @@
 
 	define('BASE_URL', APP_URL);
 	
-	// include translation file
-	if (file_exists(APP_PATH . '_translations' . DIRECTORY_SEPARATOR . 'translations_' . LANG_CODE . '.ini')) 
-	{
-		$translations = parse_ini_file(APP_PATH . '_translations' . DIRECTORY_SEPARATOR . 'translations_' . LANG_CODE . '.ini', true);
-		$smarty->assign('translations', $translations);
-	} 
-	else 
-	{
-		trigger_error('Unable to find the translations file!');
-	}
+	$translator = new Translator(LANG_CODE);
+	$translations = $translator->getTranslations();
 	
+	$smarty->assign('translator', $translator);
+	$smarty->assign('translations', $translations);
+	
+	// create a JSON string from the translations array, but only for the "js" section
+	$smarty->assign('translationsJson', iniSectionsToJSON(array("js" => $translations['js'])));
 	
 	$flag = 0;
 	
@@ -40,7 +37,6 @@
 	{
 	   $_SERVER['HTTP_REFERER'] = '';
 	}
-	
 	
 	switch($page)
 	{
@@ -220,9 +216,6 @@
 	{
 		redirect_to(BASE_URL . 'page-unavailable/', '404');
 	}
-	
-	// create a JSON string from the translations array, but only for the "js" section
-	$smarty->assign('translationsJson', iniSectionsToJSON(array("js" => $translations['js'])));
 	
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
