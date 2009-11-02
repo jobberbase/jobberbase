@@ -115,8 +115,6 @@
 		$category = get_category_by_id($info['category_id']);
 		
 		$smarty->assign('seo_title', stripslashes($info['title']) . ' ' . $translations['jobs']['preposition_at'] . ' ' . stripslashes($info['company']) . ' / ' . SITE_NAME);
-		$smarty->assign('seo_desc', $category['description']);
-		$smarty->assign('seo_keys', $category['keywords']);
 	
 		$smarty->assign('current_category', $category['var_name']);
 		$smarty->assign('back_link', BASE_URL . URL_JOBS . '/' . $category['var_name'] . '/');
