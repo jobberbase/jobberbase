@@ -576,16 +576,14 @@ class Job
 		return $jobs;
 	}
 	
-	public function GetMostAppliedToJobs($limit = false)
+	public function GetMostAppliedToJobs($limit = 0)
 	{
 		global $db;
 		
 		$jobs = array();
 		
-		if ($limit > 0)
-		{
-			$sql_limit = 'LIMIT ' . $limit;
-		}
+		$sql_limit = 'LIMIT ' . $limit;
+		
 		$i = 0;
 		$sql = 'SELECT ja.job_id, COUNT(ja.id) as nr FROM '.DB_PREFIX.'job_applications ja, '.DB_PREFIX.'jobs jbs WHERE ja.job_id = jbs.id 
 		               and jbs.is_temp = 0 AND jbs.is_active = 1 GROUP BY ja.job_id ORDER BY nr DESC ' . $sql_limit;
