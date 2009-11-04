@@ -34,6 +34,8 @@ define('SEARCH_AMOUNT_PAGES', '8'); //Max. pages to display (must be an even num
 define('ENABLE_RECAPTCHA', $settings['enable_recaptcha']);
 define('CAPTCHA_PUBLIC_KEY', $settings['captcha_public_key']);
 define('CAPTCHA_PRIVATE_KEY', $settings['captcha_private_key']);
+define('REPORT_POST_AGAIN_AFTER', $settings['report_post_after']);
+define('REPORT_POST_NOTIFY_ON', $settings['post_notify_on']);
 // default language code, useful if you with to quickly switch between translation files later
 define('LANG_CODE', 'en');
 ?>

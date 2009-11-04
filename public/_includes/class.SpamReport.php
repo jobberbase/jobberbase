@@ -9,11 +9,6 @@
  * SpamReport handles users reporting a job ad as spam or problematic
  */
 
-// a user may report the same post again, after how many minutes?
-define('REPORT_POST_AGAIN_AFTER', 10);
-// send an email to the admin if this number of votes is reached for a post
-define('REPORT_POST_NOTIFY_ON', 2);
-
 class SpamReport
 {
 	var $mIp = false;
