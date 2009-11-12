@@ -481,7 +481,10 @@ class Job
 			$order = ' ORDER BY created_on DESC ';
 		}
 
-		$sql_limit = 'LIMIT ' . $limit;
+		if($limit > 0)
+			$sql_limit = 'LIMIT ' . $limit;
+		else
+			$sql_limit = '';
 		
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
@@ -515,7 +518,10 @@ class Job
 			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
 		}
 		
-		$sql_limit = 'LIMIT ' . $limit;
+		if($limit > 0)
+			$sql_limit = 'LIMIT ' . $limit;
+		else
+			$sql_limit = '';
 		
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
