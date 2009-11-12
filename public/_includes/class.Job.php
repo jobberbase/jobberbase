@@ -246,15 +246,9 @@ class Job
 		{
 			$order = ' ORDER BY created_on DESC ';
 		}
-
-		if ($limit > 0)
-		{
-			$sql_limit = 'LIMIT ' . $limit;
-		}
-		else
-		{
-		        $sql_limit = '';        
-		}
+		
+		$sql_limit = 'LIMIT ' . $limit;
+		
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 ' . $conditions . ' AND is_temp = 0 AND is_active = 1
@@ -416,14 +410,8 @@ class Job
 			$conditions .= ' AND type_id = ' . $type_id;
 		}
 
-		if ($limit > 0)
-		{
-			$sql_limit = 'LIMIT ' . $limit;
-		}
-		else
-		{
-		  $sql_limit = '';        
-		}
+		$sql_limit = 'LIMIT ' . $limit;
+			
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 ' . $conditions . ' AND is_temp = 0 
@@ -493,10 +481,7 @@ class Job
 			$order = ' ORDER BY created_on DESC ';
 		}
 
-		if ($limit > 0)
-		{
-			$sql_limit = 'LIMIT ' . $limit;
-		}
+		$sql_limit = 'LIMIT ' . $limit;
 		
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
@@ -530,14 +515,7 @@ class Job
 			$conditions .= ' AND DATE_SUB(NOW(), INTERVAL 10 MINUTE) > created_on';
 		}
 		
-		if ($limit > 0)
-		{
-			$sql_limit = 'LIMIT ' . $limit;
-		}
-		else
-		{
-			$sql_limit = '';
-		}
+		$sql_limit = 'LIMIT ' . $limit;
 		
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
@@ -558,11 +536,8 @@ class Job
 		
 		$jobs = array();
 		
-		if ($limit > 0)
-		{
-			$sql_limit = 'LIMIT ' . $limit;
-		}
-		
+		$sql_limit = 'LIMIT ' . $limit;
+				
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
 		               WHERE 1 AND is_temp = 0 AND is_active = 1 
@@ -576,14 +551,14 @@ class Job
 		return $jobs;
 	}
 	
-	public function GetMostAppliedToJobs($limit = 0)
+	public function GetMostAppliedToJobs($limit = false)
 	{
 		global $db;
 		
 		$jobs = array();
 		
 		$sql_limit = 'LIMIT ' . $limit;
-		
+					
 		$i = 0;
 		$sql = 'SELECT ja.job_id, COUNT(ja.id) as nr FROM '.DB_PREFIX.'job_applications ja, '.DB_PREFIX.'jobs jbs WHERE ja.job_id = jbs.id 
 		               and jbs.is_temp = 0 AND jbs.is_active = 1 GROUP BY ja.job_id ORDER BY nr DESC ' . $sql_limit;
