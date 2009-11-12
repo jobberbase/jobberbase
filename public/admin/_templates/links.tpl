@@ -31,9 +31,9 @@
 							<div class="linkItem" rel="{$menu[tmp].id}">
 								<div class="linkHandle"></div>
 								<div class="linkWrapper">
-									<a href="#" title="Delete" class="deleteLink"><img src="{$BASE_URL}_templates/default/img/icon-delete.png" alt="Edit" /> Delete</a>
+									<a href="#" title="Delete" class="deleteLink"><img src="{$BASE_URL_ADMIN}img/icon-delete.png" alt="Edit" /> Delete</a>
 									<label><span>Name:</span><input type="text" size="60" name="name{$menu[tmp].id}" value="{$menu[tmp].name}" /></label>
-									<a href="#" title="Save" class="saveLink" style="display: none;"><img src="{$BASE_URL}_templates/default/img/disk.png" alt="Save" /> Save</a>
+									<a href="#" title="Save" class="saveLink" style="display: none;"><img src="{$BASE_URL_ADMIN}img/disk.png" alt="Save" /> Save</a>
 									<label><span>Url:</span><input type="text" size="60" name="url{$menu[tmp].id}" value="{$menu[tmp].url}" /></label>
 									<label><span>Title:</span><input type="text" size="60" name="title{$menu[tmp].id}" value="{$menu[tmp].title}" /></label>
 									</label>
@@ -44,7 +44,7 @@
 					{/foreach}
 					</div>
 				<p></p>
-				<p><a href="#" title="Add new link"><img src="{$BASE_URL}_templates/default/img/add.png" alt="Add new link" /> Add new link</a></p>
+				<p><a href="#" title="Add new link"><img src="{$BASE_URL_ADMIN}img/add.png" alt="Add new link" /> Add new link</a></p>
 				{/if}
 		</div><!-- #content -->
 

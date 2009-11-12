@@ -3,7 +3,7 @@
 		{foreach item=job from=$jobs name=tmp}
 			<tr id="item{$job.id}" {cycle values='class="alt",'}>
 				<td>
-					<img src="{$BASE_URL}_templates/default/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
+					<img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
 					<a href="{$BASE_URL_ADMIN}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">at</span> {$job.company}{if $job.is_location_anywhere}, {$translations.jobs.location_anywhere}{else} <span class="la">in</span> {$job.location}{/if}
 					<div style="font-size: 12px; margin-top: 5px;">viewed {$job.views_count} times{if $statisticalData[$job.id]}, {$statisticalData[$job.id].numberOfApplications} applicants, last application on {$statisticalData[$job.id].lastApplicationOn}{/if}</div>
 				</td>
