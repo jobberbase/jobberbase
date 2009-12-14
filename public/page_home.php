@@ -15,8 +15,18 @@
 		$numberOfJobsInOtherCities = $job->GetNumberOfJobsInOtherCities();
 		
 		$smarty->assign('jobs_count_in_other_cities', $numberOfJobsInOtherCities);
-		$smarty->assign('hide_other_cities_in_sidebar', SIDEBAR_ONLY_CITIES_WITH_JOBS && $numberOfJobsInOtherCities == 0);
-		$smarty->assign('jobs_count_per_city', $job->GetJobsCountPerCity(SIDEBAR_ONLY_CITIES_WITH_JOBS));
+		$smarty->assign('hide_other_cities_in_sidebar', $numberOfJobsInOtherCities < SIDEBAR_ONLY_CITIES_WITH_AT_LEAST_NUMBER_OF_JOBS);
+		
+		$jobsCountPerCity = $job->GetJobsCountPerCity();
+		
+		// exclude the cities that don't have at least the specified number of jobs 
+		foreach ($jobsCountPerCity as $index => $jobsPerCity)
+		{
+			if ($jobsPerCity['jobs_in_city'] < SIDEBAR_ONLY_CITIES_WITH_AT_LEAST_NUMBER_OF_JOBS)
+				unset($jobsCountPerCity[$index]);
+		}
+		
+		$smarty->assign('jobs_count_per_city', $jobsCountPerCity);
 	}
 
 	$smarty->assign('most_applied_to_jobs', $job->GetMostAppliedToJobs(NUMBER_OF_MOST_APPLIED_TO_JOBS_TO_GET));

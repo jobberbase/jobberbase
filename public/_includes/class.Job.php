@@ -1124,12 +1124,12 @@ class Job
 		return $result;
 	}
 	
-	public function GetJobsCountPerCity($excludeCitiesWithNoJobs)
+	public function GetJobsCountPerCity()
 	{
 		global $db;
 		$jobsCountPerCity = array();
 		
-		$sql = 'SELECT city_id, COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1 GROUP BY city_id'; 
+		$sql = 'SELECT city_id, COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1 and city_id IS NOT NULL GROUP BY city_id'; 
 		$result = $db->query($sql);
 		
 		while ($row = $result->fetch_assoc())
@@ -1137,23 +1137,18 @@ class Job
 			
 		$cities = get_cities();
 		$result = array();
+
 		foreach ($cities as $city)
 		{
-			$count = 0;
+			$numberOfJobsInCity = 0;
 			
 			// this check is needed because we don't have an entry if there are no jobs for a city
 			if (isset($jobsCountPerCity[$city['id']]))
-				$count = $jobsCountPerCity[$city['id']];
+				$numberOfJobsInCity = $jobsCountPerCity[$city['id']];
 
-			if ($count > 0)
-				$result[] = array('city_name' => $city['name'], 'jobs_in_city' => $count, 'city_ascii_name' => $city['ascii_name']);
-			else 
-			{
-				if (!$excludeCitiesWithNoJobs)
-					$result[] = array('city_name' => $city['name'], 'jobs_in_city' => $count, 'city_ascii_name' => $city['ascii_name']);
-			}
-					
+			$result[] = array('city_name' => $city['name'], 'jobs_in_city' => $numberOfJobsInCity, 'city_ascii_name' => $city['ascii_name']);
 		}
+		
 		return $result;
 	}
 	
