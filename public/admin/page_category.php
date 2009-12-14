@@ -48,6 +48,7 @@
 
 		$smarty->assign("pages", $paginator->pages_link);
 		
+		$smarty->assign('statisticalData', $statisticalData);
 		$smarty->assign('jobs', $the_jobs);
 		$smarty->assign('jobs_count', $jobsCount);
 		$smarty->assign('types', get_types());
