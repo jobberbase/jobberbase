@@ -339,4 +339,57 @@ function build_category_from_result_set_row($row)
 			     'title' => $row['title'], 'description' => $row['description'],
 			     'keywords' => $row['keywords'], 'category_order' => $row['category_order']);
 }
+
+function generate_sitemap($type)
+{
+    global $db;
+    $sanitizer = new Sanitizer;
+
+    // Get all links
+    $result = $db->query('SELECT url FROM '.DB_PREFIX.'links');
+    while ($row = $result->fetch_assoc()) if (!strstr($row['url'], 'http://')) $sitemap[BASE_URL . $row['url'] . '/'] = 1;
+    
+    // Get all custom pages
+    $result = $db->query('SELECT url FROM '.DB_PREFIX.'pages');
+    while ($row = $result->fetch_assoc()) $sitemap[BASE_URL . $row['url'] . '/'] = 1; 
+    
+    // Get all categories
+    $categories = get_categories();
+    $i = 0; while($i < count($categories)) { $sitemap[BASE_URL . URL_JOBS . '/' . $categories[$i]['var_name'] . '/'] = 1; $i++; }
+    
+    // Get all cities
+    $cities = get_cities();
+    $i = 0; while($i < count($cities)) { $sitemap[BASE_URL . URL_JOBS_IN_CITY . '/' . $cities[$i]['ascii_name'] . '/'] = 1; $i++; }
+
+    // Get all companies
+    $result = $db->query('SELECT company FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1 GROUP BY company');
+    while ($row = $result->fetch_assoc()) $sitemap[BASE_URL . URL_JOBS_AT_COMPANY . '/' . $sanitizer->sanitize_title_with_dashes($row['company']) . '/'] = 1;
+        
+    // Get all active Jobs
+    $result = $db->query('SELECT id, title, company FROM '.DB_PREFIX.'jobs WHERE is_active = 1 AND is_temp = 0');
+    while ($row = $result->fetch_assoc()) $sitemap[BASE_URL . URL_JOB . '/' . $row['id'] . '/' . $sanitizer->sanitize_title_with_dashes($row['title'])] = 1;
+    
+    // Generate output
+    if ($type == 'xml')
+    {
+        header('Content-Type: text/xml; charset="utf-8"');
+        
+        echo '<?xml version="1.0" encoding="UTF-8"?>';
+        echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        
+        foreach ($sitemap as $url => $value)
+        {
+            echo '<url><loc>'.$url.'</loc></url>';
+        }
+        echo '</urlset>';
+    }
+    else
+    {
+        foreach ($sitemap as $url => $value)
+        {
+            echo $url.'<br />';
+        }        
+    }
+
+}
 ?>

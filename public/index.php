@@ -180,6 +180,16 @@
 			$template = 'no-job.tpl';
 			$flag = 1;
 			break;
+
+        case 'sitemap.xml':
+            generate_sitemap('xml');
+            $flag = 1;
+            break;
+
+        case 'sitemap.txt':
+            generate_sitemap('txt');
+            $flag = 1;
+            break;
 		
 		// 404 etc. error page
 		case 'page-unavailable':
