@@ -247,7 +247,14 @@ class Job
 			$order = ' ORDER BY created_on DESC ';
 		}
 		
-		$sql_limit = 'LIMIT ' . $limit;
+		if ($limit != false && $limit > 0)
+		{
+			$sql_limit = 'LIMIT ' . $limit;
+		}
+		else
+		{
+			$sql_limit = '';
+		}
 		
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
@@ -1250,7 +1257,7 @@ class Job
 		global $db;
 		$sql = 'SELECT poster_email FROM '.DB_PREFIX.'jobs 
 		                  WHERE poster_email = "' . strtolower($this->mPosterEmail) . '" AND id <> ' . $this->mId . ' AND is_temp = 0
- 		                        AND (is_active = 1 OR (is_active = 0 AND created_on) < DATE_SUB(NOW(), INTERVAL 30 DAY))'; 
+ 		                        AND (is_active = 1 OR (is_active = 0 AND created_on < DATE_SUB(NOW(), INTERVAL 30 DAY)))'; 
 		$result = $db->query($sql);
 				
 		$row = $result->fetch_assoc();
