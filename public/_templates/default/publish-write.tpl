@@ -187,6 +187,7 @@
 				
 				$("#publish_form").validate({
 					rules: {
+                        type_id: { required: true },
 						company: { required: true },
 						title: { required: true },
 						description: { required: true },
