@@ -26,7 +26,11 @@ if ($id != 0)
 		// validation
 		$errors = array();
 		
-		if ($_POST['company'] == '')
+        if (!isset($_POST['type_id']) || !is_numeric($_POST['type_id']))
+        {
+            $errors['input_id'] = $translations['jobs']['type_error']; $_POST['type_id'] = 0;
+        }
+        if ($_POST['company'] == '')
 			$errors['company'] = $translations['jobs']['name_error'];
 		
 		if ($_POST['title'] == '')

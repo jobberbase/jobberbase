@@ -68,7 +68,13 @@
 			$_POST["recaptcha_response_field"]);
 			if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
 		}
-		if ($company == '')
+
+        if (!isset($type_id) || !is_numeric($type_id))
+        {
+            $errors['input_id'] = $translations['jobs']['type_error'];
+        }
+        
+        if ($company == '')
 		{
 			$errors['company'] = $translations['jobs']['name_error'];
 		}
@@ -155,6 +161,10 @@
 			$_POST["recaptcha_response_field"]);
 			if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
 		}
+        if (!isset($type_id) || !is_numeric($type_id))
+        {
+            $errors['input_id'] = $translations['jobs']['type_error'];
+        }
 		if ($company == '')
 		{
 			$errors['company'] = $translations['jobs']['company_error'];
