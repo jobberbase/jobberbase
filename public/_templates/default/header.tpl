@@ -7,6 +7,7 @@
     <title>{if $seo_title}{$seo_title}{else}{$html_title}{/if}</title>
     <meta name="description" content="{if $seo_desc}{$seo_desc}{else}{$meta_description}{/if}" />
     <meta name="keywords" content="{if $seo_keys}{$seo_keys}{else}{$meta_keywords}{/if}" />
+	<meta name="generator" content="Jobberbase v{$smarty.const.JOBBERBASE_VERSION}" />
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
 	<link rel="shortcut icon" href="{$BASE_URL}favicon.ico" type="image/x-icon" />
 	{if $CURRENT_PAGE == '' || $CURRENT_PAGE != 'jobs'}
