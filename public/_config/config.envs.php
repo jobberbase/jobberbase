@@ -23,7 +23,9 @@ $__instances['local'] = array(
 	// environment setting 1 (use 'local' for localhost/testing OR 'online' for live, production environment)
 	'location' => 'local',
 	// environment setting 2 (use 'dev' together with 'local' in the previous setting OR 'prod' with 'online')
-	'environment' => 'dev'
+	'environment' => 'dev',
+	//'apache_mod_rewrite', 'iis_url_rewrite' -microsoft URL Rewrite module, 'iis_isapi_rewrite'
+	'rewrite_mode' => 'apache_mod_rewrite'
 );
 
 // live (http://www.yourjobberbasedomain.com)
@@ -39,7 +41,8 @@ $__instances['live'] = array(
 	'ini_error_reporting' => E_ALL,
 	'ini_display_errors' => 'Off',
 	'location' => 'online',
-	'environment' => 'prod'
+	'environment' => 'prod',
+	'rewrite_mode' => 'apache_mod_rewrite'
 );
 
 
@@ -67,7 +70,7 @@ foreach ($__instances as $__instance)
 		
 		// base url of the app
 		define('APP_URL', $__instance['app_url']);
-		
+		define('REWRITE_MODE', $__instance['rewrite_mode']);
 		// error reporting
 		ini_set('error_reporting', $__instance['ini_error_reporting']);
 		ini_set('display_errors', $__instance['ini_display_errors']);

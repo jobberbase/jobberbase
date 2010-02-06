@@ -15,13 +15,10 @@
 	
 	require_once 'config.php';
 	
+	$translator = new Translator(LANG_CODE);
+	$translations = $translator->getTranslations();
 	
-	if (file_exists(APP_PATH . '_translations' . DIRECTORY_SEPARATOR . 'translations_' . LANG_CODE . '.ini')) {
-		$translations = parse_ini_file(APP_PATH . '_translations' . DIRECTORY_SEPARATOR . 'translations_' . LANG_CODE . '.ini', true);
-		$smarty->assign('translations', $translations);
-	} else {
-		trigger_error('Unable to find the translations file!');
-	}
+	$smarty->assign('translations', $translations);
 	
 	$flag = 0;
 	$js = array();

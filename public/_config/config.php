@@ -7,7 +7,7 @@
  *             (see license.txt).
  */
   
-	define('APP_PATH', str_replace('//', '/', str_replace('_config', '', dirname(__FILE__)) . DIRECTORY_SEPARATOR));
+	define('APP_PATH', str_replace(DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, str_replace('_config', '', dirname(__FILE__)) . DIRECTORY_SEPARATOR));
 
 	// Environments setup
 	require_once APP_PATH . '_config/config.envs.php';
@@ -75,13 +75,10 @@
 	$settings = $jobber_settings->GetSettings();
 	
 	require_once APP_PATH . '_config/config.settings.php';
-	
-	
 	// Setup Smarty
 	$smarty = new Smarty();
-	$smarty->template_dir = APP_PATH . '_templates/' . THEME . '/';
-	$smarty->compile_dir = APP_PATH . '_templates/' . THEME . '/_cache/';
-	
+	$smarty->template_dir = APP_PATH . '_templates' . DIRECTORY_SEPARATOR . THEME . DIRECTORY_SEPARATOR;
+	$smarty->compile_dir = APP_PATH .'_templates' . DIRECTORY_SEPARATOR . THEME . DIRECTORY_SEPARATOR . '_cache';
 	
 	// Create Textile object
 	$textile = new Textile;
@@ -90,25 +87,42 @@
 	// Split URL - get parameters
 	$_app_info['params'] = array();
 	
-	// if your server is IIS, use these lines and comment lines 135-137:
-	//$_url = $_SERVER["QUERY_STRING"];
-
-	// if server is Apache:	
-	$newUrl = str_replace('/', '\/', _APP_MAIN_DIR);
-    $pattern = '/'.$newUrl.'/';   
-    $_url = preg_replace($pattern, '', $_SERVER['REQUEST_URI'], 1);
-	$_tmp = explode('?', $_url);
-	$_url = $_tmp[0];	
-	
-	if ($_url = explode('/', $_url))
+	if (isset($_SERVER['HTTP_X_ORIGINAL_URL']))
 	{
-		foreach ($_url as $tag)
+		$_SERVER['REQUEST_URI'] = $_SERVER['HTTP_X_ORIGINAL_URL'];
+	}
+	if (isset($_SERVER['HTTP_X_REWRITE_URL']))
+	{
+		$_SERVER['REQUEST_URI'] = $_SERVER['HTTP_X_REWRITE_URL'];
+	}		
+	// if server is Apache:	
+	if(REWRITE_MODE == 'apache_mod_rewrite' || REWRITE_MODE == 'iis_isapi_rewrite')
+	{
+		$newUrl = str_replace('/', '\/', _APP_MAIN_DIR);
+	    $pattern = '/'.$newUrl.'/';   
+	    $_url = preg_replace($pattern, '', $_SERVER['REQUEST_URI'], 1);
+		$_tmp = explode('?', $_url);
+		$_url = $_tmp[0];	
+		
+		if ($_url = explode('/', $_url))
 		{
-			if ($tag)
+			foreach ($_url as $tag)
 			{
-				$_app_info['params'][] = $tag;
+				if ($tag)
+				{
+					$_app_info['params'][] = $tag;
+				}
 			}
 		}
+	}
+	elseif(REWRITE_MODE == 'iis_url_rewrite')
+	{
+		if(isset($_GET['page']))
+			$_app_info['params'][]  = $_GET['page'];
+		if(isset($_GET['id']))
+			$_app_info['params'][]  = $_GET['id'];
+		if(isset($_GET['extra']))
+			$_app_info['params'][]  = $_GET['extra'];
 	}
 	
 	$page = (isset($_app_info['params'][0]) ? $db->real_escape_string($_app_info['params'][0]) : '');
