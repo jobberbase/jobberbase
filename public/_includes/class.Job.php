@@ -884,7 +884,7 @@ class Job
 			$params['apply_online'] = 0;
 		}
 		$sql = 'INSERT INTO '.DB_PREFIX.'jobs (type_id, category_id, title, description, company, city_id, url, apply, created_on, is_temp, is_active, 
-			                       views_count, auth, outside_location, poster_email, apply_online)
+			                       views_count, auth, outside_location, poster_email, apply_online, spotlight)
 		                         VALUES (' . $params['type_id'] . ',
 		                                 ' . $params['category_id'] . ',
 		                                 "' . $params['title'] . '",
@@ -894,7 +894,8 @@ class Job
 		                                 "' . $params['url'] . '",
 		                                 "' . $params['apply'] . '",
 		                                 NOW(), ' . $params['is_temp'] . ', '. $params['is_active'] .', 0, "' . $this->GenerateAuthCode() . '", 
-		                                 "' . $params['location_outside_ro_where'] . '", "' . $params['poster_email'] . '", ' . $params['apply_online'] . ')';
+		                                 "' . $params['location_outside_ro_where'] . '", "' . $params['poster_email'] . '", ' . $params['apply_online'] . '
+		                                 , ' . $params['spotlight'] . ')';
 		$result = $db->query($sql);
 		return $db->insert_id;
 	}

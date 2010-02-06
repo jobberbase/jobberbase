@@ -127,6 +127,7 @@ if ($id != 0)
 					// a job posted by the admin is active from the beginning
 					$data['is_temp'] = 0;
 					$data['is_active'] = 1;
+					$data['spotlight'] = 0;
 					
 					$job->Create($data);
 				}
