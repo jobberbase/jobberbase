@@ -7,9 +7,9 @@
 		<div class="icons">
 			<a href="{$BASE_URL_ADMIN}edit-post/{$job.id}/" title="Edit this job"><img src="{$BASE_URL_ADMIN}_templates/img/pencil.png" alt="edit" /></a>
 			{if $job.is_spotlight == 0}
-				<a id="activateSpotlight{$job.id}" href="javascript:void(0);" onclick="Jobber.SpotlightActivate('{$BASE_URL_ADMIN}activate-spotlight/', {$job.id}, {if $CURRENT_PAGE == ''}1{else}0{/if});" title="Turn spotlight on"><img src="{$BASE_URL_ADMIN}_templates/img/star_on.png" alt="activate" /></a>
+				<a id="activateSpotlight{$job.id}" href="javascript:void(0);" onclick="Jobber.SpotlightActivate('{$BASE_URL_ADMIN}activate-spotlight/', {$job.id});" title="Turn spotlight on"><img src="{$BASE_URL_ADMIN}_templates/img/star_off.png" alt="activate" /></a>
 			{else}
-				<a id="deactivateSpotlight{$job.id}" href="javascript:void(0);" onclick="Jobber.SpotlightDeactivate('{$BASE_URL_ADMIN}deactivate-spotlight/', {$job.id});" title="Turn spotlight on"><img src="{$BASE_URL_ADMIN}_templates/img/star_off.png" alt="deactivate" /></a>
+				<a id="deactivateSpotlight{$job.id}" href="javascript:void(0);" onclick="Jobber.SpotlightDeactivate('{$BASE_URL_ADMIN}deactivate-spotlight/', {$job.id});" title="Turn spotlight off"><img src="{$BASE_URL_ADMIN}_templates/img/star_on.png" alt="deactivate" /></a>
 			{/if}&nbsp;
 			{if $job.is_active == 0}
 				<a id="activateLink{$job.id}" href="javascript:void(0);" onclick="Jobber.Activate('{$BASE_URL_ADMIN}activate/', {$job.id}, {if $CURRENT_PAGE == ''}1{else}0{/if});" title="Active this job"><img src="{$BASE_URL_ADMIN}_templates/img/switch_off.png" alt="activate" /></a>

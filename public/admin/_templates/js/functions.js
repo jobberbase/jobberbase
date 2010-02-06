@@ -132,9 +132,9 @@
         ActivateSpotlight: function(job_id)
         {
             var url = Jobber.jobber_admin_url+'activate-spotlight/';
-            Jobber.SpotlightActivate(url, job_id, 0);
+            Jobber.SpotlightActivate(url, job_id);
         },
-        SpotlightActivate: function(url, job_id, is_first_page)
+        SpotlightActivate: function(url, job_id)
         {
             $.ajax({
               type: "POST",
@@ -143,26 +143,19 @@
               success: function(msg) {
                    if (msg != "0")
                     {
-                        var currentRowId = 'item'+job_id;
                         var currentLinkId = 'activateSpotlight'+job_id;
-                        if(is_first_page == 1)
-                        {
-                            $("#"+currentRowId).css({ display: "none" });
-                        }
-                        else
-                        {
-                        	var deactivateSpotlightFunction = function()
-							{
-								Jobber.DeactivateSpotlight(job_id);
-							};
-							
-							var linkElement = document.getElementById(currentLinkId);
-							linkElement.setAttribute('title', 'Turn spotlight on');
-                            linkElement.setAttribute('onclick', deactivateSpotlightFunction);
-                            linkElement.onclick = deactivateSpotlightFunction; 
-                            linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_templates/img/star_off.png" alt="deactivate" />';
-                            linkElement.id = 'deactivateSpotlight'+job_id;
-                        }    
+                       
+                        var deactivateSpotlightFunction = function()
+						{
+							Jobber.DeactivateSpotlight(job_id);
+						};
+						
+						var linkElement = document.getElementById(currentLinkId);
+						linkElement.setAttribute('title', 'Turn spotlight off');
+                        linkElement.setAttribute('onclick', deactivateSpotlightFunction);
+                        linkElement.onclick = deactivateSpotlightFunction; 
+                        linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_templates/img/star_on.png" alt="deactivate" />';
+                        linkElement.id = 'deactivateSpotlight'+job_id;
                     }
               }
             });
@@ -184,10 +177,10 @@
 						};
 						
 						var linkElement = document.getElementById(currentLinkId);
-						linkElement.setAttribute('title', 'Turn spotlight off');							
+						linkElement.setAttribute('title', 'Turn spotlight on');							
                         linkElement.setAttribute('onclick', activateSpotlightFunction);
                         linkElement.onclick = activateSpotlightFunction;
-                        linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_templates/img/star_on.png" alt="activate" />';
+                        linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_templates/img/star_off.png" alt="activate" />';
                         linkElement.id = 'activateSpotlight'+job_id;
                     }
               }
