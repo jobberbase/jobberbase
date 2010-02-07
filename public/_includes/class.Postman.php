@@ -201,7 +201,8 @@ class Postman
 	
 	public function MailContact($name, $email, $msg)
 	{
-		$msg .= "\n\n---\nIP: " . $_SERVER['REMOTE_ADDR'];
+		$msg .= "\n\n---\nSent by: $name &lt;$email&gt;";
+		$msg .= "\nIP: " . $_SERVER['REMOTE_ADDR'];
 		$msg .= "\nDate: " . date('Y-m-d H:i');
 
 		$subject = "[" . SITE_NAME . "] contact";
