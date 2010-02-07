@@ -35,6 +35,7 @@
 		$the_jobs = $job->GetPaginatedJobsForCategory($category_id, $firstLimit, JOBS_PER_PAGE, $type_id);
 		
 		$statisticalData = array();
+		$spamReportStatisticalData = array();
 		
 		if (count($the_jobs))
 		{
@@ -44,11 +45,13 @@
 				$jobIDs[] = $aJob['id'];
 			
 			$statisticalData = $job->GetApplicationsStatistics($jobIDs);
+			$spamReportStatisticalData = $job->GetSpamReportStatistics($jobIDs);
 		}
 
 		$smarty->assign("pages", $paginator->pages_link);
 		
 		$smarty->assign('statisticalData', $statisticalData);
+		$smarty->assign('spamReportStatisticalData', $spamReportStatisticalData);
 		$smarty->assign('jobs', $the_jobs);
 		$smarty->assign('jobs_count', $jobsCount);
 		$smarty->assign('types', get_types());

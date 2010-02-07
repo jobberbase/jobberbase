@@ -22,7 +22,7 @@
 
 		<img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
 		<a href="{$BASE_URL_ADMIN}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="light">at</span> {$job.company}{if $job.is_location_anywhere}, {$translations.jobs.location_anywhere}{else} <span class="light">in</span> {$job.location}{/if}
-		<div>viewed {$job.views_count} times{if $statisticalData[$job.id]}, {$statisticalData[$job.id].numberOfApplications} applicants, last application on {$statisticalData[$job.id].lastApplicationOn}{/if}</div>
+		<div>viewed {$job.views_count} times{if $statisticalData[$job.id]}, {$statisticalData[$job.id].numberOfApplications} applicants, last application on {$statisticalData[$job.id].lastApplicationOn}{/if}{if $spamReportStatisticalData[$job.id]},<span class="spam"> reported as spam {$spamReportStatisticalData[$job.id].numberOfSpamReports} times, last time on {$spamReportStatisticalData[$job.id].lastSpamReportOn}</span>{/if}</div>
 	</div>
 {/foreach}
 </div>

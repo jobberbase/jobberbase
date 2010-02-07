@@ -420,6 +420,7 @@ span.version {
 .icons a {
 	margin-right: 0.3em;}
 .time {color: #333; font-size: 0.9em; padding-right: 0.5em;}
+.spam {color: #f00;}
 
 h2#inactive, h2#jobs, h2#categories, h2#pages, h2#edit_job, h2#stats, h2#cities, h2#job_types, h2#links, h2#settings, h2#password {
 	background-image: url(../img/inactive.png);

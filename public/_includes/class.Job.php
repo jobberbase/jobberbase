@@ -1272,11 +1272,6 @@ class Job
 		}
 	}
 	
-	/**
-	 * Returns an associative array containing the
-	 * @param $jobIDs an array of job IDs
-	 * @return
-	 */
 	public function GetApplicationsStatistics($jobIDs)
 	{
 		global $db;
@@ -1285,6 +1280,23 @@ class Job
 		
 		$sql = 'SELECT job_id, count(id) numberOfApplications, DATE_FORMAT(max(created_on), "' . DATE_TIME_FORMAT . '") lastApplicationOn 
 				FROM '.DB_PREFIX.'job_applications j 
+				WHERE job_id in (' . $this->buildCommaSeparatedIDsString($jobIDs) . ') GROUP BY job_id'; 
+		$result = $db->query($sql);
+		
+		while ($row = $result->fetch_assoc())
+			$statisticalData[$row['job_id']] = $row;
+			
+		return $statisticalData;
+	}
+	
+	public function GetSpamReportStatistics($jobIDs)
+	{
+		global $db;
+		
+		$statisticalData = array();
+		
+		$sql = 'SELECT job_id, count(id) numberOfSpamReports, DATE_FORMAT(max(the_time), "' . DATE_TIME_FORMAT . '") lastSpamReportOn 
+				FROM '.DB_PREFIX.'spam_reports 
 				WHERE job_id in (' . $this->buildCommaSeparatedIDsString($jobIDs) . ') GROUP BY job_id'; 
 		$result = $db->query($sql);
 		
