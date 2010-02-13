@@ -10,6 +10,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 	$errors = array();
 	
+	// validation
+	if (ENABLE_RECAPTCHA)
+	{
+		$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
+		$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
+		$_POST["recaptcha_response_field"]);
+		if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
+	}
+	
 	if ($contact_name == '')
 	{
 		$errors['contact_name'] = $translations['contact']['name_error'];
@@ -38,5 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	}
 }
-
 $smarty->assign('page', $pageData);
+
+if ($pageData['has_form'] == '1')
+{
+	$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
+	$smarty->assign('ENABLE_RECAPTCHA', ENABLE_RECAPTCHA);
+}

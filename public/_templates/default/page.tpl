@@ -28,7 +28,21 @@
 						<br /><br />
 						<label for="contact_msg">{$translations.contact.message_label}:</label><br />
 						<textarea {if $errors.contact_msg}class="error"{/if} name="contact_msg" id="contact_msg" cols="50" rows="8">{$smarty.post.contact_msg}</textarea>
-						<span class="validation-error">{if $errors.contact_msg}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>	
+						<span class="validation-error">{if $errors.contact_msg}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>
+						{if $ENABLE_RECAPTCHA}
+							<br /><br />
+							<label for="recaptcha_response_field">{$translations.captcha.captcha_title}:</label><br />
+							{literal}
+							<script type="text/javascript">
+							  var RecaptchaOptions = {
+							    theme : 'white',
+							    tabindex : 9
+							  };
+							</script>
+							{/literal}
+							{$the_captcha}
+							<span class="validation-error">{if $errors.captcha}<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
+						{/if}
 						<br /><br />
 						<input type="submit" name="submit" id="submit" value="{$translations.contact.submit}" />
 					</form>
