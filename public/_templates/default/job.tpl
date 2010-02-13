@@ -42,7 +42,7 @@
 			<script type="text/javascript">
 				$(document).ready(function()
 				{
-					Jobber.SendToFriend.sendMsg();
+					Jobber.SendToFriend.init();
 				});
 			</script>
 			{/literal}

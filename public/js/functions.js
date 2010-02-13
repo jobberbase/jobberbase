@@ -67,7 +67,7 @@
 				$("#send-to-friend").toggle();
 			},
 
-			sendMsg: function()
+			init: function()
 			{
 				$("#frm-send-to-friend").ajaxForm(function(responseText) { 
 					if (responseText == "0")
