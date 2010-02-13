@@ -101,7 +101,7 @@
 											</script>
 											{/literal}
 											{$the_captcha} <span class="validation-error">{if $smarty.session.apply_errors.captcha}
-											<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
+											<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" /> {$smarty.session.apply_errors.captcha}{/if}</span>
 										</td>
 									</tr>
 								{/if}
