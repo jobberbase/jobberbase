@@ -46,18 +46,18 @@
 		
 		HandleLocationOutsideRo: function()
 		{
-			if (document.getElementById("location_outside_ro").style.display == "none")
+			if ($("#location_outside_ro").is(":visible"))
 			{
-				document.getElementById("city_id").setAttribute("disabled", "disabled");
-				$("div#location_outside_ro").show();
-				document.getElementById("location_outside_ro_where").focus();
-				$("a#other_location_label").html(Jobber.I18n.js.location_pick_from_list);
+				$("#city_id").removeAttr("disabled");
+				$("#location_outside_ro").hide();
+				$("#other_location_label").html(Jobber.I18n.js.location_other);
 			}
 			else
 			{
-				document.getElementById("city_id").removeAttribute("disabled");
-				$("div#location_outside_ro").hide();
-				$("a#other_location_label").html(Jobber.I18n.js.location_other);
+				$("#city_id").attr("disabled", "disabled");
+				$("#location_outside_ro").show();
+				$("#location_outside_ro_where").focus();
+				$("#other_location_label").html(Jobber.I18n.js.location_pick_from_list);
 			}
 		},
 		
