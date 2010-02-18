@@ -105,11 +105,9 @@
 	 </li>
 	 <li><a {if $CURRENT_PAGE == 'settings'}class="selected"{/if} href="{$BASE_URL_ADMIN}settings/">Settings</a>
 	 <ul>
-	 <li><a href="{$BASE_URL_ADMIN}settings/main/">Main Settings</a></li>
-	 <li><a href="{$BASE_URL_ADMIN}settings/search-and-pagination/">Search & Pagination Settings</a></li>
-	 <li><a href="{$BASE_URL_ADMIN}settings/url-rewrite/">URl Rewrite Settings</a></li>
-	 <li><a href="{$BASE_URL_ADMIN}settings/anti-spam/">Spam Settings</a></li>
-	 <li><a href="{$BASE_URL_ADMIN}settings/mail/">Mailer Settings</a></li>
+	 {section name=index loop=$settings_categories}
+	 <li><a href="{$BASE_URL_ADMIN}settings/{$settings_categories[index].var_name}/">{$settings_categories[index].name}</a></li>
+	 {/section}
 	 </ul>
 	 </li>
 	 <li><a {if $CURRENT_PAGE == 'password'}class="selected"{/if} href="{$BASE_URL_ADMIN}password/">Change password</a></li>

@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 	<div id="content">
-	{if $settings_categories}
+	{if $settings_categories && $settings_form == ''}
 		<h2 id="settings">Settings Overview</h2>
 		<div class="list">
 		{section name=tmp loop=$settings_categories}

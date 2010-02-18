@@ -246,6 +246,7 @@
 	
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
+	$smarty->assign('settings_categories', $jobber_settings->GetSettingsCategories());
 
 	//Add the dynamic URL defitions to SMARTY
 	$smarty->assign('URL_JOB', URL_JOB);
