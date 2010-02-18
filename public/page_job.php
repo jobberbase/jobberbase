@@ -1,7 +1,14 @@
 <?php
 	$sanitizer = new Sanitizer();
-	$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
-	$smarty->assign('ENABLE_RECAPTCHA', ENABLE_RECAPTCHA);
+	
+	$captcha_enabled = ENABLE_RECAPTCHA && ENABLE_CAPTCHA_ON_APPLY_PAGE;
+	
+	$smarty->assign('ENABLE_RECAPTCHA', $captcha_enabled);
+	
+	if($captcha_enabled)
+	{
+		$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
+	}
 
 	$job_flag = false;
 	$count = 0;

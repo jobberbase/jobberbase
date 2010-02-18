@@ -4,15 +4,18 @@
 		$GLOBALS[$variable] = $value;
 	}
 	$errors = array();
+	
+	$captcha_enabled = ENABLE_RECAPTCHA && ENABLE_CAPTCHA_ON_APPLY_PAGE;
 
 	// validation
-	if (ENABLE_RECAPTCHA)
+	if ($captcha_enabled)
 	{
 		$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
 		$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
 		$_POST["recaptcha_response_field"]);
 		if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
 	}
+	
 	if ($apply_name == '')
 	{
 		$errors['apply_name'] = $translations['apply']['name_error'];

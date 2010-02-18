@@ -36,6 +36,9 @@ define('CAPTCHA_PUBLIC_KEY', $settings['captcha_public_key']);
 define('CAPTCHA_PRIVATE_KEY', $settings['captcha_private_key']);
 define('REPORT_POST_AGAIN_AFTER', $settings['report_post_after']);
 define('REPORT_POST_NOTIFY_ON', $settings['post_notify_on']);
+define('ENABLE_CAPTCHA_ON_POST_PAGE', $settings['captcha_enable_on_post_page']);
+define('ENABLE_CAPTCHA_ON_APPLY_PAGE', $settings['captcha_enable_on_apply_page']);
+define('ENABLE_CAPTCHA_ON_CONTACT_PAGE', $settings['captcha_enable_on_contact_page']);
 // default language code, useful if you with to quickly switch between translation files later
 define('LANG_CODE', 'en');
 ?>

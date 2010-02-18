@@ -314,7 +314,10 @@ INSERT INTO `settings` (`id`, `category_id`, `name`, `title`, `description`, `da
 (38, 5, 'mailer_smtp_username', 'SMTP user name', 'User name (for example, user@example.com)', NULL, NULL, NULL, NULL, NULL),
 (39, 5, 'mailer_smtp_password', 'SMTP password', 'Password', NULL, NULL, NULL, NULL, NULL),
 (40, 4, 'report_post_after', 'Report Post Delay', 'No of Minutes after which a user is allowed to report same post after the previous report.', NULL, NULL, NULL, 'not_empty|is_number', '10'),
-(41, 4, 'post_notify_on', 'When to send Mail?', 'Send mail only after this number of reports on a post.', 'integer', NULL, NULL, 'not_empty', '2');
+(41, 4, 'post_notify_on', 'When to send Mail?', 'Send mail only after this number of reports on a post.', 'integer', NULL, NULL, 'not_empty', '2'),
+(42, 4, 'captcha_enable_on_post_page', 'Enable ReCaptcha on post page', 'Enable spam protection on the post a job page.', 'boolean', 'radiobutton', 'no|yes', NULL, '0'),
+(43, 4, 'captcha_enable_on_apply_page', 'Enable ReCaptcha on apply page', 'Enable spam protection on the apply to a job page.', 'boolean', 'radiobutton', 'no|yes', NULL, '1'),
+(44, 4, 'captcha_enable_on_contact_page', 'Enable ReCaptcha on contact page', 'Enable spam protection on the contact page.', 'boolean', 'radiobutton', 'no|yes', NULL, '0');
 
 --
 -- Table structure for table `settings_categories`
