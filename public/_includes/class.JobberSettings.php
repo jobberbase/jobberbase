@@ -146,7 +146,7 @@ class JobberSettings
 		global $db;
 		$sql = 'SELECT name
 				FROM '.DB_PREFIX.'settings
-				WHERE category_id = ' . $category_id;
+				WHERE category_id = ' . $category_id . ' ORDER BY ordering ASC';
 		$result = $db->query($sql);
 		
 		$settings_list = array();
