@@ -52,7 +52,7 @@
 	 $(document).ready(function(){ 
 	 $("ul.sf-menu").superfish({ 
 	 animation: {height:'show'},
-	 delay:     500
+	 delay:     1500
 	 }); 
 	 }); 
 	</script>
