@@ -11,17 +11,20 @@
 
 class Postman
 {
+	private $emailTranslator;
+	
 	function __construct()
-	{ }
+	{ 
+		$this->emailTranslator = new EmailTranslator(LANG_CODE);
+	}
 
 	// Send a job post to a friend
 	public function MailSendToFriend($friend_email, $my_email)
 	{
+		$subject = $this->emailTranslator->GetSendToFriendSubject();
 		$msg = $_SERVER['HTTP_REFERER'];
-		$msg .= "\n\n---\nYou've received this e-mail from " . $my_email;
-		
-		$subject = 'I\'m recommending you a job ad';
-
+						
+		$msg .= $this->emailTranslator->GetSendToFriendMsg($my_email);
 		if ($friend_email != '' && $my_email != '' && validate_email($friend_email) && validate_email($my_email))
 		{
 			$mailer = $this->getConfiguredMailer();
@@ -51,12 +54,13 @@ class Postman
 	public function MailApplyOnline($data)
 	{
 		$mailer = $this->getConfiguredMailer();
+		$subject = $this->emailTranslator->GetApplyOnlineSubject($data);
 		
 		$msg = $data['apply_msg'];
-		$msg .= "\n\n---\nThis e-mail is an application sent from " . $_SERVER['HTTP_REFERER'];
-
-		$subject = "[" . SITE_NAME . "] I wish to apply for '" . $data['job_title'] . "'";
-
+		
+		$msg .= $this->emailTranslator->GetApplyOnlineMsg($_SERVER['HTTP_REFERER']);
+		
+		
     	$mailer->SetFrom($data['apply_email'], $data['apply_name']);
     	$mailer->AddAddress($data['company_email'], $data['company_name']);
     	$mailer->Subject = $subject;
@@ -84,23 +88,19 @@ class Postman
 		$msg = '';
 		$job_title = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
 		
+		$subject = $this->emailTranslator->GetPublishToAdminSubject($job_title);
+		
+		$data['job_title'] = $job_title;
 		if ($data['check_poster_email'] == 0)
 		{
-			$msg .= "Activate ad: " . BASE_URL . "activate/" . $data['id'] . "/" . $data['auth'] . "/";
-			$msg .= "\n\n\n";
+			$activateUrl = BASE_URL . "activate/" . $data['id'] . "/" . $data['auth'] . "/";
+			$msg = $this->emailTranslator->GetPublishToAdminExtraMsg($activateUrl);
 		}
+		$data['edit_url'] = BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
+		$data['deactivate_url'] =  BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
+		$data['poster_ip'] = $_SERVER['REMOTE_ADDR'];
 		
-		$msg .= $job_title;
-		$msg .= "\n\n" . $data['title'] . " at " . $data['company'];
-		$msg .= "\n\n" . $data['description'];
-		$msg .= "\n\nURL: " . $data['url'];
-		$msg .= "\n\n---\nPublished by: " . $data['poster_email'];
-		$msg .= "\n---\nEdit: " . BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
-		$msg .= "\nDeactivate: " . BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
-		$msg .= "\n\n---\nIP: " . $_SERVER['REMOTE_ADDR'];
-		$msg .= "\nDate: " . $data['created_on'];
-		
-		$subject = '[' . SITE_NAME . ']' . $job_title;
+		$msg .= $this->emailTranslator->GetPublishToAdminMsg($data);
 		
 		$mailer = $this->getConfiguredMailer();
 			
@@ -116,13 +116,9 @@ class Postman
 	// Send mail to user when posting first time (thus the post needs to be moderated)
 	public function MailPublishPendingToUser($poster_email)
 	{
-		$msg = "Hello! :)\n\n";
-		$msg .= "We apologize for the inconvenience, but since this is the first time you post with this e-mail address, we need to manually verify it.";
-		$msg .= "\nThank you for your patience, as the ad should be published ASAP. We'll send you an e-mail when that happens!";
-		$msg .= "\n\nFrom now on, every ad you post with this e-mail address will instantly be published.";
-		$msg .= "\n\n---\n\nThank you for using our service!\nThe Team";
 		
-		$subject = "Your ad on " . SITE_NAME;
+		$subject = $this->emailTranslator->GetPublishPendingToUserSubject();
+		$msg = $this->emailTranslator->GetPublishPendingToUserMsg();
 		
 		if ($poster_email != '' && validate_email($poster_email))
 		{
@@ -140,14 +136,13 @@ class Postman
 	
 	// Send mail to user when a post is published
 	public function MailPublishToUser($data, $url=BASE_URL)
-	{
-		$msg = "Hello! :)\n\n";
-		$msg .= "Your ad was published and is available at: " . $url . URL_JOB ."/" . $data['id'] . "/" . $data['url_title'] . "/";
-		$msg .= "\n\n---\nEdit it: " . $url . "post/" . $data['id'] . "/" . $data['auth'] . "/";
-		$msg .= "\nDeactivate it: " . $url . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
-		$msg .= "\n\n---\n\nThank you for using our service!\nThe " . SITE_NAME . " Team";
-		
-		$subject = 'Your ad on ' . SITE_NAME . ' was published';
+	{	
+		$subject = $this->emailTranslator->GetPublishToUserSubject();
+				
+		$data['job_url'] = $url . URL_JOB ."/" . $data['id'] . "/" . $data['url_title'] . "/";
+		$data['edit_url'] = $url . "post/" . $data['id'] . "/" . $data['auth'] . "/";
+		$data['deactivate_url'] =   $url . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
+		$msg = $this->emailTranslator->GetPublishToUserMsg($data);
 		
 		if ($data['poster_email'] != '' && validate_email($data['poster_email']))
 		{
@@ -174,19 +169,13 @@ class Postman
 	{
 		$job_title = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
 		
-		$msg = '';
+		$data['job_title'] = $job_title;
+		$data['edit_url'] = BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
+		$data['deactivate_url'] = BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
+		$data['poster_ip'] = $_SERVER['REMOTE_ADDR'];
 		
-		$msg .= "Following ad was reported as false/spam:\n--\n\n";
-		$msg .= $job_title;
-		$msg .= "\n\n" . $data['title'] . " at " . $data['company'];
-		$msg .= "\n\n" . $data['description'];
-		$msg .= "\n\n--- \n Published by: " . $data['poster_email'];
-		$msg .= "\n---\nEdit: " . BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
-		$msg .= "\nDeactivate: " . BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
-		$msg .= "\n---\nIP: " . $_SERVER['REMOTE_ADDR'];
-		$msg .= "\nDate: " . $data['created_on'];
-		
-		$subject = '[SPAM on ' . SITE_NAME . '] ' . $job_title;
+		$subject = $this->emailTranslator->GetReportSpamSubject($job_title);
+		$msg = $this->emailTranslator->GetReportSpamMsg($data);
 		
 		$mailer = $this->getConfiguredMailer();
 			
@@ -201,11 +190,12 @@ class Postman
 	
 	public function MailContact($name, $email, $msg)
 	{
-		$msg .= "\n\n---\nSent by: $name &lt;$email&gt;";
-		$msg .= "\nIP: " . $_SERVER['REMOTE_ADDR'];
-		$msg .= "\nDate: " . date('Y-m-d H:i');
-
-		$subject = "[" . SITE_NAME . "] contact";
+		$data['sender_name'] = $name;
+		$data['sender_email'] = $email;
+		$data['poster_ip'] = $_SERVER['REMOTE_ADDR'];
+		$data['created_on'] = date('Y-m-d H:i');
+		$subject = $this->emailTranslator->GetContactSubject();
+		$msg .= $this->emailTranslator->GetContactMsg($data);
 		
 		$mailer = $this->getConfiguredMailer();
 			
