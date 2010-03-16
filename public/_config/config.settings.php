@@ -22,6 +22,7 @@ define('SIDEBAR_SHOW_WHAT', $settings['sidebar_show_what']);
 define('SIDEBAR_ONLY_CITIES_WITH_AT_LEAST_NUMBER_OF_JOBS', $settings['sidebar_only_cities_with_at_least_number_of_jobs']);
 define('DATE_FORMAT', $settings['date_format']);
 define('DATE_TIME_FORMAT', $settings['date_time_format']);
+define('ENABLE_NEW_POST_MODERATION', $settings['enable_new_post_moderation']);
 define('URL_JOB', $settings['url_job']);
 define('URL_JOBS', $settings['url_jobs']);
 define('URL_CITIES', $settings['url_cities']);

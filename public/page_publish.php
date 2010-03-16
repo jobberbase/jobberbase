@@ -1,36 +1,40 @@
 <?php
 	$job = new Job($id);
-
-	// send notification to admin
+	
+	$isNewPost = $job->mIsTemp;
+	$postRequiresModeration = !$job->IsApprovedPosterEmail() && ENABLE_NEW_POST_MODERATION;
+	
+	if ($isNewPost)
+		$job->Publish();
+	
 	$postMan = new Postman();
 	
 	$jobInfo = $job->GetInfo();
-	$jobInfo['check_poster_email'] = $job->CheckPosterEmail();
+	$jobInfo['isNewPost'] = $isNewPost;
+	$jobInfo['postRequiresModeration'] = $postRequiresModeration;
 	
 	$postMan->MailPublishToAdmin($jobInfo);
 
-	// send notification to user
-	if ($jobInfo['check_poster_email'])
+	if ($postRequiresModeration)
 	{
-		// post published
-		$first_time_post = 0;
+		if ($isNewPost)
+			$postMan->MailPublishPendingToUser($job->mPosterEmail);
 		
-		$postMan->MailPublishToUser($jobInfo);	
-		$html_title = $translations['jobs']['publish_success'] . ' / ' . SITE_NAME;
-		$smarty->assign('first_time_post', 0);
+		$html_title = $translations['jobs']['add_success'] . ' / ' . SITE_NAME;
 	}
 	else
 	{
-		// post in pending status
-		$first_time_post = 1;
+		if (!$job->mIsActive)
+			$job->Activate();
 		
-		$postMan->MailPublishPendingToUser($job->mPosterEmail);	
-		$html_title = $translations['jobs']['add_success'] . ' / ' . SITE_NAME;
-		$smarty->assign('first_time_post', 1);
+		if ($isNewPost)
+			$postMan->MailPublishToUser($jobInfo);
+		
+		$html_title = $translations['jobs']['publish_success'] . ' / ' . SITE_NAME;
 	}
 	
-	$job->Publish();
+	$smarty->assign('postRequiresModeration', $postRequiresModeration);
 	
-	redirect_to(BASE_URL . 'confirm/' . $job->mId  . '/'.$first_time_post.'/');
+	redirect_to(BASE_URL . 'confirm/' . $job->mId . '/' . ($postRequiresModeration ? 1: 0) . '/');
 	exit;
 ?>

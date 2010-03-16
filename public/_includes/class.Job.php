@@ -938,14 +938,9 @@ class Job
 	public function Publish()
 	{
 		global $db;
-		if ($this->CheckPosterEmail())
-		{
-			$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0, is_active = 1 WHERE id = ' . $this->mId;
-		}
-		else
-		{
-			$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0, is_active = 0 WHERE id = ' . $this->mId;
-		}
+		
+		$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0 WHERE id = ' . $this->mId;
+		
 		$db->query($sql);
 	}
 	
@@ -1253,7 +1248,7 @@ class Job
 	}
 	
 	// Check if the poster of this post has posted before with this e-mail address
-	public function CheckPosterEmail()
+	public function IsApprovedPosterEmail()
 	{
 		global $db;
 		$sql = 'SELECT poster_email FROM '.DB_PREFIX.'jobs 

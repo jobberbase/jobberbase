@@ -60,7 +60,6 @@ class Postman
 		
 		$msg .= $this->emailTranslator->GetApplyOnlineMsg($_SERVER['HTTP_REFERER']);
 		
-		
     	$mailer->SetFrom($data['apply_email'], $data['apply_name']);
     	$mailer->AddAddress($data['company_email'], $data['company_name']);
     	$mailer->Subject = $subject;
@@ -89,7 +88,7 @@ class Postman
 		
 		$msg = '';
 		
-		if ($data['check_poster_email'] == 0)
+		if ($data['postRequiresModeration'])
 		{
 			$activateUrl = BASE_URL . "activate/" . $data['id'] . "/" . $data['auth'] . "/";
 			$msg = $this->emailTranslator->GetPublishToAdminExtraMsg($activateUrl);

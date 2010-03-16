@@ -130,7 +130,7 @@
 			$job_title = BASE_URL . URL_JOB .'/' . $job->mId . '/' . $job->mUrlTitle . '/';
 			$smarty->assign('auth', $job->GetAuth());
 			$smarty->assign('job_url', $job_title);
-			$smarty->assign('first_time_post', $extra);
+			$smarty->assign('postRequiresModeration', $extra);
 			$template = 'publish-confirmation.tpl';
 			break;
 			

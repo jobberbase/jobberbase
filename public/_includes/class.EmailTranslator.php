@@ -54,7 +54,15 @@
 		
 		public function GetPublishToAdminSubject($data)
 		{
-			$msg = (string)$this->xml->PublishToAdmin->subject;
+			if ($data['isNewPost'])
+			{
+				$msg = (string)$this->xml->PublishToAdmin->newPostSubject;
+			}
+			else
+			{
+				$msg = (string)$this->xml->PublishToAdmin->editedPostSubject;
+			}
+			
 			$msg = str_replace('{JOB_TITLE}', $data['title'], $msg);
 			$msg = str_replace('{SITE_NAME}', SITE_NAME, $msg);
 			return $msg;

@@ -23,9 +23,12 @@
 	</ApplyOnline>
 	
 	<PublishToAdmin>
-		<subject>
-				[ {SITE_NAME}  ] {JOB_TITLE}
-		</subject>
+		<newPostSubject>
+				[ {SITE_NAME}  ] New job: {JOB_TITLE}
+		</newPostSubject>
+		<editedPostSubject>
+				[ {SITE_NAME}  ] Edited job: {JOB_TITLE}
+		</editedPostSubject>
 		<message>
 			<![CDATA[
 				{JOB_URL}
