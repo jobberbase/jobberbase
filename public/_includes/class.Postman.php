@@ -85,17 +85,17 @@ class Postman
 	// Send mail to admin when a job is posted
 	public function MailPublishToAdmin($data)
 	{
+		$subject = $this->emailTranslator->GetPublishToAdminSubject($data);
+		
 		$msg = '';
-		$job_title = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
 		
-		$subject = $this->emailTranslator->GetPublishToAdminSubject($job_title);
-		
-		$data['job_title'] = $job_title;
 		if ($data['check_poster_email'] == 0)
 		{
 			$activateUrl = BASE_URL . "activate/" . $data['id'] . "/" . $data['auth'] . "/";
 			$msg = $this->emailTranslator->GetPublishToAdminExtraMsg($activateUrl);
 		}
+		
+		$data['job_url'] = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
 		$data['edit_url'] = BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
 		$data['deactivate_url'] =  BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
 		$data['poster_ip'] = $_SERVER['REMOTE_ADDR'];
@@ -116,7 +116,6 @@ class Postman
 	// Send mail to user when posting first time (thus the post needs to be moderated)
 	public function MailPublishPendingToUser($poster_email)
 	{
-		
 		$subject = $this->emailTranslator->GetPublishPendingToUserSubject();
 		$msg = $this->emailTranslator->GetPublishPendingToUserMsg();
 		

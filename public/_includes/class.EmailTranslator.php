@@ -52,18 +52,18 @@
 			return $msg;
 		}
 		
-		public function GetPublishToAdminSubject($jobTitle)
+		public function GetPublishToAdminSubject($data)
 		{
 			$msg = (string)$this->xml->PublishToAdmin->subject;
-			$msg = str_replace('{JOB_TITLE}',$jobTitle, $msg);
-			$msg = str_replace('{SITE_NAME}',SITE_NAME, $msg);
+			$msg = str_replace('{JOB_TITLE}', $data['title'], $msg);
+			$msg = str_replace('{SITE_NAME}', SITE_NAME, $msg);
 			return $msg;
 		}
 		
 		public function GetPublishToAdminMsg($data)
 		{
 			$msg = (string)$this->xml->PublishToAdmin->message;
-			$msg = str_replace('{JOB_URL}', $data['job_title'], $msg);
+			$msg = str_replace('{JOB_URL}', $data['job_url'], $msg);
 			$msg = str_replace('{JOB_TITLE}', $data['title'], $msg);
 			$msg = str_replace('{JOB_COMPANY}', $data['company'], $msg);
 			$msg = str_replace('{JOB_DESCRIPTION}', $data['description'], $msg);
