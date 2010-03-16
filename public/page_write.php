@@ -139,7 +139,7 @@
 			  			  'is_active' => 0,
 			              'apply' => '',
 			              'poster_email' => $poster_email,
-			              'apply_online' => apply_online,
+			              'apply_online' => $apply_online,
 			              'spotlight' => 0);
 			
 			$id = $job->Create($data);
