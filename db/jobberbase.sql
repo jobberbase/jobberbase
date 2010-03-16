@@ -318,7 +318,8 @@ INSERT INTO `settings` (`id`, `category_id`, `name`, `title`, `description`, `da
 (41, 4, 'post_notify_on', 'When to send Mail?', 'Send mail only after this number of reports on a post.', 'integer', NULL, NULL, 'not_empty', '2', 8),
 (42, 4, 'captcha_enable_on_post_page', 'Enable ReCaptcha on post page', 'Enable spam protection on the post a job page.', 'boolean', 'radiobutton', 'no|yes', NULL, '0', 4),
 (43, 4, 'captcha_enable_on_apply_page', 'Enable ReCaptcha on apply page', 'Enable spam protection on the apply to a job page.', 'boolean', 'radiobutton', 'no|yes', NULL, '1', 5),
-(44, 4, 'captcha_enable_on_contact_page', 'Enable ReCaptcha on contact page', 'Enable spam protection on the contact page.', 'boolean', 'radiobutton', 'no|yes', NULL, '0', 6);
+(44, 4, 'captcha_enable_on_contact_page', 'Enable ReCaptcha on contact page', 'Enable spam protection on the contact page.', 'boolean', 'radiobutton', 'no|yes', NULL, '0', 6),
+(45, 1, 'enable_new_post_moderation', 'Enable Job Moderation', 'If enabled, the administrator must always activate the very first job posted by a hiring person/company. From there on, every job posted with the same email address will be automatically activated.', 'boolean', 'radiobutton', 'no|yes', NULL, '1', 17);
 
 --
 -- Table structure for table `settings_categories`
