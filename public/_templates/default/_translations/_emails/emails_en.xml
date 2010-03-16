@@ -11,7 +11,7 @@
 		</message>
 	</SendToFriend>
 	
-	<ApplyOBRine>
+	<ApplyOnline>
 		<subject>
 				[ {SITE_NAME} ] I wish to apply for {JOB_TITLE}
 		</subject>
@@ -20,7 +20,7 @@
 				{BR}{BR}---{BR}This e-mail is an application sent from {JOB_URL}
 			]]>
 		</message>
-	</ApplyOBRine>
+	</ApplyOnline>
 	
 	<PublishToAdmin>
 		<subject>
