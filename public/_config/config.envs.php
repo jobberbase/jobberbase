@@ -16,7 +16,7 @@ $__instances['local'] = array(
 	'db_name' => 'jobberbase',
 	'db_prefix' => '',
 	// your site's full url
-	'app_url' => 'http://localhost/jobberbase/public/',
+	'app_url' => 'http://localhost/jobberbase/trunk/public/',
 	// error reporting
 	'ini_error_reporting' => E_ALL,
 	'ini_display_errors' => 'On',

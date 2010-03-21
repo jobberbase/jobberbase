@@ -1,5 +1,32 @@
 ######## jobberBase changelog ########
 
+version 1.9 (23/03/2010)
+	* new: IIS support for Windows hosting.
+	* new: View All Jobs Page.
+	* new: Admin Area can also filter jobs by types.
+	* new: Easy Language switch via config.php supporting multiple translation files.
+	* new: New Theme variable - {$THEME} which refers to the active theme in use.
+	* new: A Brand New Admin Panel Theme based on Cadify.
+	* new: Added Sitemap.xml and Sitemap.txt to Jobberbase which are generated automatically whenever they are accessed. Add it to your Google WebmasterTools and it will get it updated everytime.
+	* new: Added the minimum job count for cities to show in Sidebar.
+	* new: Added the possibility to turn off the moderation for the very first post from a hiring person/company resulting in the posts being automatically activated
+	* fix: Error Page now return correct 404 response header.
+	* fix: Number of jobs on front page can be set to 0 now.
+	* fix: Fixed a bug related to Job-Type selection.
+	* enh: Moved translations into theme directory.
+	* enh: Emails sent by jobberBase are now defined in clean XML files, inside the theme directory.
+	* enh: Lots of Unused code and css cleanup.
+	* enh: Job posts loop is now not duplicated from multiple files.
+	* enh: Backend optimisation on SQL and PHP codes to improve the performance of queries.
+	* enh: Restructuring of Files and Config.php in a logical way.
+	* enh: All unused images removed making the package lighter.
+	* enh: More Anti-Spam options apart from Recaptcha in Admin panel.
+	* enh: Some SEO Improvements and fixes.
+	* enh: Category names instead of urls in Feed Description field.
+	* enh: Jobberbase version will now appear in header of frontend so that one can easily know the jobberbase version if you need help from us.
+	* enh: Admin Area is now completely independent of frontend theme and vice versa. So now no crosslinked images will occur among frontend and admin themes.
+	* enh: The job poster no longer receives an email each time he edits his post.
+
 version 1.8 (16/09/2009)
 	* new: settings are now configurable from the admin panel (Settings menu item) (chronos)
 	* new: job types are no longer hardcoded, they can be edited/added/deleted from the admin section (links)

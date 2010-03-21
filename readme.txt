@@ -1,9 +1,9 @@
 ######## Useful info ########
 
-The blog: http://www.jobberbase.com/blog/
+Our blog: http://www.jobberbase.com/blog/
 Community forums: http://www.jobberbase.com/forum/
-Wiki (customisation guide, installation problems, faqs and themes details): http://www.jobberbase.com/wiki/
-jobberBase on Google Code: http://code.google.com/p/jobberbase/
+Wiki (customisation guide, installation problems, faqs and themes details): http://wiki.jobberbase.com/
+Project on Google Code: http://code.google.com/p/jobberbase/
 Follow us on twitter: http://twitter.com/jobberbase
 E-mail us at: hello@jobberbase.com
 
