@@ -16,7 +16,6 @@
 	{/if}
 	
 	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/layout.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/screen.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/ui.tabs.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/print.css" media="print" type="text/css" />
 	<script src="{$BASE_URL}js/jquery.js" type="text/javascript"></script>
@@ -28,7 +27,7 @@
 	<script src="{$BASE_URL}js/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/functions.js" type="text/javascript"></script>
 
-	<script src="{$BASE_URL}js/jquery.tabs.pack.js" type="text/javascript"></script>
+	<script src="{$BASE_URL}_templates/{$THEME}/js/jquery.tabs.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		Jobber.I18n = {$translationsJson};
 	</script>
