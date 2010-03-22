@@ -22,7 +22,7 @@ function get_cities_cloud()
  
 	$sql = 	'SELECT c.id, c.name, c.ascii_name, COUNT(*) AS nr
 			 FROM '.DB_PREFIX.'cities c 
-			 INNER JOIN jobs j ON (j.city_id = c.id ) 
+			 INNER JOIN '.DB_PREFIX.'jobs j ON (j.city_id = c.id ) 
 			 WHERE j.is_active = 1 
 			 GROUP BY c.name';
  
