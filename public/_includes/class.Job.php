@@ -543,27 +543,6 @@ class Job
 		return $jobs;
 	}
 	
-	public function GetMostViewedJobs($limit = false)
-	{
-		global $db;
-		
-		$jobs = array();
-		
-		$sql_limit = 'LIMIT ' . $limit;
-				
-		$sql = 'SELECT id
-		               FROM '.DB_PREFIX.'jobs
-		               WHERE 1 AND is_temp = 0 AND is_active = 1 
-		               ORDER BY views_count DESC ' . $sql_limit;
-		$result = $db->query($sql);
-		while ($row = $result->fetch_assoc())
-		{
-			$current_job = new Job($row['id']);
-			$jobs[] = $current_job->GetInfo();
-		}
-		return $jobs;
-	}
-	
 	public function GetMostAppliedToJobs($limit = false)
 	{
 		global $db;
@@ -1253,7 +1232,9 @@ class Job
 		global $db;
 		$sql = 'SELECT poster_email FROM '.DB_PREFIX.'jobs 
 		                  WHERE poster_email = "' . strtolower($this->mPosterEmail) . '" AND id <> ' . $this->mId . ' AND is_temp = 0
- 		                        AND (is_active = 1 OR (is_active = 0 AND created_on < DATE_SUB(NOW(), INTERVAL 30 DAY)))'; 
+ 		                        AND (is_active = 1 OR (is_active = 0 AND created_on < DATE_SUB(NOW(), INTERVAL 30 DAY)))';
+
+		var_dump($sql);
 		$result = $db->query($sql);
 				
 		$row = $result->fetch_assoc();
