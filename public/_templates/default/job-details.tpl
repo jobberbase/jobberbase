@@ -10,7 +10,6 @@
 				</div>
 				{/if}
 				{if $CURRENT_PAGE == $URL_JOB}
-				<a href="{$translator->url('home')}">home</a>
 				<div id="applied-to-job">
 					{$job.applied_count}
 					{if $job.applied_count != 1}
