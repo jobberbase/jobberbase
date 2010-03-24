@@ -5,7 +5,7 @@
  */
 
 // jobberBase version
-define('JOBBERBASE_VERSION', '1.9 dev');
+define('JOBBERBASE_VERSION', '1.9');
 
 // Global settings definitions
 define('SITE_NAME', $settings['site_name']);

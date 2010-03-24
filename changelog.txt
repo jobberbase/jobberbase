@@ -1,11 +1,12 @@
 ######## jobberBase changelog ########
 
-version 1.9 (23/03/2010)
+version 1.9 (24/03/2010)
 	* new: IIS support for Windows hosting.
 	* new: View All Jobs Page.
 	* new: Admin Area can also filter jobs by types.
 	* new: Easy Language switch via config.php supporting multiple translation files.
 	* new: New Theme variable - {$THEME} which refers to the active theme in use.
+	* new: A Brand New Theme, by popular demand: Hireme (contributed by hireme.sg)
 	* new: A Brand New Admin Panel Theme based on Cadify.
 	* new: Added Sitemap.xml and Sitemap.txt to Jobberbase which are generated automatically whenever they are accessed. Add it to your Google WebmasterTools and it will get it updated everytime.
 	* new: Added the minimum job count for cities to show in Sidebar.

@@ -1234,7 +1234,6 @@ class Job
 		                  WHERE poster_email = "' . strtolower($this->mPosterEmail) . '" AND id <> ' . $this->mId . ' AND is_temp = 0
  		                        AND (is_active = 1 OR (is_active = 0 AND created_on < DATE_SUB(NOW(), INTERVAL 30 DAY)))';
 
-		var_dump($sql);
 		$result = $db->query($sql);
 				
 		$row = $result->fetch_assoc();
