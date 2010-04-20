@@ -51,11 +51,11 @@
 						<input type="text" name="page_page_title" id="page_page_title" size="32" value="{$defaults.page_page_title}" />
 					</div>
 					<div class="group">
-						<label for="page_keywords">Description</label>
+						<label for="page_description">Description</label>
 						<textarea id="page_description" name="page_description" rows="6" cols="30">{$defaults.page_description}</textarea>
 					</div>
 					<div class="group">
-						<label for="page_description">Keywords</label>
+						<label for="page_keywords">Keywords</label>
 						<textarea id="page_keywords" name="page_keywords" rows="6" cols="30">{$defaults.page_keywords}</textarea>
 					</div>
 					<div class="group_submit">
