@@ -501,7 +501,10 @@ class Job
 		while ($row = $result->fetch_assoc())
 		{
 			$current_job = new Job($row['id']);
-			$jobs[] = $current_job->GetInfo();
+			$job = $current_job->GetInfo();
+			unset($job['poster_email']);
+			unset($job['auth']);
+			$jobs[] = $job;
 		}
 		return $jobs;
 	}
@@ -538,7 +541,10 @@ class Job
 		while ($row = $result->fetch_assoc())
 		{
 			$current_job = new Job($row['id']);
-			$jobs[] = $current_job->GetInfo();
+			$job = $current_job->GetInfo();
+			unset($job['poster_email']);
+			unset($job['auth']);
+			$jobs[] = $job;
 		}
 		return $jobs;
 	}
