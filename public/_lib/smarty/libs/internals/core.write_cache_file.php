@@ -36,7 +36,7 @@ function smarty_core_write_cache_file($params, &$smarty)
         // remove everything between every pair of outermost noache.../nocache-tags
         // and replace it by a single nocache-tag
         // this new nocache-tag will be replaced by dynamic contents in
-        // smarty_core_process_compiled_includes() on a cache-read
+        // smarty_core_process_compiled_lib() on a cache-read
         
         $match_count = count($match[0]);
         $results = preg_split('!(\{/?nocache\:[0-9a-f]{32}#\d+\})!', $params['results'], -1, PREG_SPLIT_DELIM_CAPTURE);

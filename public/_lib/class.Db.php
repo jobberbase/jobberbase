@@ -2,7 +2,7 @@
 /**
  * jobber job board platform
  *
- * @author     Filip C.T.E. <http://www.filipcte.ro> <me@filipcte.ro>
+ * @author     Filip C.T.E. <http://www.filipcte.com>
  * @license    You are free to edit and use this work, but it would be nice if you always referenced the original author ;)
  *             (see license.txt).
  * 
@@ -36,6 +36,27 @@ class Db extends mysqli
 		return $result;
 	}
 	
+	public function q($query)
+	{
+		$result = parent::query($query); 
+		
+		if (mysqli_error($this))
+		{
+			throw new Exception(mysqli_error($this), mysqli_errno($this));
+		}
+		
+		$array_result = array();
+		while ($line = mysqli_fetch_array($result, MYSQL_ASSOC))
+		{
+			$NewLine = array();
+			foreach($line as $key=>$val)
+				$NewLine[$key] = stripslashes($val);
+			$array_result[] = $NewLine;
+		}
+		unset($result, $line);
+		return $array_result;
+	}
+	
 	public function QueryArray($query)
 	{
 		$result = parent::query($query); 
@@ -52,17 +73,26 @@ class Db extends mysqli
 	{
 		$result = parent::query($query);
 		$line = mysqli_fetch_array($result, MYSQL_ASSOC);
-		return $line;
+		if (empty($line))
+			return false;
+		$NewLine = array();
+		foreach($line as $key=>$val)
+			$NewLine[$key] = stripslashes($val);
+		return $NewLine;
 	}
 
 	// Runs a query and returns result as a single variable
 	public function QueryItem($query)
 	{
 		$result = parent::query($query);
+		if (!$result)
+		{
+			return false;
+		}
 		$line = mysqli_fetch_array($result, MYSQL_NUM);
 		if ($line)
 		{
-			return $line[0];
+			return stripslashes($line[0]);
 		}
 		return false;
 	}
@@ -70,8 +100,9 @@ class Db extends mysqli
 	public function Execute($query)
 	{
 		$result = parent::query($query); 
-	  if(mysqli_error($this))
+		if(mysqli_error($this))
 		{
+			throw new Exception(mysqli_error($this), mysqli_errno($this));
 			return false;
 		}
 		else

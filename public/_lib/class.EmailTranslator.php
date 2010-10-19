@@ -6,7 +6,7 @@
 		
 		function __construct($languageCode)
 		{
-			$translationFilePath = APP_PATH . '_templates' . DIRECTORY_SEPARATOR . THEME . DIRECTORY_SEPARATOR . '_translations' . DIRECTORY_SEPARATOR . '_emails' . DIRECTORY_SEPARATOR . 'emails_' . $languageCode . '.xml';
+			$translationFilePath = APP_PATH . '_tpl' . DIRECTORY_SEPARATOR . THEME . DIRECTORY_SEPARATOR . '_translations' . DIRECTORY_SEPARATOR . '_emails' . DIRECTORY_SEPARATOR . 'emails_' . $languageCode . '.xml';
 
 			if (file_exists($translationFilePath)) 
 			{

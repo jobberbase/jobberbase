@@ -3,7 +3,7 @@
  * jobber job board platform - admin panel
  *
  * @author     Lavinia Creivean <links_clm@yahoo.com>
- * @author     Filip C.T.E. <http://www.filipcte.com> <me@filipcte.ro>
+ * @author     Filip C.T.E. <http://www.filipcte.com>
  * @license    You are free to edit and use this work, but it would be nice if you always referenced the original authors ;)
  *             (see license.txt).
  */
@@ -25,6 +25,7 @@
 	$extra = (isset($_app_info['params'][2]) ? $db->real_escape_string($_app_info['params'][2]) : '');
 	
 	//////////////////////////////////////////////////////////
+	
 	
 	$translator = new Translator(LANG_CODE);
 	$translations = $translator->getTranslations();

@@ -7,7 +7,7 @@
 				{$translations.category.display_only}&nbsp; 
 					{section name=tmp loop=$types}
 						<!--Doesn't seem to be type-support for cities yet-->
-						<a href="{$BASE_URL}{$URL_JOBS_IN_CITY}/{$city_ascii_name}/{$types[tmp].var_name}/" title="{$current_category} {$types[tmp].name}"><img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$types[tmp].var_name}.png" alt="{$types[tmp].name}" /></a>
+						<a href="{$BASE_URL}{$URL_JOBS_IN_CITY}/{$city_ascii_name}/{$types[tmp].var_name}/" title="{$current_category} {$types[tmp].name}"><img src="{$BASE_URL}_tpl/{$THEME}/img/icon-{$types[tmp].var_name}.png" alt="{$types[tmp].name}" /></a>
 					{/section}
 				</div><!-- #sort-by-type -->
 				{/if}

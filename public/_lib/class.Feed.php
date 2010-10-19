@@ -2,7 +2,7 @@
 /**
  * jobber job board platform
  *
- * @author     Filip C.T.E. <http://www.filipcte.ro> <me@filipcte.ro>
+ * @author     Filip C.T.E. <http://www.filipcte.com>
  * @license    You are free to edit and use this work, but it would be nice if you always referenced the original author ;)
  *             (see license.txt).
  * 
@@ -17,7 +17,7 @@ class Feed
 	var $mCategoryId = false;
 	var $mCategoryName = false;
 	
-	function __construct($category = false)
+	public function __construct($category = false)
 	{
 		global $db;
 		if ($category != 'all')

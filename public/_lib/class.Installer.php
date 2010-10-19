@@ -17,7 +17,7 @@
 		public function CheckMySQLiInterface($szDbHost, $szDbName, $szDbUser, $szDbPass)
 		{
 			//Let's try MySQLi first
-			require_once '_includes/class.Db.php';
+			require_once '_lib/class.Db.php';
 			try 
 			{
 				$db = new Db($szDbHost, $szDbUser, $szDbPass, $szDbName);
@@ -35,7 +35,7 @@
 		public function CheckMySQLInterface($szDbHost, $szDbName, $szDbUser, $szDbPass)
 		{
 			//The server doesn't not have the MySQLi extension installed. Fall back to MySQL
-			require_once '_includes/class.Db.MySql.php';
+			require_once '_lib/class.Db.MySql.php';
 			
 			try
 			{
@@ -63,7 +63,7 @@
 		//Check to see whether the cache folder has write rights
 		public function CheckCachePermissions()
 		{
-			return (fileperms('_templates/_cache') & 0x0002) != 0;
+			return (fileperms('_tpl/_cache') & 0x0002) != 0;
 		}
 		
 		//Check to see if the uploads folder has write rights

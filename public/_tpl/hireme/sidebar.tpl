@@ -7,7 +7,7 @@
 		<fieldset>
 			<div>
 				<input type="text" name="keywords" id="keywords" maxlength="30" value="{if $keywords}{$keywords}{else}{$translations.search.default}{/if}" />
-				<span id="indicator" style="display: none;"><img src="{$BASE_URL}_templates/{$THEME}/img/ajax-loader.gif" alt="" /></span>
+				<span id="indicator" style="display: none;"><img src="{$BASE_URL}_tpl/{$THEME}/img/ajax-loader.gif" alt="" /></span>
 			</div>
 			<div><label class="suggestionTop">{$translations.search.example}</label></div>
 		</fieldset>

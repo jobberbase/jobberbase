@@ -8,7 +8,7 @@
 			<li>
 				<a href="{$BASE_URL}{$URL_JOB}/{$compjob.id}/{$compjob.url_title}/" title="{$compjob.title}">
 					<span class="jobtype">
-						<img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$compjob.type_var_name}.png" alt="{$compjob.type_name}" />
+						<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-{$compjob.type_var_name}.png" alt="{$compjob.type_name}" />
 					</span>
 					<span class="date">{$compjob.created_on|date_format:"%d %b"}</span>
 					<span class="jobtitle">{$compjob.title}</span><br />

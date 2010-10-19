@@ -11,7 +11,7 @@ class JobberSettings
 {
 	var $mSettings = false;
 		
-	function __construct()
+	public function __construct()
 	{
 		global $db;
 		
@@ -31,18 +31,35 @@ class JobberSettings
 				
 			// Apply certain actions on special fields 
 			if ($input_type == 'checkbox' || $input_type == 'select' || $input_type == 'radiobutton')
-				$input_options = explode('|', $input_options);
-			elseif ($input_type == 'available_themes')
 			{
-				$input_type = 'select';	$themes = array();
-				$dir = APP_PATH.'_templates/';
+				$input_options = explode('|', $input_options);
+			}
+			else if ($input_type == 'available_themes')
+			{
+				$input_type = 'select';	
+				$themes = array();
+				$dir = APP_PATH.'_tpl/';
 				if ($dh = opendir($dir)) {
 				    while (($file = readdir($dh)) !== false) { if (filetype($dir . $file) != 'file' && $file != '.' && $file != '..' && $file != '.svn' && $file != '_cache') $themes[] = $file; }
 					closedir($dh);
 				}
 				$input_options = $themes;
 			}
-			if ($data_type == 'boolean' && $value != 1) $value = false;
+			else if ($input_type == 'timezones')
+			{
+				$input_type = 'select';	
+				$timezones = array();
+				
+				$timezones = timezone_identifiers_list();
+				
+				$input_options = $timezones;
+			}
+			
+			
+			if ($data_type == 'boolean' && $value != 1) 
+			{
+				$value = false;
+			}
 				
 			// Add the row to the setting array
 			$settings[$row['name']] = array(

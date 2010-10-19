@@ -15,8 +15,8 @@
 	{else}
 		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/" />
 	{/if}
-	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/screen.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/print.css" media="print" type="text/css" />
+	<link rel="stylesheet" href="{$BASE_URL}_tpl/{$THEME}/css/screen.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{$BASE_URL}_tpl/{$THEME}/css/print.css" media="print" type="text/css" />
 	<script src="{$BASE_URL}js/jquery.js" type="text/javascript"></script>
 	<!--[if !IE]><script src="{$BASE_URL}js/jquery.history.js" type="text/javascript"></script><![endif]-->
  	<script src="{$BASE_URL}js/jquery.form.js" type="text/javascript"></script>
@@ -51,7 +51,7 @@
 				{/if}
 			</ul>
 			<div id="the_feed">
-				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}_templates/{$THEME}/img/bt-rss.png" alt="{$translations.header.rss_alt}" /></a>
+				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}_tpl/{$THEME}/img/bt-rss.png" alt="{$translations.header.rss_alt}" /></a>
 			</div>
 		</div><!-- #header -->
 		
@@ -61,7 +61,7 @@
 					<fieldset>
 						<div>
 							<input type="text" name="keywords" id="keywords" maxlength="30" value="{if $keywords}{$keywords}{else}{$translations.search.default}{/if}" />
-							<span id="indicator" style="display: none;"><img src="{$BASE_URL}_templates/{$THEME}/img/ajax-loader.gif" alt="" /></span>
+							<span id="indicator" style="display: none;"><img src="{$BASE_URL}_tpl/{$THEME}/img/ajax-loader.gif" alt="" /></span>
 						</div>
 						<div><label class="suggestionTop">{$translations.search.example}</label></div>
 					</fieldset>

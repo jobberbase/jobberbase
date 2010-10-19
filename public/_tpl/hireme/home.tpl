@@ -16,7 +16,7 @@
 							<li>
 								<a href="{$BASE_URL}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">
 									<span class="jobtype spotlight-image">
-										<!--<img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />-->
+										<!--<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />-->
 									</span>
 									<span class="date">{$job.created_on|date_format:"%d %b"}</span>
 									<span class="jobtitle">{$job.title}</span><br />
@@ -37,7 +37,7 @@
 							<li>
 								<a href="{$BASE_URL}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">
 									<span class="jobtype">
-										<img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
+										<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
 									</span>
 									<span class="date">{$job.created_on|date_format:"%d %b"}</span>
 									<span class="jobtitle">{$job.title}</span><br />
@@ -59,7 +59,7 @@
 							<li>
 								<a href="{$BASE_URL}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">
 									<span class="jobtype">
-										<img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
+										<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
 									</span>
 									<span class="date">{$job.apps} {$translations.homepage.applicants}</span>
 									<span class="jobtitle">{$job.title}</span><br />

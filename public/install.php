@@ -1,7 +1,7 @@
 <?php
-	require_once '_includes/class.Installer.php';
-	require_once '_includes/smarty/libs/Smarty.class.php';
-	require_once '_includes/functions.php';
+	require_once '_lib/class.Installer.php';
+	require_once '_lib/smarty/libs/Smarty.class.php';
+	require_once '_lib/functions.php';
 	
 	define('ENVIRONMENT', 'dev');
 	$bMySQL = false;
@@ -20,7 +20,7 @@
 			
 			if (!$Installer->CheckCachePermissions())
 			{
-				echo "The cache folder (/_templates/_cache) does not have write permission";
+				echo "The cache folder (/_tpl/_cache) does not have write permission";
 				exit();
 			}
 			
@@ -108,8 +108,8 @@
 	
 	// Setup Smarty
 	$smarty = new Smarty();
-	$smarty->template_dir = APP_PATH . '_templates/';
-	$smarty->compile_dir = APP_PATH . '_templates/_cache/';
+	$smarty->template_dir = APP_PATH . '_tpl/';
+	$smarty->compile_dir = APP_PATH . '_tpl/_cache/';
 
 	$smarty->display('installer.tpl');
 ?>
