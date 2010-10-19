@@ -20,7 +20,7 @@
 			// no errors, go to review page
 			if (empty($errors))
 			{
-				require_once '_lib/class.Admin.php';
+				require_once APP_PATH . '_lib/class.Admin.php';
 				$admin = new CAdmin();
 				
 				if($admin->login($username, $password))

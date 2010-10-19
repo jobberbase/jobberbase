@@ -3,7 +3,7 @@
  * jobber job board platform - admin panel
  *
  * @author     Lavinia Creivean <links_clm@yahoo.com>
- * @author     Filip C.T.E. <http://www.filipcte.ro> <me@filipcte.ro>
+ * @author     Filip C.T.E. <http://www.filipcte.com> <me@filipcte.ro>
  * @license    You are free to edit and use this work, but it would be nice if you always referenced the original authors ;)
  *             (see license.txt).
  */

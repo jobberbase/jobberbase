@@ -1,5 +1,5 @@
 <?php
-	require_once '_lib/class.CityDAO.php';
+	require_once APP_PATH . '_lib/class.CityDAO.php';
 	
 	class CitiesPage
 	{

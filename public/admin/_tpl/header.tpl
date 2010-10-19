@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="{$BASE_URL_ADMIN}_tpl/css/screen.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="{$BASE_URL_ADMIN}_tpl/css/jquery.fancybox-1.2.6.css" type="text/css" media="screen" />
  
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
  
 	<script src="{$BASE_URL_ADMIN}_tpl/js/jquery.bgiframe.min.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}_tpl/js/jquery.validate.min.js" type="text/javascript"></script>
@@ -113,7 +113,5 @@
 	 <li><a {if $CURRENT_PAGE == 'password'}class="selected"{/if} href="{$BASE_URL_ADMIN}password/">Change password</a></li>
 	 <li class="right bold"><a href="{$BASE_URL_ADMIN}logout/">Logout</a></li>
 	 </ul>
-	
-	<a style="float: right" class="iframe" href="http://www.evertsemeijn.nl/help/administration/{if $CURRENT_PAGE == ''}home/{/if}{if $CURRENT_PAGE == 'edit-post'}post-a-job/{/if}{if $CURRENT_PAGE == 'pages'}pages/{/if}{if $CURRENT_PAGE == 'categories'}categories/{/if}{if $CURRENT_PAGE == 'jobs'}categories/{/if}{if $CURRENT_PAGE == 'stats'}stats/{/if}{if $CURRENT_PAGE == 'cities'}cities/{/if}{if $CURRENT_PAGE == 'types'}job-types/{/if}{if $CURRENT_PAGE == 'links'}links/{/if}{if $CURRENT_PAGE == 'settings'}settings/{/if}{if $CURRENT_PAGE == 'password'}change-password/{/if}"><img src="{$BASE_URL_ADMIN}_tpl/img/help.png" /></a>
 	
 	{/if}
