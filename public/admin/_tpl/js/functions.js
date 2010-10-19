@@ -89,7 +89,7 @@
 							linkElement.setAttribute('title', 'Deactive this job');
 							linkElement.setAttribute('onclick', deactivateJobFunction);
 							linkElement.onclick = deactivateJobFunction;
-							linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_templates/img/switch.png" alt="deactivate" />';
+							linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_tpl/img/switch.png" alt="deactivate" />';
 							linkElement.id = 'deactivateLink'+job_id;
 						}	
 					}
@@ -117,7 +117,7 @@
 						linkElement.setAttribute('title', 'Activate this job');
 						linkElement.setAttribute('onclick', activateJobFunction);
 						linkElement.onclick = activateJobFunction;
-						linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_templates/img/switch_off.png" alt="activate" />';
+						linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_tpl/img/switch_off.png" alt="activate" />';
 						linkElement.id = 'activateLink'+job_id;
 					}
 			  }
@@ -154,7 +154,7 @@
 						linkElement.setAttribute('title', 'Turn spotlight off');
                         linkElement.setAttribute('onclick', deactivateSpotlightFunction);
                         linkElement.onclick = deactivateSpotlightFunction; 
-                        linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_templates/img/star_on.png" alt="deactivate" />';
+                        linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_tpl/img/star_on.png" alt="deactivate" />';
                         linkElement.id = 'deactivateSpotlight'+job_id;
                     }
               }
@@ -180,7 +180,7 @@
 						linkElement.setAttribute('title', 'Turn spotlight on');							
                         linkElement.setAttribute('onclick', activateSpotlightFunction);
                         linkElement.onclick = activateSpotlightFunction;
-                        linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_templates/img/star_off.png" alt="activate" />';
+                        linkElement.innerHTML = '<img src="'+Jobber.jobber_admin_url+'_tpl/img/star_off.png" alt="activate" />';
                         linkElement.id = 'activateSpotlight'+job_id;
                     }
               }

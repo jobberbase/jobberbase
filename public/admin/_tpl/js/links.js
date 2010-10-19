@@ -1,21 +1,21 @@
 (function() {
-	jobberBase.types = function() {
-		var categoryTemplate = [
-			'<div class="typeItem">',
-				'<div class="typeHandle"></div>',
-				'<div class="typeWrapper">',
-					'<a href="#" title="Delete job type" class="deleteType"><img src="',
+	jobberBase.links = function() {
+		var linkTemplate = [
+			'<div class="linkItem">',
+				'<div class="linkHandle"></div>',
+				'<div class="linkWrapper">',
+					'<a href="#" title="Delete this link" class="deleteLink"><img src="',
 					'',
-					'_templates/img/bin.png" alt="Delete" /></a>',
-					'<label><span>Name:</span><input type="text" size="50" name="name[]" value="For example: Irregular" /><img class="help" src="../_templates/img/information-balloon.png" title="The name that will be used in the template" /></label>',
-					'<a href="#" title="Save changes" class="saveType"><img src="',
+					'_tpl/img/bin.png" alt="Delete" /></a>',
+					'<label><span>Name:</span><input type="text" size="60" name="name[]" value="For example: Jobberbase" /><img class="help" src="../../_tpl/img/information-balloon.png" title="The text you want to display in the frontend" /></label>',
+					'<a href="#" title="Save changes" class="saveLink"><img src="',
 					'',
-					'_templates/img/disk.png" alt="Save changes" /></a>',
-					'<label><span>Var name:</span><input type="text" id="nr" size="50" name="var_name[]" value="For example: irregular" /><img class="help" src="../_templates/img/information-balloon.png" title="Var name must not contain spaces or other special chars" /></label>',
+					'_tpl/img/disk.png" alt="Save" /></a>',
+					'<label><span>URL:</span><input type="text" size="60" name="url[]" value="For example: http://www.jobberbase.com/" /><img class="help" src="../../_tpl/img/information-balloon.png" title="The URL you want to link to. When you want to link to a Jobberbase page (e.g. the page Contact) you can use the Jobberbase URL (e.g. contact)" /></label>',
+					'<label><span>Title:</span><input type="text" size="60" name="title[]" value="For example: Open Source Job Board Software" /><img class="help" src="../../_tpl/img/information-balloon.png" title="Text that shows when you hover over the link, just like this help message. You can leave this blank if you don\'t want to show anything" /></label>',
 				'</div>',
 			'</div>'
 		];
-		
 		var pointerPosition;
 		var prevPointer;
 		var minTop;
@@ -27,7 +27,7 @@
 		var items;
 		var saving = false;
 		var mouseDown = function(e) {
-			if ($(e.target).is('div.typeHandle') && saving == false) {
+			if ($(e.target).is('div.linkHandle') && saving == false) {
 				currentEl = $(e.target.parentNode)
 								.fadeTo(500, 0.4)
 								.addClass('draggingItem')
@@ -36,8 +36,8 @@
 				elOrigNext = currentEl.nextSibling;
 				pointerPosition = e.pageY;
 				minTop = -currentEl.offsetTop;
-				maxTop = document.getElementById('typeContainer').offsetHeight - currentEl.offsetHeight + minTop;
-				items = $('#typesContainer div.typeItem');
+				maxTop = document.getElementById('linksContainer').offsetHeight - currentEl.offsetHeight + minTop;
+				items = $('#linksContainer div.linkItem');
 				$(document)
 					.bind('mousemove', mouseMove)
 					.bind('mouseup', mouseUp);
@@ -55,7 +55,7 @@
 					if (overlap > 0 && overlap < 1) {
 						var oldTop = minTop;
 						minTop = -this.offsetTop;
-						maxTop = document.getElementById('typesContainer').offsetHeight - currentEl.offsetHeight + minTop;
+						maxTop = document.getElementById('linksContainer').offsetHeight - currentEl.offsetHeight + minTop;
 						if (e.pageY > prevPointer) {
 							$(this).after(currentEl);
 						} else {
@@ -70,23 +70,6 @@
 			return false;
 		};
 		
-		var updateCategoriesList = function() {
-			$.ajax({
-				type: 'post',
-				url: Jobber.jobber_admin_url + 'types/',
-				data: {
-					action: 'getTypesList'
-				},
-				success: function(responseText){
-					$('#categs-nav ul').html(responseText);
-				},
-				complete: function(){
-					jobberBase.overlay.hide();
-				}
-			})
-			jobberBase.overlay.show(document.getElementById('categs-nav'));
-		};
-		
 		var mouseUp = function(e) {
 			$(document)
 				.unbind('mousemove', mouseMove)
@@ -96,23 +79,20 @@
 				.css('top', '0')
 				.removeClass('draggingItem');
 			if (currentEl.nextSibling != elOrigNext ||  currentEl.previousSibling != elOrigPrev) {
-				jobberBase.messages.add('Categories order changed. Saving ...');
+				jobberBase.messages.add('Link order changed. Saving ...');
 				saving = true;
-				jobberBase.overlay.show(document.getElementById('categoriesContainer'));
+				jobberBase.overlay.show(document.getElementById('linksContainer'));
 				var order = [];
-				$('#categoriesContainer div.categoryItem')
+				$('#linksContainer div.linkItem')
 					.each(function(nr){
 						order.push($(this).attr('rel'));
 					});
 				$.ajax({
 					type: 'post',
-					url: Jobber.jobber_admin_url + 'categories/',
+					url: Jobber.jobber_admin_url + 'links/',
 					data: {
 						action: 'saveOrder',
 						order: order.join(',')
-					},
-					success: function() {
-						//updateCategoriesList();
 					},
 					complete: function(){
 						jobberBase.overlay.hide();
@@ -126,25 +106,22 @@
 		
 		var mouseClick = function(e) {
 			var el = $(e.target).is('img')? e.target.parentNode : e.target;
-			if ($(el).is('a.deleteType')) {
-				if (confirm('Are you sure you want to delete this job type?')) {
+			if ($(el).is('a.deleteLink')) {
+				if (confirm('Are you sure you want to delete this link?')) {
 					jobberBase.overlay.show(el.parentNode.parentNode);
 					saving = true;
 					$.ajax({
 						type: 'post',
 						dataType: 'text',
-						url: Jobber.jobber_admin_url + 'types/',
+						url: Jobber.jobber_admin_url + 'links/',
 						data: {
-							action: 'deleteType',
-							id: $(el).parent().parent().attr('rel')
+							action: 'deleteLink',
+							link: $(el).parent().parent().attr('rel')
 						},
 						success: function(responseText) {
-							if(responseText == '0')
-							{
-								alert('You can\'t delete this job type because there are jobs with this type!');
-								return;
-							}
-							 else {
+							if (typeof responseText == 'string' && responseText.length > 0) {
+								alert(responseText);
+							} else {
 								$(el)
 									.parent()
 									.parent()
@@ -154,8 +131,7 @@
 											$(this).remove()
 										}
 									);
-								jobberBase.messages.add('The job type has been deleted');
-								//updateCategoriesList();
+								jobberBase.messages.add('Link has been deleted');
 							}
 						},
 						complete: function(){
@@ -166,23 +142,23 @@
 					this.blur();
 					return false;
 				}
-			} else if ($(el).is('a.saveType')) {
+			} else if ($(el).is('a.saveLink')) {
 				jobberBase.overlay.show(el.parentNode.parentNode);
 				saving = true;
 				$.ajax({
 					type: 'post',
 					dataType: 'text',
-					url: Jobber.jobber_admin_url + 'types/',
+					url: Jobber.jobber_admin_url + 'links/',
 					data: {
-						action: 'saveType',
-						id: $(el).parent().parent().attr('rel'),
+						action: 'saveLink',
+						link: $(el).parent().parent().attr('rel'),
 						name: $(el).parent().find('input:first').val(),
-						var_name: $(el).parent().find('input:last').val()
+						url: $(el).parent().find('input:eq(1)').val(),
+						title: $(el).parent().find('input:eq(2)').val()
 					},
 					success: function() {
-						jobberBase.messages.add('The job type has been saved');
+						jobberBase.messages.add('Link has been saved');
 						$(el).hide();
-						//updateCategoriesList();
 					},
 					complete: function(){
 						jobberBase.overlay.hide();
@@ -215,11 +191,11 @@
 			if (saving === true) {
 				return false;
 			}
-			categoryTemplate[4] = Jobber.jobber_admin_url;
-			categoryTemplate[8] = Jobber.jobber_admin_url;
-			var el = $('#typesContainer')
-					.append(categoryTemplate.join(''))
-					.find('div.typeItem:last')
+			linkTemplate[4] = Jobber.jobber_admin_url;
+			linkTemplate[8] = Jobber.jobber_admin_url;
+			var el = $('#linksContainer')
+					.append(linkTemplate.join(''))
+					.find('div.linkItem:last')
 						.find('input')
 							.bind('focus', inputFocus)
 							.bind('blur', inputBlur)
@@ -232,21 +208,22 @@
 			$.ajax({
 				type: 'post',
 				dataType: 'text',
-				url: Jobber.jobber_admin_url + 'types/',
+				url: document.location.href,
 				data: {
-					action: 'newType'
+					action: 'newLink'
 				},
 				success: function(id) {
 					$(el)
 						.attr('rel', id)
 						.find('input:first')
-							.attr('name', 'name[' + id + ']')
+							.attr('name', 'name' + id)
 							.end()
-						.find('input:last')
-							.attr('name', 'var_name[' + id + ']')
-							.end();
-						
-					//updateCategoriesList();
+						.find('input:eq(1)')
+					        .attr('name', 'url' + id )
+					        .end()
+					    .find('input:eq(2)')
+					        .attr('name', 'title' + id )
+					        .end()
 				},
 				complete: function(){
 					jobberBase.overlay.hide();
@@ -257,9 +234,9 @@
 		};
 		return {
 			init: function(){
-				if (document.getElementById('typesContainer')) {
-					$('#typesContainer')
-						
+				if (document.getElementById('linksContainer')) {
+					$('#linksContainer')
+						.bind('mousedown', mouseDown)
 						.bind('click', mouseClick)
 						.find('input')
 							.bind('focus', inputFocus)
@@ -273,5 +250,5 @@
 			}
 		};
 	}();
-	jobberBase.register(jobberBase.types.init, 'init');
+	jobberBase.register(jobberBase.links.init, 'init');
 })();

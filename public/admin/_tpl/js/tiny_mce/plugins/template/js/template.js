@@ -11,7 +11,7 @@ var TemplateDialog = {
 	init : function() {
 		var ed = tinyMCEPopup.editor, tsrc, sel, x, u;
 
- 		tsrc = ed.getParam("template_templates", false);
+ 		tsrc = ed.getParam("template_tpl", false);
  		sel = document.getElementById('tpath');
 
 		// Setup external template list

@@ -1,5 +1,5 @@
 <?php
-	require_once '_includes/class.CityDAO.php';
+	require_once '_lib/class.CityDAO.php';
 	
 	class CitiesPage
 	{

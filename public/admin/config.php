@@ -9,13 +9,13 @@
  */
 
 	require_once '../_config/config.php';
-	require_once '_includes/class.Types.php';
+	require_once '_lib/class.Types.php';
 	
 	$currentDirectoryNames = explode('/', dirname($_SERVER['PHP_SELF']));
 	
 	define('CURRENT_DIRECTORY', end($currentDirectoryNames));
-	$smarty->template_dir = APP_PATH . CURRENT_DIRECTORY. '/_templates/';
-	$smarty->compile_dir = APP_PATH . CURRENT_DIRECTORY. '/_templates/_cache/';
+	$smarty->template_dir = APP_PATH . CURRENT_DIRECTORY. '/_tpl/';
+	$smarty->compile_dir = APP_PATH . CURRENT_DIRECTORY. '/_tpl/_cache/';
 
 	define('BASE_URL_ORIG', APP_URL);
 	define('BASE_URL', APP_URL . 'admin/');

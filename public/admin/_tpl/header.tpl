@@ -7,28 +7,28 @@
 	<meta name="description" content="{$meta_description}" />
 	<meta name="keywords" content="{$meta_keywords}" />
 	<link rel="shortcut icon" href="{$BASE_URL}favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="{$BASE_URL_ADMIN}_templates/css/screen.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="{$BASE_URL_ADMIN}_templates/css/jquery.fancybox-1.2.6.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{$BASE_URL_ADMIN}_tpl/css/screen.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{$BASE_URL_ADMIN}_tpl/css/jquery.fancybox-1.2.6.css" type="text/css" media="screen" />
  
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
  
-	<script src="{$BASE_URL_ADMIN}_templates/js/jquery.bgiframe.min.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/jquery.validate.min.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/functions.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/main.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/categories.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/hoverIntent.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/links.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/messages.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/overlay.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/superfish.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/supersubs.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/types.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/jquery.fancybox-1.2.6.pack.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/jquery.easing.1.3.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/jquery.bgiframe.min.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/functions.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/main.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/categories.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/hoverIntent.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/links.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/messages.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/overlay.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/superfish.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/supersubs.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/types.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/jquery.fancybox-1.2.6.pack.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/jquery.easing.1.3.js" type="text/javascript"></script>
 	{if $editor}
-	<script src="{$BASE_URL_ADMIN}_templates/js/tiny_mce/tiny_mce.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_templates/js/editor.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/editor.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	{literal}
 	 tinyMCE_GZ.init({
@@ -45,8 +45,8 @@
 	 Jobber.I18n = {$translationsJson};
 	</script>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="{$BASE_URL_ADMIN}_templates/css/superfish.css" /> 
-	<link rel="stylesheet" type="text/css" media="screen" href="{$BASE_URL_ADMIN}_templates/css/superfish-navbar.css" />  
+	<link rel="stylesheet" type="text/css" media="screen" href="{$BASE_URL_ADMIN}_tpl/css/superfish.css" /> 
+	<link rel="stylesheet" type="text/css" media="screen" href="{$BASE_URL_ADMIN}_tpl/css/superfish-navbar.css" />  
 	{literal}
 	<script type="text/javascript"> 
 	 $(document).ready(function(){ 
@@ -114,6 +114,6 @@
 	 <li class="right bold"><a href="{$BASE_URL_ADMIN}logout/">Logout</a></li>
 	 </ul>
 	
-	<a style="float: right" class="iframe" href="http://www.evertsemeijn.nl/help/administration/{if $CURRENT_PAGE == ''}home/{/if}{if $CURRENT_PAGE == 'edit-post'}post-a-job/{/if}{if $CURRENT_PAGE == 'pages'}pages/{/if}{if $CURRENT_PAGE == 'categories'}categories/{/if}{if $CURRENT_PAGE == 'jobs'}categories/{/if}{if $CURRENT_PAGE == 'stats'}stats/{/if}{if $CURRENT_PAGE == 'cities'}cities/{/if}{if $CURRENT_PAGE == 'types'}job-types/{/if}{if $CURRENT_PAGE == 'links'}links/{/if}{if $CURRENT_PAGE == 'settings'}settings/{/if}{if $CURRENT_PAGE == 'password'}change-password/{/if}"><img src="{$BASE_URL_ADMIN}_templates/img/help.png" /></a>
+	<a style="float: right" class="iframe" href="http://www.evertsemeijn.nl/help/administration/{if $CURRENT_PAGE == ''}home/{/if}{if $CURRENT_PAGE == 'edit-post'}post-a-job/{/if}{if $CURRENT_PAGE == 'pages'}pages/{/if}{if $CURRENT_PAGE == 'categories'}categories/{/if}{if $CURRENT_PAGE == 'jobs'}categories/{/if}{if $CURRENT_PAGE == 'stats'}stats/{/if}{if $CURRENT_PAGE == 'cities'}cities/{/if}{if $CURRENT_PAGE == 'types'}job-types/{/if}{if $CURRENT_PAGE == 'links'}links/{/if}{if $CURRENT_PAGE == 'settings'}settings/{/if}{if $CURRENT_PAGE == 'password'}change-password/{/if}"><img src="{$BASE_URL_ADMIN}_tpl/img/help.png" /></a>
 	
 	{/if}

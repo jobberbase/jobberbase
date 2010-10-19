@@ -5,7 +5,7 @@
 		<div class="list">
 		{section name=tmp loop=$settings_categories}
 			<div class="row {cycle values='odd,even'}">
-				<a class="right" href="{$BASE_URL_ADMIN}settings/{$settings_categories[tmp].var_name}/" title="Edit {$settings_categories[tmp].name}"><img src="{$BASE_URL_ADMIN}_templates/img/pencil.png" alt="Edit" /></a>
+				<a class="right" href="{$BASE_URL_ADMIN}settings/{$settings_categories[tmp].var_name}/" title="Edit {$settings_categories[tmp].name}"><img src="{$BASE_URL_ADMIN}_tpl/img/pencil.png" alt="Edit" /></a>
 				<h4 class="bold mb05">{$settings_categories[tmp].name}</h4>
 				<div>{if $settings_categories[tmp].description != ''}{$settings_categories[tmp].description}{/if}</div>
 			</div>

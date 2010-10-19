@@ -7,7 +7,7 @@
 				This job ad has been posted over 40 days ago...
 			</div>
 		{/if}
-			<h2><img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" /> {$job.title}</h2>
+			<h2><img src="{$BASE_URL}_tpl/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" /> {$job.title}</h2>
 			<p>
 				<span class="light">at</span>
 				{if $job.url && $job.url != 'http://'}
