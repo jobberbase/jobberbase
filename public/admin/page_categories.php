@@ -1,8 +1,11 @@
 <?php
+global $cache;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 	switch ($_POST['action']) {
 		case 'saveOrder':
+			$cache->removeCache(CACHE_CATEGORIES);
+			
 			$categories = explode(',', $_POST['order']);
 			$values = '';
 			foreach ($categories as $key => $category) {
@@ -22,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 			');
 			break;
 		case 'newCategory':
+			$cache->removeCache(CACHE_CATEGORIES);
+			
 			$result = $db->query('
 				SELECT 
 					category_order 
@@ -58,6 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 			echo $last['id'];
 			break;
 		case 'deleteCategory':
+			$cache->removeCache(CACHE_CATEGORIES);
+			
 			$result = $db -> query('
 				SELECT 
 					COUNT(id) as total 
@@ -87,6 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
 			echo $html;
 			break;
 		case 'saveCategory':
+			$cache->removeCache(CACHE_CATEGORIES);
+			
 			$result = $db -> query('
                 UPDATE  
                     '.DB_PREFIX.'categories 

@@ -7,7 +7,7 @@
 <div id="container_login">
 	<div class="block">
 	<form id="login" method="post" action="{$BASE_URL_ADMIN}">
-		<h3>Log into Jobberbase</h3>
+		<h3>Please login first</h3>
 		<div class="block_inner">
 			<div class="group{if $errors.username} error{/if}">
 				<input type="text" name="username" id="username" size="20" value="{$smarty.post.username}" />

@@ -41,7 +41,8 @@
 	{
 		$j = new Job($job_id);
 
-		$filename = time() . '_' . $_FILES['apply_cv']['name'];
+		$f = pathinfo($_FILES['apply_cv']['name']);
+		$filename = md5(time() . '_' . $_FILES['apply_cv']['name'] . uniqid()) . '.' . $f['extension'];
 		if (move_uploaded_file($_FILES['apply_cv']['tmp_name'], FILE_UPLOAD_DIR . $filename))
 		{
 			$attachment = $filename;
@@ -61,7 +62,7 @@
 		              'attachment_filename' => $attachment,
 		              'job_id' => $job_id);
 								
-		$app = new JobApplication($job_id);
+		$app = new JobApplication($job_id, $data);
 		
 		$applicationTimeoutDisabled = MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP <= 0;
 		$applicationTimeoutPassed = false;

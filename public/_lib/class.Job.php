@@ -738,8 +738,10 @@ class Job
  
 		$pages = '';
 		$id_array = '';
-		$max_loop = SEARCH_RESULTS_PER_PAGE;
-		$max_visible_pages = SEARCH_AMOUNT_PAGES;
+		//$max_loop = SEARCH_RESULTS_PER_PAGE;
+		//$max_visible_pages = SEARCH_AMOUNT_PAGES;
+		$max_loop = JOBS_PER_PAGE;
+		$max_visible_pages = 10;
  
 		while ($row = $result->fetch_assoc()) $id_array[] = $row['id'];
  

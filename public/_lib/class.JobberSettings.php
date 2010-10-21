@@ -71,8 +71,9 @@ class JobberSettings
 				'input_options' => $input_options,
 				'validation' => $validation,
 				'value' => stripslashes($value), 
-				'category_id' => $row['category_id'] 
-				);
+				'category_id' => $row['category_id'],
+				'extradata' => $row['extradata']
+			);
 		}
 		
 		$this->mSettings = $settings;
@@ -137,25 +138,36 @@ class JobberSettings
 		
 		if (!empty($setting_names))
 		{
-			$i = 0; while($i < count($setting_names))
+			$count = count($setting_names);
+			$i = 0; 
+			while($i < $count)
 			{
-				if (!empty($settings[$setting_names[$i]]) && $advanced == true) 
+				if (!empty($settings[$setting_names[$i]]) && $advanced == true)
+				{
 					$settings_array[$setting_names[$i]] = $settings[$setting_names[$i]];
+				}
 				elseif (!empty($settings[$setting_names[$i]]))
+				{
 					$settings_array[$setting_names[$i]] = $settings[$setting_names[$i]]['value'];
+				}
+					
 				$i++;
 			}
 			return $settings_array;
 		}
-		elseif ($advanced == false)
+		elseif ($advanced === false)
 		{
 			foreach ($settings as $setting)
 			{
-				$settings_array[$setting['name']] = $setting['value'];
+				$settings_array[$setting['name']] = (!empty($setting['extradata']) && $setting['name'] == 'site_logo') ? $setting['extradata'] : $setting['value'];
 			}
+
 			return $settings_array;
 		}
-		else return $settings;
+		else 
+		{
+			return $settings;
+		}
 	}
 	
 	public function GetSettingsByCategory($category_id, $advanced = false)
@@ -177,20 +189,35 @@ class JobberSettings
 
 	public function UpdateSettings($settings_array)
 	{
-		global $db;
+		global $db, $cache;
+		
+		// remove cache
+        $cache->removeCache(CACHE_SITE_SETTINGS);
 		
 		$settings = $this->mSettings; $i = 0;
+		$count = count($settings_array);
 		
-		while($i < count($settings_array))
+		while($i < $count)
 		{
 			$value = $settings_array[$i]['value'];
 			$name = $settings_array[$i]['name'];
+			$extradata = $settings_array[$i]['extradata'];
+			$extradata_q = '';
 			
-			if ($value != $settings[$name]['value'])
+			if (!empty($extradata))
 			{
-				$sql = 'UPDATE '.DB_PREFIX.'settings SET value = "' . $value . '" WHERE name = "' . $name . '"';
+				$extradata_q = ', extradata = "' . $extradata . '"';
+			}
+			
+			
+			if ($value != $settings[$name]['value'] || !empty($extradata_q))
+			{
+				$sql = 'UPDATE '.DB_PREFIX.'settings SET value = "' . $value . '"' . $extradata_q . ' WHERE name = "' . $name . '"';
+				$extradata = '';
+				$extradata_q = null;
 				$db->query($sql);
 			}
+			
 			$i++;
 		}
 	}

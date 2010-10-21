@@ -77,6 +77,16 @@
 			$flag = 1;
 			break;
 
+		case 'applicants':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
+			require_once 'page_applicants.php';
+			$flag = 1;
+			break;
+
 		case 'activate':
 			if(!isset($_SESSION['AdminId']))
 			{

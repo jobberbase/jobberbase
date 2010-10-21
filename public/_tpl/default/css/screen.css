@@ -195,19 +195,11 @@ div#box .addJob
 	top:28px;
 }
 
-div#box .addJob a.add
-{
-	background:url(../img/bt-post.png) no-repeat 0 0;
-	display:block;
-	height:47px;
-	text-indent:-1000em;
-	width:182px;
-}
+.postJobBtn{background:url(../img/bt-post2.png) no-repeat right 0; float:left; height:47px; padding-right:10px; text-decoration:none;}
+.postJobBtn span{background:url(../img/bt-post2.png) no-repeat 0 0; float:left; display:block; font-size:16px; color:#fff; text-transform:uppercase; font-weight:bold; height:45px; padding:2px 20px 0 30px; line-height:45px; cursor:pointer;}
+.postJobBtn:hover{background-position:right -47px; text-decoration:none;}
+.postJobBtn:hover span{background-position:0 -47px;}
 
-div#box .addJob a.add:hover
-{
-	background:url(../img/bt-post.png) no-repeat -182px 0;
-}
 
 #content
 {

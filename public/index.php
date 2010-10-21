@@ -32,7 +32,7 @@
 	
 	$meta_description = '';
 	$meta_keywords = '';
-	
+
 	if(!isset($_SERVER['HTTP_REFERER'])) 
 	{
 	   $_SERVER['HTTP_REFERER'] = '';

@@ -3,15 +3,19 @@
 	{if $settings_categories && $settings_form == ''}
 		<h2 id="settings">Settings Overview</h2>
 		<div class="list">
-		{section name=tmp loop=$settings_categories}
+			{section name=tmp loop=$settings_categories}
+				<div class="row {cycle values='odd,even'}">
+					<a class="right" href="{$BASE_URL_ADMIN}settings/{$settings_categories[tmp].var_name}/" title="Edit {$settings_categories[tmp].name}"><img src="{$BASE_URL_ADMIN}_tpl/img/pencil.png" alt="Edit" /></a>
+					<h4 class="bold mb05"><a href="{$BASE_URL_ADMIN}settings/{$settings_categories[tmp].var_name}/">{$settings_categories[tmp].name}</a></h4>
+					<div>{if $settings_categories[tmp].description != ''}{$settings_categories[tmp].description}{/if}</div>
+				</div>
+			{/section}
 			<div class="row {cycle values='odd,even'}">
-				<a class="right" href="{$BASE_URL_ADMIN}settings/{$settings_categories[tmp].var_name}/" title="Edit {$settings_categories[tmp].name}"><img src="{$BASE_URL_ADMIN}_tpl/img/pencil.png" alt="Edit" /></a>
-				<h4 class="bold mb05">{$settings_categories[tmp].name}</h4>
-				<div>{if $settings_categories[tmp].description != ''}{$settings_categories[tmp].description}{/if}</div>
+				<a class="right" href="{$BASE_URL_ADMIN}password/" title="Change password"><img src="{$BASE_URL_ADMIN}_tpl/img/pencil.png" alt="Edit" /></a>
+				<h4 class="bold mb05"><a href="{$BASE_URL_ADMIN}password/">Change your password</a></h4>
+				<div>You can change your admin password here.</div>
 			</div>
-		{/section}
 		</div>
-
 	{/if}
 
 	{if $settings_form != ''}
@@ -27,7 +31,7 @@
 			</div>
 		{/if}
 		
-		<form id="publish_form" method="post" action="{$BASE_URL_ADMIN}settings/{$CURRENT_ID}/">
+		<form id="publish_form" method="post" enctype="multipart/form-data" action="{$BASE_URL_ADMIN}settings/{$CURRENT_ID}/">
 			<div class="list settings">
 			{foreach from=$settings_form item=setting}
 				{assign var=name value=$setting.name}
@@ -37,9 +41,12 @@
 				{assign var=data_type value=$setting.data_type}
 				{assign var=input_type value=$setting.input_type}
 				{assign var=input_options value=$setting.input_options}
+				{assign var=extradata value=$setting.extradata}
 				
 				<div class="row {cycle values='odd,even'}{if $errors.$name != ''} error{/if}">
-					<span>{$title}:</span>
+					<table width="100%"><tr>
+					<td width="180" valign="top"><strong>{$title}:</strong></td>
+					<td>
 					{if $input_type == 'text_area'}
 						<textarea class="settingsform_text_area{if $errors.$name != ''} error{/if}" name="{$name}" cols="40" rows="2">{$value|escape}</textarea>
 					{elseif $input_type == 'radiobutton'}
@@ -62,12 +69,17 @@
 						{section name=tmp2 loop=$input_options}
 							<input type="checkbox" name="{$name}[]" value="{$input_options[tmp2]}" {if in_array($input_options[tmp2], $value)}checked="checked"{/if} />{$input_options[tmp2]}<br />
 						{/section}
+					{elseif $input_type == 'file'}
+						Current logo:<br />
+						<img src="{$BASE_URL}img.php?q={$name}" alt="" /><br /><br />
+						<input type="file" name="{$name}[]" />
 					{else}
 						<input class="settingsform_text_field{if $errors.$name != ''} error{/if}" type="text" name="{$name}" value="{$value|escape}" size="42" />
 					{/if}
-							{$description}
-					</div>
-				{/foreach}
+					{$description}
+					</td></tr></table>
+				</div>
+			{/foreach}
 			</div>
 			<div class="group_submit">
 				<input type="hidden" name="action" value="update_settings" />

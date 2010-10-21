@@ -21,8 +21,13 @@
 		<div class="time">{$job.created_on}</div>
 
 		<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-{$job.type_var_name}.png" alt="{$job.type_name}" />
-		<a href="{$BASE_URL_ADMIN}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="light">at</span> {$job.company}{if $job.is_location_anywhere}, {$translations.jobs.location_anywhere}{else} <span class="light">in</span> {$job.location}{/if}
-		<div>viewed {$job.views_count} times{if $statisticalData[$job.id]}, {$statisticalData[$job.id].numberOfApplications} applicants, last application on {$statisticalData[$job.id].lastApplicationOn}{/if}{if $spamReportStatisticalData[$job.id]},<span class="spam"> reported as spam {$spamReportStatisticalData[$job.id].numberOfSpamReports} times, last time on {$spamReportStatisticalData[$job.id].lastSpamReportOn}</span>{/if}</div>
+		<strong><a href="{$BASE_URL_ADMIN}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a></strong> 
+		<span class="light">at</span> {$job.company}{if $job.is_location_anywhere}, {$translations.jobs.location_anywhere}{else} <span class="light">in</span> {$job.location}{/if}
+		<div>
+			viewed <strong>{$job.views_count} times</strong>{if $statisticalData[$job.id]}, <strong>{$statisticalData[$job.id].numberOfApplications} applicants</strong>, 
+			last application on <strong>{$statisticalData[$job.id].lastApplicationOn}</strong>{/if}{if $spamReportStatisticalData[$job.id]},
+			<span class="spam"> reported as spam <strong>{$spamReportStatisticalData[$job.id].numberOfSpamReports} times</strong>, 
+				last time on <strong>{$spamReportStatisticalData[$job.id].lastSpamReportOn}</strong></span>{/if}</div>
 	</div>
 {/foreach}
 </div>

@@ -10,8 +10,11 @@
 		$smarty->assign('category_name', $jobber_settings->GetSettingsCategoryNameById($settings_category_id));
 		$smarty->assign('settings_form', $settings_form);
 	}
-	else $smarty->assign('settings_categories', $jobber_settings->GetSettingsCategories());
-	
+	else 
+	{
+		$smarty->assign('settings_categories', $jobber_settings->GetSettingsCategories());
+	}
+
 	// Process a form (if given) to save the settings
 	if (!empty($_POST))
 	{
@@ -19,27 +22,47 @@
 		
 		$fv = new FormValidator();
 		$setting_array = array();
-		
+
 		// Looping all given fields and values
 		foreach ($settings_form as $setting)
 		{
-			// If field value is an array, convert it to a string for DB storage
-			if (is_array($GLOBALS[$setting['name']]))
+			// if a file was uploaded for this setting, add it in the db (extradata field)
+			$sn = $setting['name'];
+			if (isset($_FILES) && isset($_FILES[$sn]))
 			{
-				$a = 0; $new_value = '';
-				while($a < count($GLOBALS[$setting['name']]))
+				$fp = fopen($_FILES[$sn]['tmp_name'][0], 'r');
+				$extradata = fread($fp, filesize($_FILES[$sn]['tmp_name'][0]));
+				$extradata = addslashes($extradata);
+				fclose($fp);
+			}
+
+			// If field value is an array, convert it to a string for DB storage
+			if (isset($GLOBALS[$setting['name']]) && is_array($GLOBALS[$setting['name']]))
+			{
+				$a = 0; 
+				$new_value = '';
+				$count = count($GLOBALS[$setting['name']]);
+				while ($a < $count)
 				{
-					if ($GLOBALS[$setting['name']][$a] != '_hidden' && $new_value == '') $new_value .= $GLOBALS[$setting['name']][$a];
-					elseif ($GLOBALS[$setting['name']][$a] != '_hidden' ) $new_value .= '|' . $GLOBALS[$setting['name']][$a];
+					if ($GLOBALS[$setting['name']][$a] != '_hidden' && $new_value == '') 
+					{
+						$new_value .= $GLOBALS[$setting['name']][$a];
+					}
+					elseif ($GLOBALS[$setting['name']][$a] != '_hidden' ) 
+					{
+						$new_value .= '|' . $GLOBALS[$setting['name']][$a];
+					}
 					$a++;
 				}
+				
 				$GLOBALS[$setting['name']] = $new_value;
 			}
 			
 			// Validate the fields if needed
 			if (!empty($setting['validation']))
 			{
-				$a = 0; while($a < count($setting['validation']))
+				$count = count($setting['validation']);
+				$a = 0; while($a < $count)
 				{
 					if ($setting['validation'][$a] == 'not_empty')
 						$fv->isEmpty($setting['name']);
@@ -52,9 +75,13 @@
 					$a++;
 				}
 			}
-			if ($setting['data_type'] == 'integer') $fv->isNumber($setting['name']);
+			if ($setting['data_type'] == 'integer') 
+			{
+				$fv->isNumber($setting['name']);
+			}
 
-			$setting_array[] = array('name'=> $setting['name'], 'value' => $GLOBALS[$setting['name']]);
+			$setting_array[] = array('name'=> $setting['name'], 'value' => $GLOBALS[$setting['name']], 'extradata' => isset($extradata) ? $extradata : '');
+			$extradata = '';
 		}
 		
 		if ($fv->isError())
@@ -81,6 +108,7 @@
 		}
 		else
 		{
+			//print_r($setting_array);exit;
 			$jobber_settings->UpdateSettings($setting_array);
 			redirect_to(BASE_URL.'settings/'. $id . '/');
 		}

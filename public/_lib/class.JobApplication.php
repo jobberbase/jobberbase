@@ -12,19 +12,31 @@
 class JobApplication
 {
 	var $mJobId = false;
+    var $mData = array();
 	
-	function __construct($job_id)
+	public function __construct($id, $data = array())
 	{ 
-		$this->mJobId = $job_id;
+		$this->mJobId = $id;
+        $this->mData = $data;
 	}
 	
 	public function Apply($ip)
 	{
 		global $db;
 		
-		$sql = 'INSERT INTO '.DB_PREFIX.'job_applications (job_id, created_on, ip)
-		                    VALUES (' . $this->mJobId . ', NOW(), "' . $ip . '")';
+		$sql = 'INSERT INTO '.DB_PREFIX.'job_applications (job_id, created_on, ip, name, email, message, cv_path)
+		                    VALUES (' . $this->mJobId . ', NOW(), "' . $ip . '",
+                                "' . $this->mData['apply_name'] . '", "' . $this->mData['apply_email'] . '", 
+                                "' . $this->mData['apply_msg'] . '", "' . $this->mData['attachment_filename'] . '")';
 		$db->query($sql);
+	}
+	
+	public function getAllForJob()
+	{
+		global $db;
+		$sql = 'SELECT * FROM '.DB_PREFIX.'job_applications WHERE job_id = ' . $this->mJobId;
+		$result = $db->QueryArray($sql);
+		return $result;
 	}
 	
 	public function HasApplyTimeoutPassed($ip)

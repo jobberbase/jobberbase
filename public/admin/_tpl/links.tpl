@@ -8,27 +8,27 @@
 		<div class="list">
 			<div class="row odd">
 				<a class="right" href="{$BASE_URL_ADMIN}links/primary/" title="Edit main menu"><img src="{$BASE_URL_ADMIN}_tpl/img/pencil.png" alt="Edit" /></a>
-				<h4 class="bold mb05">Primary menu</h4>
+				<h4 class="bold mb05"><a href="{$BASE_URL_ADMIN}links/primary/">Primary menu</a></h4>
 				<div>The primary menu for your Jobberbase theme. By default this menu is located at the top.</div>
 			</div>
 			<div class="row even">
 				<a class="right" href="{$BASE_URL_ADMIN}links/secondary/" title="Edit secondary menu"><img src="{$BASE_URL_ADMIN}_tpl/img/pencil.png" alt="Edit" /></a>
-				<h4 class="bold mb05">Secondary menu</h4>
+				<h4 class="bold mb05"><a href="{$BASE_URL_ADMIN}links/secondary/">Secondary menu</a></h4>
 				<div>The secondary menu for your Jobberbase theme. By default this menu is located in the sidebar</div>
 			</div>
 			<div class="row odd">
 				<a class="right" href="{$BASE_URL_ADMIN}links/footer1/" title="Edit footer menu 1"><img src="{$BASE_URL_ADMIN}_tpl/img/pencil.png" alt="Edit" /></a>
-				<h4 class="bold mb05">Footer menu 1</h4>
+				<h4 class="bold mb05"><a href="{$BASE_URL_ADMIN}links/footer1/">Footer menu 1</a></h4>
 				<div>The default footer holds 3 columns. This is for the first column</div>
 			</div>
 			<div class="row even">
 				<a class="right" href="{$BASE_URL_ADMIN}links/footer2/" title="Edit footer menu 2"><img src="{$BASE_URL_ADMIN}_tpl/img/pencil.png" alt="Edit" /></a>
-				<h4 class="bold mb05">Footer menu 2</h4>
+				<h4 class="bold mb05"><a href="{$BASE_URL_ADMIN}links/footer2/">Footer menu 2</a></h4>
 				<div>The default footer holds 3 columns. This is for the second column</div>
 			</div>
 			<div class="row odd">
 				<a class="right" href="{$BASE_URL_ADMIN}links/footer3/" title="Edit footer menu 3"><img src="{$BASE_URL_ADMIN}_tpl/img/pencil.png" alt="Edit" /></a>
-				<h4 class="bold mb05">Footer menu 3</h4>
+				<h4 class="bold mb05"><a href="{$BASE_URL_ADMIN}links/footer3/">Footer menu 3</a></h4>
 				<div>The default footer holds 3 columns. This is for the third column</div>
 			</div>
 		</div>

@@ -1,6 +1,11 @@
 <?php
+global $cache
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) 
+{
+	// clear cache types
+    $cache->removeCache(CACHE_TYPES);
+	
 	switch ($_POST['action']) {
 	
 		case 'newType':
