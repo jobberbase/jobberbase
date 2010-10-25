@@ -27,7 +27,6 @@
 
 	// Function and classes includes
 	require_once APP_PATH . '_lib/class.Translator.php';
-	require_once APP_PATH . '_lib/class.EmailTranslator.php';
 	require_once APP_PATH . '_lib/function.validate_email.php';
 	require_once APP_PATH . '_lib/function.redirect_to.php';
 	require_once APP_PATH . '_lib/function.printr.php';

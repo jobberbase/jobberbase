@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emails>
+	<SendToFriend>
+		<subject>
+				Te estoy recomendando un anuncio de trabajo
+		</subject>
+		<message>
+			<![CDATA[
+				{BR}{BR}---{BR}Usted ha recibido este e-mail de {YOUR_EMAIL}
+			]]>
+		</message>
+	</SendToFriend>
+	
+	<ApplyOnline>
+		<subject>
+				[ {SITE_NAME} ] Deseo solicitar {JOB_TITLE}
+		</subject>
+		<message>
+			<![CDATA[
+				{BR}{BR}---{BR}Este correo electrónico es una solicitud que se envía desde {JOB_URL}
+			]]>
+		</message>
+	</ApplyOnline>
+	
+	<PublishToAdmin>
+		<newPostSubject>
+				[ {SITE_NAME}  ] Empleo Nuevo: {JOB_TITLE}
+		</newPostSubject>
+		<editedPostSubject>
+				[ {SITE_NAME}  ] Empleo Editado: {JOB_TITLE}
+		</editedPostSubject>
+		<message>
+			<![CDATA[
+				{JOB_URL}
+				{BR} {JOB_TITLE} en {JOB_COMPANY}
+				{BR} {JOB_DESCRIPTION}
+				{BR} URL: {JOB_URL}
+				{BR}---{BR} Publicado por: {JOB_POSTER_EMAIL}
+				{BR}---{BR} Editar: {JOB_EDIT_URL}
+				{BR} Desactivar: {JOB_DEACTIVATE_URL}
+				{BR}{BR}---{BR} IP: {JOB_POSTER_IP}
+				{BR} Fecha: {JOB_POST_DATE}
+			]]>
+		</message>
+		<messageFirstPost>
+			<![CDATA[
+				Aviso activado {JOB_ACTIVATE_URL}{BR}
+			]]>
+		</messageFirstPost>
+	</PublishToAdmin>
+	
+	<PublishPendingToUser>
+		<subject>
+				su anuncio en{SITE_NAME}
+		</subject>
+		<message>
+			<![CDATA[
+				Hola! :){BR}{BR}
+				Pedimos disculpas por las molestias, pero ya que esta es la primera vez que solicita con esta dirección de correo electrónico, es necesario verificarla manualmente.
+				{BR}Gracias por su paciencia, el anuncio debe publicarse lo antes posible. Le enviaremos un e-mail cuando eso suceda.
+				{BR}{BR}A partir de ahora, todos los anuncios que enlace con esta dirección de correo electrónico se publicará al instante.
+				{BR}{BR}---{BR}¡Gracias por usar nuestros servicios!
+				{BR}El equipo de
+			]]>
+		</message>
+	</PublishPendingToUser>
+	
+	<PublishToUser>
+		<subject>
+				Su aviso en {SITE_NAME} fue publicado 
+		</subject>
+		<message>
+			<![CDATA[
+				Hola! :){BR}{BR}
+				Su aviso fue publicado y esta disponible en {JOB_URL}
+				{BR}{BR}---{BR}Editarlo: {JOB_EDIT_URL}
+				{BR}Desactivarlo: {JOB_DEACTIVATE_URL}
+				{BR}{BR}---{BR}¡Gracias por usar nuestros servicios!
+				{BR} El equipo de {SITE_NAME}
+			]]>
+		</message>
+	</PublishToUser>
+	
+	<ReportSpam>
+		<subject>
+				 [SPAM en {SITE_NAME}] {JOB_TITLE}
+		</subject>
+		<message>
+			<![CDATA[
+				el siguiente aviso fue reportado como falso o spam: {BR}---{BR}{BR}
+				{JOB_URL}
+				{BR}{BR} {JOB_TITLE} en {JOB_COMPANY}
+				{BR}{BR} {JOB_DESCRIPTION}
+				{BR}{BR}---{BR} Publicado por: {JOB_POSTER_EMAIL}
+				{BR}---{BR}Editar: {JOB_EDIT_URL}
+				{BR} Desactivar: {JOB_DEACTIVATE_URL}
+				{BR}---{BR}IP: {JOB_POSTER_IP}
+				{BR} Fecha: {JOB_POST_DATE}
+			]]>
+		</message>
+	</ReportSpam>
+	
+	<Contact>
+		<subject>
+				 [{SITE_NAME}] contacto
+		</subject>
+		<message>
+			<![CDATA[
+				{BR}{BR}---{BR} Enviado por: {SENDER_NAME} <{SENDER_EMAIL}>
+				{BR} IP: {SENDER_IP}
+				{BR} Fecha: {SEND_DATE}
+			]]>
+		</message>
+	</Contact>
+</emails>

@@ -47,7 +47,14 @@
 					{foreach item=tr_item from=$tr_section.items}
 						<tr>
 							<td width="230" valign="top"><strong>{$tr_item.item}:</strong></td>
-							<td><input type="text" value="{$tr_item.value}" size="80" /> <a href="#" title="Delete this item" class="translation-item-delete" rel="{$tr_item.id}"><img src="{$BASE_URL_ADMIN}_tpl/img/bin.png" alt="Delete" /></a></td>
+							<td>
+								{if $tr_item.field_type == 'textarea'}
+								<textarea cols="68" rows="10" rel="{$tr_item.id}">{$tr_item.value}</textarea>
+								{else}
+								<input type="text" value="{$tr_item.value}" size="80" rel="{$tr_item.id}" /> 
+								{/if}
+								<a href="#" title="Delete this item" class="translation-item-delete" rel="{$tr_item.id}"><img src="{$BASE_URL_ADMIN}_tpl/img/bin.png" alt="Delete" /></a>
+							</td>
 						</tr>
 					{/foreach}
 					</table>

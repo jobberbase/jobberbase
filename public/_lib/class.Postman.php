@@ -9,32 +9,55 @@
  * Postman class is a generic class that handles all e-mail operations
  */
 
-class Postman
+class Postman extends Translator
 {
-	private $emailTranslator;
-	
-	function __construct()
-	{ 
-		$this->emailTranslator = new EmailTranslator(LANG_CODE);
+	public function __construct()
+	{
+		parent::__construct(LANG_CODE);
 	}
+	
+	private function getEmailData($section)
+	{
+		$e = $this->translations[$section];
+		
+		$arguments = func_get_args();
+		if (isset($arguments[1]) && is_array($arguments[1]))
+		{
+			$args = $arguments[1];
+			
+			foreach ($args as $search_for => $replace_with)
+			{
+				$subject = str_replace('{' . $search_for . '}', $replace_with, $e['subject']);
+				$message = str_replace('{' . $search_for . '}', $replace_with, $e['message']);
+			}
+		}
+		
+		return array('subject' => $subject, 'message' => $message);
+	}
+	
+	
 
 	// Send a job post to a friend
 	public function MailSendToFriend($friend_email, $my_email)
 	{
-		$subject = $this->emailTranslator->GetSendToFriendSubject();
-		$msg = $_SERVER['HTTP_REFERER'];
-						
-		$msg .= $this->emailTranslator->GetSendToFriendMsg($my_email);
+		$mailer = $this->getConfiguredMailer();
+		
+		$replace = array(
+			'YOUR_EMAIL' => $my_email
+		);
+		$email_data = $this->getEmailData('email_SendToFriend', $replace);
+	
+		$subject = $email_data['subject'];
+		$msg = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'n/a') . "\n" . $email_data['message'];
+		
 		if ($friend_email != '' && $my_email != '' && validate_email($friend_email) && validate_email($my_email))
 		{
-			$mailer = $this->getConfiguredMailer();
-			
 			$mailer->SetFrom($my_email);
     		$mailer->AddAddress($friend_email);
 			$mailer->Subject = $subject;
 			$mailer->Body = $this->nl2br($msg);
 			$mailer->AltBody = $msg;
-			
+
 			if ($mailer->Send())
 			{
 				return true;
@@ -54,11 +77,16 @@ class Postman
 	public function MailApplyOnline($data)
 	{
 		$mailer = $this->getConfiguredMailer();
-		$subject = $this->emailTranslator->GetApplyOnlineSubject($data);
 		
-		$msg = $data['apply_msg'];
+		$replace = array(
+			'JOB_TITLE' => $data['job_title'],
+			'SITE_NAME' => SITE_NAME,
+			'JOB_URL' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''
+		);
+		$email_data = $this->getEmailData('email_ApplyOnline', $replace);
 		
-		$msg .= $this->emailTranslator->GetApplyOnlineMsg($_SERVER['HTTP_REFERER']);
+		$subject = $email_data['subject'];
+		$msg = $data['apply_msg'] . "\n" . $email_data['message'];
 		
     	$mailer->SetFrom($data['apply_email'], $data['apply_name']);
     	$mailer->AddAddress($data['company_email'], $data['company_name']);
@@ -84,80 +112,119 @@ class Postman
 	// Send mail to admin when a job is posted
 	public function MailPublishToAdmin($data)
 	{
-		$subject = $this->emailTranslator->GetPublishToAdminSubject($data);
+		$mailer = $this->getConfiguredMailer();
 		
-		$msg = '';
+		$replace = array(
+			'JOB_TITLE' => $data['title'],
+			'SITE_NAME' => SITE_NAME,
+			'JOB_URL' => BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/',
+			'JOB_TITLE' => $data['title'],
+			'JOB_COMPANY' => $data['company'],
+			'JOB_DESCRIPTION' => $data['description'],
+			'JOB_POSTER_EMAIL' => $data['poster_email'],
+			'JOB_EDIT_URL' => BASE_URL . 'post/' . $data['id'] . '/' . $data['auth'] . '/',
+			'JOB_DEACTIVATE_URL' => BASE_URL . 'deactivate/' . $data['id'] . '/' . $data['auth'] . '/',
+			'JOB_POSTER_IP' => $_SERVER['REMOTE_ADDR'],
+			'JOB_POST_DATE' => $data['created_on']
+		);
 		
 		if ($data['postRequiresModeration'])
 		{
-			$activateUrl = BASE_URL . "activate/" . $data['id'] . "/" . $data['auth'] . "/";
-			$msg = $this->emailTranslator->GetPublishToAdminExtraMsg($activateUrl);
+			$email_data = $this->getEmailData('email_PublishToAdmin_firstPost', $replace);
+		}
+		else
+		{
+			$email_data = $this->getEmailData('email_PublishToAdmin', $replace);
 		}
 		
-		$data['job_url'] = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
-		$data['edit_url'] = BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
-		$data['deactivate_url'] =  BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
-		$data['poster_ip'] = $_SERVER['REMOTE_ADDR'];
+		$subject = $email_data['subject'];
+		$msg = $email_data['message'];
 		
-		$msg .= $this->emailTranslator->GetPublishToAdminMsg($data);
-		
-		$mailer = $this->getConfiguredMailer();
-			
 		$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
     	$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
 		$mailer->Body = $this->nl2br($msg);
 		$mailer->AltBody = $msg;
 		
-		$mailer->Send();
+		if ($mailer->Send())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	// Send mail to user when posting first time (thus the post needs to be moderated)
 	public function MailPublishPendingToUser($poster_email)
 	{
-		$subject = $this->emailTranslator->GetPublishPendingToUserSubject();
-		$msg = $this->emailTranslator->GetPublishPendingToUserMsg();
+		$mailer = $this->getConfiguredMailer();
+		
+		$replace = array(
+			'SITE_NAME' => SITE_NAME
+		);
+		$email_data = $this->getEmailData('email_PublishPendingToUser', $replace);
+		
+		$subject = $email_data['subject'];
+		$msg = $email_data['message'];
 		
 		if ($poster_email != '' && validate_email($poster_email))
 		{
-			$mailer = $this->getConfiguredMailer();
-			
 			$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
 	    	$mailer->AddAddress($poster_email);
 			$mailer->Subject = $subject;
 			$mailer->Body = $this->nl2br($msg);
 			$mailer->AltBody = $msg;
 			
-			$mailer->Send();
+			if ($mailer->Send())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 	
 	// Send mail to user when a post is published
-	public function MailPublishToUser($data, $url=BASE_URL)
+	public function MailPublishToUser($data, $url = BASE_URL)
 	{	
-		$subject = $this->emailTranslator->GetPublishToUserSubject();
-				
-		$data['job_url'] = $url . URL_JOB ."/" . $data['id'] . "/" . $data['url_title'] . "/";
-		$data['edit_url'] = $url . "post/" . $data['id'] . "/" . $data['auth'] . "/";
-		$data['deactivate_url'] =   $url . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
-		$msg = $this->emailTranslator->GetPublishToUserMsg($data);
+		$mailer = $this->getConfiguredMailer();
+		
+		$replace = array(
+			'SITE_NAME' => SITE_NAME,
+			'JOB_URL' => $url . URL_JOB ."/" . $data['id'] . "/" . $data['url_title'] . "/",
+			'JOB_EDIT_URL' => $url . "post/" . $data['id'] . "/" . $data['auth'] . "/",
+			'JOB_DEACTIVATE_URL' => $url . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/"
+		);
+		$email_data = $this->getEmailData('email_PublishToUser', $replace);
+		
+		$subject = $email_data['subject'];
+		$msg = $email_data['message'];
 		
 		if ($data['poster_email'] != '' && validate_email($data['poster_email']))
 		{
-			$mailer = $this->getConfiguredMailer();
-			
 			$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
 	    	$mailer->AddAddress($data['poster_email']);
 			$mailer->Subject = $subject;
 			$mailer->Body = $this->nl2br($msg);
 			$mailer->AltBody = $msg;
 			
-			$mailer->Send();
+			if ($mailer->Send())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 	
 	// Send mail to user when a post is activated (after first-time post)
- 	public function MailPostActivatedToUser($data, $url=BASE_URL)
+ 	public function MailPostActivatedToUser($data, $url = BASE_URL)
     {
         $this->MailPublishToUser($data, $url);
     }
@@ -165,45 +232,65 @@ class Postman
 	// Send mail to admin when someone posts a new spam word
 	public function MailReportSpam($data)
 	{
-		$job_title = BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/';
-		
-		$data['job_title'] = $job_title;
-		$data['edit_url'] = BASE_URL . "post/" . $data['id'] . "/" . $data['auth'] . "/";
-		$data['deactivate_url'] = BASE_URL . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/";
-		$data['poster_ip'] = $_SERVER['REMOTE_ADDR'];
-		
-		$subject = $this->emailTranslator->GetReportSpamSubject($job_title);
-		$msg = $this->emailTranslator->GetReportSpamMsg($data);
-		
 		$mailer = $this->getConfiguredMailer();
-			
+		
+		$replace = array(
+			'JOB_TITLE' => BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/',
+			'SITE_NAME' => SITE_NAME,
+			'JOB_URL' => BASE_URL . URL_JOB .'/' . $data['id'] . '/' . $data['url_title'] . '/',
+			'JOB_TITLE' => $data['title'],
+			'JOB_COMPANY' => $data['company'],
+			'JOB_DESCRIPTION' => $data['description'],
+			'JOB_POSTER_EMAIL' => $data['poster_email'],
+			'JOB_EDIT_URL' => BASE_URL . 'post/' . $data['id'] . '/' . $data['auth'] . '/',
+			'JOB_DEACTIVATE_URL' => BASE_URL . 'deactivate/' . $data['id'] . '/' . $data['auth'] . '/',
+			'JOB_POSTER_IP' => $_SERVER['REMOTE_ADDR'],
+			'JOB_POST_DATE' => $data['created_on']
+		);
+		$email_data = $this->getEmailData('email_ReportSpam', $replace);
+		
+		$subject = $email_data['subject'];
+		$msg = $email_data['message'];
+		
 		$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
     	$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
 		$mailer->Body = $this->nl2br($msg);
 		$mailer->AltBody = $msg;
 		
-		$mailer->Send();
+		if ($mailer->Send())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public function MailContact($name, $email, $msg)
 	{
-		$data['sender_name'] = $name;
-		$data['sender_email'] = $email;
-		$data['poster_ip'] = $_SERVER['REMOTE_ADDR'];
-		$data['created_on'] = date('Y-m-d H:i');
-		$subject = $this->emailTranslator->GetContactSubject();
-		$msg .= $this->emailTranslator->GetContactMsg($data);
-		
 		$mailer = $this->getConfiguredMailer();
-			
+		
+		$replace = array(
+			'SITE_NAME' => SITE_NAME,
+			'SENDER_NAME' => $name,
+			'SENDER_EMAIL' => $email,
+			'SENDER_IP' => $_SERVER['REMOTE_ADDR'],
+			'SEND_DATE' => date('Y-m-d H:i')
+		);
+		$email_data = $this->getEmailData('email_ReportSpam', $replace);
+		
+		$subject = $email_data['subject'];
+		$msg = $email_data['message'];
+		
 		$mailer->SetFrom($email, $name);
     	$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
 		$mailer->Body = $this->nl2br($msg);
 		$mailer->AltBody = $msg;
 		
-		if($mailer->Send())
+		if ($mailer->Send())
 		{
 			return true;
 		}
@@ -212,6 +299,7 @@ class Postman
 			return false;
 		}	
 	}
+	
 
 	private function getConfiguredMailer()
 	{

@@ -93,6 +93,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 			break;
 		}
 		
+		case 'save_translation_item':
+		{
+			if ($translator->saveTranslationItem($id, $value))
+			{
+				$cache->removeCache(CACHE_TRANSLATIONS);
+				echo 1;
+			}
+			else
+			{
+				echo 0;
+			}
+			break;
+		}
+		
 		case 'delete_translation_section':
 		{
 			if ($translator->deleteTranslationSection($id))

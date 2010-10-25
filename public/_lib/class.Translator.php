@@ -10,9 +10,9 @@
 
 class Translator
 {
-	private $translations_raw = array();
-	private $translations = array();
-	private $lang_code = 'en';
+	protected $translations_raw = array();
+	protected $translations = array();
+	protected $lang_code = 'en';
 	
 	public function __construct($languageCode)
 	{
@@ -20,7 +20,10 @@ class Translator
 		
 		$this->lang_code = $languageCode;
 		
-		$sql = 'SELECT a.* AS lang_id FROM i18n_translations a, i18n_langs b WHERE b.code = "' . $languageCode . '" AND b.id = a.lang_id';
+		$sql = 'SELECT a.* AS lang_id 
+		               FROM i18n_translations a, i18n_langs b 
+		               WHERE b.code = "' . $languageCode . '" AND b.id = a.lang_id 
+		               ORDER BY a.parent_id ASC, a.item ASC';
 		$trans = $db->QueryArray($sql);
 		
 		// get raw, structured translations
@@ -32,7 +35,7 @@ class Translator
 			}
 			else
 			{
-				$this->translations_raw[$t['parent_id']]['items'][] = array('id' => $t['id'], 'item' => $t['item'], 'value' => $t['value']);
+				$this->translations_raw[$t['parent_id']]['items'][] = array('id' => $t['id'], 'item' => $t['item'], 'value' => $t['value'], 'field_type' => $t['field_type']);
 			}
 		}
 		
@@ -88,10 +91,12 @@ class Translator
 	 */
 	public function translate()
 	{
-		 $numargs = func_num_args();
-		 
-		 if ($numargs < 1)
-		 	trigger_error('Translator.translate requires at least the label as parameter');
+		$numargs = func_num_args();
+
+		if ($numargs < 1)
+		{
+			trigger_error('Translator.translate requires at least the label as parameter');
+		}
 		 else
 		 {
 		 	$arguments = func_get_args();
@@ -110,7 +115,9 @@ class Translator
 			 	return $this->replacePlaceholders($message, $placeholders);
 		 	}
 			else
-		 		return $label;
+			{
+				return $label;
+			}
 		 }
 	}
 	
@@ -210,6 +217,21 @@ class Translator
 		if ($db->affected_rows > 0)
 		{
 			return $db->insert_id;
+		}
+		
+		return false;
+	}
+	
+	public function saveTranslationItem($id, $value)
+	{
+		global $db;
+		
+		$sql = 'UPDATE i18n_translations SET value = "' . $value . '" WHERE id = ' . $id;
+		$db->Execute($sql);
+		
+		if ($db->affected_rows > 0)
+		{
+			return true;
 		}
 		
 		return false;

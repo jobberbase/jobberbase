@@ -1,8 +1,6 @@
 (function() {
 	jobberBase.translations = function() {
 		
-		var tt = function() { alert(22) };
-		
 		var addLanguage = function() {
 			if ($("#new-lang-name").val() != "" && $("#new-lang-code").val() != "")
 			{
@@ -161,6 +159,20 @@
 			});	
 		};
 		
+		var saveTranslationItemValue = function(id, value) {
+			$.ajax({
+				type: 'post',
+				url: Jobber.jobber_admin_url + 'translations/',
+				data: {
+					action: 'save_translation_item',
+					id: id,
+					value: value
+				},
+				success: function(response) {
+					
+				}
+			});
+		};
 		
 		
 		
@@ -252,6 +264,22 @@
 						deleteTranslationSection($(this));
 					}
 					return false;
+				});
+				
+				
+				// store item's value on focus
+				 $("table input, table textarea").focus(function() {
+					$.currently_selected_translation_item = { id: $(this).attr("rel"), val: $(this).val() };
+				});
+				// save item on blur, if value has changed
+				$("table input, table textarea").blur(function() {
+					item_id = $(this).attr("rel");
+					item_value = $(this).val();
+					
+					if ($.currently_selected_translation_item.id == item_id && $.currently_selected_translation_item.val != item_value)
+					{
+						saveTranslationItemValue(item_id, item_value);
+					}
 				});
 				
 			}

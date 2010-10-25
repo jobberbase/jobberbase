@@ -4,7 +4,7 @@
 		// default configuration options
 		var cfg = {
 			sensitivity: 7,
-			interval: 100,
+			interval: 40,
 			timeout: 0
 		};
 		// override configuration options with user supplied object
