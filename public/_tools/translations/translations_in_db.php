@@ -14,12 +14,6 @@
 	$lang_id = 1;
 	
 	
-	$p = new Postman();
-	$p->MailSendToFriend('asdf@sdf.com', 'me@sdf.com');
-	
-	
-	exit;
-	
 	// strings / .ini
 	if (0)
 	{
@@ -48,7 +42,7 @@
 	
 	
 	// emails / .xml
-	if (1)
+	if (0)
 	{
 		$translationFilePath = APP_PATH . '_tools/translations/src/en/emails_en.xml';
 
