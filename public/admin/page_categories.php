@@ -1,7 +1,8 @@
 <?php
 global $cache;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) 
+{
 	switch ($_POST['action']) {
 		case 'saveOrder':
 			$cache->removeCache(CACHE_CATEGORIES);

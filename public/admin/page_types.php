@@ -1,5 +1,5 @@
 <?php
-global $cache
+global $cache;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST)) 
 {

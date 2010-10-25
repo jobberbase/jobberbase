@@ -1,4 +1,5 @@
 {include file="header.tpl"}
+
 	<div id="content">
 	{if $settings_categories && $settings_form == ''}
 		<h2 id="settings">Settings Overview</h2>

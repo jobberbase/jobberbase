@@ -71,6 +71,7 @@ foreach ($__instances as $__instance)
 		// base url of the app
 		define('APP_URL', $__instance['app_url']);
 		define('REWRITE_MODE', $__instance['rewrite_mode']);
+		
 		// error reporting
 		ini_set('error_reporting', $__instance['ini_error_reporting']);
 		ini_set('display_errors', $__instance['ini_display_errors']);

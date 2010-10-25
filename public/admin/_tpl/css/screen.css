@@ -222,6 +222,7 @@ img .right     { float:right;margin:4px 0 4px 10px; }
 
 /* THE JOURNEY STARTS HERE */
 
+
 body {
 	font-size: 0.8em;
 	background: #eef5f7 url(../img/body.png) repeat-x 0 0;
@@ -366,7 +367,7 @@ form input.error, form textarea.error {
 	border-color: red;
 }
 
-form input, form textarea, .block input, .block textarea, #categoriesContainer input, #categoriesContainer textarea, #typesContainer input, #typesContainer textarea, #linksContainer input, #linksContainer textarea {
+form input, form textarea, .block input, .block textarea, #categoriesContainer input, #categoriesContainer textarea, #typesContainer input, #typesContainer textarea, #linksContainer input, #linksContainer textarea, .translations input, .translations textarea {
 	border: 1px solid #BBB;
 	padding: 0.3em 0.5em;
 }
@@ -404,7 +405,7 @@ span.version {
 	margin-bottom: 1em;
 }
 .list h4 a { font-size:14px;color:#026284;text-decoration:none;}
-.list h4 a:hover { text-decoration:underline;}
+.list h4 a:hover { text-decoration:underline !important;}
 .settings .row span {
 	float: left;
 	width: 18em;
@@ -652,3 +653,20 @@ ul.applicants-list span.applicant-name { font-size:14px;font-weight:bold;}
 h3.generic { font-size:16px;}
 #content a { color:#026284;}
 #content a:hover { text-decoration:none;}
+
+#translation-langs { border-top:4px solid #ddd;padding:10px;margin:10px 0;background:#fff;display:none;}
+#translation-langs h4 { font-size:14px;font-weight:bold !important;margin:0 0 5px 0;}
+h4.genericBig { font-size:16px;font-weight:bold !important;margin:0 0 5px 0; margin: 10px 3px;}
+h4.genericBig span {font-weight:normal;}
+.new-translation table th, #translation-langs table th { text-align:left;font-size:11px;line-height:1em;}
+#translation-langs table.listing {width:500px;}
+#translation-langs table.listing th {border-bottom:1px solid #ccc;padding:3px;}
+#translation-langs table.listing td {border-bottom:1px solid #ddd;padding:3px;}
+#translation-langs .lang-edit { display:none;}
+
+.new-translation, #new-translation-section { border-top:4px solid #ddd;padding:10px;margin:10px 0;background:#fff;display:none;}
+
+a.lang-delete-trigger { color:red!important;}
+
+a.new-item {background:url(../img/plus-button.png) no-repeat;display:block;padding:2px 0 0 25px;font-size:14;font-weight:bold;text-decoration:none;}
+a.new-item:hover {text-decoration:underline !important;}

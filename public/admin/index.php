@@ -27,11 +27,6 @@
 	//////////////////////////////////////////////////////////
 	
 	
-	$translator = new Translator(LANG_CODE);
-	$translations = $translator->getTranslations();
-	
-	$smarty->assign('translations', $translations);
-	
 	$flag = 0;
 	$js = array();
 	if(!isset($_SERVER['HTTP_REFERER'])) {
@@ -84,6 +79,16 @@
 				exit;
 			}
 			require_once 'page_applicants.php';
+			$flag = 1;
+			break;
+
+		case 'translations':
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
+			require_once 'page_translations.php';
 			$flag = 1;
 			break;
 
@@ -263,8 +268,10 @@
 		redirect_to(BASE_URL . 'page-unavailable/');
 	}
 	
+	// translations
+	$smarty->assign('translations', $translations);
 	// create a JSON string from the translations array, but only for the "js" section
-	$smarty->assign('translationsJson', iniSectionsToJSON(array("js" => $translations['js'])));
+	$smarty->assign('translationsJson', iniSectionsToJSON(array('js' => $translations['js'])));
 	
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());

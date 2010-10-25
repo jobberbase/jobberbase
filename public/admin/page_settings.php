@@ -12,7 +12,7 @@
 	}
 	else 
 	{
-		$smarty->assign('settings_categories', $jobber_settings->GetSettingsCategories());
+		//$smarty->assign('settings_categories', $jobber_settings->GetSettingsCategories());
 	}
 
 	// Process a form (if given) to save the settings

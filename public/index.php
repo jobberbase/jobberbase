@@ -14,19 +14,10 @@
 	}
 	
 	require_once '_config/config.php';
-
+	
 	define('BASE_URL', APP_URL);
-	
-	$translator = new Translator(LANG_CODE);
-	$translations = $translator->getTranslations();
-	
-	$smarty->assign('translator', $translator);
-	$smarty->assign('translations', $translations);
-	
-	// create a JSON string from the translations array, but only for the "js" section
-	$smarty->assign('translationsJson', iniSectionsToJSON(array("js" => $translations['js'])));
-	
-	//////////////////////////////
+
+	//////////////////////////////////////////////////////////////////////////
 	
 	$flag = 0;
 	
@@ -233,6 +224,12 @@
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('articles', get_articles());
 	$smarty->assign('navigation', get_navigation());
+	
+	// translations
+	$smarty->assign('translator', $translator);
+	$smarty->assign('translations', $translations);
+	// create a JSON string from the translations array, but only for the "js" section
+	$smarty->assign('translationsJson', iniSectionsToJSON(array('js' => $translations['js'])));
 	
 	$smarty->assign('THEME', $settings['theme']);
 	$smarty->assign('CURRENT_PAGE', $page);

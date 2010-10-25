@@ -16,6 +16,7 @@
 	<script src="{$BASE_URL_ADMIN}_tpl/js/functions.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}_tpl/js/main.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}_tpl/js/categories.js" type="text/javascript"></script>
+	<script src="{$BASE_URL_ADMIN}_tpl/js/translations.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}_tpl/js/hoverIntent.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}_tpl/js/links.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}_tpl/js/messages.js" type="text/javascript"></script>
@@ -38,8 +39,9 @@
 		{if $isAuthenticated == 1}
 		<ul>
 			<li class="bold">&bull; &nbsp;&nbsp;<a href="{$BASE_URL_ADMIN}logout/">Logout &rarr;</a></li>
+			<li>&bull; &nbsp;&nbsp;<a href="{$BASE_URL_ADMIN}stats/">Stats</a></li>
 			<li>&bull; &nbsp;&nbsp;<a href="{$BASE_URL_ADMIN}settings/">Settings</a></li>
-			<li><a href="{$BASE_URL_ADMIN}stats/">Stats</a></li>
+			<li><a href="{$BASE_URL_ADMIN}translations/">Translations</a></li>
 		</ul>
 		{/if}
 	</div>

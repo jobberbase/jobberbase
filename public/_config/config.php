@@ -12,12 +12,10 @@
 	// Environments setup
 	require_once APP_PATH . '_config/config.envs.php';
 
-
 	if(isset($_SERVER['SCRIPT_NAME'])) 
 	{
-		# on Windows _APP_MAIN_DIR becomes \ and abs url would look something like HTTP_HOST\/restOfUrl, so \ should be trimed too
-		# @modified Chis Florinel <chis.florinel@candoo.ro>
-		
+		// on Windows _APP_MAIN_DIR becomes \ and abs url would look something like HTTP_HOST\/restOfUrl, so \ should be trimed too
+		// @modified Chis Florinel <chis.florinel@candoo.ro>
 		$app_main_dir = rtrim(dirname($_SERVER['SCRIPT_NAME']),'/\\');	
 		define('_APP_MAIN_DIR', $app_main_dir);
   	} 
@@ -80,6 +78,7 @@
     define('CACHE_NAVIGATION', 'NAVIGATION');
     define('CACHE_TYPES', 'TYPES');
     define('CACHE_JOBS', 'JOBS');
+    define('CACHE_TRANSLATIONS', 'CACHE_TRANSLATIONS');
 
     $cache = new Cache(APP_PATH . '_cache/', null, USE_CACHE);
 
@@ -100,11 +99,26 @@
 	require_once APP_PATH . '_config/config.settings.php';
 	
 	
+	// Setup translations
+	$translator = new Translator(LANG_CODE);
+	//$translations = $translator->getTranslations();
+	
+    if ($cache->testCache(CACHE_TRANSLATIONS . '_' . LANG_CODE))
+    {
+        $translations = $cache->loadCache(CACHE_TRANSLATIONS . '_' . LANG_CODE);
+    }
+    else
+    {
+        $translations = $translator->getTranslations();
+        $cache->saveCache($translations, CACHE_TRANSLATIONS . '_' . LANG_CODE);
+    }
+	
 	
 	// Setup Smarty
 	$smarty = new Smarty();
 	$smarty->template_dir = APP_PATH . '_tpl' . DIRECTORY_SEPARATOR . THEME . DIRECTORY_SEPARATOR;
 	$smarty->compile_dir = APP_PATH .'_tpl' . DIRECTORY_SEPARATOR . THEME . DIRECTORY_SEPARATOR . '_cache';
+	
 	
 	// Create Textile object
 	$textile = new Textile;
