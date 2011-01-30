@@ -50,7 +50,7 @@
 							<td>
 								<input {if $errors.title}class="error"{/if} type="text" name="title" id="title" tabindex="2" size="50" value="{if $job.company}{$job.title|escape}{else}{$smarty.post.title|escape}{/if}" />
 								{if $errors.title}<span class="validation-error"><img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" /></span>{/if}
-								<div class="{$translations.publish.title_info}"></div>
+								<div class="suggestion">{$translations.publish.title_info}</div>
 							</td>
 						</tr>
 						<tr>
