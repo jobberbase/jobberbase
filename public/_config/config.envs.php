@@ -68,8 +68,17 @@ foreach ($__instances as $__instance)
 		define('LOCATION', $__instance['location']);
 		define('ENVIRONMENT', $__instance['environment']);
 		
+		$app_url = $__instance['app_url'];
+		
+		$indexOfLastSlash = strrpos($app_url, "/");
+		$expectedIndexOfLastSlash = strlen($app_url) - 1;
+
+		// manually add an ending slash to the app_url if the user didn't specify it
+		if ($indexOfLastSlash && $indexOfLastSlash != $expectedIndexOfLastSlash )
+			$app_url .= '/';
+			
 		// base url of the app
-		define('APP_URL', $__instance['app_url']);
+		define('APP_URL', $app_url);
 		define('REWRITE_MODE', $__instance['rewrite_mode']);
 		
 		// error reporting
