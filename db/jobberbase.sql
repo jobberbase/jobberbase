@@ -133,7 +133,8 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `spotlight` tinyint(4) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `type_id` (`type_id`),
-  KEY `category_id` (`category_id`)
+  KEY `category_id` (`category_id`),
+  KEY `city_id` (`city_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
@@ -158,7 +159,8 @@ CREATE TABLE IF NOT EXISTS `job_applications` (
   `job_id` int(10) unsigned NOT NULL,
   `created_on` datetime NOT NULL,
   `ip` varchar(15) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `job_id` (`job_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
@@ -221,7 +223,8 @@ CREATE TABLE IF NOT EXISTS `spam_reports` (
   `the_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `ip` varchar(15) NOT NULL,
   `job_id` int(11) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `job_id` (`job_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
@@ -267,7 +270,8 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `validation` text,
   `value` longtext,
   `ordering` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
