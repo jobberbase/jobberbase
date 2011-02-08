@@ -10,8 +10,8 @@
 						<li><a href="{if $navigation.secondary[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.secondary[tmp].url}/" title="{$navigation.secondary[tmp].title}" >{$navigation.secondary[tmp].name}</a></li>
 					{/if}
 				{/section}
-			</ul>
 			{/if}
+			</ul>
 			
 			{if $smarty.session.last_viewed_jobs}
 			<h4>{$translations.header.seen_recently}</h4>
