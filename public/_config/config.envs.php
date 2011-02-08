@@ -4,7 +4,7 @@
  *
  */
 
-// local (http://localhost/jobberbase/public)
+// local
 $__instances['local'] = array(
 	// should be a unique part of the url (or the entire url if you wish)
 	'prefix' => 'demo.jobberbase',
@@ -28,7 +28,7 @@ $__instances['local'] = array(
 	'rewrite_mode' => 'apache_mod_rewrite'
 );
 
-// live (http://www.yourjobberbasedomain.com)
+// live
 $__instances['live'] = array(
 	'prefix' => 'yourjobberbasedomain.com',
 	'db_host' => 'localhost',

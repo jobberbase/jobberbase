@@ -63,7 +63,7 @@
 			
                 </li>
             </ul>
-			<h1 id="logo"><a href="{$BASE_URL}" title="{$translations.header.title}">{$translations.header.name}</a></h1>
+			<h1 id="logo"><a href="{$BASE_URL}" title="{$translations.header.title}" style="background:url({$BASE_URL}img.php?q=site_logo) no-repeat !important;">{$translations.header.name}</a></h1>
 		
 		
 		
