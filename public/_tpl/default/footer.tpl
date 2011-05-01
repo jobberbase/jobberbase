@@ -1,34 +1,41 @@
 	</div><!-- #container -->
 	<div class="footer">
 		<div id="footer-contents">
+			
 			<div id="footer-col1">
-				{$translations.footer.column_use}:<br />
-				{if $navigation.footer1 != ''}
-					{section name=tmp loop=$navigation.footer1}
-						{if $smarty.const.ENABLE_NEW_JOBS || (!$smarty.const.ENABLE_NEW_JOBS && $navigation.footer1[tmp].url != 'post')}
-							<a href="{if $navigation.footer1[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.footer1[tmp].url}/" title="{$navigation.footer1[tmp].title}" >{$navigation.footer1[tmp].name}</a><br />
-						{/if}
-					{/section}
+				{if count($navigation.footer1) > 0}
+					{$translations.footer.column_use}:<br />
+					{if $navigation.footer1 != ''}
+						{section name=tmp loop=$navigation.footer1}
+							{if $smarty.const.ENABLE_NEW_JOBS || (!$smarty.const.ENABLE_NEW_JOBS && $navigation.footer1[tmp].url != 'post')}
+								<a href="{if $navigation.footer1[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.footer1[tmp].url}/" title="{$navigation.footer1[tmp].title}" >{$navigation.footer1[tmp].name}</a><br />
+							{/if}
+						{/section}
+					{/if}
 				{/if}
 			</div>
 			<div id="footer-col2">
-				{$translations.footer.column_find}:<br />
-				{if $navigation.footer2 != ''}
-					{section name=tmp loop=$navigation.footer2}
-						{if $smarty.const.ENABLE_NEW_JOBS || (!$smarty.const.ENABLE_NEW_JOBS && $navigation.footer2[tmp].url != 'post')}
-							<a href="{if $navigation.footer2[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.footer2[tmp].url}/" title="{$navigation.footer2[tmp].title}" >{$navigation.footer2[tmp].name}</a><br />
-						{/if}
-					{/section}
+				{if count($navigation.footer2) > 0}
+					{$translations.footer.column_find}:<br />
+					{if $navigation.footer2 != ''}
+						{section name=tmp loop=$navigation.footer2}
+							{if $smarty.const.ENABLE_NEW_JOBS || (!$smarty.const.ENABLE_NEW_JOBS && $navigation.footer2[tmp].url != 'post')}
+								<a href="{if $navigation.footer2[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.footer2[tmp].url}/" title="{$navigation.footer2[tmp].title}" >{$navigation.footer2[tmp].name}</a><br />
+							{/if}
+						{/section}
+					{/if}
 				{/if}
 			</div>
 			<div id="footer-col3">
-				{$translations.footer.column_misc}:<br />
-				{if $navigation.footer3 != ''}
-					{section name=tmp loop=$navigation.footer3}
-						{if $smarty.const.ENABLE_NEW_JOBS || (!$smarty.const.ENABLE_NEW_JOBS && $navigation.footer3[tmp].url != 'post')}
-							<a href="{if $navigation.footer3[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.footer3[tmp].url}/" title="{$navigation.footer3[tmp].title}" >{$navigation.footer3[tmp].name}</a><br />
-						{/if}
-					{/section}
+				{if count($navigation.footer3) > 0}
+					{$translations.footer.column_misc}:<br />
+					{if $navigation.footer3 != ''}
+						{section name=tmp loop=$navigation.footer3}
+							{if $smarty.const.ENABLE_NEW_JOBS || (!$smarty.const.ENABLE_NEW_JOBS && $navigation.footer3[tmp].url != 'post')}
+								<a href="{if $navigation.footer3[tmp].outside != 1}{$BASE_URL}{/if}{$navigation.footer3[tmp].url}/" title="{$navigation.footer3[tmp].title}" >{$navigation.footer3[tmp].name}</a><br />
+							{/if}
+						{/section}
+					{/if}
 				{/if}
 			</div>
 			<div id="footer-copyright">
