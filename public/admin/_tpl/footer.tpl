@@ -2,7 +2,7 @@
 	<div class="footer clear">
 	</div><!-- .footer -->
 	
-	<div id="overlay"><img src="{$BASE_URL_ADMIN}img/ajax-loader.gif" /></div>
+	<div id="overlay"><img src="{$BASE_URL_ADMIN}_tpl/img/ajax-loader.gif" /></div>
 	<div id="messagesContainer"></div>
 	
 	{if $CURRENT_PAGE == "categories"}
