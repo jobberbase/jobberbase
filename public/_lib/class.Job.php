@@ -648,7 +648,7 @@ class Job
 			{
 				if ($kw1 != '')
 				{
-					$conditions .= ' (title LIKE "%' . $kw1 . '%" OR description LIKE "%' . $kw1 . '%")';
+					$conditions .= ' (title LIKE "%' . $kw1 . '%" OR company LIKE "%' . $kw1 . '%" OR description LIKE "%'. $kw1 . '%")';
 					$_SESSION['keywords_array'][] = $kw1;
 				}
 				if ($kw2 != '')
@@ -726,14 +726,14 @@ class Job
 		            $check_cities .= 'OR city_id = "'.$cities_r[$a].'" ';
 		          }
 		        }
-		        $conditions .= 'AND (title LIKE "%' . $keywords_r[$i] . '%" OR description LIKE "%' . $keywords_r[$i] . '%" OR outside_location LIKE "%' . $keywords_r[$i] . '%" '.$check_cities.' ) ';
+		        $conditions .= 'AND (title LIKE "%' . $keywords_r[$i] . '%" OR company LIKE "%' . $keywords_r[$i] . '%" OR description LIKE "%' . $keywords_r[$i] . '%" OR outside_location LIKE "%' . $keywords_r[$i] . '%" '.$check_cities.' ) ';
 		    }
  
 			$sql = 'SELECT id
 					FROM '.DB_PREFIX.'jobs
 					WHERE is_temp = 0 AND is_active = 1 '. $conditions .'
 					ORDER BY created_on DESC';
-			$result = $db->query($sql);			
+			$result = $db->query($sql);
 		}
  
 		$pages = '';
