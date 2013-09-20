@@ -46,15 +46,15 @@ $__instances['live'] = array(
 );
 
 
+// http requests
+if (isset($_SERVER['HTTP_HOST']))
+{
+	$_compare_to = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+}
+
 // setup current instance
 foreach ($__instances as $__instance)
 {
-	// http requests
-	if (isset($_SERVER['HTTP_HOST']))
-	{
-		$_compare_to = $_SERVER['HTTP_HOST'];
-	}
-
 	if (strstr($_compare_to, $__instance['prefix']))
 	{
 		define('DB_HOST', $__instance['db_host']);
@@ -87,5 +87,10 @@ foreach ($__instances as $__instance)
 		
 		break;
 	}
+}
+
+if(!defined('DB_HOST'))
+{
+	die('None of the configured JobberBase instances matched your request!<br />If you are an admin of this JobberBase installation, you may want to review the \'prefix\' values of the configured JobberBase instances in config.envs.php.');
 }
 ?>
