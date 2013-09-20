@@ -47,7 +47,7 @@ $__instances['live'] = array(
 
 
 // http requests
-if (isset($_SERVER['HTTP_HOST']))
+if (isset($_SERVER['HTTP_HOST']) && isset($_SERVER['REQUEST_URI']))
 {
 	$_compare_to = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 }
