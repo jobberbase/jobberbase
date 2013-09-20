@@ -647,7 +647,7 @@ span.la
 	background-color:#09C;
 	border:1px solid #369;
 	color:#fff;
-	cursor:hand;
+	cursor:pointer;
 }
 
 #publish_form input#submit:hover,

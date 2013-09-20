@@ -24,7 +24,7 @@
 			         var imgStyle = "display:inline-block;" + img.style.cssText;
 			         if (img.align == "left") imgStyle = "float:left;" + imgStyle;
 			         if (img.align == "right") imgStyle = "float:right;" + imgStyle;
-			         if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle;
+			         if (img.parentElement.href) imgStyle = "cursor:pointer;" + imgStyle;
 			         var strNewHTML = "<span " + imgID + imgClass + imgTitle;
 			         strNewHTML += " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";";
 			         strNewHTML += "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader";
