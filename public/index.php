@@ -19,8 +19,6 @@
 
 	//////////////////////////////////////////////////////////////////////////
 	
-	$flag = 0;
-	
 	$job = new Job();
 	
 	$meta_description = '';
@@ -36,89 +34,74 @@
 		// home
 		case '':
 			require_once 'page_home.php';
-			$flag = 1;
 			break;
 			
 		// cities
 		case URL_CITIES:
 			require_once 'page_cities.php';
-			$flag = 1;
 			break;
 	
 		// per category
 		case URL_JOBS:
 			require_once 'page_jobs.php';
-			$flag = 1;
 			break;
 			
 		// per company
 		case URL_JOBS_AT_COMPANY:
 			require_once 'page_company.php';
-			$flag = 1;
 			break;
 			
 		// per city
 		case URL_JOBS_IN_CITY:
 			require_once 'page_city.php';
-			$flag = 1;
 			break;
 			
 		case 'jobs-in-other-cities':
 			require_once 'page_other_cities.php';
-			$flag = 1;
 			break;
 			
 		// search results
 		case 'search':
 			require_once 'page_search.php';
-			$flag = 1;
 			break;
 						
 		// job post page, with the job's details
 		case URL_JOB:
 			require_once 'page_job.php';
-			$flag = 1;
 			break;
 	
 		case 'send-to-friend':
 			require_once 'page_sendtofriend.php';
-			$flag = 1;
 			break;
 			
 		case 'apply-online':
 			require_once 'page_apply.php';
-			$flag = 1;
 			break;
 		
 		case 'report-spam':
 			require_once 'page_reportspam.php';
-			$flag = 1;
 			break;
 			
 		// create/edit a job post
 		case 'post':
 			if(!ENABLE_NEW_JOBS) { redirect_to(BASE_URL); exit; }
 			require_once 'page_write.php';
-			$flag = 1;
 			break;
 		
 		// verify the posted job
 		case 'verify':
 			if(!ENABLE_NEW_JOBS) { redirect_to(BASE_URL); exit; }
 			require_once 'page_verify.php';
-			$flag = 1;
 			break;
 	
 		// actually publish the job post
 		case 'publish':
 			if(!ENABLE_NEW_JOBS) { redirect_to(BASE_URL); exit; }
 			require_once 'page_publish.php';
-			$flag = 1;
 			break;
 			
 		case 'confirm':
 			if(!ENABLE_NEW_JOBS) { redirect_to(BASE_URL); exit; }
-			$flag =1;
 			$job = new Job($id);
 			$job_title = BASE_URL . URL_JOB .'/' . $job->mId . '/' . $job->mUrlTitle . '/';
 			$smarty->assign('auth', $job->GetAuth());
@@ -130,68 +113,51 @@
 		// deactivate a post
 		case 'deactivate':
 			require_once 'page_deactivate.php';
-			$flag = 1;
 			break;
 			
 		// activate a post
 		case 'activate':
 			require_once 'page_activate.php';
-			$flag = 1;
 			break;
 			
 		case 'rss':
 			require_once 'page_rss.php';
 			$html_title = 'RSS Feeds for ' . SITE_NAME;
-			$flag = 1;
 			break;
 			
 		case 'sitemap':
 			$html_title = 'Sitemap';
 			$template = 'sitemap.tpl';
-			$flag = 1;
 			break;
 			
 		case 'widgets':
 			$html_title = 'Widgets - ' . SITE_NAME;
 			$template = 'widgets.tpl';
-			$flag = 1;
 			break;		
 		
 		// companies
 		case URL_COMPANIES:
 			require_once 'page_companies.php';
-			$flag = 1;
 			break;
 			
 		case 'get-companies':
 			require_once 'page_getcompanies.php';
-			$flag = 1;
 			break;
 			
 		case 'job-unavailable':
 			$html_title = 'Unavailable job / ' . SITE_NAME;
 			$template = 'no-job.tpl';
-			$flag = 1;
 			break;
 
         case 'sitemap.xml':
             generate_sitemap('xml');
-            $flag = 1;
             break;
 
         case 'sitemap.txt':
             generate_sitemap('txt');
-            $flag = 1;
             break;
 		
-		// 404 etc. error page
-		case 'page-unavailable':
-			// TO-DO: add suggestion if no trailing slash supplied
-			$html_title = 'Page unavailable / ' . SITE_NAME;
-			$template = 'error.tpl';
-			$flag = 1;
-			break;
-		
+		// custom pages, with fallback to the 404 error page
 		default: 
 			$result = $db->query('
 				SELECT 
@@ -208,16 +174,13 @@
 				$meta_keywords = $pageData['keywords'];
 				$meta_description = $pageData['description'];
 				$template = 'page.tpl';
-				$flag = 1;
 			} else {
-				$flag = 0;
+				header("HTTP/1.1 404 Not Found");
+				// TO-DO: add suggestion if no trailing slash supplied
+				$html_title = 'Page unavailable / ' . SITE_NAME;
+				$template = 'error.tpl';
 			}
 			break;
-	}
-	// if page not found
-	if ($flag == 0)
-	{
-		redirect_to(BASE_URL . 'page-unavailable/', '404');
 	}
 	
 	// get job categories and cities

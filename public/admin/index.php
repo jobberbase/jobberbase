@@ -26,7 +26,6 @@
 	
 	//////////////////////////////////////////////////////////
 	
-	$flag = 0;
 	$js = array();
 	if(!isset($_SERVER['HTTP_REFERER'])) {
 	   $_SERVER['HTTP_REFERER'] = '';
@@ -48,11 +47,9 @@
 			{				
 				require_once 'page_home.php';
 			}
-			$flag = 1;
 			break;
 
 		case 'logout':
-			$flag = 1;
 			if (isset($_SESSION['AdminId']))
 			{			
 				unset($_SESSION['AdminId']);
@@ -68,7 +65,6 @@
 				exit;
 			}
 			require_once 'page_home.php';
-			$flag = 1;
 			break;
 
 		case 'applicants':
@@ -78,7 +74,6 @@
 				exit;
 			}
 			require_once 'page_applicants.php';
-			$flag = 1;
 			break;
 
 		case 'translations':
@@ -88,7 +83,6 @@
 				exit;
 			}
 			require_once 'page_translations.php';
-			$flag = 1;
 			break;
 
 		case 'activate':
@@ -98,7 +92,6 @@
 				exit;
 			}
 			require_once 'page_activate.php';
-			$flag = 1;
 			break;
 
 		case 'deactivate':
@@ -108,7 +101,6 @@
 				exit;
 			}
 			require_once 'page_deactivate.php';
-			$flag = 1;
 			break;
 
 		case 'delete':
@@ -118,7 +110,6 @@
 				exit;
 			}
 			require_once 'page_delete.php';
-			$flag = 1;
 			break;
 
 		case URL_JOB:
@@ -128,7 +119,6 @@
 				exit;
 			}			
 			require_once 'page_job.php';
-			$flag = 1;
 			break;
 
 		case URL_JOBS:
@@ -138,18 +128,6 @@
 				exit;
 			}
 			require_once 'page_category.php';
-			$flag = 1;
-			break;
-
-		case 'page-unavailable':
-			if(!isset($_SESSION['AdminId']))
-			{
-				redirect_to(BASE_URL);
-				exit;
-			}
-			$html_title = 'Page unavailable / ' . SITE_NAME;
-			$template = 'error.tpl';
-			$flag = 1;
 			break;
 
 		case 'stats':
@@ -159,7 +137,6 @@
 				exit;
 			}
 			require_once 'page_stats.php';
-			$flag = 1;
 			break;
 
 		case 'pages':
@@ -169,7 +146,6 @@
 				exit;
 			}
 			require_once 'page_pages.php';
-			$flag = 1;
 			break;
 		case 'categories':
 			if(!isset($_SESSION['AdminId']))
@@ -178,7 +154,6 @@
 				exit;
 			}
 			require_once 'page_categories.php';
-			$flag = 1;
 			break;
 		case 'types':
 			if(!isset($_SESSION['AdminId']))
@@ -187,7 +162,6 @@
 				exit;
 			}
 			require_once 'page_types.php';
-			$flag = 1;
 			break;
 		case 'password':
 			if(!isset($_SESSION['AdminId']))
@@ -198,7 +172,6 @@
 			require_once 'page_password.php';
 			$html_title = 'Change password / ' . SITE_NAME;
 			$template = 'password.tpl';
-			$flag = 1;
 			break;
 		case 'links':
 			if(!isset($_SESSION['AdminId']))
@@ -207,7 +180,6 @@
 				exit;
 			}
 			require_once 'page_links.php';
-			$flag = 1;
 			break;
 		case 'settings':
 			if(!isset($_SESSION['AdminId']))
@@ -216,7 +188,6 @@
 				exit;
 			}
 			require_once 'page_settings.php';
-			$flag = 1;
 			break;
 		case 'edit-post':
 			if(!isset($_SESSION['AdminId']))
@@ -225,7 +196,6 @@
 				exit;
 			}
 			require_once 'page_edit_post.php';
-			$flag = 1;
 			break;
 		case 'activate-spotlight':
             if(!isset($_SESSION['AdminId']))
@@ -234,7 +204,6 @@
                 exit;
             }
             require_once 'page_activate_spotlight.php';
-            $flag = 1;
             break;
    		case 'deactivate-spotlight':
             if(!isset($_SESSION['AdminId']))
@@ -243,7 +212,6 @@
                 exit;
             }
             require_once 'page_deactivate_spotlight.php';
-            $flag = 1;
             break;
    		case 'cities':
 	  		if(!isset($_SESSION['AdminId']))
@@ -253,18 +221,19 @@
             }
             
    			require_once 'page_cities.php';
-   			$flag = 1;
    			$citiesPage = new CitiesPage();
    			$template = $citiesPage->processRequest($id, $extra, $smarty);
    			break;
-		default: 
-			$flag = 0;	
+		default:
+			if(!isset($_SESSION['AdminId']))
+			{
+				redirect_to(BASE_URL);
+				exit;
+			}
+			header("HTTP/1.1 404 Not Found");
+			$html_title = 'Page unavailable / ' . SITE_NAME;
+			$template = 'error.tpl';
 			break;
-	}
-	// if page not found
-	if ($flag == 0)
-	{
-		redirect_to(BASE_URL . 'page-unavailable/');
 	}
 	
 	// translations
