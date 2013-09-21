@@ -13,9 +13,4 @@ foreach ($settings as $k => $setting)
 	$k = strtoupper($k);
 	define("{$k}", $setting);
 }
-
-// default language code, useful if you with to quickly switch between translation files later
-define('LANG_CODE', 'en');
-
-
 ?>

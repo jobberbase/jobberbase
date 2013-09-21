@@ -17,6 +17,8 @@ $__instances['local'] = array(
 	'db_prefix' => '',
 	// your site's full url
 	'app_url' => 'http://demo.jobberbase.vm/',
+	// language to use
+	'lang_code' => 'en',
 	// error reporting
 	'ini_error_reporting' => E_ALL,
 	'ini_display_errors' => 'On',
@@ -38,6 +40,8 @@ $__instances['live'] = array(
 	'db_name' => 'jobberbase',
 	'db_prefix' => '',
 	'app_url' => 'http://www.yourjobberbasedomain.com/',
+	// language to use
+	'lang_code' => 'en',
 	'ini_error_reporting' => E_ALL,
 	'ini_display_errors' => 'Off',
 	'location' => 'online',
@@ -84,6 +88,8 @@ foreach ($__instances as $__instance)
 		// error reporting
 		ini_set('error_reporting', $__instance['ini_error_reporting']);
 		ini_set('display_errors', $__instance['ini_display_errors']);
+
+		define('LANG_CODE', $__instance['lang_code']);
 		
 		break;
 	}
