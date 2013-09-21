@@ -22,7 +22,6 @@
 	{literal}
 
 		Jobber.jobber_admin_url = "{/literal}{$BASE_URL_ADMIN}{literal}";
-		Jobber.FixPng();
 		Jobber.I18n = {/literal}{$translationsJson}{literal};
 		
 		{/literal}{if $editor}{*
