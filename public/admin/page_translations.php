@@ -67,6 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 		
 		case 'add_translation_item':
 		{
+			escape($_POST, false);
+
 			if ($new_item_id = $translator->addTranslationItem($section_id, $item, $value))
 			{
 				$cache->removeCache(CACHE_TRANSLATIONS);
@@ -95,6 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 		
 		case 'save_translation_item':
 		{
+			escape($_POST, false);
+
 			if ($translator->saveTranslationItem($id, $value))
 			{
 				$cache->removeCache(CACHE_TRANSLATIONS);
