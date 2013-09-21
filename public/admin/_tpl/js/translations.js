@@ -159,7 +159,7 @@
 			});	
 		};
 		
-		var saveTranslationItemValue = function(id, value) {
+		var saveTranslationItemValue = function(id, value, element) {
 			$.ajax({
 				type: 'post',
 				url: Jobber.jobber_admin_url + 'translations/',
@@ -169,7 +169,12 @@
 					value: value
 				},
 				success: function(response) {
-					
+					response = parseInt(response);
+					if (response == 1) {
+						$(element).animate({backgroundColor: '#b4ff8e'}, 500).animate({backgroundColor: '#ffffff'}, 500);
+					} else {
+						$(element).animate({backgroundColor: '#ffb48e'}, 500);
+					}
 				}
 			});
 		};
@@ -278,7 +283,7 @@
 					
 					if ($.currently_selected_translation_item.id == item_id && $.currently_selected_translation_item.val != item_value)
 					{
-						saveTranslationItemValue(item_id, item_value);
+						saveTranslationItemValue(item_id, item_value, this);
 					}
 				});
 				
