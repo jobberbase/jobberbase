@@ -14,15 +14,22 @@
  * @param array $what		$_GET, $_POST or any other array
  */
 
-function escape($what)
+function escape($what, $strip=true)
 {
 	global $db;
 
 	foreach ($what as $variable => $value)
 	{
-		if (is_string($value) || is_numeric($value))
+		if (is_string($value))
 		{
-			$GLOBALS[$variable] = $db->real_escape_string(strip_tags($value));
+			if ($strip)
+			{
+				$GLOBALS[$variable] = $db->real_escape_string(strip_tags($value));
+			}
+			else
+			{
+				$GLOBALS[$variable] = $db->real_escape_string($value);
+			}
 		}
 		else
 		{
