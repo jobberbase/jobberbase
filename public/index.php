@@ -145,6 +145,7 @@
 			break;
 			
 		case 'job-unavailable':
+			header("HTTP/1.1 404 Not Found");
 			$html_title = 'Unavailable job / ' . SITE_NAME;
 			$template = 'no-job.tpl';
 			break;
