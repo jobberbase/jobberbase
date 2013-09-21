@@ -49,9 +49,9 @@
 							<td width="230" valign="top"><strong>{$tr_item.item}:</strong></td>
 							<td>
 								{if $tr_item.field_type == 'textarea'}
-								<textarea cols="70" rows="10" rel="{$tr_item.id}">{$tr_item.value}</textarea>
+								<textarea cols="70" rows="10" rel="{$tr_item.id}">{$tr_item.value|htmlspecialchars}</textarea>
 								{else}
-								<input type="text" value="{$tr_item.value}" size="70" rel="{$tr_item.id}" />
+								<input type="text" value="{$tr_item.value|htmlspecialchars}" size="70" rel="{$tr_item.id}" />
 								{/if}
 								<a href="#" title="Delete this item" class="translation-item-delete" rel="{$tr_item.id}"><img src="{$BASE_URL_ADMIN}_tpl/img/bin.png" alt="Delete" /></a>
 							</td>
