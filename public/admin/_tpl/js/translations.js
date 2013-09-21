@@ -96,9 +96,11 @@
 		};
 		
 		var addTranslationItem = function(trigger_elem) {
-			section_id = $(trigger_elem).attr("rel");
-			item = $(trigger_elem).parents("tr").find(".new-translation-item").val();
-			value = $(trigger_elem).parents("tr").find(".new-translation-value").val();
+			var section_id = $(trigger_elem).attr("rel");
+			var item_field = $(trigger_elem).parents("tr").find(".new-translation-item");
+			var value_field = $(trigger_elem).parents("tr").find(".new-translation-value");
+			var item = item_field.val();
+			var value = value_field.val();
 			
 			if (item != "" && value != "")
 			{
@@ -112,6 +114,8 @@
 						value: value
 					},
 					success: function(response) {
+						item_field.val('');
+						value_field.val('');
 						new_item = '<tr><td><strong>' + item + '</strong></td><td><input type="text" size="70" value="' + Jobber.EscapeHTML(value) + '" /> ';
 						new_item += '<a href="#" title="Delete this item" class="translation-item-delete" rel="' + response +'"><img src="' + Jobber.jobber_admin_url + '_tpl/img/bin.png" alt="Delete" /></a></td></tr>';
 
@@ -273,11 +277,11 @@
 				
 				
 				// store item's value on focus
-				 $("table input, table textarea").focus(function() {
+				 $("table input[rel], table textarea[rel]").focus(function() {
 					$.currently_selected_translation_item = { id: $(this).attr("rel"), val: $(this).val() };
 				});
 				// save item on blur, if value has changed
-				$("table input, table textarea").blur(function() {
+				$("table input[rel], table textarea[rel]").blur(function() {
 					item_id = $(this).attr("rel");
 					item_value = $(this).val();
 					
