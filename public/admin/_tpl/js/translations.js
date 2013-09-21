@@ -112,7 +112,7 @@
 						value: value
 					},
 					success: function(response) {
-						new_item = '<tr><td><strong>' + item + '</strong></td><td><input type="text" size="80" value="' + value + '" /> ';
+						new_item = '<tr><td><strong>' + item + '</strong></td><td><input type="text" size="70" value="' + value + '" /> ';
 						new_item += '<a href="#" title="Delete this item" class="translation-item-delete" rel="' + response +'"><img src="' + Jobber.jobber_admin_url + '_tpl/img/bin.png" alt="Delete" /></a></td></tr>';
 
 						$("table#translations_" + section_id + ":first").prepend(new_item);

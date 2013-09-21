@@ -34,8 +34,8 @@
 							<table>
 								<tr><th>Item</th><th>Value</th><th>&nbsp;</th></tr>
 								<tr>
-									<td><input type="text" class="new-translation-item" size="29" /></td>
-									<td><input type="text" class="new-translation-value" size="82" /></td>
+									<td><input type="text" class="new-translation-item" size="20" /></td>
+									<td><input type="text" class="new-translation-value" size="70" /></td>
 									<td><button class="new-translation-add-trigger" rel="{$tr_section.id}">Add</button> or <a href="#" class="new-transaction-cancel-trigger">Cancel</a></td>
 								</tr>
 							</table>
@@ -49,9 +49,9 @@
 							<td width="230" valign="top"><strong>{$tr_item.item}:</strong></td>
 							<td>
 								{if $tr_item.field_type == 'textarea'}
-								<textarea cols="68" rows="10" rel="{$tr_item.id}">{$tr_item.value}</textarea>
+								<textarea cols="70" rows="10" rel="{$tr_item.id}">{$tr_item.value}</textarea>
 								{else}
-								<input type="text" value="{$tr_item.value}" size="80" rel="{$tr_item.id}" /> 
+								<input type="text" value="{$tr_item.value}" size="70" rel="{$tr_item.id}" />
 								{/if}
 								<a href="#" title="Delete this item" class="translation-item-delete" rel="{$tr_item.id}"><img src="{$BASE_URL_ADMIN}_tpl/img/bin.png" alt="Delete" /></a>
 							</td>
