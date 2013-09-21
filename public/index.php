@@ -187,7 +187,10 @@
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('articles', get_articles());
 	$smarty->assign('navigation', get_navigation());
-	
+
+	// list of available languages
+	$smarty->assign('languages', $translator->getLanguages());
+
 	// translations
 	$smarty->assign('translator', $translator);
 	$smarty->assign('translations', $translations);
