@@ -48,7 +48,6 @@
 	
 	<!--[if !IE]><script src="{$BASE_URL}js/jquery.history.js" type="text/javascript"></script><![endif]-->
  	<script src="{$BASE_URL}js/jquery.form.js" type="text/javascript"></script>
-	<script src="{$BASE_URL}js/cmxforms.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/jquery.metadata.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="{$BASE_URL}js/functions.js" type="text/javascript"></script>
