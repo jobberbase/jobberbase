@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="{$BASE_URL_ADMIN}_tpl/css/superfish-navbar.css" type="text/css" media="screen" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_tpl/js/jquery.bgiframe.min.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}_tpl/js/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}_tpl/js/functions.js" type="text/javascript"></script>
 	<script src="{$BASE_URL_ADMIN}_tpl/js/main.js" type="text/javascript"></script>
