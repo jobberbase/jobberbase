@@ -20,7 +20,7 @@
 				</div>
 				<div class="group">
 					<label for="page_content">Content</label>
-					<textarea id="page_content" name="page_content" class="textarea_field mceEditor" cols="85" rows="25">{$defaults.page_content}</textarea>
+					<textarea id="page_content" name="page_content" class="textarea_field mceEditor" cols="70" rows="25">{$defaults.page_content}</textarea>
 				</div>
 				<div class="group">
 					<label><input type="checkbox" id="page_has_form" name="page_has_form" value="1"{if $defaults.page_has_form == '1'} checked="checked"{/if} /> Add a contact form?</label>
@@ -28,7 +28,7 @@
 					<div {if $defaults.page_has_form != '1'} class="hidden"{/if}>
 						<label for="page_form_message">Form message</label></div>
 					<div {if $defaults.page_has_form != '1'} class="hidden"{/if}>
-						<textarea id="page_form_message" name="page_form_message" class="textarea_field mceEditor" cols="85" rows="10">{$defaults.page_form_message}</textarea>
+						<textarea id="page_form_message" name="page_form_message" class="textarea_field mceEditor" cols="70" rows="10">{$defaults.page_form_message}</textarea>
 					</div>
 				</div>
 				<div class="group_submit">
@@ -43,20 +43,20 @@
 				<div class="block_inner">
 					<div class="group{if $errors.page_url} error{/if}">
 						<label for="page_url">URL</label>
-						<input type="text" name="page_url" id="page_url" size="32" value="{$defaults.page_url}" />
+						<input type="text" name="page_url" id="page_url" size="30" value="{$defaults.page_url}" />
 						{if $errors.page_url}<span class="suggestion">{$errors.page_url}</span>{/if}
 					</div>
 					<div class="group{if $errors.page_page_title} error{/if}">
 						<label for="page_page_title">Page title</label>
-						<input type="text" name="page_page_title" id="page_page_title" size="32" value="{$defaults.page_page_title}" />
+						<input type="text" name="page_page_title" id="page_page_title" size="30" value="{$defaults.page_page_title}" />
 					</div>
 					<div class="group">
 						<label for="page_description">Description</label>
-						<textarea id="page_description" name="page_description" rows="6" cols="30">{$defaults.page_description}</textarea>
+						<textarea id="page_description" name="page_description" rows="6" cols="28">{$defaults.page_description}</textarea>
 					</div>
 					<div class="group">
 						<label for="page_keywords">Keywords</label>
-						<textarea id="page_keywords" name="page_keywords" rows="6" cols="30">{$defaults.page_keywords}</textarea>
+						<textarea id="page_keywords" name="page_keywords" rows="6" cols="28">{$defaults.page_keywords}</textarea>
 					</div>
 					<div class="group_submit">
 						<button type="submit"><span>{if $current_page}Save changes{else}Save page{/if}</span></button>
