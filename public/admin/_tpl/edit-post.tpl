@@ -65,7 +65,7 @@
 						</div>
 						<div class="group{if $errors.description} error{/if}">
 							<label for="description">{$translations.publish.description_label}</label>
-							<textarea name="description" id="description" cols="80" rows="15">{if $job.description}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
+							<textarea name="description" id="description" cols="70" rows="15">{if $job.description}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
 							<div class="suggestion">
 								<a target="_blank" href="http://www.textism.com/tools/textile/" onclick="$('#textile-suggestions').toggle(); return false;">{$translations.publish.description_info}</a>
 							</div>
