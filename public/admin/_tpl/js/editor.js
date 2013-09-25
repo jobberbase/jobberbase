@@ -22,15 +22,5 @@
 					return false;
 				});
 		}
-		$('#page_has_form')
-			.bind('change', function(){
-				console.log(this);
-				$(this)
-					.parent()
-					.parent()
-					.parent()
-					.nextAll()
-					.toggleClass('hidden');
-			});
 	};
 })();

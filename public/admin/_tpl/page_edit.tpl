@@ -111,6 +111,14 @@
 						page_page_title: ''
 					}
 				});
+				$('#page_has_form').change(
+					function(){
+						$(this)
+							.parent()
+							.nextAll()
+							.toggleClass('hidden');
+					}
+				);
 			});
 		</script>
 		{/literal}
