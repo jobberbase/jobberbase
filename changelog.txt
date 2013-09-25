@@ -1,6 +1,9 @@
 ######## jobberBase changelog ########
 
-version 1.9 (25/03/2010)
+version 1.9.1 (26/04/2010)
+	* fix: security bug fix
+
+version 1.9 (24/03/2010)
 	* new: IIS support for Windows hosting.
 	* new: View All Jobs Page.
 	* new: Admin Area can also filter jobs by types.
