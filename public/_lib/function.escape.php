@@ -8,13 +8,14 @@
  * 
  * Function escapes all POST/GET variables after form submission
  *
- * @Usage	Instead of doing extract($_POST), you can now
- * 			escape fields like this: escape($_POST)
+ * @Usage      Instead of doing extract($_POST), you can now
+ *             escape fields like this: escape($_POST)
  *
- * @param array $what		$_GET, $_POST or any other array
+ * @param array $what         $_GET, $_POST or any other array
+ * @param array $dontStrip    an array of key names in $what, whose values should not be stripped of HTML
  */
 
-function escape($what, $strip=true)
+function escape($what, $dontStrip=array())
 {
 	global $db;
 
@@ -22,13 +23,13 @@ function escape($what, $strip=true)
 	{
 		if (is_string($value))
 		{
-			if ($strip)
+			if (in_array($variable, $dontStrip))
 			{
-				$GLOBALS[$variable] = $db->real_escape_string(strip_tags($value));
+				$GLOBALS[$variable] = $db->real_escape_string($value);
 			}
 			else
 			{
-				$GLOBALS[$variable] = $db->real_escape_string($value);
+				$GLOBALS[$variable] = $db->real_escape_string(strip_tags($value));
 			}
 		}
 		else
