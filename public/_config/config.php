@@ -7,7 +7,7 @@
  *             (see license.txt).
  */
   
-	define('APP_PATH', str_replace(DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, str_replace('_config', '', dirname(__FILE__)) . DIRECTORY_SEPARATOR));
+	define('APP_PATH', dirname(dirname(__FILE__)).'/');
 
 	// Environments setup
 	require_once APP_PATH . '_config/config.envs.php';
