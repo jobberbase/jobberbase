@@ -55,7 +55,7 @@
 						mode : "specific_textareas",
 						theme : "advanced",
 						plugins : full ? "table,advimage,advlink,contextmenu," : "",
-						theme_advanced_buttons1 : full ? "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect" : "bold,italic,underline,strikethrough,|,bullist,numlist,|,outdent,indent,|,link,unlink,image,",
+						theme_advanced_buttons1 : full ? "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect" : "bold,italic,underline,strikethrough,|,bullist,numlist,|,outdent,indent,|,link,unlink,image,cleanup,code",
 						theme_advanced_buttons2 : full ? "bullist,numlist,|,outdent,indent,blockquote,|,link,unlink,anchor,image,cleanup,code,|,forecolor,backcolor" : "",
 						theme_advanced_buttons3 : "",
 						theme_advanced_toolbar_location : "top",
