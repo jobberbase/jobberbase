@@ -100,16 +100,6 @@
 		$app = new JobApplication($id);
 		$info['applied_count'] = $app->Count();
 		
-		if (strstr($info['description'], '*'))
-		{
-			$txt = new Textile();
-			$info['description'] = $txt->TextileThis($info['description']);	
-		}
-		else
-		{
-			$info['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $info['description']);
-		}
-		
 		// ######### list other jobs by the same company #########
 		$compjobs = $job->ApiGetJobsByCompany($info['company'], 5, false);
 		$sanitizedcomp = $sanitizer->sanitize_title_with_dashes($info['company']);

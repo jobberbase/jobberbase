@@ -928,25 +928,6 @@ div#sort-by-type a:hover
 	font-size:24px;
 }
 
-#textile-suggestions table
-{
-	font-size:11px;
-	margin-top:5px;
-	width:90%;
-}
-
-#textile-suggestions table th
-{
-	border-bottom:2px solid #bbb;
-	font-weight:bold
-}
-
-#textile-suggestions table td
-{
-	border-bottom:1px solid #ccc;
-	width: 49%
-}
-
 #job-listings .current_page
 {
 	border:1px solid #ccc;

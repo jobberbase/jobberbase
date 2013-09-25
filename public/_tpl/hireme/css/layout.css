@@ -350,9 +350,6 @@ input.submit {	background-color: #79bb1c;	color: #fff;	border: 1px solid #009988
 .suggestion {color: #777;font-size: 11px;}
 	#publish_form a:hover,.suggestion a{background:#666; color:#fff;}
 
-#textile-suggestions table {margin-top: 5px;width: 80%;font-size: 11px;}
-	#textile-suggestions table th {	border-bottom: 2px solid #bbb;	font-weight: bold;}
-	#textile-suggestions table td {	border-bottom: 1px solid #ccc;}
 #location_outside_ro {margin-top: 5px;}	
 
 ul.margin{margin-left:20px;}

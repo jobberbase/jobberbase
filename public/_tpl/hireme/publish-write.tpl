@@ -73,56 +73,6 @@
 							<td class="publish-label" valign="top">{$translations.publish.description_label}:</td>
 							<td><textarea {if $errors.description}class="error"{/if} tabindex="4" name="description" id="description" cols="80" rows="15">{if $job.company}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
 								{if $errors.description}<span class="validation-error"><img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" /></span>{/if}
-								<div class="suggestion">
-									<a target="_blank" href="http://www.textism.com/tools/textile/" onclick="$('#textile-suggestions').toggle(); return false;">{$translations.publish.description_info}</a></div>
-								<div id="textile-suggestions" style="display: none;">
-									<table>
-											<thead>
-											<tr class="odd">
-												<th>{$translations.publish.syntax}</th>
-												<th>{$translations.publish.result}</th>
-											</tr>
-											</thead>
-											<tbody>
-											<tr class="even">
-												<td>That is _incredible_</td>
-												<td>That is <em>incredible</em></td>
-
-											</tr>
-											<tr class="odd">
-												<td>*Indeed* it is</td>
-												<td><strong>Indeed</strong> it is</td>
-											</tr>
-											<tr class="even">
-												<td>"Wikipedia":http://www.wikipedia.org</td>
-
-												<td><a href="http://www.wikipedia.org">Wikipedia</a></td>
-											</tr>
-											<tr class="odd">
-												<td>* apples<br />* oranges<br />* pears</td>
-												<td>
-
-													<ul>
-														<li>apples</li>
-														<li>oranges</li>
-														<li>pears</li>
-													</ul>
-												</td>
-											</tr>
-
-											<tr class="even">
-												<td># first<br /># second<br /># third</td>
-												<td>
-													<ol>
-														<li>first</li>
-														<li>second</li>
-														<li>third</li>
-													</ol>
-												</td>
-											</tr>
-											</tbody>
-										</table>
-								</div><!-- #textile-suggestions -->
 							</td>
 						</tr>
 					</table>

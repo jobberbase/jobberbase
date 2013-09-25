@@ -21,14 +21,6 @@
 	}
 	
 	$jobInfo = $job->GetInfo();
-	if (strstr($jobInfo['description'], '*'))
-	{
-		$jobInfo['description'] = $textile->TextileThis($jobInfo['description']);	
-	}
-	else
-	{
-		$jobInfo['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $jobInfo['description']);
-	}
 	$smarty->assign('job', $jobInfo);
 	$html_title = stripslashes($jobInfo['title']) . ' at ' . stripslashes($jobInfo['company']) . ' / ' . SITE_NAME;
 	$template = 'publish-verify.tpl';

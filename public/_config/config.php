@@ -37,7 +37,6 @@
 	require_once APP_PATH . '_lib/class.Cache.php';
 	require_once APP_PATH . '_lib/class.phpmailer.php';
 	require_once APP_PATH . '_lib/class.Postman.php';
-	require_once APP_PATH . '_lib/class.Textile.php';
 	require_once APP_PATH . '_lib/class.Sanitizer.php';
 	require_once APP_PATH . '_lib/class.Db.php';
 	// comment the previous line and uncomment the next line if you get a Class 'mysqli' not found error
@@ -119,10 +118,6 @@
 	$smarty->compile_dir = APP_PATH .'_tpl' . DIRECTORY_SEPARATOR . THEME . DIRECTORY_SEPARATOR . '_cache';
 	
 	
-	// Create Textile object
-	$textile = new Textile;
-
-
 	// Split URL - get parameters
 	$_app_info['params'] = array();
 	

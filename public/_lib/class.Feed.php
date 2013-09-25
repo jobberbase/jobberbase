@@ -89,8 +89,6 @@ class Feed
 			{
 				$properties['description'] .= '<strong>URL:</strong> <a href="' . $job['url'] . '">' . $job['url'] . '</a><br /><br />';
 			}
-			$textile = new Textile();
-			$job['description'] = $textile->TextileThis($job['description']);
 			$properties['description'] .= '<strong>Description:</strong><br />' . $job['description'] . '<br /><br />';
 			$properties['description'] .= '<a href="' . BASE_URL . URL_JOB .'/' . $job['id'] . '/' . $job['url_title'] . '/' . '">Apply to this job</a><br />';
 			$properties['link'] = BASE_URL . URL_JOB .'/' . $job['id'] . '/' . $job['url_title'] . '/';

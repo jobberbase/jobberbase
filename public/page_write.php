@@ -48,8 +48,6 @@
 		$job = new Job($id);
 		$jobs = $job->GetInfo();
 
-		$jobs['description'] = $textile->noTextile($jobs['description']);
-		
 		if (strstr($jobs['url'], 'http://'))
 		{
 			$jobs['url'] = substr($jobs['url'], 7, strlen($jobs['url']));
@@ -60,7 +58,7 @@
 	// this branch executes after first writing a post and hitting the submit button
 	if (!empty($_POST['action']) && $_POST['action'] == 'publish')
 	{
-		escape($_POST);
+		escape($_POST, array('description'));
 		$errors = array();
 		
 		$_SESSION['user_ip'] = $_SERVER['REMOTE_ADDR'];
@@ -155,7 +153,7 @@
 	}
 	else if (!empty($_POST['action']) && $_POST['action'] == 'edit' /*&& $_SERVER['REMOTE_ADDR'] == $_SESSION['user_ip']*/)
 	{
-		escape($_POST);
+		escape($_POST, array('description'));
 		$errors = array();
 		
 		$_SESSION['referer'] = BASE_URL . 'post/';
