@@ -20,6 +20,7 @@ if ($id != 0)
 	$smarty->assign_by_ref('job', $jobToEdit);
 	
 	$smarty->assign('show_preview', false);
+	$smarty->assign('editor', true);
 	
 	if (!empty($_POST))
 	{
@@ -79,7 +80,6 @@ if ($id != 0)
 		$jobToEdit['type_var_name'] = get_type_varname_by_id($_POST['type_id']);
 		$jobToEdit['type_id'] = $_POST['type_id'];
 		
-		$jobToEdit['textiledDescription'] = $textile->TextileThis($_POST['description']);
 		$jobToEdit['location_outside_ro'] = $jobToEdit['location_outside_ro_where'];
 		
 		$is_location_anywhere = $jobToEdit['city_id'] == 0 && $jobToEdit['location_outside_ro'] == '';
@@ -104,10 +104,10 @@ if ($id != 0)
 				$smarty->assign('show_preview', true);
 			else
 			{
-				escape($_POST);	
+				escape($_POST, array('description'));
 				
 				$data = array('company' => $company,
-				          	  'url' => $url,
+				              'url' => $url,
 				              'title' => $title,
 				              'city_id' => $city_id,
 				              'category_id' => $category_id,

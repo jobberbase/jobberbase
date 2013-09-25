@@ -22,7 +22,7 @@
 				{/if}
 			</p>
 			<div id="job-description">
-				{$job.textiledDescription}
+				{$job.description}
 			</div>
 		</div><!-- #job-details -->
 	</div>

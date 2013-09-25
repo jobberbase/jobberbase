@@ -65,59 +65,7 @@
 						</div>
 						<div class="group{if $errors.description} error{/if}">
 							<label for="description">{$translations.publish.description_label}</label>
-							<textarea name="description" id="description" cols="70" rows="15">{if $job.description}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
-							<div class="suggestion">
-								<a target="_blank" href="http://www.textism.com/tools/textile/" onclick="$('#textile-suggestions').toggle(); return false;">{$translations.publish.description_info}</a>
-							</div>
-							<div id="textile-suggestions" style="display: none;">
-								<table>
-									<thead>
-										<tr class="odd">
-											<th>{$translations.publish.syntax}</th>
-											<th>{$translations.publish.result}</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="even">
-											<td>That is _incredible_</td>
-											<td>That is <em>incredible</em></td>
-	
-										</tr>
-										<tr class="odd">
-											<td>*Indeed* it is</td>
-											<td><strong>Indeed</strong> it is</td>
-										</tr>
-										<tr class="even">
-											<td>"Wikipedia":http://www.wikipedia.org</td>
-	
-											<td><a href="http://www.wikipedia.org">Wikipedia</a></td>
-										</tr>
-										<tr class="odd">
-											<td>* apples<br />* oranges<br />* pears</td>
-											<td>
-	
-												<ul>
-													<li>apples</li>
-													<li>oranges</li>
-													<li>pears</li>
-												</ul>
-											</td>
-										</tr>
-	
-										<tr class="even">
-											<td># first<br /># second<br /># third</td>
-											<td>
-												<ol>
-													<li>first</li>
-													<li>second</li>
-	
-													<li>third</li>
-												</ol>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div><!-- #textile-suggestions -->
+							<textarea name="description" id="description" class="mceEditor" cols="70" rows="15">{if $job.description}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
 						</div>
 					</div>
 				</div>
@@ -160,6 +108,7 @@
 		
 		{literal}
 		<script type="text/javascript">
+			jobberBase.editor.init(false);
 			$(document).ready(function()
 			{
 				$('#type_id_1').focus();

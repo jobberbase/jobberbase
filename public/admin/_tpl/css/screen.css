@@ -510,9 +510,6 @@ div.category div {
 	float: left;
 	margin-left: 1em;}
 
-#textile-suggestions table th, #textile-suggestions table td {
-	width: 50%;}
-
 /* NOTIFICATIONS */
 .attention, .approved, .fail, .information {
 	background-repeat:no-repeat;

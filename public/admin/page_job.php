@@ -9,16 +9,6 @@
 		$app = new JobApplication($id);
 		$info['applicants'] = $app->getAllForJob();
 
-		if (strstr($info['description'], '*'))
-		{
-			$txt = new Textile();
-			$info['description'] = $txt->TextileThis($info['description']);	
-		}
-		else
-		{
-			$info['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $info['description']);
-		}
-
 		$smarty->assign('job', $info);
 		$smarty->assign('applicants', $info['applicants']);
 		$smarty->assign('cv_path', '/' . FILE_UPLOAD_DIR);
