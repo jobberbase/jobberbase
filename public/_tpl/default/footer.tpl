@@ -53,7 +53,11 @@
 	<script src="{$BASE_URL}js/functions.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
+	{if $editor}
+		Jobber.InitEditor();
+	{/if}
 	{literal}
+
  		$(document).ready(function()
 		{
 			Jobber.I18n = {/literal}{$translationsJson}{literal};

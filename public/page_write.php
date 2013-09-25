@@ -3,6 +3,7 @@
 	$captcha_enabled = ENABLE_RECAPTCHA && ENABLE_CAPTCHA_ON_POST_PAGE;
 
 	$smarty->assign('ENABLE_RECAPTCHA', $captcha_enabled);
+	$smarty->assign('editor', true);
 	
 	if ($captcha_enabled)
 	{

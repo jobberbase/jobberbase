@@ -13,6 +13,9 @@
 	{/if}
 	<link rel="stylesheet" href="{$BASE_URL}_tpl/{$THEME}/css/screen.css" type="text/css" media="screen" />
 	<script src="{$BASE_URL}js/jquery.js" type="text/javascript"></script>
+	{if $editor}
+	<script src="{$BASE_URL}js/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+	{/if}
 </head>
 
 <body>

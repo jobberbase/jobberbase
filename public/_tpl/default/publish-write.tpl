@@ -71,7 +71,7 @@
 						</tr>
 						<tr>
 							<td valign="top">{$translations.publish.description_label}:</td>
-							<td><textarea {if $errors.description}class="error"{/if} tabindex="4" name="description" id="description" cols="80" rows="15">{if $job.company}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
+							<td><textarea class="mceEditor {if $errors.description}error{/if}" tabindex="4" name="description" id="description" cols="80" rows="15">{if $job.company}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
 								{if $errors.description}<span class="validation-error"><img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" /></span>{/if}
 							</td>
 						</tr>

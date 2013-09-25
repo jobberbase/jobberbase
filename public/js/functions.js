@@ -74,6 +74,17 @@
 					$("#report-spam-response").html(status);
 			  }
 			});
+		},
+
+		InitEditor: function() {
+			if (typeof tinyMCE != 'object') {
+				return;
+			}
+			tinyMCE.init({
+				mode : "specific_textareas",
+				theme : "simple",
+				editor_selector : "mceEditor"
+			});
 		}
 	}
 })();
