@@ -28,7 +28,6 @@
 	<script src="{$BASE_URL_ADMIN}_tpl/js/jquery.easing.1.3.js" type="text/javascript"></script>
 	{if $editor}
 	<script src="{$BASE_URL}js/tiny_mce/tiny_mce.js" type="text/javascript"></script>
-	<script src="{$BASE_URL_ADMIN}_tpl/js/editor.js" type="text/javascript"></script>
 	{/if}
 </head>
 

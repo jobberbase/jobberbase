@@ -63,7 +63,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="block mb2">
+			<div class="block mb2 hidden">
 				<h3>Links</h3>
 				<div class="block_inner">
 					<p>Make a selection in the editor or select an existing link and click on one of the links bellow.</p>
@@ -88,38 +88,50 @@
 </div><!-- #content -->
 {literal}
 	<script type="text/javascript">
-		jobberBase.editor();
+		jobberBase.editor.init(true); // passing true to init full-featured editor
+		$(document).ready(function()
+		{
+			$('#page_title').focus();
+
+			$("#publish_form").validate({
+				rules: {
+					page_title: { required: true },
+					page_content: { required: true },
+					page_url: { required: true },
+					page_page_title: { required: true }
+				},
+				messages: {
+					page_title: '',
+					page_content: '',
+					page_url: '',
+					page_page_title: ''
+				}
+			});
+
+			$('#page_has_form').change(
+				function(){
+					$(this)
+						.parent()
+						.nextAll()
+						.toggleClass('hidden');
+				}
+			);
+
+			if (jobberBase.editor.initialized) {
+				$('#links_list').click(function(e){
+					if ($(e.target).is('a')) {
+						e.target.blur();
+						jobberBase.editor.insertLink($(e.target).attr('rel'), $(e.target).text());
+					}
+					return false;
+				});
+
+				$('#links_list')
+					.parent()
+					.parent()
+					.removeClass('hidden');
+			}
+		});
 	</script>
 {/literal}
-{literal}
-		<script type="text/javascript">
-			$(document).ready(function()
-			{
-				$('#page_title').focus();
-				
-				$("#publish_form").validate({
-					rules: {
-						page_title: { required: true },
-						page_content: { required: true },
-						page_url: { required: true },
-						page_page_title: { required: true }
-					},
-					messages: {
-						page_title: '',
-						page_content: '',
-						page_url: '',
-						page_page_title: ''
-					}
-				});
-				$('#page_has_form').change(
-					function(){
-						$(this)
-							.parent()
-							.nextAll()
-							.toggleClass('hidden');
-					}
-				);
-			});
-		</script>
-		{/literal}
 {include file="footer.tpl"}
