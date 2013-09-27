@@ -183,7 +183,33 @@
 			}
 			break;
 	}
-	
+
+	// get jobs
+	$smarty->assign('jobs_count_all', $job->CountJobs());
+
+	if (SIDEBAR_SHOW_WHAT == 'categories')
+	{
+		$smarty->assign('jobs_count_all_categs', $job->GetJobsCountForAllCategs());
+	}
+	else
+	{
+		$numberOfJobsInOtherCities = $job->GetNumberOfJobsInOtherCities();
+
+		$smarty->assign('jobs_count_in_other_cities', $numberOfJobsInOtherCities);
+		$smarty->assign('hide_other_cities_in_sidebar', $numberOfJobsInOtherCities < SIDEBAR_ONLY_CITIES_WITH_AT_LEAST_NUMBER_OF_JOBS);
+
+		$jobsCountPerCity = $job->GetJobsCountPerCity();
+
+		// exclude the cities that don't have at least the specified number of jobs 
+		foreach ($jobsCountPerCity as $index => $jobsPerCity)
+		{
+			if ($jobsPerCity['jobs_in_city'] < SIDEBAR_ONLY_CITIES_WITH_AT_LEAST_NUMBER_OF_JOBS)
+				unset($jobsCountPerCity[$index]);
+		}
+
+		$smarty->assign('jobs_count_per_city', $jobsCountPerCity);
+	}
+
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('articles', get_articles());
