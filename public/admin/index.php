@@ -236,6 +236,9 @@
 			break;
 	}
 	
+	// list of available languages
+	$smarty->assign('languages', $translator->getLanguages());
+
 	// translations
 	$smarty->assign('translations', $translations);
 	// create a JSON string from the translations array, but only for the "js" section
