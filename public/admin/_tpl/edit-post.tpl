@@ -30,7 +30,7 @@
 							{section name=tmp2 loop=$types}
 							<div>
 								<label for="type_id_{$types[tmp2].id}">
-									<input class="no-border" type="radio" name="type_id" id="type_id_{$types[tmp2].id}" value="{$types[tmp2].id}" {if !$job.type_id && !$smarty.post.type_id}{if $types[tmp2].id == 1}checked="checked"{/if}{else}{if $types[tmp2].id == $job.type_id}checked="checked"{/if}{if $types[tmp2].id == $smarty.post.type_id}checked="checked"{/if}{/if} />
+									<input class="no-border" type="radio" name="type_id" id="type_id_{$types[tmp2].id}" value="{$types[tmp2].id}" {if !$job.type_id && !$smarty.post.type_id}{if $types[tmp2].id == 1}checked="checked"{/if}{else}{if $types[tmp2].id == $job.type_id}checked="checked"{else}{if $types[tmp2].id == $smarty.post.type_id}checked="checked"{/if}{/if}{/if} />
 									<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-{$types[tmp2].var_name}.png" alt="{$types[tmp2].name}" />
 								</label>
 							</div>
@@ -40,7 +40,7 @@
 							<label>Category</label>
 							<select name="category_id" id="category_id" class="ml1">
 							{section name=tmp1 loop=$categories}
-								<option value="{$categories[tmp1].id}" {if $default_categ_id != '' && $default_categ_id == $categories[tmp1].id}selected="selected"{else}{if $categories[tmp1].id == $job.category_id}selected="selected"{/if}{if $categories[tmp1].id == $smarty.post.category_id}selected="selected"{/if}{/if}>{$categories[tmp1].name}</option>
+								<option value="{$categories[tmp1].id}" {if $default_categ_id != '' && $default_categ_id == $categories[tmp1].id}selected="selected"{else}{if $categories[tmp1].id == $job.category_id}selected="selected"{else}{if $categories[tmp1].id == $smarty.post.category_id}selected="selected"{/if}{/if}{/if}>{$categories[tmp1].name}</option>
 							{/section}
 							</select>
 						</div>
