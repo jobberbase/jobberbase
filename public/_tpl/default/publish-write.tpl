@@ -54,6 +54,13 @@
 							</td>
 						</tr>
 						<tr>
+							<td class="publish-label" valign="top">{$translations.publish.subtitle_label}:</td>
+							<td>
+								<input {if $errors.title}class="error"{/if} type="text" name="subtitle" id="subtitle" tabindex="2" size="50" value="{if $job.title}{$job.subtitle|escape}{else}{$smarty.post.subtitle|escape}{/if}" />
+								<div class="suggestion">{$translations.publish.subtitle_info}</div>
+							</td>
+						</tr>
+						<tr>
 							<td valign="top">{$translations.publish.location_label}:</td>
 							<td>
 								<select name="city_id" id="city_id" tabindex="3" {if $job.location_outside_ro != '' OR $smarty.post.location_outside_ro_where != ''}disabled="disabled"{/if}>
