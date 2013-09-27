@@ -54,10 +54,10 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="publish-label" valign="top">{$translations.publish.subtitle_label}:</td>
+							<td class="publish-label" valign="top">{$translations.publish.summary_label}:</td>
 							<td>
-								<input {if $errors.title}class="error"{/if} type="text" name="subtitle" id="subtitle" tabindex="2" size="50" value="{if $job.title}{$job.subtitle|escape}{else}{$smarty.post.subtitle|escape}{/if}" />
-								<div class="suggestion">{$translations.publish.subtitle_info}</div>
+								<input {if $errors.title}class="error"{/if} type="text" name="summary" id="summary" tabindex="2" size="50" value="{if $job.title}{$job.summary|escape}{else}{$smarty.post.summary|escape}{/if}" />
+								<div class="suggestion">{$translations.publish.summary_info}</div>
 							</td>
 						</tr>
 						<tr>
