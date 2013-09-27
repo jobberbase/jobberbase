@@ -20,6 +20,7 @@ class Job
 	var $mTypeName = false;
 	var $mCategoryId = false;
 	var $mTitle = false;
+	var $mSummary = false;
 	var $mDescription = false;
 	var $mCompany = false;
 	var $mLocation = false;
@@ -47,8 +48,8 @@ class Job
 		if (is_numeric($job_id))
 		{
 			$sanitizer = new Sanitizer;
-			$sql = 'SELECT a.type_id AS type_id, a.category_id AS category_id, a.title AS title, a.description AS description, 
-			               a.company AS company, a.url AS url, a.apply AS apply, 
+			$sql = 'SELECT a.type_id AS type_id, a.category_id AS category_id, a.title AS title, a.summary AS summary, 
+			               a.description AS description, a.company AS company, a.url AS url, a.apply AS apply, 
 			               DATE_FORMAT(a.created_on, "' . DATE_FORMAT . '") AS created_on, a.created_on AS mysql_date,
 			               a.is_temp AS is_temp, a.is_active AS is_active, a.spotlight AS spotlight,
 			               a.views_count AS views_count, a.auth AS auth, a.city_id AS city_id, a.outside_location AS outside_location,
@@ -68,6 +69,7 @@ class Job
 				$this->mCategoryId = $row['category_id'];
 				$this->mCategoryName = $row['category_name'];
 				$this->mTitle = str_replace('&', '&amp;', $row['title']);
+				$this->mSummary = str_replace('&', '&amp;', $row['summary']);
 				$this->mDescription = $row['description'];
 				$this->mCompany = $row['company'];
 				$this->mUrl = $row['url'];
@@ -103,6 +105,7 @@ class Job
 					 'company' => stripslashes($this->mCompany),
 					 'url' => stripslashes($this->mUrl),
 					 'title' => stripslashes($this->mTitle),
+					 'summary' => stripslashes($this->mSummary),
 					 'url_title' => stripslashes($this->mUrlTitle),
 					 'location' => $this->mLocation,
 					 'location_outside_ro' => $this->mLocationOutsideRo,
@@ -136,6 +139,7 @@ class Job
 					 'company' => stripslashes($this->mCompany),
 					 'url' => stripslashes($this->mUrl),
 					 'title' => stripslashes($this->mTitle),
+					 'summary' => stripslashes($this->mSummary),
 					 'url_title' => stripslashes($this->mUrlTitle),
 					 'location' => $this->mLocation,
 					 'location_outside_ro' => $this->mLocationOutsideRo,
@@ -640,7 +644,7 @@ class Job
 				}
 				if ($found_city)
 				{
-					$conditions .= ' AND (title LIKE "%' . $keywords . '%" OR company LIKE "%' . $keywords . '%"' .  ' OR description LIKE "%' . $keywords . '%")';	
+					$conditions .= ' AND (title LIKE "%' . $keywords . '%" OR summary LIKE "%' . $keywords . '%" OR company LIKE "%' . $keywords . '%"' .  ' OR description LIKE "%' . $keywords . '%")';	
 				}
 			}
  
@@ -648,7 +652,7 @@ class Job
 			{
 				if ($kw1 != '')
 				{
-					$conditions .= ' (title LIKE "%' . $kw1 . '%" OR company LIKE "%' . $kw1 . '%" OR description LIKE "%'. $kw1 . '%")';
+					$conditions .= ' (title LIKE "%' . $kw1 . '%" OR summary LIKE "%' . $kw1 . '" OR company LIKE "%' . $kw1 . '%" OR description LIKE "%'. $kw1 . '%")';
 					$_SESSION['keywords_array'][] = $kw1;
 				}
 				if ($kw2 != '')
@@ -672,7 +676,7 @@ class Job
 					{
 						$extra_conditions .= ' OR city_id = ' . $row['id'];
 					}
-					$conditions = 'title LIKE "%' . $keywords . '%" OR company LIKE "%' . $keywords . '%"' .  ' OR description LIKE "%' . $keywords . '%" OR outside_location LIKE "%' . $keywords . '%"' . $extra_conditions;
+					$conditions = 'title LIKE "%' . $keywords . '%" OR summary LIKE "%' . $keywords . '%" OR company LIKE "%' . $keywords . '%"' .  ' OR description LIKE "%' . $keywords . '%" OR outside_location LIKE "%' . $keywords . '%"' . $extra_conditions;
  
 					$_SESSION['keywords_array'][] = $keywords;
 				}
@@ -726,7 +730,7 @@ class Job
 		            $check_cities .= 'OR city_id = "'.$cities_r[$a].'" ';
 		          }
 		        }
-		        $conditions .= 'AND (title LIKE "%' . $keywords_r[$i] . '%" OR company LIKE "%' . $keywords_r[$i] . '%" OR description LIKE "%' . $keywords_r[$i] . '%" OR outside_location LIKE "%' . $keywords_r[$i] . '%" '.$check_cities.' ) ';
+		        $conditions .= 'AND (title LIKE "%' . $keywords_r[$i] . '%" OR summary LIKE "%' . $keywords_r[$i] . '%" OR company LIKE "%' . $keywords_r[$i] . '%" OR description LIKE "%' . $keywords_r[$i] . '%" OR outside_location LIKE "%' . $keywords_r[$i] . '%" '.$check_cities.' ) ';
 		    }
  
 			$sql = 'SELECT id
@@ -870,11 +874,12 @@ class Job
 		{
 			$params['apply_online'] = 0;
 		}
-		$sql = 'INSERT INTO '.DB_PREFIX.'jobs (type_id, category_id, title, description, company, city_id, url, apply, created_on, is_temp, is_active, 
+		$sql = 'INSERT INTO '.DB_PREFIX.'jobs (type_id, category_id, title, summary, description, company, city_id, url, apply, created_on, is_temp, is_active, 
 			                       views_count, auth, outside_location, poster_email, apply_online, spotlight)
 		                         VALUES (' . $params['type_id'] . ',
 		                                 ' . $params['category_id'] . ',
 		                                 "' . $params['title'] . '",
+										 "' . $params['summary'] . '",
 		                                 "' . $params['description'] . '",
 		                                 "' . $params['company'] . '",
 		                                 ' . $params['city_id'] . ',
@@ -909,6 +914,7 @@ class Job
 		$sql = 'UPDATE '.DB_PREFIX.'jobs SET type_id = ' . $params['type_id'] . ',
         										category_id = ' . $params['category_id'] . ',
 										        title = "' . $params['title'] . '",
+										        summary = "' . $params['summary'] . '",
 										        description = "' . $params['description'] . '",
 										        company = "' . $params['company'] . '",
 										        city_id = ' . $params['city_id'] . ',

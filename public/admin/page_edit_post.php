@@ -69,6 +69,7 @@ if ($id != 0)
 		$jobToEdit['company'] = $_POST['company'];
 		$jobToEdit['url'] = $_POST['url'];
 		$jobToEdit['title'] = $_POST['title'];
+		$jobToEdit['summary'] = $_POST['summary'];
 		$jobToEdit['city_id'] = $city_id;
 		$jobToEdit['location_outside_ro_where'] = ($isCitySelected ? '' : $_POST['location_outside_ro_where']);
 		$jobToEdit['category_id'] = $_POST['category_id'];
@@ -109,6 +110,7 @@ if ($id != 0)
 				$data = array('company' => $company,
 				              'url' => $url,
 				              'title' => $title,
+				              'summary' => $summary,
 				              'city_id' => $city_id,
 				              'category_id' => $category_id,
 				              'type_id' => $type_id,

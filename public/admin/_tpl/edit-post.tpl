@@ -50,6 +50,11 @@
 							<div class="{$translations.publish.title_info}"></div>
 						</div>
 						<div class="group">
+							<label for="summary">{$translations.publish.summary_label}</label>
+							<input type="text" name="summary" id="summary" size="50" value="{if $job.summary}{$job.summary|escape}{else}{$smarty.post.summary|escape}{/if}" />
+							<div class="{$translations.publish.summary_info}"></div>
+						</div>
+						<div class="group">
 							<label for="city_id">{$translations.publish.location_label}</label>
 							<select name="city_id" id="city_id" {if $job.location_outside_ro != ''}disabled="disabled"{/if} class="ml1">
 								<option value="0">{$translations.jobs.location_anywhere}</option>
