@@ -278,10 +278,10 @@ class Postman extends Translator
 			'SENDER_IP' => $_SERVER['REMOTE_ADDR'],
 			'SEND_DATE' => date('Y-m-d H:i')
 		);
-		$email_data = $this->getEmailData('email_ReportSpam', $replace);
+		$email_data = $this->getEmailData('email_Contact', $replace);
 		
 		$subject = $email_data['subject'];
-		$msg = $email_data['message'];
+		$msg = $msg . "\n" . $email_data['message'];
 		
 		$mailer->SetFrom($email, $name);
     	$mailer->AddAddress(NOTIFY_EMAIL);
