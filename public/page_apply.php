@@ -43,11 +43,12 @@
 
 		$f = pathinfo($_FILES['apply_cv']['name']);
 		$basefilename = $f['filename'] . '_' . uniqid();
+		$filename = $basefilename . '.' . $f['extension'];
 		$suffix = 0;
-		do {
+		while (file_exists(FILE_UPLOAD_DIR . $filename)) {
 			$suffix++;
 			$filename = $basefilename . '_' . $suffix . '.' . $f['extension'];
-		} while (file_exists(FILE_UPLOAD_DIR . $filename));
+		}
 
 		if (move_uploaded_file($_FILES['apply_cv']['tmp_name'], FILE_UPLOAD_DIR . $filename))
 		{
