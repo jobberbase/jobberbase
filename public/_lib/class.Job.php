@@ -1004,19 +1004,26 @@ class Job
 	public function DeleteJobAdmin()
 	{
 		global $db;
-			
+
 		$sql = 'DELETE FROM '.DB_PREFIX.'hits WHERE job_id  = ' . $this->mId;
-		$res = $db->query($sql);	
-		
+		$res = $db->query($sql);
+
+		$sql = 'SELECT cv_path FROM '.DB_PREFIX.'job_applications WHERE job_id = ' . $this->mId;
+		$cvs = $db->QueryArray($sql);
+
 		$sql = 'DELETE FROM '.DB_PREFIX.'job_applications WHERE job_id  = ' . $this->mId;
 		$res = $res && $db->query($sql);
-		
+
 		$sql = 'DELETE FROM '.DB_PREFIX.'spam_reports WHERE job_id  = ' . $this->mId;
 		$res = $res && $db->query($sql);
 
 		$sql = 'DELETE FROM '.DB_PREFIX.'jobs WHERE id  = ' . $this->mId;
 		$res = $res && $db->query($sql);
-		
+
+		foreach ($cvs as $row) {
+			unlink(APP_PATH . FILE_UPLOAD_DIR . $row['cv_path']);
+		}
+
 		return ($res==false)?$res:true;
 	}
 	public function MakeValidUrl($string)
