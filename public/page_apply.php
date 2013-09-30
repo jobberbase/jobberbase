@@ -113,7 +113,7 @@
 		// delete uploaded file (cleanup)
 		if (($attachment != '') && !($settings['keep_uploaded_cvs']))
 		{
-			unlink(APP_PATH . FILE_UPLOAD_DIR . $attachment);
+			@unlink(APP_PATH . FILE_UPLOAD_DIR . $attachment);
 		}
 	}
 	else
