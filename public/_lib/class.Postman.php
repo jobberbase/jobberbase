@@ -16,22 +16,21 @@ class Postman extends Translator
 		parent::__construct(LANG_CODE);
 	}
 	
-	private function getEmailData($section)
+	private function getEmailData($section, $replace=array())
 	{
 		$e = $this->translations[$section];
-		
-		$arguments = func_get_args();
-		if (isset($arguments[1]) && is_array($arguments[1]))
+		$subject = $e['subject'];
+		$message = $e['message'];
+
+		if (is_array($replace) && !empty($replace))
 		{
-			$args = $arguments[1];
-			
-			foreach ($args as $search_for => $replace_with)
+			foreach ($replace as $search_for => $replace_with)
 			{
-				$subject = str_replace('{' . $search_for . '}', $replace_with, $e['subject']);
-				$message = str_replace('{' . $search_for . '}', $replace_with, $e['message']);
+				$subject = str_replace('{' . $search_for . '}', $replace_with, $subject);
+				$message = str_replace('{' . $search_for . '}', $replace_with, $message);
 			}
 		}
-		
+
 		return array('subject' => $subject, 'message' => $message);
 	}
 	
