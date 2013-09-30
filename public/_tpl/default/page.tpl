@@ -17,7 +17,7 @@
 			{if $smarty.session.contact_msg_sent != 1}
 			<div id="contact-form">
 				<div id="contact-form-contents">
-					<form id="apply-online" method="post" action="{$BASE_URL}{$page.url}/">
+					<form id="apply-online" method="post" enctype="multipart/form-data" action="{$BASE_URL}{$page.url}/">
 						<label for="contact_name">{$translations.contact.name_label}:</label><br />
 						<input {if $errors.contact_name}class="error"{/if} type="text" name="contact_name" id="contact_name" maxlength="50" size="30" value="{$smarty.post.contact_name}" />
 						<span class="validation-error">{if $errors.contact_name}<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>	
@@ -29,6 +29,13 @@
 						<label for="contact_msg">{$translations.contact.message_label}:</label><br />
 						<textarea {if $errors.contact_msg}class="error"{/if} name="contact_msg" id="contact_msg" cols="50" rows="8">{$smarty.post.contact_msg}</textarea>
 						<span class="validation-error">{if $errors.contact_msg}<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>
+
+						{if $page.accepts_files == '1'}
+						<br /><br />
+						<label for="contact_attach">{$translations.contact.attachment_label}: <input type="file" name="contact_attach" id="contact_attach" /></label>
+						<span class="validation-error">{if $errors.contact_attach}<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>
+						{/if}
+
 						{if $ENABLE_RECAPTCHA}
 							<br /><br />
 							<label for="recaptcha_response_field">{$translations.captcha.captcha_title}:</label><br />
