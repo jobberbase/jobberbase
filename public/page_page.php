@@ -39,7 +39,7 @@
 			}
 
 			$attachment_path = $attachment_filename = '';
-			if (($pageData['accepts_files'] == '1') && $_FILES['contact_attach'])
+			if (($pageData['accepts_files'] == '1') && array_key_exists('contact_attach', $_FILES))
 			{
 				if ($_FILES['contact_attach']['size'] >= MAX_CV_SIZE)
 				{

@@ -283,8 +283,8 @@ class Postman extends Translator
 		$subject = $email_data['subject'];
 		$msg = $data['message']. "\n" . $email_data['message'];
 		
-		$mailer->SetFrom($email, $name);
-    	$mailer->AddAddress(NOTIFY_EMAIL);
+		$mailer->SetFrom($data['email'], $data['name']);
+		$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
 		$mailer->Body = $this->nl2br($msg);
 		$mailer->AltBody = $msg;
