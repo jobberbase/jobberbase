@@ -267,21 +267,21 @@ class Postman extends Translator
 		}
 	}
 	
-	public function MailContact($name, $email, $msg)
+	public function MailContact($data)
 	{
 		$mailer = $this->getConfiguredMailer();
 		
 		$replace = array(
 			'SITE_NAME' => SITE_NAME,
-			'SENDER_NAME' => $name,
-			'SENDER_EMAIL' => $email,
+			'SENDER_NAME' => $data['name'],
+			'SENDER_EMAIL' => $data['email'],
 			'SENDER_IP' => $_SERVER['REMOTE_ADDR'],
 			'SEND_DATE' => date('Y-m-d H:i')
 		);
 		$email_data = $this->getEmailData('email_Contact', $replace);
 		
 		$subject = $email_data['subject'];
-		$msg = $msg . "\n" . $email_data['message'];
+		$msg = $data['message']. "\n" . $email_data['message'];
 		
 		$mailer->SetFrom($email, $name);
     	$mailer->AddAddress(NOTIFY_EMAIL);
@@ -289,6 +289,11 @@ class Postman extends Translator
 		$mailer->Body = $this->nl2br($msg);
 		$mailer->AltBody = $msg;
 		
+		if ($data['attachment_filename'] != '')
+		{
+			$mailer->AddAttachment($data['attachment_path'], $data['attachment_filename']);
+		}
+
 		if ($mailer->Send())
 		{
 			return true;

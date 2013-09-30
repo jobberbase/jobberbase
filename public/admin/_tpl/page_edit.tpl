@@ -24,9 +24,9 @@
 				</div>
 				<div class="group">
 					<label><input type="checkbox" id="page_has_form" name="page_has_form" value="1"{if $defaults.page_has_form == '1'} checked="checked"{/if} /> Add a contact form?</label>
-					{if $defaults.page_has_form != '1'}<div class="suggestion">You can change the feedback message after you save the page</div>{/if}
+					<label {if $defaults.page_has_form != '1'} class="hidden"{/if}><input type="checkbox" id="page_form_accepts_files" name="page_form_accepts_files" value="1"{if $defaults.page_form_accepts_files == '1'} checked="checked"{/if} /> Accept files in the contact form?</label>
 					<div {if $defaults.page_has_form != '1'} class="hidden"{/if}>
-						<label for="page_form_message">Form message</label></div>
+						<label for="page_form_message">Form feedback message</label></div>
 					<div {if $defaults.page_has_form != '1'} class="hidden"{/if}>
 						<textarea id="page_form_message" name="page_form_message" class="textarea_field mceEditor" cols="70" rows="10">{$defaults.page_form_message}</textarea>
 					</div>

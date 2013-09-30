@@ -431,6 +431,8 @@ ALTER TABLE `job_applications` ADD COLUMN `name` VARCHAR(150) AFTER `job_id`,
 
 ALTER TABLE `jobs` ADD COLUMN `summary` VARCHAR(255) AFTER `title`;
 
+ALTER TABLE `pages` ADD COLUMN `accepts_files` enum('0','1') NOT NULL AFTER `has_form`;
+
  UPDATE `settings` SET `category_id` = 4 WHERE `name` = 'apply_delay';
  UPDATE `settings` SET `category_id` = 5 WHERE `name` IN ('notify_email', 'admin_email');
  UPDATE `settings` SET `category_id` = 6 WHERE `name` IN ('sidebar_only_cities_with_at_least_number_of_jobs', 'sidebar_show_what', 'date_time_format', 'theme', 'date_format');

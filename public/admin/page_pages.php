@@ -104,6 +104,7 @@
 							\'' . $db->real_escape_string($defaults['page_title']) . '\',
 							\'' . $db->real_escape_string($defaults['page_content']) . '\',
 							\'' . (empty($defaults['page_has_form']) ? '0' : '1') . '\',
+							\'' . (empty($defaults['page_form_accepts_files']) ? '0' : '1') . '\',
 							\'' . $db->real_escape_string($defaults['page_form_message']) . '\'
 						)
 				');
@@ -119,6 +120,7 @@
 				'page_title' => $row['title'],
 				'page_content' => $row['content'],
 				'page_has_form' => $row['has_form'],
+				'page_form_accepts_files' => $row['accepts_files'],
 				'page_form_message' => $row['form_message']
 			);
 		}
