@@ -54,7 +54,7 @@ class Postman extends Translator
 			$mailer->SetFrom($my_email);
     		$mailer->AddAddress($friend_email);
 			$mailer->Subject = $subject;
-			$mailer->Body = $this->nl2br($msg);
+			$mailer->Body = nl2br($msg);
 			$mailer->AltBody = $msg;
 
 			if ($mailer->Send())
@@ -90,7 +90,7 @@ class Postman extends Translator
     	$mailer->SetFrom($data['apply_email'], $data['apply_name']);
     	$mailer->AddAddress($data['company_email'], $data['company_name']);
     	$mailer->Subject = $subject;
-    	$mailer->Body = $this->nl2br($msg);
+    	$mailer->Body = nl2br($msg);
     	$mailer->AltBody = $msg;
     	
 		if ($data['attachment_filename'] != '')
@@ -142,7 +142,7 @@ class Postman extends Translator
 		$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
     	$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
-		$mailer->Body = $this->nl2br($msg);
+		$mailer->Body = nl2br($msg);
 		$mailer->AltBody = $msg;
 		
 		if ($mailer->Send())
@@ -173,7 +173,7 @@ class Postman extends Translator
 			$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
 	    	$mailer->AddAddress($poster_email);
 			$mailer->Subject = $subject;
-			$mailer->Body = $this->nl2br($msg);
+			$mailer->Body = nl2br($msg);
 			$mailer->AltBody = $msg;
 			
 			if ($mailer->Send())
@@ -208,7 +208,7 @@ class Postman extends Translator
 			$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
 	    	$mailer->AddAddress($data['poster_email']);
 			$mailer->Subject = $subject;
-			$mailer->Body = $this->nl2br($msg);
+			$mailer->Body = nl2br($msg);
 			$mailer->AltBody = $msg;
 			
 			if ($mailer->Send())
@@ -254,7 +254,7 @@ class Postman extends Translator
 		$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
     	$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
-		$mailer->Body = $this->nl2br($msg);
+		$mailer->Body = nl2br($msg);
 		$mailer->AltBody = $msg;
 		
 		if ($mailer->Send())
@@ -286,7 +286,7 @@ class Postman extends Translator
 		$mailer->SetFrom($data['email'], $data['name']);
 		$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
-		$mailer->Body = $this->nl2br($msg);
+		$mailer->Body = nl2br($msg);
 		$mailer->AltBody = $msg;
 		
 		if ($data['attachment_filename'] != '')
@@ -329,11 +329,6 @@ class Postman extends Translator
 		}
 		
 		return $mailer;
-	}
-	
-	private function nl2br($text)
-	{
-		return str_replace(array("\r\n", "\r", "\n"), "<br />", $text);
 	}
 }
 ?>
