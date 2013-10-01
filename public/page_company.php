@@ -3,6 +3,10 @@
 	
 	$sql = 'SELECT DISTINCT company FROM '.DB_PREFIX.'jobs';
 	$comps = $db->QueryArray($sql);
+	if($id == '_undisclosed_')
+	{
+		$id = '';
+	}
 	foreach ($comps as $comp)
 	{
 		if ($sanitizer->sanitize_title_with_dashes($comp['company']) == $id)

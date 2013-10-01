@@ -521,7 +521,7 @@ class Job
 		$jobs = array();
 		$conditions = '';
 		
-		if ($company)
+		if ($company !== false)
 		{
 			$conditions .= ' AND company LIKE "' . $db->real_escape_string($company) . '"';
 		}

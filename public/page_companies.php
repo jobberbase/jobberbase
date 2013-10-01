@@ -14,9 +14,15 @@
 	{
 		$nr = $company['nr'];
 		$tag_height = get_cloud_tag_height($nr);
+
+		$varname = $sanitizer->sanitize_title_with_dashes($company['company']);
+		if ($varname == '')
+		{
+			$varname = '_undisclosed_';
+		}
 		
 		$companies[] = array('name' => $company['company'], 
-		                     'varname' => $sanitizer->sanitize_title_with_dashes($company['company']), 
+		                     'varname' => $varname, 
 		                     'count' => $nr, 
 		                     'tag_height' => $tag_height);
 	}
