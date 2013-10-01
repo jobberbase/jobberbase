@@ -79,10 +79,6 @@
             $errors['input_id'] = $translations['jobs']['type_error'];
         }
         
-        if ($company == '')
-		{
-			$errors['company'] = $translations['jobs']['name_error'];
-		}
 		if ($title == '')
 		{
 			$errors['title'] = $translations['jobs']['title_error'];
@@ -171,10 +167,6 @@
         {
             $errors['input_id'] = $translations['jobs']['type_error'];
         }
-		if ($company == '')
-		{
-			$errors['company'] = $translations['jobs']['company_error'];
-		}
 		if ($title == '')
 		{
 			$errors['title'] = $translations['jobs']['job_title_error'];

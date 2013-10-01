@@ -48,7 +48,7 @@
 						<tr>
 							<td class="publish-label" valign="top">{$translations.publish.title_label}:</td>
 							<td>
-								<input {if $errors.title}class="error"{/if} type="text" name="title" id="title" tabindex="2" size="50" value="{if $job.company}{$job.title|escape}{else}{$smarty.post.title|escape}{/if}" />
+								<input {if $errors.title}class="error"{/if} type="text" name="title" id="title" tabindex="2" size="50" value="{if $job.title}{$job.title|escape}{else}{$smarty.post.title|escape}{/if}" />
 								{if $errors.title}<span class="validation-error"><img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" /></span>{/if}
 								<div class="suggestion">{$translations.publish.title_info}</div>
 							</td>
@@ -78,7 +78,7 @@
 						</tr>
 						<tr>
 							<td valign="top">{$translations.publish.description_label}:</td>
-							<td><textarea class="mceEditor {if $errors.description}error{/if}" tabindex="4" name="description" id="description" cols="80" rows="15">{if $job.company}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
+							<td><textarea class="mceEditor {if $errors.description}error{/if}" tabindex="4" name="description" id="description" cols="80" rows="15">{if $job.description}{$job.description}{else}{$smarty.post.description}{/if}</textarea>
 								{if $errors.description}<span class="validation-error"><img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" /></span>{/if}
 							</td>
 						</tr>
@@ -89,13 +89,12 @@
 					<table border="0" cellspacing="2" cellpadding="2">
 						<tr>
 							<td class="publish-label">{$translations.publish.name_label}:</td>
-							<td><input {if $errors.company}class="error"{/if} tabindex="6" type="text" name="company" id="company" size="40" value="{if $job.company}{$job.company|escape}{else}{$smarty.post.company|escape}{/if}" />
-							<span class="validation-error">{if $errors.company}<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" />{/if}</span>
+							<td><input tabindex="6" type="text" name="company" id="company" size="40" value="{if $job.company}{$job.company|escape}{else}{$smarty.post.company|escape}{/if}" />
 							</td>
 						</tr> 
 						<tr>
 							<td valign="top">{$translations.publish.website_label}:</td>
-							<td>http://<input tabindex="7" type="text" name="url" id="url" size="35" value="{if $job.company}{$job.url}{else}{$smarty.post.url}{/if}" />
+							<td>http://<input tabindex="7" type="text" name="url" id="url" size="35" value="{if $job.url}{$job.url}{else}{$smarty.post.url}{/if}" />
 								<div class="suggestion">{$translations.publish.website_info}</div>
 							</td>
 						</tr>
@@ -145,16 +144,13 @@
 				$("#publish_form").validate({
 					rules: {
                         type_id: { required: true },
-						company: { required: true },
 						title: { required: true },
 						description: { required: true },
 						poster_email: { required: true, email: true }
 					},
 					messages: {
                         type_id: ' <img src="{/literal}{$BASE_URL}_tpl/{$THEME}/{literal}img/icon-delete.png" alt="" />',					   
-						company: ' <img src="{/literal}{$BASE_URL}_tpl/{$THEME}/{literal}img/icon-delete.png" alt="" />',
 						title: ' <img src="{/literal}{$BASE_URL}_tpl/{$THEME}/{literal}img/icon-delete.png" alt="" />',
-						location: ' <img src="{/literal}{$BASE_URL}_tpl/{$THEME}/{literal}img/icon-delete.png" alt="" />',
 						description: ' <img src="{/literal}{$BASE_URL}_tpl/{$THEME}/{literal}img/icon-delete.png" alt="" />',
 						poster_email: ' <img src="{/literal}{$BASE_URL}_tpl/{$THEME}/{literal}img/icon-delete.png" alt="" />'
 					}

@@ -78,14 +78,14 @@
 				<div id="company_info" class="left span1 block last">
 					<h3>{$translations.publish.company}</h3>
 					<div class="block_inner">
-						<div class="group{if $errors.company} error{/if}">
+						<div class="group">
 							<label for="company">{$translations.publish.name_label}</label>
 							<input type="text" name="company" id="company" size="30" value="{if $job.company}{$job.company|escape}{else}{$smarty.post.company|escape}{/if}" />
 						</div>
 
 						<div class="group">
 							<label for="url">{$translations.publish.website_label}</label>
-							<em>http://</em><input type="text" name="url" id="url" size="25" value="{if $job.company}{$job.url}{else}{$smarty.post.url}{/if}" />
+							<em>http://</em><input type="text" name="url" id="url" size="25" value="{if $job.url}{$job.url}{else}{$smarty.post.url}{/if}" />
 							<div class="suggestion">{$translations.publish.website_info}</div>
 						</div>
 	
@@ -120,15 +120,12 @@
 				
 				$("#publish_form").validate({
 					rules: {
-						company: { required: true },
 						title: { required: true },
 						description: { required: true },
 						poster_email: { required: true, email: true }
 					},
 					messages: {
-						company: '',
 						title: '',
-						location: '',
 						description: '',
 						poster_email: ''
 					}

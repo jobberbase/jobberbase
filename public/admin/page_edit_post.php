@@ -31,8 +31,6 @@ if ($id != 0)
         {
             $errors['input_id'] = $translations['jobs']['type_error']; $_POST['type_id'] = 0;
         }
-        if ($_POST['company'] == '')
-			$errors['company'] = $translations['jobs']['name_error'];
 		
 		if ($_POST['title'] == '')
 			$errors['title'] = $translations['jobs']['title_error'];
