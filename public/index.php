@@ -64,7 +64,16 @@
 		case 'search':
 			require_once 'page_search.php';
 			break;
-						
+
+		// subscriptions management page
+		case 'subscriptions':
+			require_once 'page_subscriptions.php';
+			break;
+
+		case 'subscribe':
+			require_once 'page_subscribe.php';
+			break;
+
 		// job post page, with the job's details
 		case URL_JOB:
 			require_once 'page_job.php';

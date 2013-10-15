@@ -1,56 +1,83 @@
 <?php
+	$email = $auth = null;
 	if (!empty($_POST) && isset($_POST['email']) && isset($_POST['auth']))
 	{
 		$email = $db->real_escape_string($_POST['email']);
 		$auth = $db->real_escape_string($_POST['auth']);
-		if (Subscriber::isValid($email, $auth)) {
-			$subscriber = new Subscriber($email);
-			$postman = new Postman();
+	}
+	elseif (!empty($id) && !empty($extra))
+	{
+		$email = $id;
+		$auth = $extra;
+	}
+	if (!empty($email) && !empty($auth) && Subscriber::isValid($email, $auth)) {
+		$subscriber = new Subscriber($email);
+		$postman = new Postman();
 
-			if (isset($_POST['delete_subscriber']))
+		if (isset($_POST['delete_subscriber']))
+		{
+			if ($subscriber->delete())
 			{
-				if ($subscriber->delete())
-				{
-					$postman->MailSubscriptionRemoved($email);
-					$template = 'subscriptions_removed.tpl';
-				}
-			}
-			else
-			{
-				$categories = array();
-				if(isset($_POST['categories']) && is_array($_POST['categories']))
-				{
-					foreach($_POST['categories'] as $category)
-					{
-						$categories[] = $db->real_escape_string($category);
-					}
-				}
-				if ($subscriber->updateSubscriptions($categories))
-				{
-					$postman->MailSubscriptionUpdated($email, $auth);
-					$smarty->assign('subscriptions_updated', true);
-				}
-				$smarty->assign('subscriptions_email', $email);
-				$smarty->assign('subscriptions_auth', $auth);
-				$smarty->assign('subscriptions_categories_confirmed', $categories);
-				$smarty->assign('subscriptions_categories_unconfirmed', array());
-				$template = 'subscriptions_manage.tpl';
+				$postman->MailSubscriptionRemoved($email);
+				$template = 'subscriptions-removed.tpl';
 			}
 		}
 		else
 		{
-			redirect_to(BASE_URL);
-			exit;
+			$all_categories = get_categories();
+			$categories = array();
+			foreach ($all_categories as $category)
+			{
+				$category['subscribed'] = false;
+				$categories[$category['id']] = $category;
+			}
+
+			$subscriptions_updated = false;
+
+			if(isset($_POST['save_settings']))
+			{
+				$subscribe_categories = array();
+				if(isset($_POST['categories']) && is_array($_POST['categories']))
+				{
+					foreach($_POST['categories'] as $categoryId)
+					{
+						if (array_key_exists($categoryId, $categories) || ($categoryId === '0'))
+						{
+							$subscribe_categories[] = $db->real_escape_string($categoryId);
+						}
+					}
+				}
+				if ($subscriber->updateSubscriptions($subscribe_categories))
+				{
+					$postman->MailSubscriptionUpdated($email, $auth);
+					$subscriptions_updated = true;
+				}
+			}
+			else
+			{
+				$subscribe_categories = $subscriber->getSubscriptions();
+			}
+
+			$all_jobs_subscribed = false;
+			foreach($subscribe_categories as $categoryId)
+			{
+				if ($categoryId === '0')
+				{
+					$all_jobs_subscribed = true;
+				}
+				else
+				{
+					$categories[$categoryId]['subscribed'] = true;
+				}
+			}
+
+			$smarty->assign('subscriptions_email', $email);
+			$smarty->assign('subscriptions_auth', $auth);
+			$smarty->assign('subscriptions_categories', $categories);
+			$smarty->assign('subscriptions_all_jobs_subscribed', $all_jobs_subscribed);
+			$smarty->assign('subscriptions_updated', $subscriptions_updated);
+			$template = 'subscriptions-manage.tpl';
 		}
-	}
-	elseif (!empty($id) && !empty($extra) && Subscriber::isValid($id, $extra))
-	{
-		$subscriber = new Subscriber($id);
-		$smarty->assign('subscriptions_email', $id);
-		$smarty->assign('subscriptions_auth', $extra);
-		$smarty->assign('subscriptions_categories_confirmed', $subscriber->getConfirmedSubscriptions);
-		$smarty->assign('subscriptions_categories_unconfirmed', $subscriber->getUnconfirmedSubscriptions);
-		$template = 'subscriptions_manage.tpl';
 	}
 	else
 	{

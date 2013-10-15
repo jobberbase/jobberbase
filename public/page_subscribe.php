@@ -13,16 +13,12 @@
 				exit;
 			}
 		}
-		else
-		{
-			$categoryData = null;
-		}
 
 		$subscriber = new Subscriber($email);
 		$postman = new Postman();
 		if ($subscriber->addSubscription($category))
 		{
-			if ($postman->MailSubscriptionPleaseConfirm($email, $categoryData))
+			if ($postman->MailSubscriptionPleaseConfirm($email, $subscriber->getAuthCode()))
 			{
 				echo '1';
 				exit;

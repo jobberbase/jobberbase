@@ -303,7 +303,92 @@ class Postman extends Translator
 			return false;
 		}	
 	}
-	
+
+	public function MailSubscriptionPleaseConfirm($email, $auth)
+	{
+		$mailer = $this->getConfiguredMailer();
+
+		$replace = array(
+			'SITE_NAME' => SITE_NAME,
+			'SITE_URL' => BASE_URL,
+			'SENDER_IP' => $_SERVER['REMOTE_ADDR'],
+			'MANAGE_URL' => BASE_URL . 'subscriptions/' . $email . '/' . $auth . '/'
+		);
+		$email_data = $this->getEmailData('email_SubscriptionPleaseConfirm', $replace);
+		$subject = $email_data['subject'];
+		$msg = $email_data['message'];
+		
+		$mailer->SetFrom(ADMIN_EMAIL);
+		$mailer->AddAddress($email);
+		$mailer->Subject = $subject;
+		$mailer->Body = $msg;
+		
+		if ($mailer->Send())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
+
+	public function MailSubscriptionUpdated($email, $auth)
+	{
+		$mailer = $this->getConfiguredMailer();
+
+		$replace = array(
+			'SITE_NAME' => SITE_NAME,
+			'SITE_URL' => BASE_URL,
+			'SENDER_IP' => $_SERVER['REMOTE_ADDR'],
+			'MANAGE_URL' => BASE_URL . 'subscriptions/' . $email . '/' . $auth . '/'
+		);
+		$email_data = $this->getEmailData('email_SubscriptionUpdated', $replace);
+		$subject = $email_data['subject'];
+		$msg = $email_data['message'];
+		
+		$mailer->SetFrom(ADMIN_EMAIL);
+		$mailer->AddAddress($email);
+		$mailer->Subject = $subject;
+		$mailer->Body = $msg;
+		
+		if ($mailer->Send())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
+
+	public function MailSubscriptionRemoved($email)
+	{
+		$mailer = $this->getConfiguredMailer();
+
+		$replace = array(
+			'SITE_NAME' => SITE_NAME,
+			'SITE_URL' => BASE_URL,
+			'SENDER_IP' => $_SERVER['REMOTE_ADDR']
+		);
+		$email_data = $this->getEmailData('email_SubscriptionRemoved', $replace);
+		$subject = $email_data['subject'];
+		$msg = $email_data['message'];
+		
+		$mailer->SetFrom(ADMIN_EMAIL);
+		$mailer->AddAddress($email);
+		$mailer->Subject = $subject;
+		$mailer->Body = $msg;
+		
+		if ($mailer->Send())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
 
 	private function getConfiguredMailer()
 	{

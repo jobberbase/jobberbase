@@ -104,11 +104,18 @@ class Subscriber {
 		return $this->getSubscriptions(false);
 	}
 
-	protected function getSubscriptions($confirmed=true)
+	public function getSubscriptions($confirmed=null)
 	{
 		global $db;
 
-		$sql = 'SELECT category_id FROM '.DB_PREFIX.'subscriptions WHERE subscriber_id = ' . $this->_id . ' AND confirmed = ' . (int)(bool)$confirmed;
+		if (is_null($confirmed))
+		{
+			$sql = 'SELECT category_id FROM '.DB_PREFIX.'subscriptions WHERE subscriber_id = ' . $this->_id;
+		}
+		else
+		{
+			$sql = 'SELECT category_id FROM '.DB_PREFIX.'subscriptions WHERE subscriber_id = ' . $this->_id . ' AND confirmed = ' . (int)(bool)$confirmed;
+		}
 		if ($tmpResult = $db->QueryArray($sql))
 		{
 			$result = array_map(function($item){ return $item['category_id']; }, $tmpResult);
@@ -130,14 +137,23 @@ class Subscriber {
 	{
 		global $db;
 
-		$sql = 'DELETE FROM '.DB_PREFIX.'subscriptions WHERE subscriber_id = ' . $this->_id . ';'
-			 . 'DELETE FROM '.DB_PREFIX.'subscribers WHERE id = ' . $this->_id;
-		return $db->ExecuteMultiple($sql);
+		$sql = 'DELETE FROM '.DB_PREFIX.'subscriptions WHERE subscriber_id = ' . $this->_id;
+		if ($db->Execute($sql))
+		{
+			$sql = 'DELETE FROM '.DB_PREFIX.'subscribers WHERE id = ' . $this->_id;
+			return $db->Execute($sql);
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	public static function isValid($email, $auth)
 	{
-		$sql = 'SELECT id FROM '.DB_PREFIX.'subscribers WHERE email = ' . $email . ' AND auth = ' . $auth;
+		global $db;
+
+		$sql = 'SELECT id FROM '.DB_PREFIX.'subscribers WHERE email = "' . $email . '" AND auth = "' . $auth . '"';
 		return (bool)$db->QueryItem($sql);
 	}
 

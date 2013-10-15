@@ -38,6 +38,7 @@
 	require_once APP_PATH . '_lib/class.phpmailer.php';
 	require_once APP_PATH . '_lib/class.Postman.php';
 	require_once APP_PATH . '_lib/class.Sanitizer.php';
+	require_once APP_PATH . '_lib/class.Subscriber.php';
 	require_once APP_PATH . '_lib/class.Db.php';
 	// comment the previous line and uncomment the next line if you get a Class 'mysqli' not found error
 	// require_once APP_PATH . '_lib/class.Db.MySql.php';
