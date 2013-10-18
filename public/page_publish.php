@@ -28,7 +28,10 @@
 			$job->Activate();
 		
 		if ($isNewPost)
+		{
 			$postMan->MailPublishToUser($jobInfo);
+			Subscriber::sendJob($id);
+		}
 		
 		$html_title = $translations['jobs']['publish_success'] . ' / ' . SITE_NAME;
 	}

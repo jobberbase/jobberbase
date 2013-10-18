@@ -6,7 +6,7 @@
 		$activator = $j->Activate();
 		$vali = new Postman();
 		$vali->MailPostActivatedToUser($j->GetInfo());
-		
+		Subscriber::sendJob($id);
 		
 		$_SESSION['status'] = $translations['jobs']['activated_success'];	
 		redirect_to(BASE_URL . URL_JOB .'/' . $id . '/');
