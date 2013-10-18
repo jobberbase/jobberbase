@@ -16,29 +16,36 @@ class Subscriber {
 
 	public function __construct($email)
 	{
-		global $db;
-
-		$email = (string)$email;
-
-		$sql = 'SELECT id, auth FROM '.DB_PREFIX.'subscribers WHERE email = "' . $email . '"';
-		$result = $db->QueryRow($sql);
-		if ($result)
+		if (filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
-			$this->_email = $email;
-			$this->_id = $result['id'];
-			$this->_auth = $result['auth'];
+			global $db;
+
+			$email = (string)$email;
+
+			$sql = 'SELECT id, auth FROM '.DB_PREFIX.'subscribers WHERE email = "' . $email . '"';
+			$result = $db->QueryRow($sql);
+			if ($result)
+			{
+				$this->_email = $email;
+				$this->_id = $result['id'];
+				$this->_auth = $result['auth'];
+			}
+			else
+			{
+				$auth = self::generateAuthCode();
+				$sql = 'INSERT INTO '.DB_PREFIX.'subscribers (email, auth)
+							   VALUES ("' . $email . '", "' . $auth . '")';
+				if($db->Execute($sql))
+				{
+					$this->_email = $email;
+					$this->_id = $db->insert_id;
+					$this->_auth = $auth;
+				}
+			}
 		}
 		else
 		{
-			$auth = self::generateAuthCode();
-			$sql = 'INSERT INTO '.DB_PREFIX.'subscribers (email, auth)
-			               VALUES ("' . $email . '", "' . $auth . '")';
-			if($db->Execute($sql))
-			{
-				$this->_email = $email;
-				$this->_id = $db->insert_id;
-				$this->_auth = $auth;
-			}
+			$this = false;
 		}
 	}
 
