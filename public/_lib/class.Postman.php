@@ -310,9 +310,9 @@ class Postman extends Translator
 
 		$replace = array(
 			'SITE_NAME' => SITE_NAME,
-			'SITE_URL' => BASE_URL,
+			'SITE_URL' => APP_URL,
 			'SENDER_IP' => $_SERVER['REMOTE_ADDR'],
-			'MANAGE_URL' => BASE_URL . 'subscriptions/' . $email . '/' . $auth . '/'
+			'MANAGE_URL' => APP_URL . 'subscriptions/' . $email . '/' . $auth . '/'
 		);
 		$email_data = $this->getEmailData('email_SubscriptionPleaseConfirm', $replace);
 		$subject = $email_data['subject'];
