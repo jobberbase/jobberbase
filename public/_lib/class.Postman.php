@@ -122,6 +122,7 @@ class Postman extends Translator
 			'JOB_DESCRIPTION' => $data['description'],
 			'JOB_POSTER_EMAIL' => $data['poster_email'],
 			'JOB_EDIT_URL' => BASE_URL . 'post/' . $data['id'] . '/' . $data['auth'] . '/',
+			'JOB_ACTIVATE_URL' => BASE_URL . 'activate/' . $data['id']. '/' . $data['auth'] . '/',
 			'JOB_DEACTIVATE_URL' => BASE_URL . 'deactivate/' . $data['id'] . '/' . $data['auth'] . '/',
 			'JOB_POSTER_IP' => $_SERVER['REMOTE_ADDR'],
 			'JOB_POST_DATE' => $data['created_on']
