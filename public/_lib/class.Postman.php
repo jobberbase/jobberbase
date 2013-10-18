@@ -52,10 +52,9 @@ class Postman extends Translator
 		if ($friend_email != '' && $my_email != '' && validate_email($friend_email) && validate_email($my_email))
 		{
 			$mailer->SetFrom($my_email);
-    		$mailer->AddAddress($friend_email);
+			$mailer->AddAddress($friend_email);
 			$mailer->Subject = $subject;
 			$mailer->Body = nl2br($msg);
-			$mailer->AltBody = $msg;
 
 			if ($mailer->Send())
 			{
@@ -87,15 +86,14 @@ class Postman extends Translator
 		$subject = $email_data['subject'];
 		$msg = $data['apply_msg'] . "\n" . $email_data['message'];
 		
-    	$mailer->SetFrom($data['apply_email'], $data['apply_name']);
-    	$mailer->AddAddress($data['company_email'], $data['company_name']);
-    	$mailer->Subject = $subject;
-    	$mailer->Body = nl2br($msg);
-    	$mailer->AltBody = $msg;
-    	
+		$mailer->SetFrom($data['apply_email'], $data['apply_name']);
+		$mailer->AddAddress($data['company_email'], $data['company_name']);
+		$mailer->Subject = $subject;
+		$mailer->Body = nl2br($msg);
+
 		if ($data['attachment_filename'] != '')
 		{
-    		$mailer->AddAttachment($data['attachment_path'], $data['attachment_filename']);
+			$mailer->AddAttachment($data['attachment_path'], $data['attachment_filename']);
 		}
 
 		if ($mailer->Send())
@@ -141,7 +139,7 @@ class Postman extends Translator
 		$msg = $email_data['message'];
 		
 		$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
-    	$mailer->AddAddress(NOTIFY_EMAIL);
+		$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
 		$mailer->Body = nl2br($msg);
 		$mailer->AltBody = $msg;
@@ -172,10 +170,9 @@ class Postman extends Translator
 		if ($poster_email != '' && validate_email($poster_email))
 		{
 			$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
-	    	$mailer->AddAddress($poster_email);
+			$mailer->AddAddress($poster_email);
 			$mailer->Subject = $subject;
 			$mailer->Body = nl2br($msg);
-			$mailer->AltBody = $msg;
 			
 			if ($mailer->Send())
 			{
@@ -207,10 +204,9 @@ class Postman extends Translator
 		if ($data['poster_email'] != '' && validate_email($data['poster_email']))
 		{
 			$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
-	    	$mailer->AddAddress($data['poster_email']);
+			$mailer->AddAddress($data['poster_email']);
 			$mailer->Subject = $subject;
 			$mailer->Body = nl2br($msg);
-			$mailer->AltBody = $msg;
 			
 			if ($mailer->Send())
 			{
@@ -253,7 +249,7 @@ class Postman extends Translator
 		$msg = $email_data['message'];
 		
 		$mailer->SetFrom(NOTIFY_EMAIL, SITE_NAME);
-    	$mailer->AddAddress(NOTIFY_EMAIL);
+		$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
 		$mailer->Body = nl2br($msg);
 		$mailer->AltBody = $msg;
@@ -288,7 +284,6 @@ class Postman extends Translator
 		$mailer->AddAddress(NOTIFY_EMAIL);
 		$mailer->Subject = $subject;
 		$mailer->Body = nl2br($msg);
-		$mailer->AltBody = $msg;
 		
 		if ($data['attachment_filename'] != '')
 		{
