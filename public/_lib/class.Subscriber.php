@@ -157,6 +157,47 @@ class Subscriber {
 		return (bool)$db->QueryItem($sql);
 	}
 
+	public static function sendJob($jobId)
+	{
+		$job = new Job($jobId);
+		$subscribers = self::getCategorySubscribers($job->mCategoryId);
+		$postman = new Postman();
+
+		foreach ($subscribers as $subscriber)
+		{
+			$postman->MailSubscriptionJobPosted($subscriber['email'], $subscriber['auth'], $job);
+		}
+	}
+
+	public static function getCategorySubscribers($categoryId, $includeImplicit=true)
+	{
+		global $db;
+
+		if ($includeImplicit)
+		{
+			$categoryFilter = 'b.category_id IN (0,' . $categoryId . ')';
+		}
+		else
+		{
+			$categoryFilter = 'b.category_id = ' . $categoryId;
+		}
+		$sql = 'SELECT DISTINCT a.id as id, a.email as email, a.auth as auth
+				FROM '.DB_PREFIX.'subscribers a, '.DB_PREFIX.'subscriptions b
+				WHERE a.id = b.subscriber_id
+				AND ' . $categoryFilter;
+
+		if ($tmpResult = $db->QueryArray($sql))
+		{
+			$result = array();
+			foreach ($tmpResult as $subscriber)
+			{
+				$result[$subscriber['id']] = array('email' => $subscriber['email'], 'auth' => $subscriber['auth']);
+			}
+			return $result;
+		}
+		return false;
+	}
+
 	protected static function generateAuthCode()
 	{
 		$auth = md5(uniqid() . time());

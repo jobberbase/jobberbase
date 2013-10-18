@@ -390,6 +390,36 @@ class Postman extends Translator
 		}	
 	}
 
+	public function MailSubscriptionJobPosted($email, $auth, $job)
+	{
+		$mailer = $this->getConfiguredMailer();
+		$replace = array(
+			'SITE_NAME' => SITE_NAME,
+			'SITE_URL' => BASE_URL,
+			'MANAGE_URL' => BASE_URL . 'subscriptions/' . $email . '/' . $auth . '/',
+			'JOB_TITLE' => $job->mTitle,
+			'JOB_SUMMARY' => $job->mSummary,
+			'JOB_URL' => BASE_URL . URL_JOB .  '/' . $job->mId . '/' . $job->mUrlTitle . '/'
+		);
+		$email_data = $this->getEmailData('email_SubscriptionJobPosted', $replace);
+		$subject = $email_data['subject'];
+		$msg = $email_data['message'];
+
+		$mailer->SetFrom();
+		$mailer->AddAddress($email);
+		$mailer->Subject = $subject;
+		$mailer->Body = $msg;
+
+		if ($mailer->Send())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	private function getConfiguredMailer()
 	{
 		global $settings;

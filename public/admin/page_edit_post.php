@@ -129,7 +129,9 @@ if ($id != 0)
 					$data['is_active'] = 1;
 					$data['spotlight'] = 0;
 					
-					$job->Create($data);
+					if ($jobId = $job->Create($data)) {
+						Subscriber::sendJob($jobId);
+					}
 				}
 				
 				$category = get_category_by_id($category_id);
