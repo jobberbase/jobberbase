@@ -1,5 +1,5 @@
 <?php
-	if (!empty($_POST) && isset($_POST['email']) && isset($_POST['category']))
+	if (!empty($_POST) && isset($_POST['email']) && isset($_POST['category']) && filter_var($email, FILTER_VALIDATE_EMAIL))
 	{
 		$email = $db->real_escape_string($_POST['email']);
 		$category = $db->real_escape_string($_POST['category']);
