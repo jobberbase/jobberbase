@@ -339,9 +339,9 @@ class Postman extends Translator
 
 		$replace = array(
 			'SITE_NAME' => SITE_NAME,
-			'SITE_URL' => BASE_URL,
+			'SITE_URL' => APP_URL,
 			'SENDER_IP' => $_SERVER['REMOTE_ADDR'],
-			'MANAGE_URL' => BASE_URL . 'subscriptions/' . $email . '/' . $auth . '/'
+			'MANAGE_URL' => APP_URL . 'subscriptions/' . $email . '/' . $auth . '/'
 		);
 		$email_data = $this->getEmailData('email_SubscriptionUpdated', $replace);
 		$subject = $email_data['subject'];
@@ -368,7 +368,7 @@ class Postman extends Translator
 
 		$replace = array(
 			'SITE_NAME' => SITE_NAME,
-			'SITE_URL' => BASE_URL,
+			'SITE_URL' => APP_URL,
 			'SENDER_IP' => $_SERVER['REMOTE_ADDR']
 		);
 		$email_data = $this->getEmailData('email_SubscriptionRemoved', $replace);
@@ -395,17 +395,17 @@ class Postman extends Translator
 		$mailer = $this->getConfiguredMailer();
 		$replace = array(
 			'SITE_NAME' => SITE_NAME,
-			'SITE_URL' => BASE_URL,
-			'MANAGE_URL' => BASE_URL . 'subscriptions/' . $email . '/' . $auth . '/',
+			'SITE_URL' => APP_URL,
+			'MANAGE_URL' => APP_URL . 'subscriptions/' . $email . '/' . $auth . '/',
 			'JOB_TITLE' => $job->mTitle,
 			'JOB_SUMMARY' => $job->mSummary,
-			'JOB_URL' => BASE_URL . URL_JOB .  '/' . $job->mId . '/' . $job->mUrlTitle . '/'
+			'JOB_URL' => APP_URL . URL_JOB .  '/' . $job->mId . '/' . $job->mUrlTitle . '/'
 		);
 		$email_data = $this->getEmailData('email_SubscriptionJobPosted', $replace);
 		$subject = $email_data['subject'];
 		$msg = $email_data['message'];
 
-		$mailer->SetFrom();
+		$mailer->SetFrom(ADMIN_EMAIL);
 		$mailer->AddAddress($email);
 		$mailer->Subject = $subject;
 		$mailer->Body = $msg;
