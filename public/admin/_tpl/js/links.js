@@ -1,21 +1,16 @@
 (function() {
 	jobberBase.links = function() {
-		var linkTemplate = [
-			'<div class="linkItem">',
-				'<div class="linkHandle"></div>',
-				'<div class="linkWrapper">',
-					'<a href="#" title="Delete this link" class="deleteLink"><img src="',
-					'',
-					'_tpl/img/bin.png" alt="Delete" /></a>',
-					'<label><span>Name:</span><input type="text" size="60" name="name[]" value="For example: Jobberbase" /><img class="help" src="../../_tpl/img/information-balloon.png" title="The text you want to display in the frontend" /></label>',
-					'<a href="#" title="Save changes" class="saveLink"><img src="',
-					'',
-					'_tpl/img/disk.png" alt="Save" /></a>',
-					'<label><span>URL:</span><input type="text" size="60" name="url[]" value="For example: http://www.jobberbase.com/" /><img class="help" src="../../_tpl/img/information-balloon.png" title="The URL you want to link to. When you want to link to a Jobberbase page (e.g. the page Contact) you can use the Jobberbase URL (e.g. contact)" /></label>',
-					'<label><span>Title:</span><input type="text" size="60" name="title[]" value="For example: Open Source Job Board Software" /><img class="help" src="../../_tpl/img/information-balloon.png" title="Text that shows when you hover over the link, just like this help message. You can leave this blank if you don\'t want to show anything" /></label>',
-				'</div>',
-			'</div>'
-		];
+		var linkTemplate =
+			'<div class="linkItem">\
+				<div class="linkHandle"></div>\
+				<div class="linkWrapper">\
+					<a href="#" title="Delete this link" class="deleteLink"><img src="{JOBBER_ADMIN_URL}_tpl/img/bin.png" alt="Delete" /></a>\
+					<label><span>Name:</span><input type="text" size="60" name="name[]" value="For example: Jobberbase" /><img class="help" src="../../_tpl/img/information-balloon.png" title="The text you want to display in the frontend" /></label>\
+					<a href="#" title="Save changes" class="saveLink"><img src="{JOBBER_ADMIN_URL}_tpl/img/disk.png" alt="Save" /></a>\
+					<label><span>URL:</span><input type="text" size="60" name="url[]" value="For example: http://www.jobberbase.com/" /><img class="help" src="../../_tpl/img/information-balloon.png" title="The URL you want to link to. When you want to link to a Jobberbase page (e.g. the page Contact) you can use the Jobberbase URL (e.g. contact)" /></label>\
+					<label><span>Title:</span><input type="text" size="60" name="title[]" value="For example: Open Source Job Board Software" /><img class="help" src="../../_tpl/img/information-balloon.png" title="Text that shows when you hover over the link, just like this help message. You can leave this blank if you don\'t want to show anything" /></label>\
+				</div>\
+			</div>';
 		var pointerPosition;
 		var prevPointer;
 		var minTop;
@@ -191,10 +186,8 @@
 			if (saving === true) {
 				return false;
 			}
-			linkTemplate[4] = Jobber.jobber_admin_url;
-			linkTemplate[8] = Jobber.jobber_admin_url;
 			var el = $('#linksContainer')
-					.append(linkTemplate.join(''))
+					.append(linkTemplate.replace('{JOBBER_ADMIN_URL}', Jobber.jobber_admin_url))
 					.find('div.linkItem:last')
 						.find('input')
 							.bind('focus', inputFocus)
