@@ -571,7 +571,7 @@ div.category div {
 	margin:0 0 5px 0;
 	position:relative
 }
-.categoryItem a, .typeItem a, .linkItem a {
+.categoryItem a, .typeItem a, .linkItem .buttons, .menuItem .buttons {
 	float:right
 }
 .categoryItem label, .typeItem label, .linkItem label {
@@ -587,6 +587,21 @@ div.category div {
 	clear:left;
 	width:10em
 }
+.linkItem .linkChildren {
+	margin:0 1em 1em 1em;
+/*	min-height:1em;*/
+}
+
+.linkItem .linkChildren:empty {
+/*	border:1px dashed #BBB;*/
+	display: none;
+}
+/*
+.linkItem .linkChildren:empty::before {
+	content:'Drag child menu items here';
+	color:#BBB;
+}
+*/
 .categoryHandle, .typeHandle, .linkHandle {
 	margin-bottom:5px;
 	height:10px;
@@ -612,7 +627,15 @@ div.draggingItem div.categoryHandle, div.draggingItem div.linkHandle {
 .category_box{
 	margin:5px;
 }
-
+#linksContainer .linkItem:first-child > .linkWrapper > .buttons > a.moveLinkUp,
+#linksContainer .linkItem:first-child > .linkWrapper > .buttons > a.nestLink,
+#linksContainer .linkItem:last-child > .linkWrapper > .buttons > a.moveLinkDown,
+#linksContainer a.unnestLink {
+	display: none;
+}
+#linksContainer .linkItem .linkItem a.unnestLink {
+	display: inline;
+}
 
 #messagesContainer{
 	position:absolute;

@@ -101,35 +101,121 @@ function get_articles()
 	return $articles;
 }
 
-function get_navigation($menu = false)
+function get_menus($name=null)
 {
 	global $db;
+
+	if (!is_null($name))
+	{
+		$condition = 'AND url="'.$name.'"';
+	}
+	else
+	{
+		$condition = '';
+	}
 	
-	$conditions = '';
-	
-	if (isset($menu) && ($menu == 'primary' || $menu == 'secondary' || $menu == 'footer1' || $menu == 'footer2' || $menu == 'footer3'))
-		$conditions = ' WHERE menu = \''.$menu.'\'';
-	
+	$sql = 'SELECT id, url AS varname, name, title
+	            FROM '.DB_PREFIX.'links
+	            WHERE parent = 0
+	            '.$condition.'
+	            ORDER BY link_order ASC';
+	$result = $db->query($sql);
+	$menus = array();
+	while ($row = $result->fetch_assoc())
+	{
+		$menus[$row['varname']] = $row;
+	}
+	return $menus;
+}
+
+function get_descendants($menuItem)
+{
+	global $db;
+
 	$navigation = array();
 
-	$sql = 'SELECT id, url, name, title, menu
-				FROM '.DB_PREFIX.'links
-				' . $conditions . '
-				ORDER BY link_order ASC';
+	$sql = '
+		SELECT id, parent
+		FROM '.DB_PREFIX.'links
+		ORDER BY link_order ASC';
+
+	$result = $db->query($sql);
+	while ($row = $result->fetch_assoc())
+	{
+		$navigation[$row['id']] = array(
+			'id' => $row['id'],
+			'parent' => $row['parent'],
+			'children' => array());
+	}
+	if(array_key_exists($menuItem, $navigation))
+	{
+		foreach ($navigation as $rowId => $row)
+		{
+			if (array_key_exists($row['parent'], $navigation))
+			{
+				$navigation[$row['parent']]['children'][] =& $navigation[$rowId];
+			}
+		}
+		
+		$navigation = $navigation[$menuItem];
+		return _get_descendant_ids($navigation);
+	}
+	return array();
+}
+function _get_descendant_ids($array)
+{
+	$ids = array($array['id']);
+	foreach($array['children'] as $child)
+	{
+		$ids = array_merge($ids, _get_descendant_ids($child));
+	}
+	return $ids;
+}
+
+function get_navigation($menu = null)
+{
+	global $db;
+
+	$navigation = array();
+
+	$sql = '
+		SELECT id, url, name, title, parent
+		FROM '.DB_PREFIX.'links
+		ORDER BY link_order ASC';
 
 	$result = $db->query($sql);
 	while ($row = $result->fetch_assoc())
 	{
 		$url_check = substr($row['url'], 0, 4);
-		if ($url_check == 'http' || $url_check == 'www.') $outside = 1; else $outside = 0; 
+		if ($url_check == 'http') $outside = 1; else $outside = 0;
 		
-		$navigation[$row['menu']][] = array(
-								'id' => $row['id'],
-								'url' => $row['url'],
-								'name' => $row['name'],
-								'title' => $row['title'],
-								'menu' => $row['menu'],
-								'outside' => $outside);
+		$navigation[$row['id']] = array(
+			'id' => $row['id'],
+			'url' => $row['url'],
+			'name' => $row['name'],
+			'title' => $row['title'],
+			'parent' => $row['parent'],
+			'outside' => $outside,
+			'children' => array());
+	}
+	foreach ($navigation as $rowId => $row)
+	{
+		if (array_key_exists($row['parent'], $navigation))
+		{
+			$navigation[$row['parent']]['children'][] =& $navigation[$rowId];
+		}
+	}
+	foreach ($navigation as $rowId => $row)
+	{
+		if ($row['parent'] == 0)
+		{
+			$navigation[$row['url']] =& $navigation[$rowId]['children'];
+		}
+		unset ($navigation[$rowId]);
+	}
+	if (!is_null($menu) && array_key_exists($menu, $navigation))
+	{
+		$navigation = array($menu => $navigation[$menu]);
 	}
 	return $navigation;
 }

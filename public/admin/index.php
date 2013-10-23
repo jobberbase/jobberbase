@@ -248,6 +248,9 @@
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('settings_categories', $jobber_settings->GetSettingsCategories());
 
+	// get menus
+	$smarty->assign('menus', get_menus());
+
 	//Add the dynamic URL defitions to SMARTY
 	$smarty->assign('URL_JOB', URL_JOB);
 	$smarty->assign('URL_JOBS', URL_JOBS);

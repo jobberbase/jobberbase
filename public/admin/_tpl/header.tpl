@@ -73,11 +73,17 @@
 		<li><a {if $CURRENT_PAGE == 'types'}class="selected"{/if} href="{$BASE_URL_ADMIN}types/">Job types</a></li>
 		<li><a {if $CURRENT_PAGE == 'links'}class="selected"{/if} href="{$BASE_URL_ADMIN}links/">Links</a>
 		<ul>
-		<li><a href="{$BASE_URL_ADMIN}links/primary/">Primary Menu</a></li>
-		<li><a href="{$BASE_URL_ADMIN}links/secondary/">Secondary Menu</a></li>
-		<li><a href="{$BASE_URL_ADMIN}links/footer1/">Footer Column 1</a></li>
-		<li><a href="{$BASE_URL_ADMIN}links/footer2/">Footer Column 2</a></li>
-		<li><a href="{$BASE_URL_ADMIN}links/footer3/">Footer Column 3</a></li>
+			{foreach from=$menus item=menu name=menus}
+			<li><a href="{$BASE_URL_ADMIN}links/{$menu.varname}/">{$menu.name}</a></li>
+			{/foreach}
+{*
+			<li><a href="{$BASE_URL_ADMIN}links/{$menus[tmp].}/">Primary Menu</a></li>
+			<li><a href="{$BASE_URL_ADMIN}links/primary/">Primary Menu</a></li>
+			<li><a href="{$BASE_URL_ADMIN}links/secondary/">Secondary Menu</a></li>
+			<li><a href="{$BASE_URL_ADMIN}links/footer1/">Footer Column 1</a></li>
+			<li><a href="{$BASE_URL_ADMIN}links/footer2/">Footer Column 2</a></li>
+			<li><a href="{$BASE_URL_ADMIN}links/footer3/">Footer Column 3</a></li>
+*}
 		</ul>
 		</li>
 		</ul>

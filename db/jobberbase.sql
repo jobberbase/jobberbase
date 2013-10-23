@@ -443,3 +443,22 @@ ALTER TABLE `pages` ADD COLUMN `accepts_files` enum('0','1') NOT NULL AFTER `has
  UPDATE `settings` SET `ordering` = 3 WHERE `name` = 'meta_description';
  UPDATE `settings` SET `ordering` = 2 WHERE `name` = 'meta_keywords';
  UPDATE `settings` SET `ordering` = 2 WHERE `name` = 'notify_email';
+
+-- In the `links` table, the `menu` column should be renamed to `parent` and its type changed to INT(11)
+-- Also, six new entries are needed in this table, because menus themselves are now stored in it
+
+INSERT INTO `links` (`url`, `name`, `title`, `menu`, `link_order`) VALUES
+('primary', 'Primary Menu', 'The primary menu for your Jobberbase theme. By default this menu is located at the top', '0', 0),
+('secondary', 'Secondary Menu', 'The secondary menu for your Jobberbase theme. By default this menu is located in the sidebar', '0', 1),
+('footer', 'Footer Menu', 'The footer menu for your Jobberbase theme', '0', 2),
+('___footer1___', 'Use:', '', 'footer', 0),
+('___footer2___', 'Find out more:', '', 'footer', 1),
+('___footer3___', 'Misc:', '', 'footer', 2);
+UPDATE `links` SET `menu` = (SELECT MAX(`id`) FROM `links` WHERE `url`='primary') WHERE `menu` = 'primary';
+UPDATE `links` SET `menu` = (SELECT MAX(`id`) FROM `links` WHERE `url`='secondary') WHERE `menu` = 'secondary';
+UPDATE `links` SET `menu` = (SELECT MAX(`id`) FROM `links` WHERE `url`='footer') WHERE `menu` = 'footer';
+UPDATE `links` SET `menu` = (SELECT MAX(`id`) FROM `links` WHERE `url`='___footer1___') WHERE `menu` = 'footer1';
+UPDATE `links` SET `menu` = (SELECT MAX(`id`) FROM `links` WHERE `url`='___footer2___') WHERE `menu` = 'footer2';
+UPDATE `links` SET `menu` = (SELECT MAX(`id`) FROM `links` WHERE `url`='___footer3___') WHERE `menu` = 'footer3';
+UPDATE `links` SET `url` = '' WHERE `url` IN ('___footer1___','___footer2___','___footer3___');
+ALTER TABLE `links` CHANGE `menu` `parent` INT(11) NOT NULL;
