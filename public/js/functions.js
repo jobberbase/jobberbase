@@ -62,16 +62,16 @@
 			init: function()
 			{
 				$("#frm-subscribe").ajaxForm(function(responseText) {
-					if (responseText == "0")
-					{
-						var msg = Jobber.I18n.js.subscribe_unsuccessful;
-						$("#subscribe-response").css({ color: "red" });
-					}
-					else
+					if (responseText == "1")
 					{
 						var msg = Jobber.I18n.js.subscribe_successful;
 						$("#frm-subscribe").clearForm();
 						$("#subscribe-response").css({ color: "green" });
+					}
+					else
+					{
+						var msg = Jobber.I18n.js.subscribe_unsuccessful;
+						$("#subscribe-response").css({ color: "red" });
 					}
 					$("#subscribe-response").html(msg);
 				});
