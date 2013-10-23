@@ -2,7 +2,7 @@
 		<div id="content">
 				<h2 id="job_types">Job Types</h2>
 				
-				<div class="information">The icon has to be named <em>icon_varname.png</em> (replace varname with the varname of the corresponding jobtype) and has to be uploaded to <strong>{$BASE_URL}_tpl/{$THEME}/img/</strong>.</div>
+				<div class="information">The icon has to be named <em>icon-varname.png</em> (replace varname with the varname of the corresponding jobtype) and has to be uploaded to <strong>{$BASE_URL}_tpl/{$THEME}/img/</strong>.</div>
 				
 				<div id="typesContainer">
 				{section name=tmp loop=$types}
