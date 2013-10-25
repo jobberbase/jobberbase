@@ -3,12 +3,20 @@
 	
 		<div class="domtab">
 			<ul id="nav" class="domtabs clearfix">
+				{if $page}
+					<li class="selected"><a href="#page_content" title="" id="pagecontent"><span></span>{$page.title}</a></li>
+				{/if}
 				<li class="selected"><a href="#spotlight_jobs" title="" id="alljobs"><span></span>{$translations.homepage.spotlight_jobs}</a></li>
 				<li class="selected"><a href="#latest_jobs" title="" id="alljobs"><span></span>{$translations.homepage.recent_jobs}</a></li>
 				{if $most_applied_to_jobs}
 					<li class="selected"><a href="#popular_jobs" title="" id="alljobs"><span></span>{$translations.homepage.popular_jobs}</a></li>
 				{/if}
 			</ul>
+			{if $page}
+				<div id="page_content">
+					{$page.content}
+				</div>
+			{/if}
 			{if $spotlight_jobs}
 				<div id="spotlight_jobs"  class="latest-jobs">
 					<ul class="joblisting">

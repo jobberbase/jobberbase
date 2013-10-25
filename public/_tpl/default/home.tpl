@@ -1,3 +1,8 @@
+{if $page}
+	{$page.content}
+	<br />
+{/if}
+
 {if $spotlight_jobs}
 	<h2>{$translations.homepage.spotlight_jobs}</h2>
 	
@@ -10,10 +15,10 @@
 			<span class="spotlight-image"></span>
 		</div>
 	{/foreach}
+	<br />
 {/if}
 
 {if $latest_jobs}
-	<br />
 	<h2>{$translations.homepage.recent_jobs}</h2>
 	
 	{foreach item=job from=$latest_jobs}
@@ -29,10 +34,10 @@
 	<div id="view_all">
 		<a href="{$BASE_URL}{$URL_JOBS}/">{$translations.homepage.view_all_jobs}</a>
 	</div>
+	<br />
 {/if}
 
 {if $most_applied_to_jobs}
-	<br />
 	<h2>{$translations.homepage.popular_jobs}</h2>
 	
 	{foreach item=job from=$most_applied_to_jobs}
@@ -44,10 +49,10 @@
 			<span class="time-posted"><strong>{$job.apps}</strong> {$translations.homepage.applicants}</span>			
 		</div>
 	{/foreach}
+	<br />
 {/if}
 
 {if !$latest_jobs && !$most_applied_to_jobs}
-	<br />
 	<p>
 		{$translations.homepage.no_jobs}.<br />
 		<a href="{$BASE_URL}post/" title="{$translations.footer.new_job_title}">{$translations.footer.new_job}</a>?
