@@ -20,12 +20,12 @@ class Translator
 		
 		$this->lang_code = $languageCode;
 		
-		$sql = 'SELECT a.* AS lang_id 
+		$sql = 'SELECT a.*
 		               FROM '.DB_PREFIX.'i18n_translations a, '.DB_PREFIX.'i18n_langs b 
 		               WHERE b.code = "' . $languageCode . '" AND b.id = a.lang_id 
 		               ORDER BY a.parent_id ASC, a.item ASC';
 		$trans = $db->QueryArray($sql);
-		
+
 		// get raw, structured translations
 		foreach ($trans as $t)
 		{
