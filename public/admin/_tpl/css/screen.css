@@ -247,7 +247,7 @@ body {
 
 /* FORMS */
 #container_login {
-	width: 265px;
+	width: 370px;
 	margin: 7em auto 0 auto;
 }
 #container_login_inner {
@@ -263,13 +263,13 @@ body {
 #login #username, #login #password {
 	background: #FFF url(../img/user.png) no-repeat 3px 3px;
 	padding-left: 23px;
-	width: 180px;
+	width: 285px;
 	margin-left: 0;}
 #login #password {
 	background: #FFF url(../img/lock.png) no-repeat 3px 3px;}
 #login .error #username, #login .error #password {
 	background-image: url(../img/user_error.png);
-	width: 157px;
+	width: 262px;
 	padding-left: 40px;
 	border: 1px solid red;}
 #login .error #password {

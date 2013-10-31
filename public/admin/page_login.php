@@ -1,9 +1,21 @@
 <?php
+		$captcha_enabled = ENABLE_RECAPTCHA && ENABLE_CAPTCHA_ON_ADMIN_LOGIN_PAGE;
+
 		if(!empty($_POST['action']) && $_POST['action'] == 'login')
 		{
 			escape($_POST);
 			$errors = array();
-			
+
+			if ($captcha_enabled)
+			{
+				$resp = recaptcha_check_answer(
+					CAPTCHA_PRIVATE_KEY,
+					$_SERVER["REMOTE_ADDR"],
+					$_POST["recaptcha_challenge_field"],
+					$_POST["recaptcha_response_field"]);
+				if (!$resp->is_valid) $errors['captcha'] = 'Incorrect CAPTCHA code.';
+			}
+
 			$_SESSION['user_ip'] = $_SERVER['REMOTE_ADDR'];
 			$_SESSION['referer'] = BASE_URL;
 			
@@ -42,5 +54,10 @@
 			}
 		}
 		$template = 'login.tpl';
-		
+		$smarty->assign('ENABLE_RECAPTCHA', $captcha_enabled);
+
+		if ($captcha_enabled)
+		{
+			$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
+		}
 ?>

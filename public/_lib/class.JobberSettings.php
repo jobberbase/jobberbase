@@ -53,9 +53,9 @@ class JobberSettings
 					SELECT url 
 					FROM '.DB_PREFIX.'pages 
 					ORDER BY url ASC';
-				if ($result = $db->query($sql))
+				if ($resultPages = $db->query($sql))
 				{
-					while ($resultRow = $result->fetch_assoc())
+					while ($resultRow = $resultPages->fetch_assoc())
 					{
 						$pages[] = $resultRow['url'];
 					}
