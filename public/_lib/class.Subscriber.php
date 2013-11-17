@@ -118,7 +118,13 @@ class Subscriber {
 		}
 		if ($tmpResult = $db->QueryArray($sql))
 		{
-			$result = array_map(function($item){ return $item['category_id']; }, $tmpResult);
+			// The following line works only with PHP 5.3 and above
+			// $result = array_map(function($item){ return $item['category_id']; }, $tmpResult);
+			$result = array();
+			foreach ($tmpResult as $key=>$row)
+			{
+				$result[$key] = $row['category_id'];
+			}
 			return $result;
 		}
 		return false;
