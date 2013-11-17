@@ -419,9 +419,7 @@ Featured Jobs
 	margin-right:25px;
 }
 
-#footer-col1,
-#footer-col2,
-#footer-col3
+.footer-col
 {
 	display:inline;
 	float:left;
