@@ -412,6 +412,33 @@ CREATE TABLE IF NOT EXISTS `i18n_translations` (
 
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `subscribers`
+--
+
+CREATE TABLE IF NOT EXISTS `subscribers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `auth` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE IF NOT EXISTS `subscriptions` (
+  `subscriber_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `confirmed` tinyint(1) NOT NULL,
+  UNIQUE KEY `subscriber_id` (`subscriber_id`,`category_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+
+-- --------------------------------------------------------
+
 ALTER TABLE `settings` ADD COLUMN `extradata` BLOB AFTER `value`;
 
 INSERT INTO `settings_categories` (`id`, `name`, `var_name`, `description`) VALUES
