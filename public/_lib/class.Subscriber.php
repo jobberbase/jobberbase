@@ -165,6 +165,7 @@ class Subscriber {
 
 	public static function sendJob($jobId)
 	{
+		global $db;
 		$job = new Job($jobId);
 		$subscribers = self::getCategorySubscribers($job->mCategoryId);
 		$postman = new Postman();
@@ -172,6 +173,9 @@ class Subscriber {
 		foreach ($subscribers as $subscriber)
 		{
 			$postman->MailSubscriptionJobPosted($subscriber['email'], $subscriber['auth'], $job);
+			$sql = 'INSERT INTO '.DB_PREFIX.'subscriber_mail_log (email, job_id, job_title, job_summary, date)
+				VALUES ("'.$subscriber['email'].'", '.$jobId.', "'.$job->mTitle.'", "'.$job->mSummary.'" NOW())';
+			$db->Execute($sql);
 		}
 	}
 
