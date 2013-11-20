@@ -3,7 +3,7 @@
 	
 	$sql = 'SELECT DISTINCT company FROM '.DB_PREFIX.'jobs';
 	$comps = $db->QueryArray($sql);
-	if($id == 'undisclosed')
+	if($id === 'undisclosed')
 	{
 		$company = '';
 	}
@@ -12,7 +12,7 @@
 		$company = false;
 		foreach ($comps as $comp)
 		{
-			if ($sanitizer->sanitize_title_with_dashes($comp['company']) == $id)
+			if ($sanitizer->sanitize_title_with_dashes($comp['company']) === $id)
 			{
 				$company = $comp['company'];
 				break;
