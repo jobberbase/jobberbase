@@ -18,7 +18,7 @@
 		$varname = $sanitizer->sanitize_title_with_dashes($company['company']);
 		if ($varname == '')
 		{
-			$varname = '_undisclosed_';
+			$varname = 'undisclosed';
 		}
 		
 		$companies[] = array('name' => $company['company'], 
