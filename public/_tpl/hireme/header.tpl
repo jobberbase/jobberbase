@@ -27,9 +27,9 @@
 	<script type="text/javascript">
 		Jobber.I18n = {$translationsJson};
 	</script>
-	{if $editor}^M
-	<script src="{$BASE_URL}js/tiny_mce/tiny_mce.js" type="text/javascript"></script>^M
-	{/if}^M
+	{if $editor}
+	<script src="{$BASE_URL}js/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+	{/if}
 </head>
 
 <body>
