@@ -39,6 +39,7 @@
 	$smarty->assign('types', get_types());
 	$smarty->assign('current_category', $category_var_name);
 	$smarty->assign('current_category_name', $category['name']);
+	$smarty->assign('current_category_id', $category_id);
 
 	$smarty->assign('seo_title', empty($category['title']) ? $category['name'] : $category['title']);
 	$smarty->assign('seo_desc', $category['description']);
