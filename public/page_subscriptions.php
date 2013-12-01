@@ -31,6 +31,7 @@
 				$category['subscribed'] = false;
 				$categories[$category['id']] = $category;
 			}
+			$keywords = $subscriber->getKeywords();
 
 			$subscriptions_updated = false;
 
@@ -46,11 +47,22 @@
 							$subscribe_categories[] = $db->real_escape_string($categoryId);
 						}
 					}
+					if ($subscriber->updateSubscriptions($subscribe_categories))
+					{
+						$subscriptions_updated = true;
+					}
 				}
-				if ($subscriber->updateSubscriptions($subscribe_categories))
+				if(isset($_POST['keywords']) && ($_POST['keywords'] != $keywords))
+				{
+					if ($subscriber->setKeywords($_POST['keywords']))
+					{
+						$keywords = $subscriber->getKeywords();
+						$subscriptions_updated = true;
+					}
+				}
+				if ($subscriptions_updated)
 				{
 					$postman->MailSubscriptionUpdated($email, $auth);
-					$subscriptions_updated = true;
 				}
 			}
 			else
@@ -74,6 +86,7 @@
 			$smarty->assign('subscriptions_email', $email);
 			$smarty->assign('subscriptions_auth', $auth);
 			$smarty->assign('subscriptions_categories', $categories);
+			$smarty->assign('subscriptions_keywords', $keywords);
 			$smarty->assign('subscriptions_all_jobs_subscribed', $all_jobs_subscribed);
 			$smarty->assign('subscriptions_updated', $subscriptions_updated);
 			$template = 'subscriptions-manage.tpl';

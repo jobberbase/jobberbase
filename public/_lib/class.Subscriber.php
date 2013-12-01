@@ -13,6 +13,7 @@ class Subscriber {
 	protected $_id;
 	protected $_email;
 	protected $_auth;
+	protected $_keywords;
 
 	public function __construct($email)
 	{
@@ -20,13 +21,14 @@ class Subscriber {
 
 		$email = (string)$email;
 
-		$sql = 'SELECT id, auth FROM '.DB_PREFIX.'subscribers WHERE email = "' . $email . '"';
+		$sql = 'SELECT id, auth, keywords FROM '.DB_PREFIX.'subscribers WHERE email = "' . $email . '"';
 		$result = $db->QueryRow($sql);
 		if ($result)
 		{
 			$this->_email = $email;
 			$this->_id = $result['id'];
 			$this->_auth = $result['auth'];
+			$this->_keywords = $result['keywords'];
 		}
 		else
 		{
@@ -38,6 +40,7 @@ class Subscriber {
 				$this->_email = $email;
 				$this->_id = $db->insert_id;
 				$this->_auth = $auth;
+				$this->_keywords = '';
 			}
 		}
 	}
@@ -45,6 +48,30 @@ class Subscriber {
 	public function getAuthCode()
 	{
 		return $this->_auth;
+	}
+
+	public function getKeywords()
+	{
+		return $this->_keywords;
+	}
+
+	public function setKeywords($keywords)
+	{
+		global $db;
+
+		$keywords = explode(',', $_POST['keywords']);
+		foreach ($keywords as &$keyword)
+		{
+			$keyword = trim($keyword);
+		}
+		$keywords = implode(',', $keywords);
+		$sql = 'UPDATE '.DB_PREFIX.'subscribers SET keywords = "' . $db->real_escape_string($keywords) . '" WHERE id = ' . $this->_id;
+		if ($db->Execute($sql))
+		{
+			$this->_keywords = $keywords;
+			return true;
+		}
+		return false;
 	}
 
 	// Update/confirm the list of subscriptions for the user.
@@ -172,9 +199,17 @@ class Subscriber {
 
 		foreach ($subscribers as $subscriber)
 		{
+			if (!empty($subscriber['keywords']))
+			{
+				$keywords = '/\b(' . str_replace(',', '|', preg_quote($subscriber['keywords'])) . ')\b/i';
+				if (!(preg_match($keywords, $job->mTitle) || preg_match($keywords, $job->mSummary) || preg_match($keywords, strip_tags($job->mDescription))))
+				{
+					continue;
+				}
+			}
 			$postman->MailSubscriptionJobPosted($subscriber['email'], $subscriber['auth'], $job);
 			$sql = 'INSERT INTO '.DB_PREFIX.'subscriber_mail_log (email, job_id, job_title, job_summary, date)
-				VALUES ("'.$subscriber['email'].'", '.$jobId.', "'.$job->mTitle.'", "'.$job->mSummary.'" NOW())';
+				VALUES ("'.$subscriber['email'].'", '.$jobId.', "'.$job->mTitle.'", "'.$job->mSummary.'", NOW())';
 			$db->Execute($sql);
 		}
 	}
@@ -191,7 +226,7 @@ class Subscriber {
 		{
 			$categoryFilter = 'b.category_id = ' . $categoryId;
 		}
-		$sql = 'SELECT DISTINCT a.id as id, a.email as email, a.auth as auth
+		$sql = 'SELECT DISTINCT a.id as id, a.email as email, a.auth as auth, a.keywords as keywords
 				FROM '.DB_PREFIX.'subscribers a, '.DB_PREFIX.'subscriptions b
 				WHERE a.id = b.subscriber_id
 				AND ' . $categoryFilter;
@@ -201,7 +236,7 @@ class Subscriber {
 			$result = array();
 			foreach ($tmpResult as $subscriber)
 			{
-				$result[$subscriber['id']] = array('email' => $subscriber['email'], 'auth' => $subscriber['auth']);
+				$result[$subscriber['id']] = $subscriber;
 			}
 			return $result;
 		}
