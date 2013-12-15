@@ -1,21 +1,15 @@
 {include file="header.tpl"}
-	<div id="left-content">		
+
 		<div id="content">
-			<div id="job-listings">
-				{if $jobs}
-					<div id="sort-by-type">
-					{$translations.category.display_only}&nbsp; 
-						{section name=tmp loop=$types}
-							<a href="{$BASE_URL}{$URL_JOBS}/{$current_category}/{$types[tmp].var_name}/" title="{$current_category} {$types[tmp].name}"><img src="{$BASE_URL}_tpl/{$THEME}/img/icon-{$types[tmp].var_name}.png" alt="{$types[tmp].name}" /></a>
-						{/section}
-					</div><!-- #sort-by-type -->
-				{/if}
-				<h2>
-					{$translations.category.jobs_for} {$current_category_name}
-				</h2>
-				{include file="posts-loop.tpl"}
-			</div><!-- #job-listings -->
-			<h2>{$translations.subscriptions.subscribe_message}</h2>
+			<div id="job-listings"></div><!-- #job-listings -->
+			<h2>
+				{$translations.subscriptions.subscribe_title}
+			</h2>
+			{if $page}
+				<div class="subscribe-page-content">
+				{$page.content}
+				</div>
+			{/if}
 			<div id="subscribe">
 				<form id="frm-subscribe" method="post" action="{$BASE_URL}subscribe/">
 					<table>
@@ -25,7 +19,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<input type="hidden" name="category" value="{$current_category_id}">
+								<input type="hidden" name="category" value="0">
 								<input type="submit" name="submit" id="submit" value="{$translations.subscriptions.subscribe_submit}" />
 								&nbsp;&nbsp;<span id="subscribe-response"></span>
 							</td>
@@ -42,8 +36,5 @@
 			});
 			{/literal}
 		</script>
-	</div>
-	<div id="sidebar">
-		{include file="sidebar.tpl"}
-	</div>
+
 {include file="footer.tpl"}
