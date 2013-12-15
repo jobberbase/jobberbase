@@ -1,7 +1,6 @@
 <?php
 	$category_var_name = $id;
-	$category = get_category_by_var_name($category_var_name);
-	
+
 	$category_id = $category['id'];
 	
 	$type_var_name = $extra;
