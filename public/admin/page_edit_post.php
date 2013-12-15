@@ -17,7 +17,6 @@ if ($id != 0)
 	}
 	
 	$jobToEdit = $job->GetInfo();
-	$smarty->assign_by_ref('job', $jobToEdit);
 	
 	$smarty->assign('show_preview', false);
 	$smarty->assign('editor', true);
@@ -144,6 +143,7 @@ if ($id != 0)
 			$smarty->assign('errors', $errors);
 	}
 		
+	$smarty->assign('job', $jobToEdit);
 	$smarty->assign('categories', get_categories());
 	$smarty->assign('types', get_types());
 	$smarty->assign('cities', get_cities());
