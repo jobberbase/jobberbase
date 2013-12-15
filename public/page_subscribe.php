@@ -35,7 +35,7 @@
 		{
 			$sql = '
 				SELECT *
-				FROM '.DB_PREFIX.'pages 
+				FROM '.DB_PREFIX.'pages
 				WHERE url = "' . $db->real_escape_string($settings['subscribe_page_content']) . '"';
 			$result = $db->query($sql);
 			$pageData = $result->fetch_assoc();

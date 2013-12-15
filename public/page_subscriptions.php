@@ -24,6 +24,22 @@
 		}
 		else
 		{
+			if ($settings['subscribe_page_content'] != '')
+			{
+				$sql = '
+					SELECT *
+					FROM '.DB_PREFIX.'pages
+					WHERE url = "' . $db->real_escape_string($settings['subscribe_page_content']) . '"';
+				$result = $db->query($sql);
+				$pageData = $result->fetch_assoc();
+				if (is_array($pageData)) {
+					$html_title = $pageData['page_title'] . ' - ' . SITE_NAME;
+					$meta_keywords = $pageData['keywords'];
+					$meta_description = $pageData['description'];
+					$smarty->assign('page', $pageData);
+				}
+			}
+
 			$all_categories = get_categories();
 			$categories = array();
 			foreach ($all_categories as $category)
@@ -94,7 +110,7 @@
 	}
 	else
 	{
-		redirect_to(BASE_URL);
+		redirect_to(BASE_URL.'subscribe/');
 		exit;
 	}
 ?>
