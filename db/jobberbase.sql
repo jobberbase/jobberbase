@@ -468,7 +468,8 @@ INSERT INTO `settings` (`id`, `category_id`, `name`, `title`, `description`, `da
 (50, 7, 'google_analytics_code', 'Google Analytics Code', 'Enter you Google Analytics code here', NULL, NULL, NULL, NULL, '', NULL, 5),
 (51, 1, 'keep_uploaded_cvs', 'Keep uploaded CV''s', 'Keep the CV''s that applicants upload. If on, the CV''s can be downloaded from admin area. Otherwise they will be deleted right after sending application emails.', 'boolean', 'radiobutton', 'no|yes', NULL, '0', NULL, 10),
 (52, 1, 'home_page_content', 'Home page', 'Pick the page, the content of which you want to be shown on the home page. Leave empty if you only want to show job lists there.', NULL, 'available_pages', NULL, NULL, '', NULL, '6'),
-(53, 4, 'enable_captcha_on_admin_login_page', 'Enable ReCaptcha on admin login page', 'Protect the admin area with ReCaptcha.', 'boolean', 'radiobutton', 'no|yes', NULL, '0', NULL, 7);
+(53, 4, 'enable_captcha_on_admin_login_page', 'Enable ReCaptcha on admin login page', 'Protect the admin area with ReCaptcha.', 'boolean', 'radiobutton', 'no|yes', NULL, '0', NULL, 7),
+(54, 1, 'subscribe_page_content', 'Subscribe page', 'Pick the page, the content of which you want to be shown on the subscribe page. Leave empty if you only want to show the subscribe form there.', NULL, 'available_pages', NULL, NULL, '', NULL, '7');
 
 ALTER TABLE `job_applications` ADD COLUMN `name` VARCHAR(150) AFTER `job_id`,
  ADD COLUMN `email` VARCHAR(100) AFTER `name`,
