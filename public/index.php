@@ -116,6 +116,8 @@
 			$smarty->assign('auth', $job->GetAuth());
 			$smarty->assign('job_url', $job_title);
 			$smarty->assign('postRequiresModeration', $extra);
+			$smarty->assign('laterEdit', $_SESSION['later_edit']);
+			unset($_SESSION['later_edit'], $_SESSION['referer']);
 			$template = 'publish-confirmation.tpl';
 			break;
 			
@@ -256,4 +258,16 @@
 
 	if (isset($template) && $template != '')
 		$smarty->display($template);
+
+	unset(
+		$_SESSION['status'],
+		$_SESSION['apply_mail_sent'],
+		$_SESSION['apply_errors'],
+		$_SESSION['apply_fields'],
+		$_SESSION['apply_allowed'],
+		$_SESSION['apply_successful'],
+		$_SESSION['contact_msg_sent'],
+		$_SESSION['contact_errors'],
+		$_SESSION['contact_fields']
+	);
 ?>

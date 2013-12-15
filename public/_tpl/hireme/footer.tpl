@@ -61,43 +61,5 @@
 		//]]>
 	</script>
 	{/literal}
-	{php}
-	  if (isset($_SESSION['status']))
-		{
-			unset($_SESSION['status']);
-		}
-		if (isset($_SESSION['apply_mail_sent']))
-		{
-			unset($_SESSION['apply_mail_sent']);
-		}
-		if (isset($_SESSION['apply_errors']))
-		{
-			unset($_SESSION['apply_errors']);
-		}
-		if (isset($_SESSION['apply_fields']))
-		{
-			unset($_SESSION['apply_fields']);
-		}
-		if (isset($_SESSION['apply_allowed']))
-		{
-			unset($_SESSION['apply_allowed']);
-		}
-		if (isset($_SESSION['apply_successful']))
-		{
-			unset($_SESSION['apply_successful']);
-		}
-		if (isset($_SESSION['contact_msg_sent']))
-		{
-			unset($_SESSION['contact_msg_sent']);
-		}
-		if (isset($_SESSION['contact_errors']))
-		{
-			unset($_SESSION['contact_errors']);
-		}
-		if (isset($_SESSION['contact_fields']))
-		{
-			unset($_SESSION['contact_fields']);
-		}
-	{/php}
 </body>
 </html>
