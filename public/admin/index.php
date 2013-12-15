@@ -271,6 +271,7 @@
 	else
 		$smarty->assign('isAuthenticated', 0);
 	$smarty->assign('js', $js);
+	$smarty->error_reporting = E_ALL & ~E_NOTICE;
 	if (isset($template) && $template != '')
 		$smarty->display($template);
 ?>

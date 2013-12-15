@@ -256,6 +256,7 @@
 	if (isset($meta_keywords) && $meta_keywords != '')
 		$smarty->assign('meta_keywords', $meta_keywords);
 
+	$smarty->error_reporting = E_ALL & ~E_NOTICE;
 	if (isset($template) && $template != '')
 		$smarty->display($template);
 
