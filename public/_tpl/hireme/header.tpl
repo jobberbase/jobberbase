@@ -67,7 +67,8 @@
 		
 		
 		
-			{php}/*<ul id="top">
+			{*
+			<ul id="top">
 				{if $navigation.primary != ''}
 					{section name=tmp loop=$navigation.primary}
 						{if $smarty.const.ENABLE_NEW_JOBS || (!$smarty.const.ENABLE_NEW_JOBS && $navigation.primary[tmp].url != 'post')}
@@ -80,10 +81,12 @@
 			</ul>
 			<div id="the_feed">
 				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}_tpl/{$THEME}/img/bt-rss.png" alt="{$translations.header.rss_alt}" /></a>
-			</div>*/{/php}
+			</div>
+			*}
 		</div><!-- #header -->
 		
-		{php}/*<div id="box">
+		{*
+		<div id="box">
 			<div id="search">
 				<form id="search_form" method="post" action="{$BASE_URL}search/">
 					<fieldset>
@@ -109,6 +112,7 @@
 			{/section}
     	</ul>
 	</div><!-- #categs-nav -->
-	<div class="clear"></div>*/{/php}
+	<div class="clear"></div>
+	*}
 	<div id="mainbody" class="clearfix">	
 	
