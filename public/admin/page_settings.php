@@ -28,7 +28,7 @@
 		{
 			// if a file was uploaded for this setting, add it in the db (extradata field)
 			$sn = $setting['name'];
-			if (isset($_FILES) && isset($_FILES[$sn]))
+			if (isset($_FILES) && isset($_FILES[$sn]) && file_exists($_FILES[$sn]['tmp_name'][0]))
 			{
 				$fp = fopen($_FILES[$sn]['tmp_name'][0], 'r');
 				$extradata = fread($fp, filesize($_FILES[$sn]['tmp_name'][0]));
@@ -80,7 +80,7 @@
 				$fv->isNumber($setting['name']);
 			}
 
-			$setting_array[] = array('name'=> $setting['name'], 'value' => $GLOBALS[$setting['name']], 'extradata' => isset($extradata) ? $extradata : '');
+			$setting_array[] = array('name'=> $setting['name'], 'value' => (isset($GLOBALS[$setting['name']]) ? $GLOBALS[$setting['name']] : null), 'extradata' => (isset($extradata) ? $extradata : ''));
 			$extradata = '';
 		}
 		
