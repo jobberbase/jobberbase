@@ -1,4 +1,5 @@
 <?php
+	die ('This installer is a stub and does not work! Please install JobberBase manually.');
 	require_once '_lib/class.Installer.php';
 	require_once '_lib/smarty/libs/Smarty.class.php';
 	require_once '_lib/functions.php';
@@ -33,11 +34,12 @@
 		else
 		{		
 			$_SESSION['db_host'] = $_POST['host'];
+			$_SESSION['db_port'] = $_POST['port'];
 			$_SESSION['db_name'] = $_POST['db_name'];
 			$_SESSION['db_username'] = $_POST['username'];
 			$_SESSION['db_password'] = $_POST['password'];
 			
-			if (!$Installer->CheckMySQLiInterface($_POST['host'], $_POST['db_name'], $_POST['username'], $_POST['password']))
+			if (!$Installer->CheckMySQLiInterface($_POST['host'], $_POST['db_name'], $_POST['username'], $_POST['password'], $_POST['port']))
 			{
 				if (substr($Installer->GetLastError(), 0, 22) == "Access denied for user")
 				{
@@ -58,10 +60,11 @@
 	else
 	{
 		echo "Not good!";
-		if (!$Installer->CheckMySQLiInterface($_SESSION['db_host'], $_POST['db_name'], $_POST['username'], $_POST['password']))
+		if (!$Installer->CheckMySQLiInterface($_SESSION['db_host'], $_POST['db_name'], $_POST['username'], $_POST['password'], $_POST['port']))
 		{
 			//Could not create database connection, nothing to do but fail and weep
 			unset($_SESSION['db_host']);
+			unset($_SESSION['db_port']);
 			unset($_SESSION['db_name']);
 			unset($_SESSION['db_username']);
 			unset($_SESSION['db_password']);
@@ -74,13 +77,13 @@
 	
 	if ($bMySQL)
 	{
-		if (!$Installer->WriteConfigFile($_SESSION['db_host'], $_SESSION['db_name'], $_SESSION['db_username'], $_SESSION['db_password'], $bUsingMySQLi))
+		if (!$Installer->WriteConfigFile($_SESSION['db_host'], $_SESSION['db_port'], $_SESSION['db_name'], $_SESSION['db_username'], $_SESSION['db_password'], $bUsingMySQLi))
 		{
 			echo $Installer->GetLastError();
 			exit();
 		}
 		
-		$db = new Db($_SESSION['db_host'], $_SESSION['db_username'], $_SESSION['db_password'], $_SESSION['db_name']);
+		$db = new Db($_SESSION['db_host'], $_SESSION['db_username'], $_SESSION['db_password'], $_SESSION['db_name'], $_SESSION['db_port']);
 		$db->Execute('SET CHARSET UTF8');
 		
 		/*unset($_SESSION['db_host']);
@@ -105,11 +108,11 @@
 	}
 			
 	define('APP_PATH',dirname(__FILE__).DIRECTORY_SEPARATOR);
-	
+
 	// Setup Smarty
 	$smarty = new Smarty();
-	$smarty->template_dir = APP_PATH . '_tpl/';
-	$smarty->compile_dir = APP_PATH . '_tpl/_cache/';
+	$smarty->template_dir = APP_PATH . '_tpl/default/';
+	$smarty->compile_dir = APP_PATH . '_tpl/default/_cache/';
 
 	$smarty->display('installer.tpl');
 ?>

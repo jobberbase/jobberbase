@@ -14,13 +14,13 @@
 			return phpversion() >= $this->m_szNeededPhpVersion;
 		}
 		
-		public function CheckMySQLiInterface($szDbHost, $szDbName, $szDbUser, $szDbPass)
+		public function CheckMySQLiInterface($szDbHost, $szDbName, $szDbUser, $szDbPass, $szDbPort)
 		{
 			//Let's try MySQLi first
 			require_once '_lib/class.Db.php';
 			try 
 			{
-				$db = new Db($szDbHost, $szDbUser, $szDbPass, $szDbName);
+				$db = new Db($szDbHost, $szDbUser, $szDbPass, $szDbName, $szDbPort);
 				$db->Execute('SET CHARSET UTF8');
 			}
 			catch(ConnectException $exception) 
@@ -32,14 +32,14 @@
 			return true;
 		}
 		
-		public function CheckMySQLInterface($szDbHost, $szDbName, $szDbUser, $szDbPass)
+		public function CheckMySQLInterface($szDbHost, $szDbName, $szDbUser, $szDbPass, $szDbPort)
 		{
 			//The server doesn't not have the MySQLi extension installed. Fall back to MySQL
 			require_once '_lib/class.Db.MySql.php';
 			
 			try
 			{
-				$db = new Db($szDbHost, $szDbUser, $szDbPass, $szDbName);
+				$db = new Db($szDbHost, $szDbUser, $szDbPass, $szDbName, $szDbPort);
 				$db->Execute('SET CHARSET UTF8');
 			}
 			catch(ConnectException $exception) 
@@ -63,7 +63,7 @@
 		//Check to see whether the cache folder has write rights
 		public function CheckCachePermissions()
 		{
-			return (fileperms('_tpl/_cache') & 0x0002) != 0;
+			return (fileperms('_tpl/default/_cache') & 0x0002) != 0;
 		}
 		
 		//Check to see if the uploads folder has write rights
@@ -72,7 +72,7 @@
 			return (fileperms('uploads') & 0x0002) != 0;
 		}
 		
-		public function WriteConfigFile($szDbHost, $szDbName, $szDbUser, $szDbPassword, $bUsingMySQLi)
+		public function WriteConfigFile($szDbHost, $szDbPort, $szDbName, $szDbUser, $szDbPassword, $bUsingMySQLi)
 		{
 			//Read the default configuration file
 			$hDefaultConfig = fopen('config_default.php', 'r+');
@@ -88,6 +88,7 @@
 			
 			//Replace the default values with local settings
 			$szConfigFile = str_replace('[[DB_HOST]]', $szDbHost, $szConfigFile);
+			$szConfigFile = str_replace('[[DB_PORT]]', $szDbPort, $szConfigFile);
 			$szConfigFile = str_replace('[[DB_USER]]', $szDbUser, $szConfigFile);
 			$szConfigFile = str_replace('[[DB_PASS]]', $szDbPassword, $szConfigFile);
 			$szConfigFile = str_replace('[[DB_NAME]]', $szDbName, $szConfigFile);
