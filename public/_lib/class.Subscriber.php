@@ -229,6 +229,7 @@ class Subscriber {
 		$sql = 'SELECT DISTINCT a.id as id, a.email as email, a.auth as auth, a.keywords as keywords
 				FROM '.DB_PREFIX.'subscribers a, '.DB_PREFIX.'subscriptions b
 				WHERE a.id = b.subscriber_id
+				AND b.confirmed = 1
 				AND ' . $categoryFilter;
 
 		if ($tmpResult = $db->QueryArray($sql))
