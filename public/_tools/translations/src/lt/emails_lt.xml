@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emails>
+	<SendToFriend>
+		<subject>
+				Įdomus darbo pasiūlymas
+		</subject>
+		<message>
+			<![CDATA[
+{BR}{BR}-- {BR}Šį el. laišką Jums išsiuntė {YOUR_EMAIL}
+			]]>
+		</message>
+	</SendToFriend>
+	
+	<ApplyOnline>
+		<subject>
+				[ {SITE_NAME} ] Noriu dalyvauti atrankoje į poziciją: {JOB_TITLE}
+		</subject>
+		<message>
+			<![CDATA[
+{BR}{BR}-- {BR}Šią paraišką dalyvauti atrankoje atsiuntė {JOB_URL}
+			]]>
+		</message>
+	</ApplyOnline>
+	
+	<PublishToAdmin>
+		<newPostSubject>
+				[ {SITE_NAME} ] Naujas darbo pasiūlymas: {JOB_TITLE}
+		</newPostSubject>
+		<editedPostSubject>
+				[ {SITE_NAME} ] Pataisytas darbo pasiūlymas: {JOB_TITLE}
+		</editedPostSubject>
+		<message>
+			<![CDATA[
+{JOB_URL}
+{BR} {JOB_TITLE}
+{BR} Darbą siūlo {JOB_COMPANY}
+{BR} {JOB_DESCRIPTION}
+{BR} URL adresas: {JOB_URL}
+{BR}---{BR} Pasiūlymą patalpino: {JOB_POSTER_EMAIL}
+{BR}---{BR} Taisyti: {JOB_EDIT_URL}
+{BR} Nutraukti skelbimo galiojimą: {JOB_DEACTIVATE_URL}
+{BR}{BR}---{BR} IP: {JOB_POSTER_IP}
+{BR} Data: {JOB_POST_DATE}
+			]]>
+		</message>
+		<messageFirstPost>
+			<![CDATA[
+Aktyvinti skelbimą: {JOB_ACTIVATE_URL}{BR}
+			]]>
+		</messageFirstPost>
+	</PublishToAdmin>
+	
+	<PublishPendingToUser>
+		<subject>
+				Jūsų darbo pasiūlymas „{SITE_NAME}“ svetainėje
+		</subject>
+		<message>
+			<![CDATA[
+Sveiki! :){BR}{BR}
+Atsiprašome dėl nepatogumų, tačiau kadangi tai yra pirmas kartas, kai šiuo el. pašto adresu Jūs talpinate skelbimą, mes jį turėsime patvirtinti rankiniu būdu.
+{BR}Iš anksto dėkojame už kantrybę. Skelbimą turėtume patvirtinti netrukus. Kai tai nutiks, Jūs gausite pranešimą el. paštu.
+{BR}{BR}Ateityje visi Jūsų skelbimai, kuriuose nurodysite šį el. paštą, bus patvirtinami automatiškai.
+{BR}{BR}-- {BR}Dėkojame, kad naudojatės mūsų paslaugomis!
+{BR} „{SITE_NAME}“ komanda
+			]]>
+		</message>
+	</PublishPendingToUser>
+	
+	<PublishToUser>
+		<subject>
+				Jūsų darbo pasiūlymas „{SITE_NAME}“ svetainėje patvirtintas
+		</subject>
+		<message>
+			<![CDATA[
+Sveiki! :){BR}{BR}
+Jūsų darbo pasiūlymas patvirtintas, jį galite peržiūrėti adresu {JOB_URL}
+{BR}{BR}---{BR}Taisyti: {JOB_EDIT_URL}
+{BR}Nutraukti skelbimo galiojimą: {JOB_DEACTIVATE_URL}
+{BR}{BR}-- {BR}Dėkojame, kad naudojatės mūsų paslaugomis!
+{BR} „{SITE_NAME}“ komanda
+			]]>
+		</message>
+	</PublishToUser>
+	
+	<ReportSpam>
+		<subject>
+				 [BRUKALAS svetainėje „{SITE_NAME}“] {JOB_TITLE}
+		</subject>
+		<message>
+			<![CDATA[
+Gautas pranešimas, jog šis darbo pasiūlymas negalioja arba yra brukalas: {BR}---{BR}{BR}
+{JOB_URL}
+{BR}{BR} {JOB_TITLE}
+{BR} Darbą siūlo {JOB_COMPANY}
+{BR}{BR} {JOB_DESCRIPTION}
+{BR}{BR}---{BR} Pasiūlymą patalpino: {JOB_POSTER_EMAIL}
+{BR}---{BR}Taisyti: {JOB_EDIT_URL}
+{BR} Nutraukti skelbimo galiojimą: {JOB_DEACTIVATE_URL}
+{BR}---{BR}IP: {JOB_POSTER_IP}
+{BR} Data: {JOB_POST_DATE}
+			]]>
+		</message>
+	</ReportSpam>
+	
+	<Contact>
+		<subject>
+				 [{SITE_NAME}] atsiliepimas
+		</subject>
+		<message>
+			<![CDATA[
+{BR}{BR}---{BR} Atsiliepimą išsiuntė: {SENDER_NAME} <{SENDER_EMAIL}>
+{BR} IP: {SENDER_IP}
+{BR} Data: {SEND_DATE}
+			]]>
+		</message>
+	</Contact>
+	<SubscriptionJobPosted>
+		<subject>
+				[ {SITE_NAME} ] Patalpintas naujas darbo pasiūlymas
+		</subject>
+		<message>
+			<![CDATA[
+Sveiki!{BR}{BR}
+Svetainėje „{SITE_NAME}“ patalpintas naujas darbo pasiūlymas:{BR}{BR}
+{JOB_TITLE}{BR}
+{JOB_SUMMARY}{BR}{BR}
+Peržiūrėti detalesnę šio pasiūlymo informaciją, o gal ir pateikti savo kandidatūrą, galite, apsilankę adresu:{BR}
+{JOB_URL}{BR}{BR}
+Šiuos laiškus Jūs gaunate, nes juos užsiprenumeravote. Jeigu norite pakeisti prenumeratos nustatymus, arba jos atsisakyti visai, tai galite atlikti šiuo adresu:{BR}{BR}
+{MANAGE_URL}{BR}{BR}
+-- {BR}
+Dėkojame kad naudojatės mūsų paslaugomis!{BR}
+ „{SITE_NAME}“ komanda
+			]]>
+		</message>
+	</SubscriptionJobPosted>
+	<SubscriptionPleaseConfirm>
+		<subject>
+				[ {SITE_NAME} ] Prašom patvirtinti prenumeratą
+		</subject>
+		<message>
+			<![CDATA[
+Sveiki!{BR}{BR}
+Kažkas Jūsų el. pašto adresu ką tik bandė užprenumeruoti darbo pasiūlymus iš svetainės „{SITE_NAME}“ ({SITE_URL}).{BR}{BR}
+Jeigu norite patvirtinti šią prenumeratą arba pakeisti jos nuostatas, prašom apsilankyti šiuo adresu:{BR}
+{MANAGE_URL}{BR}{BR}
+Jeigu šią prenumeratos užklausą įvykdėte ne Jūs, tuomet galite tiesiog nepaisyti šio laiško, arba vis tiek apsilankyti minėtame tinklalapyje ir spustelėti mygtuką „Atsisakyti visų prenumeratų“, kad Jūsų el. pašto adresas būtų visiškai pašalintas iš mūsų duomenų bazės. Bet kuriuo atveju, kol prenumerata nepatvirtinta, darbo pasiūlymų mes Jums nesiųsime.{BR}{BR}
+Beje, prenumeratos užklausa buvo atlikta iš šio IP adreso: {SENDER_IP}.{BR}{BR}
+-- {BR}
+Dėkojame kad naudojatės mūsų paslaugomis!{BR}
+ „{SITE_NAME}“ komanda
+			]]>
+		</message>
+	</SubscriptionPleaseConfirm>
+	<SubscriptionRemoved>
+		<subject>
+				[ {SITE_NAME} ] Prenumerata nutraukta
+		</subject>
+		<message>
+			<![CDATA[
+Sveiki!{BR}{BR}
+Jūs atsisakėte visų svetainės „{SITE_NAME}“ ({SITE_URL}) darbo pasiūlymų prenumeratų.{BR}{BR}
+Jeigu norėsite, bet kada galėsite norimus pasiūlymus užsiprenumeruoti iš naujo.{BR}{BR}
+Ši prenumeratos atsisakymo užklausa buvo atlikta iš šio IP adreso: {SENDER_IP}.{BR}{BR}
+-- {BR}
+Dėkojame kad naudojatės mūsų paslaugomis!{BR}
+ „{SITE_NAME}“ komanda
+			]]>
+		</message>
+	</SubscriptionRemoved>
+	<SubscriptionUpdated>
+		<subject>
+				[ {SITE_NAME} ] Jūsų prenumeratos nuostatos pakeistos
+		</subject>
+		<message>
+			<![CDATA[
+Sveiki!{BR}{BR}
+Informuojame, jog pakeistos Jūsų darbo pasiūlymų prenumeratos nuostatos svetainėje „{SITE_NAME}“ ({SITE_URL}).{BR}{BR}
+Jeigu kada norėsite pakeisti prenumeratos nuostatas vėl, arba jos atsisakyti visai, tai galite atlikti šiuo adresu:{BR}
+{MANAGE_URL}{BR}{BR}
+Beje, ši nuostatų pakeitimo užklausa buvo atlikta iš šio IP adreso: {SENDER_IP}.{BR}{BR}
+-- {BR}
+Dėkojame kad naudojatės mūsų paslaugomis!{BR}
+ „{SITE_NAME}“ komanda
+			]]>
+		</message>
+	</SubscriptionUpdated>
+</emails>

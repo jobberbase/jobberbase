@@ -6,7 +6,7 @@
 		</subject>
 		<message>
 			<![CDATA[
-				{BR}{BR}---{BR}You've received this e-mail from {YOUR_EMAIL}
+{BR}{BR}-- {BR}You've received this e-mail from {YOUR_EMAIL}
 			]]>
 		</message>
 	</SendToFriend>
@@ -17,34 +17,34 @@
 		</subject>
 		<message>
 			<![CDATA[
-				{BR}{BR}---{BR}This e-mail is an application sent from {JOB_URL}
+{BR}{BR}-- {BR}This e-mail is an application sent from {JOB_URL}
 			]]>
 		</message>
 	</ApplyOnline>
 	
 	<PublishToAdmin>
 		<newPostSubject>
-				[ {SITE_NAME}  ] New job: {JOB_TITLE}
+				[ {SITE_NAME} ] New job: {JOB_TITLE}
 		</newPostSubject>
 		<editedPostSubject>
-				[ {SITE_NAME}  ] Edited job: {JOB_TITLE}
+				[ {SITE_NAME} ] Edited job: {JOB_TITLE}
 		</editedPostSubject>
 		<message>
 			<![CDATA[
-				{JOB_URL}
-				{BR} {JOB_TITLE} at {JOB_COMPANY}
-				{BR} {JOB_DESCRIPTION}
-				{BR} URL: {JOB_URL}
-				{BR}---{BR} Published by: {JOB_POSTER_EMAIL}
-				{BR}---{BR} Edit: {JOB_EDIT_URL}
-				{BR} Deactivate: {JOB_DEACTIVATE_URL}
-				{BR}{BR}---{BR} IP: {JOB_POSTER_IP}
-				{BR} Date: {JOB_POST_DATE}
+{JOB_URL}
+{BR} {JOB_TITLE} at {JOB_COMPANY}
+{BR} {JOB_DESCRIPTION}
+{BR} URL: {JOB_URL}
+{BR}---{BR} Published by: {JOB_POSTER_EMAIL}
+{BR}---{BR} Edit: {JOB_EDIT_URL}
+{BR} Deactivate: {JOB_DEACTIVATE_URL}
+{BR}{BR}---{BR} IP: {JOB_POSTER_IP}
+{BR} Date: {JOB_POST_DATE}
 			]]>
 		</message>
 		<messageFirstPost>
 			<![CDATA[
-				Activate ad {JOB_ACTIVATE_URL}{BR}
+Activate ad {JOB_ACTIVATE_URL}{BR}
 			]]>
 		</messageFirstPost>
 	</PublishToAdmin>
@@ -55,12 +55,12 @@
 		</subject>
 		<message>
 			<![CDATA[
-				Hello! :){BR}{BR}
-				We apologize for the inconvenience, but since this is the first time you post with this e-mail address, we need to manually verify it.
-				{BR}Thank you for your patience, as the ad should be published ASAP. We'll send you an e-mail when that happens!
-				{BR}{BR}From now on, every ad you post with this e-mail address will instantly be published.
-				{BR}{BR}---{BR}Thank you for using our service!
-				{BR}The Team
+Hello! :){BR}{BR}
+We apologize for the inconvenience, but since this is the first time you post with this e-mail address, we need to manually verify it.
+{BR}Thank you for your patience, as the ad should be published ASAP. We'll send you an e-mail when that happens!
+{BR}{BR}From now on, every ad you post with this e-mail address will instantly be published.
+{BR}{BR}-- {BR}Thank you for using our service!
+{BR}The Team
 			]]>
 		</message>
 	</PublishPendingToUser>
@@ -71,12 +71,12 @@
 		</subject>
 		<message>
 			<![CDATA[
-				Hello! :){BR}{BR}
-				Your ad was published and is available at {JOB_URL}
-				{BR}{BR}---{BR}Edit it: {JOB_EDIT_URL}
-				{BR}Deactivate it: {JOB_DEACTIVATE_URL}
-				{BR}{BR}---{BR}Thank you for using our service!
-				{BR} The {SITE_NAME} Team
+Hello! :){BR}{BR}
+Your ad was published and is available at {JOB_URL}
+{BR}{BR}---{BR}Edit it: {JOB_EDIT_URL}
+{BR}Deactivate it: {JOB_DEACTIVATE_URL}
+{BR}{BR}-- {BR}Thank you for using our service!
+{BR} The {SITE_NAME} Team
 			]]>
 		</message>
 	</PublishToUser>
@@ -87,15 +87,15 @@
 		</subject>
 		<message>
 			<![CDATA[
-				Following ad was reported as false/spam: {BR}---{BR}{BR}
-				{JOB_URL}
-				{BR}{BR} {JOB_TITLE} at {JOB_COMPANY}
-				{BR}{BR} {JOB_DESCRIPTION}
-				{BR}{BR}---{BR} Published by: {JOB_POSTER_EMAIL}
-				{BR}---{BR}Edit: {JOB_EDIT_URL}
-				{BR} Deactivate: {JOB_DEACTIVATE_URL}
-				{BR}---{BR}IP: {JOB_POSTER_IP}
-				{BR} Date: {JOB_POST_DATE}
+Following ad was reported as false/spam: {BR}---{BR}{BR}
+{JOB_URL}
+{BR}{BR} {JOB_TITLE} at {JOB_COMPANY}
+{BR}{BR} {JOB_DESCRIPTION}
+{BR}{BR}---{BR} Published by: {JOB_POSTER_EMAIL}
+{BR}---{BR}Edit: {JOB_EDIT_URL}
+{BR} Deactivate: {JOB_DEACTIVATE_URL}
+{BR}---{BR}IP: {JOB_POSTER_IP}
+{BR} Date: {JOB_POST_DATE}
 			]]>
 		</message>
 	</ReportSpam>
@@ -106,10 +106,80 @@
 		</subject>
 		<message>
 			<![CDATA[
-				{BR}{BR}---{BR} Sent by: {SENDER_NAME} <{SENDER_EMAIL}>
-				{BR} IP: {SENDER_IP}
-				{BR} Date: {SEND_DATE}
+{BR}{BR}---{BR} Sent by: {SENDER_NAME} <{SENDER_EMAIL}>
+{BR} IP: {SENDER_IP}
+{BR} Date: {SEND_DATE}
 			]]>
 		</message>
 	</Contact>
+	<SubscriptionJobPosted>
+		<subject>
+				[ {SITE_NAME} ] New job ad has been posted
+		</subject>
+		<message>
+			<![CDATA[
+Hello!{BR}{BR}
+A new job ad has been posted on {SITE_NAME} website:{BR}{BR}
+{JOB_TITLE}{BR}
+{JOB_SUMMARY}{BR}{BR}
+To view the ad or apply for this job, please visit the following page:{BR}
+{JOB_URL}{BR}{BR}
+You are receiving these notifications because you have subscribed to them. If you want to adjust your subscription preferences, or unsubscribe altogether, you can visit the following page:{BR}{BR}
+{MANAGE_URL}{BR}{BR}
+-- {BR}
+Thank you for using our service!{BR}
+ The {SITE_NAME} Team
+			]]>
+		</message>
+	</SubscriptionJobPosted>
+	<SubscriptionPleaseConfirm>
+		<subject>
+				[ {SITE_NAME} ] Please confirm your subscription
+		</subject>
+		<message>
+			<![CDATA[
+Hello!{BR}{BR}
+Someone tried to subscribe you to new job announcements from the {SITE_NAME} website ({SITE_URL}).{BR}{BR}
+To validate this subscription, or adjust the subscription settings, please visit the following page:{BR}
+{MANAGE_URL}{BR}{BR}
+If you did not request this, you can either ignore this message, or still visit the page and click the Unsubscribe All button to remove yourself from our database.{BR}{BR}
+For your information, the person who initiated this change used the following IP address: {SENDER_IP}.{BR}{BR}
+-- {BR}
+Thank you for using our service!{BR}
+ The {SITE_NAME} Team
+			]]>
+		</message>
+	</SubscriptionPleaseConfirm>
+	<SubscriptionRemoved>
+		<subject>
+				[ {SITE_NAME} ] You have been unsubscribed
+		</subject>
+		<message>
+			<![CDATA[
+Hello!{BR}{BR}
+You have been unsubscribed from all job announcements from the {SITE_NAME} website ({SITE_URL}).{BR}{BR}
+You can subscribe again anytime.{BR}{BR}
+For your information, the person who initiated this change used the following IP address: {SENDER_IP}.{BR}{BR}
+-- {BR}
+Thank you for using our service!{BR}
+ The {SITE_NAME} Team
+			]]>
+		</message>
+	</SubscriptionRemoved>
+	<SubscriptionUpdated>
+		<subject>
+				[ {SITE_NAME} ] Your subscription settings have been updated
+		</subject>
+		<message>
+			<![CDATA[
+Hello!{BR}{BR}
+The preferences of your subscription to new job announcements from the {SITE_NAME} website ({SITE_URL}) have been updated.{BR}{BR}
+If you would ever want to adjust your subscription preferences again, or unsubscribe from all announcements altogether, you can visit the following page:{BR}{MANAGE_URL}{BR}{BR}
+For your information, the person who initiated this change uses the following IP address: {SENDER_IP}.{BR}{BR}
+-- {BR}
+Thank you for using our service!{BR}
+ The {SITE_NAME} Team
+			]]>
+		</message>
+	</SubscriptionUpdated>
 </emails>
