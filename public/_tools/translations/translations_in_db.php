@@ -18,7 +18,7 @@
 	$cache->removeCache(CACHE_TRANSLATIONS);
 
 	// test if language is already created in the database
-	$sql = "SELECT id FROM i18n_langs WHERE code='{$langCode}'";
+	$sql = "SELECT id FROM ".DB_PREFIX."i18n_langs WHERE code='{$langCode}'";
 	$lang_id = $db->queryItem($sql);
 	if ($lang_id)
 	{
@@ -28,14 +28,14 @@
 	{
 		echo 'Creating an entry in i18n_langs...<br />';
 		// if the language is not created yet, create it.
-		$sql = "INSERT INTO i18n_langs (name, code) VALUES ('{$langName}', '{$langCode}')";
+		$sql = "INSERT INTO ".DB_PREFIX."i18n_langs (name, code) VALUES ('{$langName}', '{$langCode}')";
 		$db->Execute($sql);
 		$lang_id = $db->insert_id;
 	}
 	
 	if ($lang_id)
 	{
-		$sql = "SELECT COUNT(id) FROM i18n_translations WHERE lang_id={$lang_id}";
+		$sql = "SELECT COUNT(id) FROM ".DB_PREFIX."i18n_translations WHERE lang_id={$lang_id}";
 		$count = $db->queryItem($sql);
 		if ($count)
 		{
@@ -53,14 +53,14 @@
 
 			foreach ($translations as $t_section => $t_data)
 			{
-				$sql = "INSERT INTO i18n_translations (id, parent_id, lang_id, item) VALUES (NULL, 0, {$lang_id}, '{$t_section}')";
+				$sql = "INSERT INTO ".DB_PREFIX."i18n_translations (id, parent_id, lang_id, item) VALUES (NULL, 0, {$lang_id}, '{$t_section}')";
 				$db->Execute($sql);
 
 				$parent_id = $db->insert_id;
 
 				foreach ($t_data as $k => $v)
 				{
-					$sql = "INSERT INTO i18n_translations (parent_id, lang_id, item, value) VALUES ({$parent_id}, {$lang_id}, '" . addslashes($k) . "', '" . addslashes($v) . "')";
+					$sql = "INSERT INTO ".DB_PREFIX."i18n_translations (parent_id, lang_id, item, value) VALUES ({$parent_id}, {$lang_id}, '" . addslashes($k) . "', '" . addslashes($v) . "')";
 					$db->Execute($sql);
 				}
 			}
@@ -92,16 +92,16 @@
 
 					// create new section for this email
 					$item1 = 'email_' . $item . '_firstPost';
-					$sql = 'INSERT INTO i18n_translations (id, parent_id, lang_id, item) VALUES (NULL, 0, ' . $lang_id . ', "' . $item1 . '")';
+					$sql = 'INSERT INTO '.DB_PREFIX.'i18n_translations (id, parent_id, lang_id, item) VALUES (NULL, 0, ' . $lang_id . ', "' . $item1 . '")';
 					$db->Execute($sql);
 					$parent_id1 = $db->insert_id;
 
 					// add subject as translation item
-					$sql = 'INSERT INTO i18n_translations (parent_id, lang_id, item, value) VALUES (' . $parent_id1 . ', ' . $lang_id . ', "subject", "' . addslashes(trim($subject)) . '")';
+					$sql = 'INSERT INTO '.DB_PREFIX.'i18n_translations (parent_id, lang_id, item, value) VALUES (' . $parent_id1 . ', ' . $lang_id . ', "subject", "' . addslashes(trim($subject)) . '")';
 					$db->Execute($sql);
 
 					// add message as translation item
-					$sql = 'INSERT INTO i18n_translations (parent_id, lang_id, item, value, field_type) VALUES (' . $parent_id1 . ', ' . $lang_id . ', "message", "' . addslashes(trim($msg1)) . '", "textarea")';
+					$sql = 'INSERT INTO '.DB_PREFIX.'i18n_translations (parent_id, lang_id, item, value, field_type) VALUES (' . $parent_id1 . ', ' . $lang_id . ', "message", "' . addslashes(trim($msg1)) . '", "textarea")';
 					$db->Execute($sql);
 
 					// 2nd email: usual email
@@ -109,16 +109,16 @@
 
 					// create new section for this email
 					$item2 = 'email_' . $item;
-					$sql = 'INSERT INTO i18n_translations (id, parent_id, lang_id, item) VALUES (NULL, 0, ' . $lang_id . ', "' . $item2 . '")';
+					$sql = 'INSERT INTO '.DB_PREFIX.'i18n_translations (id, parent_id, lang_id, item) VALUES (NULL, 0, ' . $lang_id . ', "' . $item2 . '")';
 					$db->Execute($sql);
 					$parent_id2 = $db->insert_id;
 
 					// add subject as translation item
-					$sql = 'INSERT INTO i18n_translations (parent_id, lang_id, item, value) VALUES (' . $parent_id2 . ', ' . $lang_id . ', "subject", "' . addslashes(trim($subject)) . '")';
+					$sql = 'INSERT INTO '.DB_PREFIX.'i18n_translations (parent_id, lang_id, item, value) VALUES (' . $parent_id2 . ', ' . $lang_id . ', "subject", "' . addslashes(trim($subject)) . '")';
 					$db->Execute($sql);
 
 					// add message as translation item
-					$sql = 'INSERT INTO i18n_translations (parent_id, lang_id, item, value, field_type) VALUES (' . $parent_id2 . ', ' . $lang_id . ', "message", "' . addslashes(trim($msg2)) . '", "textarea")';
+					$sql = 'INSERT INTO '.DB_PREFIX.'i18n_translations (parent_id, lang_id, item, value, field_type) VALUES (' . $parent_id2 . ', ' . $lang_id . ', "message", "' . addslashes(trim($msg2)) . '", "textarea")';
 					$db->Execute($sql);
 				}
 				else
@@ -127,16 +127,16 @@
 
 					// create new section for this email
 					$item = 'email_' . $item;
-					$sql = 'INSERT INTO i18n_translations (id, parent_id, lang_id, item) VALUES (NULL, 0, ' . $lang_id . ', "' . $item . '")';
+					$sql = 'INSERT INTO '.DB_PREFIX.'i18n_translations (id, parent_id, lang_id, item) VALUES (NULL, 0, ' . $lang_id . ', "' . $item . '")';
 					$db->Execute($sql);
 					$parent_id = $db->insert_id;
 
 					// add subject as translation item
-					$sql = 'INSERT INTO i18n_translations (parent_id, lang_id, item, value) VALUES (' . $parent_id . ', ' . $lang_id . ', "subject", "' . addslashes(trim($subject)) . '")';
+					$sql = 'INSERT INTO '.DB_PREFIX.'i18n_translations (parent_id, lang_id, item, value) VALUES (' . $parent_id . ', ' . $lang_id . ', "subject", "' . addslashes(trim($subject)) . '")';
 					$db->Execute($sql);
 
 					// add message as translation item
-					$sql = 'INSERT INTO i18n_translations (parent_id, lang_id, item, value, field_type) VALUES (' . $parent_id . ', ' . $lang_id . ', "message", "' . addslashes(trim($message)) . '", "textarea")';
+					$sql = 'INSERT INTO '.DB_PREFIX.'i18n_translations (parent_id, lang_id, item, value, field_type) VALUES (' . $parent_id . ', ' . $lang_id . ', "message", "' . addslashes(trim($message)) . '", "textarea")';
 					$db->Execute($sql);
 				}
 			}
