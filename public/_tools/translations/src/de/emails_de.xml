@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emails>
+	<SendToFriend>
+		<subject>
+				Empfohlene Stellenanzeige
+		</subject>
+		<message>
+			<![CDATA[
+{BR}{BR}-- {BR}Sie erhalten diese Email von: {YOUR_EMAIL}
+			]]>
+		</message>
+	</SendToFriend>
+	
+	<ApplyOnline>
+		<subject>
+				[ {SITE_NAME} ] Bewerbung auf folgende Stelle: {JOB_TITLE}
+		</subject>
+		<message>
+			<![CDATA[
+{BR}{BR}-- {BR}Onlinebewerbung gesendet von: {JOB_URL}
+			]]>
+		</message>
+	</ApplyOnline>
+	
+	<PublishToAdmin>
+		<newPostSubject>
+				[ {SITE_NAME} ] Neue Anzeige: {JOB_TITLE}
+		</newPostSubject>
+		<editedPostSubject>
+				[ {SITE_NAME} ] Bearbeitete Anzeige: {JOB_TITLE}
+		</editedPostSubject>
+		<message>
+			<![CDATA[
+{JOB_URL}
+{BR} {JOB_TITLE} bei {JOB_COMPANY}
+{BR} {JOB_DESCRIPTION}
+{BR} URL: {JOB_URL}
+{BR}---{BR} Anzeige von: {JOB_POSTER_EMAIL}
+{BR}---{BR} Bearbeiten: {JOB_EDIT_URL}
+{BR} Deaktivieren: {JOB_DEACTIVATE_URL}
+{BR}{BR}---{BR} IP: {JOB_POSTER_IP}
+{BR} Datum: {JOB_POST_DATE}
+			]]>
+		</message>
+		<messageFirstPost>
+			<![CDATA[
+Anzeige aktivieren {JOB_ACTIVATE_URL}{BR}
+			]]>
+		</messageFirstPost>
+	</PublishToAdmin>
+	
+	<PublishPendingToUser>
+		<subject>
+				Ihre Anzeige auf: {SITE_NAME}
+		</subject>
+		<message>
+			<![CDATA[
+Hallo! :){BR}{BR}
+Da Sie diese Email Adresse erstmalig verwenden, muss diese zuerst manuell bestätigt werden.
+{BR}Sie erhalten von uns eine Nachricht, wenn dies geschehen ist!
+{BR}{BR}Zukünftig werden alle Stellenanzeigen mit dieser Email Adresse umgehend freigegeben.
+{BR}{BR}-- {BR}Vielen Dank, das Sie unseren Service verwenden!
+{BR}Das Team
+			]]>
+		</message>
+	</PublishPendingToUser>
+	
+	<PublishToUser>
+		<subject>
+				Ihre Anzeige auf {SITE_NAME} wurde veröffentlicht 
+		</subject>
+		<message>
+			<![CDATA[
+Hello! :){BR}{BR}
+Ihre Anzeige wurde veröffentlicht und ist hier verfügbar auf {JOB_URL}
+{BR}{BR}---{BR}Bearbeiten: {JOB_EDIT_URL}
+{BR}Deaktivieren: {JOB_DEACTIVATE_URL}
+{BR}{BR}-- {BR}Danke für Ihr Vertrauen in unseren Service!
+{BR} Das {SITE_NAME} Team
+			]]>
+		</message>
+	</PublishToUser>
+	
+	<ReportSpam>
+		<subject>
+				 [SPAM auf {SITE_NAME}] {JOB_TITLE}
+		</subject>
+		<message>
+			<![CDATA[
+Folgende Anzeige wurde als Spam/fehlerhaft gemeldet: {BR}---{BR}{BR}
+{JOB_URL}
+{BR}{BR} {JOB_TITLE} von {JOB_COMPANY}
+{BR}{BR} {JOB_DESCRIPTION}
+{BR}{BR}---{BR} Eingetragen von: {JOB_POSTER_EMAIL}
+{BR}---{BR}Bearbeiten: {JOB_EDIT_URL}
+{BR} Deaktivieren: {JOB_DEACTIVATE_URL}
+{BR}---{BR}IP: {JOB_POSTER_IP}
+{BR} Datum: {JOB_POST_DATE}
+			]]>
+		</message>
+	</ReportSpam>
+	
+	<Contact>
+		<subject>
+				 [{SITE_NAME}] Kontakt
+		</subject>
+		<message>
+			<![CDATA[
+{BR}{BR}---{BR} Gesendet von: {SENDER_NAME} <{SENDER_EMAIL}>
+{BR} IP: {SENDER_IP}
+{BR} Datum: {SEND_DATE}
+			]]>
+		</message>
+	</Contact>
+	<SubscriptionJobPosted>
+		<subject>
+				[ {SITE_NAME} ] Neue Stellenanzeige veröffentlicht
+		</subject>
+		<message>
+			<![CDATA[
+Hallo!{BR}{BR}
+Eine neue Stellenanzeige wurde auf {SITE_NAME} veröffentlicht.{BR}{BR}
+{JOB_TITLE}{BR}
+{JOB_SUMMARY}{BR}{BR}
+Um Die Stellenanzeige aufzurufen klicken Sie bitte hier:{BR}
+{JOB_URL}{BR}{BR}
+Sie erhalten diese Benachrichtigung als registriertes Mitglied. Wenn Sie Ihre Einstellungen ändern möchten gehen Sie bitte auf folgende Seite:{BR}{BR}
+{MANAGE_URL}{BR}{BR}
+-- {BR}
+Vielen Dank, das Sie unseren Service verwenden!{BR}
+ Das {SITE_NAME} Team
+			]]>
+		</message>
+	</SubscriptionJobPosted>
+	<SubscriptionPleaseConfirm>
+		<subject>
+				[ {SITE_NAME} ] Bitte bestätigen Sie Ihre Anmeldung
+		</subject>
+		<message>
+			<![CDATA[
+Hallo!{BR}{BR}
+Sie haben sich mit Ihrer Email Adresse für unseren Newsletter angemeldet auf {SITE_NAME} <br> ({SITE_URL}).{BR}{BR}
+Um die Anmeldung zu bestätigen oder wenn Sie Ihre Einstellungen bearbeiten möchten, klicken Sie bitte auf den folgenden Link:{BR}
+{MANAGE_URL}{BR}{BR}
+Falls Sie dies nicht selber veranlasst haben, können Sie diese Mail ignorieren.{BR}{BR}
+Die Änderung wurde von dieser IP Adresse aus veranlasst: {SENDER_IP}.{BR}{BR}
+-- {BR}
+Vielen Dank, das Sie unseren Service verwenden!{BR}
+ The {SITE_NAME} Team
+			]]>
+		</message>
+	</SubscriptionPleaseConfirm>
+	<SubscriptionRemoved>
+		<subject>
+				[ {SITE_NAME} ] Sie haben sich abgemeldet
+		</subject>
+		<message>
+			<![CDATA[
+Hallo!{BR}{BR}
+Sie haben sich von unserem Newsletterauf {SITE_NAME} <br> ({SITE_URL}) abgemeldet.{BR}{BR}
+Sie können Ihre Anmeldung jederzeit wieder aktivieren.{BR}{BR}
+Die Änderung wurde von dieser IP Adresse aus veranlasst: {SENDER_IP}.{BR}{BR}
+-- {BR}
+Vielen Dank, das Sie unseren Service verwenden!{BR}
+ The {SITE_NAME} Team
+			]]>
+		</message>
+	</SubscriptionRemoved>
+	<SubscriptionUpdated>
+		<subject>
+				[ {SITE_NAME} ] Ihre Einstellungen wurden geändert
+		</subject>
+		<message>
+			<![CDATA[
+Hallo!{BR}{BR}
+Ihre Newslettereinstellungen von {SITE_NAME} <br> ({SITE_URL}) wurden aktualisiert{BR}{BR}
+Um Ihre Einstellungen zu ändern, oder den Newsletter abzubestellen klicken Sie auf diesen Link:{BR}{MANAGE_URL}{BR}{BR}
+Die Änderung wurde von dieser IP Adresse aus veranlasst: {SENDER_IP}.{BR}{BR}
+-- {BR}
+Vielen Dank, das Sie unseren Service verwenden!{BR}
+ Das {SITE_NAME} Team
+			]]>
+		</message>
+	</SubscriptionUpdated>
+</emails>
