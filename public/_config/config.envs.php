@@ -6,7 +6,7 @@
 
 // local
 $__instances['local'] = array(
-	// should be a unique part of the url (or the entire url if you wish)
+	// The prefix should be a unique part of the url (not including protocol name or auth info; see below).
 	'prefix' => 'demo.jobberbase',
 	// mysql credentials
 	'db_host' => 'localhost',
