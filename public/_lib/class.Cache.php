@@ -52,23 +52,29 @@ class Cache
 
     public function saveCache($data, $identifier, $group = 'default')
     {
-        $this->liteCache->save(serialize($data), $identifier, $group);
+        return $this->liteCache->save(serialize($data), $identifier, $group);
     }
 
     public function loadCache($identifier, $group = 'default') 
     {
-        $data = $this->liteCache->get($identifier, $group);
-        return unserialize($data);
+        if ($data = $this->liteCache->get($identifier, $group))
+        {
+            return unserialize($data);
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public function removeCache($identifier, $group = 'default') 
     {
-        $this->liteCache->remove($identifier, $group);
+        return $this->liteCache->remove($identifier, $group);
     }
 
     public function cleanCache($group = false) 
     {
-        $this->liteCache->clean($group);
+        return $this->liteCache->clean($group);
     }
 
 }
