@@ -14,8 +14,6 @@
 	/***  CONFIGURATION ENDS HERE  ***/
 
 	require_once '../../_config/config.php';
-	
-	$cache->removeCache(CACHE_TRANSLATIONS);
 
 	// test if language is already created in the database
 	$sql = "SELECT id FROM ".DB_PREFIX."i18n_langs WHERE code='{$langCode}'";
@@ -43,6 +41,8 @@
 		}
 
 		echo 'No strings have been found for this language id in the database. Continuing with import...<br />';
+		$cache->removeCache(CACHE_TRANSLATIONS.'_'.$langCode);
+
 		// strings / .ini
 		$translationFilePath = APP_PATH . "_tools/translations/src/{$langCode}/translations_{$langCode}.ini";
 

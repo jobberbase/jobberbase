@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 		{
 			if ($translator->addLanguage($name, $code))
 			{
-				$cache->removeCache(CACHE_TRANSLATIONS);
+				$cache->removeCache(CACHE_TRANSLATIONS.'_'.$code);
 				echo 1;
 			}
 			else
@@ -25,9 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 		
 		case 'edit_language':
 		{
+			$oldCode = $translator->getLanguageCodeById($id);
+			$cache->removeCache(CACHE_TRANSLATIONS.'_'.$oldCode);
 			if ($translator->editLanguage($id, $name, $code))
 			{
-				$cache->removeCache(CACHE_TRANSLATIONS);
+				$cache->removeCache(CACHE_TRANSLATIONS.'_'.$code);
 				echo 1;
 			}
 			else
@@ -39,9 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 		
 		case 'delete_language':
 		{
+			$code = $translator->getLanguageCodeById($id);
 			if ($translator->deleteLanguage($id))
 			{
-				$cache->removeCache(CACHE_TRANSLATIONS);
+				$cache->removeCache(CACHE_TRANSLATIONS.'_'.$code);
 				echo 1;
 			}
 			else
@@ -55,7 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 		{
 			if ($translator->addTranslationSection($item, $lang_id))
 			{
-				$cache->removeCache(CACHE_TRANSLATIONS);
+				$code = $translator->getLanguageCodeById($lang_id);
+				$cache->removeCache(CACHE_TRANSLATIONS.'_'.$code);
 				echo 1;
 			}
 			else
@@ -68,10 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 		case 'add_translation_item':
 		{
 			escape($_POST, array('value'));
-
 			if ($new_item_id = $translator->addTranslationItem($section_id, $item, $value))
 			{
-				$cache->removeCache(CACHE_TRANSLATIONS);
+				$item = $translator->getItemById($new_item_id);
+				$code = $translator->getLanguageCodeById($item['lang_id']);
+				$cache->removeCache(CACHE_TRANSLATIONS.'_'.$code);
 				echo $new_item_id;
 			}
 			else
@@ -83,9 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 		
 		case 'delete_translation_item':
 		{
+			$item = $translator->getItemById($id);
 			if ($translator->deleteTranslationItem($id))
 			{
-				$cache->removeCache(CACHE_TRANSLATIONS);
+				$code = $translator->getLanguageCodeById($item['lang_id']);
+				$cache->removeCache(CACHE_TRANSLATIONS.'_'.$code);
 				echo 1;
 			}
 			else
@@ -101,7 +108,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 
 			if ($translator->saveTranslationItem($id, $value))
 			{
-				$cache->removeCache(CACHE_TRANSLATIONS);
+				$item = $translator->getItemById($id);
+				$code = $translator->getLanguageCodeById($item['lang_id']);
+				$cache->removeCache(CACHE_TRANSLATIONS.'_'.$cde);
 				echo 1;
 			}
 			else
@@ -113,9 +122,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && key_exists('action', $_POST))
 		
 		case 'delete_translation_section':
 		{
+			$section_item = $translator->getItemById($id);
 			if ($translator->deleteTranslationSection($id))
 			{
-				$cache->removeCache(CACHE_TRANSLATIONS);
+				$code = $translator->getLanguageCodeById($section_item['lang_id']);
+				$cache->removeCache(CACHE_TRANSLATIONS.'_'.$code);
 				echo 1;
 			}
 			else
@@ -139,7 +150,7 @@ if (isset($_app_info['params'][1]) && $_app_info['params'][1] == 'edit')
 	$smarty->assign('languages', $translator->getLanguages());
 	$smarty->assign('current_category', 'translations_edit');
 	$smarty->assign('current_lang', $lang_code);
-	$smarty->assign('current_lang_id', $translator_edit->getLangId());
+	$smarty->assign('current_lang_id', $translator_edit->getLanguageIdByCode());
 	$template = 'translations-edit.tpl';
 }
 // list translations options (languages and translations)

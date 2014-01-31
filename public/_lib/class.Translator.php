@@ -59,14 +59,22 @@ class Translator
 		return $this->translations_raw;
 	}
 	
-	public function getLangId()
+	public function getLanguageIdByCode()
 	{
 		global $db;
 		
 		$sql = 'SELECT id FROM '.DB_PREFIX.'i18n_langs WHERE code = "' . $this->lang_code . '"';
 		return $db->QueryItem($sql);
 	}
-	
+
+	public function getLanguageCodeById($id)
+	{
+		global $db;
+
+		$sql = 'SELECT code FROM '.DB_PREFIX.'i18n_langs WHERE id = ' . $id;
+		return $db->QueryItem($sql);
+	}
+
 	public function getItemById($id)
 	{
 		global $db;
@@ -120,7 +128,6 @@ class Translator
 			}
 		 }
 	}
-	
 	
 	public function getLanguages()
 	{
@@ -256,12 +263,7 @@ class Translator
 	{
 		global $db;
 		
-		// delete section
-		$sql = 'DELETE FROM '.DB_PREFIX.'i18n_translations WHERE id = ' . $id;
-		$db->Execute($sql);
-		
-		// delete all translation items under this section
-		$sql = 'DELETE FROM '.DB_PREFIX.'i18n_translations WHERE parent_id = ' . $id;
+		$sql = 'DELETE FROM '.DB_PREFIX.'i18n_translations WHERE id = ' . $id . ' OR parent_id = ' . $id;
 		$db->Execute($sql);
 		
 		if ($db->affected_rows > 0)
