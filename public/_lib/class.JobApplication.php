@@ -25,10 +25,11 @@ class JobApplication
 		global $db;
 		global $settings;
 		
-		$sql = 'INSERT INTO '.DB_PREFIX.'job_applications (job_id, created_on, ip, name, email, message, cv_path)
-		                    VALUES (' . $this->mJobId . ', NOW(), "' . $ip . '",
+		$sql = 'INSERT INTO '.DB_PREFIX.'job_applications (job_id, name, email, cv_path, message, created_on, ip)
+		                    VALUES (' . $this->mJobId . ',
                                 "' . $this->mData['apply_name'] . '", "' . $this->mData['apply_email'] . '", 
-                                "' . $this->mData['apply_msg'] . '", "' . ($settings['keep_uploaded_cvs'] ? $this->mData['attachment_filename'] : '') . '")';
+                                "' . ($settings['keep_uploaded_cvs'] ? $this->mData['attachment_filename'] : '') . '",
+                                "' . $this->mData['apply_msg'] . '",  NOW(), "' . $ip . '")';
 		$db->query($sql);
 	}
 	
