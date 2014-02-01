@@ -1021,7 +1021,7 @@ class Job
 		$res = $res && $db->query($sql);
 
 		foreach ($cvs as $row) {
-			unlink(APP_PATH . FILE_UPLOAD_DIR . $row['cv_path']);
+			@unlink(APP_PATH . FILE_UPLOAD_DIR . $row['cv_path']);
 		}
 
 		return ($res==false)?$res:true;
