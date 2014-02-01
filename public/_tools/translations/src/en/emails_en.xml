@@ -38,6 +38,7 @@
 {BR}---{BR} Published by: {JOB_POSTER_EMAIL}
 {BR}---{BR} Edit: {JOB_EDIT_URL}
 {BR} Deactivate: {JOB_DEACTIVATE_URL}
+{BR} View job applications: {JOB_APPLICANTS_URL}
 {BR}{BR}---{BR} IP: {JOB_POSTER_IP}
 {BR} Date: {JOB_POST_DATE}
 			]]>
@@ -75,6 +76,8 @@ Hello! :){BR}{BR}
 Your ad was published and is available at {JOB_URL}
 {BR}{BR}---{BR}Edit it: {JOB_EDIT_URL}
 {BR}Deactivate it: {JOB_DEACTIVATE_URL}
+{BR}Manage all jobs: {JOB_MANAGE_URL}
+{BR}View job applications: {JOB_APPLICANTS_URL}
 {BR}{BR}-- {BR}Thank you for using our service!
 {BR} The {SITE_NAME} Team
 			]]>

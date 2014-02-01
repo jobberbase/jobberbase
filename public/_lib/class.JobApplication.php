@@ -33,10 +33,18 @@ class JobApplication
 		$db->query($sql);
 	}
 	
-	public function getAllForJob()
+	public function getAllForJob($from=false, $to=false)
 	{
 		global $db;
-		$sql = 'SELECT * FROM '.DB_PREFIX.'job_applications WHERE job_id = ' . $this->mJobId;
+		if ((int)$from >= 0 && (int)$to > 0)
+		{
+			$sql_limit = ' LIMIT ' . (int)$from .', ' . (int)$to;
+		}
+		else
+		{
+			$sql_limit = '';
+		}
+		$sql = 'SELECT * FROM '.DB_PREFIX.'job_applications WHERE job_id = ' . $this->mJobId . $sql_limit;
 		$result = $db->QueryArray($sql);
 		return $result;
 	}

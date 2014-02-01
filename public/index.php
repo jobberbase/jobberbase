@@ -130,7 +130,18 @@
 		case 'activate':
 			require_once 'page_activate.php';
 			break;
-			
+
+		case 'view-applicants':
+			require_once 'page_view_applicants.php';
+			$flag = 1;
+			break;
+
+		// manage all posts
+		case 'manage':
+			require_once 'page_manage.php';
+			$flag = 1;
+			break;
+
 		case 'rss':
 			require_once 'page_rss.php';
 			$html_title = 'RSS Feeds for ' . SITE_NAME;

@@ -122,6 +122,7 @@ class Postman extends Translator
 			'JOB_EDIT_URL' => BASE_URL . 'post/' . $data['id'] . '/' . $data['auth'] . '/',
 			'JOB_ACTIVATE_URL' => BASE_URL . 'activate/' . $data['id']. '/' . $data['auth'] . '/',
 			'JOB_DEACTIVATE_URL' => BASE_URL . 'deactivate/' . $data['id'] . '/' . $data['auth'] . '/',
+			'JOB_APPLICANTS_URL' => BASE_URL . 'view-applicants/' . $data['id'] . '/' . $data['auth'] . '/',
 			'JOB_POSTER_IP' => $_SERVER['REMOTE_ADDR'],
 			'JOB_POST_DATE' => $data['created_on']
 		);
@@ -194,7 +195,9 @@ class Postman extends Translator
 			'SITE_NAME' => SITE_NAME,
 			'JOB_URL' => $url . URL_JOB ."/" . $data['id'] . "/" . $data['url_title'] . "/",
 			'JOB_EDIT_URL' => $url . "post/" . $data['id'] . "/" . $data['auth'] . "/",
-			'JOB_DEACTIVATE_URL' => $url . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/"
+			'JOB_DEACTIVATE_URL' => $url . "deactivate/" . $data['id'] . "/" . $data['auth'] . "/",
+			'JOB_MANAGE_URL' => $url . "manage/" . $data['id'] . "/" . $data['auth'] . "/",
+			'JOB_APPLICANTS_URL' => $url . "view-applicants/" . $data['id'] . "/" . $data['auth'] . "/"
 		);
 		$email_data = $this->getEmailData('email_PublishToUser', $replace);
 		

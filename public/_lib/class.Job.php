@@ -188,7 +188,8 @@ class Job
 	// $random: (1/0) randomize results?
 	// $days_behind: (int) only get results from last N days
 	// $for_feed: (boolean) is this request from rss feed?
-	public function GetJobs($type_id = false, $categ_id = false, $limit = false, $random, $days_behind, $for_feed = false, $city_id = false, $spotlight = false)
+	// $poster_email: (string) poster email
+	public function GetJobs($type_id = false, $categ_id = false, $limit = false, $random, $days_behind, $for_feed = false, $city_id = false, $spotlight = false, $poster_email = false)
 	{
 		global $db;
 		$jobs = array();
@@ -215,7 +216,12 @@ class Job
 		{
 			$conditions .= ' AND category_id = ' . $categ_id;
 		}
-		
+
+		if ($poster_email)
+		{
+			$conditions .=' AND poster_email = "' . addslashes($poster_email) . '"';
+		}
+
 		if ($days_behind > 0)
 		{
 			$conditions .=' AND created_on >= DATE_SUB(NOW(), INTERVAL ' . $days_behind . ' DAY)';
@@ -238,8 +244,8 @@ class Job
 		}
 		
 		if ($spotlight &&  is_numeric($spotlight))
-    	{
-  			$conditions .= ' AND spotlight = ' . $spotlight;
+		{
+			$conditions .= ' AND spotlight = ' . $spotlight;
 		}
 
 		if ($random == 1)
@@ -326,7 +332,32 @@ class Job
 		
 		return $jobs;
 	}
-	
+
+	public function GetPaginatedJobsForPoster($email, $startIndex, $numberOfJobsToGet, $jobTypeID=false)
+	{
+		global $db;
+		$jobs = array();
+
+		$sql = 'SELECT id
+		               FROM '.DB_PREFIX.'jobs
+		               WHERE poster_email = "' . $email . '" AND is_temp = 0 AND is_active = 1';
+		if ($jobTypeID)
+		{
+			$sql .= ' AND type_id = ' . $jobTypeID;
+		}
+		$sql .= ' ORDER BY created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
+
+		$result = $db->query($sql);
+
+		while ($row = $result->fetch_assoc())
+		{
+			$current_job = new Job($row['id']);
+			$jobs[] = $current_job->GetInfo();
+		}
+
+		return $jobs;
+	}
+
 	public function GetPaginatedJobs($startIndex, $numberOfJobsToGet, $jobTypeID = 0)
 	{
 		global $db;
@@ -830,7 +861,13 @@ class Job
 	{
 		return $this->mAuth;
 	}
-	
+
+	// Get job poster's email address
+	public function GetPosterEmail()
+	{
+		return $this->mPosterEmail;
+	}
+
 	public function IncreaseViewCount()
 	{
 		global $db;
@@ -1050,25 +1087,11 @@ class Job
 		return $auth;
 	}
 	
-	public function CountJobs($categ = false, $type = false)
+	public function CountJobs($categ = false, $type = false, $city_id = false, $poster_email = false)
 	{
 		global $db;
 		$condition = '';
-	 	
-		if ($type)
-		{
-			if (!is_numeric($type))
-			{
-				$type_id = $this->GetTypeId($type);
-			}
-			else
-			{
-				$type_id = $type;
-			}
-			
-			$condition .= ' AND type_id = ' . $type_id;
-		}
-		
+
 		if ($categ)
 		{
 			if (!is_numeric($categ))
@@ -1083,11 +1106,35 @@ class Job
 			$condition .= ' AND category_id = ' . $categ_id;
 		}
 
+		if ($type)
+		{
+			if (!is_numeric($type))
+			{
+				$type_id = $this->GetTypeId($type);
+			}
+			else
+			{
+				$type_id = $type;
+			}
+			
+			$condition .= ' AND type_id = ' . $type_id;
+		}
+
+		if ($city_id && is_numeric($city_id))
+		{
+			$condition .= ' AND city_id = ' . $city_id;
+		}
+
+		if ($poster_email)
+		{
+			$condition .= ' AND poster_email = "' . addslashes($poster_email) . '"';
+		}
+
 		$sql = 'SELECT COUNT(id) AS total FROM '.DB_PREFIX.'jobs WHERE is_temp = 0 AND is_active = 1' . $condition;
-		
+
 		$result = $db->query($sql);
 		$row = $result->fetch_assoc();
-		return $row['total'];	
+		return $row['total'];
 	}
 	
 	public function CountJobsOfType($type_id)
