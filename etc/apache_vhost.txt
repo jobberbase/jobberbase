@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+    ServerName jobberbase.local    
+    
+    DocumentRoot "/var/www/jobberbase/public"
+    
+    <Directory "/var/www/jobberbase/public">
+        Options FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
