@@ -239,6 +239,7 @@
 
 	// list of available languages
 	$smarty->assign('languages', $translator->getLanguages());
+    $smarty->assign('lang_code', LANG_CODE);
 
 	// translations
 	$smarty->assign('translator', $translator);
