@@ -163,7 +163,7 @@
                 apply_name: { required: true },
                 apply_email: { required: true, email: true },
                 apply_msg: { required: true },
-                apply_cv: { extension: "pdf|rtf|doc|odt|docx" }
+                apply_cv: { required: true, extension: "pdf|rtf|doc|odt|docx" }
             }
         });
     });
