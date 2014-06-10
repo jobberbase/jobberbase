@@ -1,0 +1,57 @@
+
+@media (min-width: 768px) {
+    @footerHeight: 120px;
+
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+
+    body {
+        margin-bottom: @footerHeight + 40px;
+    }
+
+    #footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        min-height: @footerHeight;
+    }
+}
+
+@media (max-width: 768px) {
+    #search input {
+        margin-bottom: 15px;
+    }
+}
+
+#header {
+    padding: 20px 0;
+
+    .rss-feed {
+        margin-top: 20px;
+    }
+}
+
+#nav {
+    margin: 20px 0;
+}
+
+.nav-right li {
+    padding: 6px 0;
+}
+
+#footer {
+    padding: 20px 0;
+    background-color: #f5f5f5;
+}
+
+.table-jobs {
+    .job-type {
+        width: 100px;
+    }
+}
+
+#content h3 {
+    margin: 30px 0 20px 0;
+}
