@@ -26,6 +26,42 @@
     {/if}
 </head>
 <body>
+
+<nav id="nav-top" class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="col-xs-9">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control"  placeholder="{$translations.search.default}" value="{if $keywords}{$keywords}{/if}">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {if $smarty.const.ENABLE_NEW_JOBS}
+                <a href="{$BASE_URL}post/" class="btn btn-primary btn-lg btn-block add-button">{$translations.search.submit}</a>
+            {/if}
+            <ul class="nav navbar-nav">
+                {section name=tmp loop=$categories}
+                    <li id="{$categories[tmp].var_name}" {if $current_category == $categories[tmp].var_name}class="active"{/if}><a href="{$BASE_URL}{$URL_JOBS}/{$categories[tmp].var_name}/" title="{$categories[tmp].name}">{$categories[tmp].name}</a></li>
+                {/section}
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <header id="header">
     <div class="container">
         {if $smarty.session.status neq ''}
@@ -40,7 +76,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <ul id="top" class="nav nav-pills pull-right">
+                <ul id="top" class="nav nav-pills pull-right hidden-xs">
                     {if $navigation.primary != ''}
                         {section name=tmp loop=$navigation.primary}
                             {if $smarty.const.ENABLE_NEW_JOBS || (!$smarty.const.ENABLE_NEW_JOBS && $navigation.primary[tmp].url != 'post')}
@@ -51,7 +87,7 @@
                 </ul>
                 <div class="clearfix"></div>
 
-                <div class="rss-feed pull-right">
+                <div class="rss-feed pull-right hidden-xs">
                     <a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}_tpl/{$THEME}/img/bt-rss.png" alt="{$translations.header.rss_alt}" /></a>
                 </div>
             </div>

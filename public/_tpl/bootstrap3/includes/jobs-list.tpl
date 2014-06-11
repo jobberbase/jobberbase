@@ -4,29 +4,35 @@
 {if !isset($manage)}
     {$manage = false}
 {/if}
+{if !isset($applicants)}
+    {$applicants = false}
+{/if}
 
 <table class="table table-hover table-striped table-jobs">
     {foreach item=job from=$jobs}
+        {$type = $job.type_var_name}
+        {if $type eq 'fulltime'}
+            {$class = 'success'}
+        {elseif $type eq 'parttime'}
+            {$class = 'info'}
+        {elseif $type eq 'freelance'}
+            {$class = 'warning'}
+        {else}
+            {$class = 'default'}
+        {/if}
         <tr>
-            <td class="job-type">
-                {$type = $job.type_var_name}
-                {if $type eq 'fulltime'}
-                    {$class = 'success'}
-                {elseif $type eq 'parttime'}
-                    {$class = 'info'}
-                {elseif $type eq 'freelance'}
-                    {$class = 'warning'}
-                {else}
-                    {$class = 'default'}
-                {/if}
+            <td class="job-type hidden-xs">
                 <span class="label label-{$class}">{$job.type_name}</span>
             </td>
             <td>
+                <p class="visible-xs"><span class="label label-{$class}">{$job.type_name}</span></p>
                 <a href="{$BASE_URL}{$URL_JOB}/{$job.id}/{$job.url_title}/" title="{$job.title}">{$job.title}</a> <span class="la">{$translations.homepage.at}</span> {$job.company}{if $job.is_location_anywhere}, {$translations.jobs.location_anywhere}{else} <span class="la">{$translations.homepage.in}</span> {$job.location}{/if}
             </td>
-            <td class="text-right">
+            <td class="last text-right">
                 {if $spotlight}
                     <span class="label label-warning">Spotlight</span>
+                {elseif $applicants}
+                    <strong>{$job.apps}</strong> {$translations.homepage.applicants}
                 {else}
                     {$job.created_on}
                 {/if}

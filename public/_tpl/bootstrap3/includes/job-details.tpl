@@ -9,10 +9,44 @@
             {$translator->translate("apply.old_ad", $smarty.const.OLD_JOB_NOTIFY)}
         </div>
     {/if}
-    {if $CURRENT_PAGE == $URL_JOB}
-        <div id="applied-to-job" class="pull-right">
-            <h1>
-                <span class="label label-default">{$job.applied_count}</span>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>
+                {$type = $job.type_var_name}
+                {if $type eq 'fulltime'}
+                    {$class = 'success'}
+                {elseif $type eq 'parttime'}
+                    {$class = 'info'}
+                {elseif $type eq 'freelance'}
+                    {$class = 'warning'}
+                {else}
+                    {$class = 'default'}
+                {/if}
+
+                <span class="label label-{$class}">{$job.type_name}</span> {$job.title}
+            </h2>
+
+            <p>
+                <span class="fading">{$translations.jobs.preposition_at}</span>
+                {if $job.url && $job.url != 'http://'}
+                    <a href="{$job.url}">{$job.company}</a>
+                {else}
+                    <strong>{$job.company}</strong>
+                {/if}
+                {if $job.is_location_anywhere}
+                    <strong>({$translations.jobs.location_anywhere})</strong>
+                {else}
+                    <span class="fading">{$translations.homepage.in}</span> <strong>{$job.location}</strong>
+                {/if}
+            </p>
+        </div>
+        <div class="col-md-6">
+            {if $CURRENT_PAGE == $URL_JOB}
+                <div id="applied-to-job" class="text-right-not-xs text-right-not-sm">
+                    <h1>
+                        <span class="label label-default">{$job.applied_count}</span>
                 <span class="small">
                     {if $job.applied_count != 1}
                         {$translations.homepage.applicants}
@@ -20,40 +54,16 @@
                         {$translations.homepage.applicant}
                     {/if}
                 </span>
-            </h1>
+                    </h1>
+                </div>
+            {/if}
         </div>
-    {/if}
+    </div>
 
-    <h3>
-        {$type = $job.type_var_name}
-        {if $type eq 'fulltime'}
-            {$class = 'success'}
-        {elseif $type eq 'parttime'}
-            {$class = 'info'}
-        {elseif $type eq 'freelance'}
-            {$class = 'warning'}
-        {else}
-            {$class = 'default'}
-        {/if}
-
-        <span class="label label-{$class}">{$job.type_name}</span> {$job.title}
-    </h3>
-    <p>
-        <span class="fading">{$translations.jobs.preposition_at}</span>
-        {if $job.url && $job.url != 'http://'}
-            <a href="{$job.url}">{$job.company}</a>
-        {else}
-            <strong>{$job.company}</strong>
-        {/if}
-        {if $job.is_location_anywhere}
-            <strong>({$translations.jobs.location_anywhere})</strong>
-        {else}
-            <span class="fading">{$translations.homepage.in}</span> <strong>{$job.location}</strong>
-        {/if}
-    </p>
     <div id="job-description" class="well">
         {$job.description}
     </div>
+
     <br />
     {if $job.apply_online && $CURRENT_PAGE != 'verify'}
         <div id="apply_online_now">

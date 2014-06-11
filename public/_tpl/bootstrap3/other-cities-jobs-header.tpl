@@ -1,13 +1,14 @@
 {include file="includes/header.tpl"}
 
 <div id="job-listings">
-    {include file="includes/filter.tpl" current_url="{$BASE_URL}jobs-in-other-cities"}
     <div class="page-header">
         <h2>
             {$translations.jobscity.jobs_in_other_cities}
         </h2>
     </div>
+
     {if $jobs}
+        {include file="includes/filter.tpl" current_url="{$BASE_URL}jobs-in-other-cities"}
         {include file="includes/jobs-list.tpl"}
     {else}
         <div class="alert alert-info">

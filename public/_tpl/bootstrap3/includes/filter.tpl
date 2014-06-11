@@ -3,7 +3,7 @@
         {$current_url = "{$BASE_URL}{$URL_JOBS}/{$current_category}"}
     {/if}
 
-    <div class="pull-right">
+    <div class="filters text-right">
         {$translations.category.display_only}
         {section name=tmp loop=$types}
             {$type = $types[tmp].var_name}

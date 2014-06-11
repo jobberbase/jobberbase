@@ -2,12 +2,13 @@
 
 
 <div id="job-listings">
-    {include file="includes/filter.tpl"}
     <div class="page-header">
         <h2>
             {$translations.category.jobs_for} {$current_category_name}
         </h2>
     </div>
+    
+    {include file="includes/filter.tpl"}
     {include file="includes/posts-loop.tpl"}
 </div>
 

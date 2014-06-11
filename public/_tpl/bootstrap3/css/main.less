@@ -1,5 +1,9 @@
 
-@media (min-width: 768px) {
+@import "responsive-align";
+@import "../vendor/bootstrap/less/variables";
+
+/* Sticky footer */
+@media (min-width: @screen-sm-min) {
     @footerHeight: 120px;
 
     html {
@@ -19,9 +23,22 @@
     }
 }
 
-@media (max-width: 768px) {
-    #search input {
-        margin-bottom: 15px;
+#nav-top {
+    display: none;
+
+    @media (max-width: @screen-xs-max) {
+        display: block;
+    }
+
+    .add-button {
+        margin-top: 15px;
+    }
+
+    .navbar-form {
+        padding: 0 15px;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
     }
 }
 
@@ -31,14 +48,34 @@
     .rss-feed {
         margin-top: 20px;
     }
+
+    .logo img {
+        max-width: 100%;
+    }
 }
 
 #nav {
     margin: 20px 0;
+
+    @media (max-width: @screen-sm-max) {
+        display: none;
+    }
 }
 
-.nav-right li {
-    padding: 6px 0;
+#search {
+    @media (max-width: @screen-xs-max) {
+        display: none;
+
+        input {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+#content {
+    .nav-right li {
+        padding: 6px 0;
+    }
 }
 
 #footer {
@@ -50,6 +87,18 @@
     .job-type {
         width: 100px;
     }
+
+    .last {
+        min-width: 100px;
+    }
+}
+
+.filters {
+    margin-bottom: 15px;
+}
+
+#job-description {
+    margin-top: 20px;
 }
 
 #content h3 {

@@ -2,12 +2,13 @@
 
 
 <div id="job-listings">
-    {include file="includes/filter.tpl" current_url="{$BASE_URL}{$URL_JOBS}"}
     <div class="page-header">
         <h2>
             {$translations.alljobs.all_jobs}
         </h2>
     </div>
+
+    {include file="includes/filter.tpl" current_url="{$BASE_URL}{$URL_JOBS}"}
     {include file="includes/posts-loop.tpl"}
 </div>
 
