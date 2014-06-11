@@ -1,7 +1,7 @@
 {include file="includes/header.tpl"}
 
 
-<ul class="pagination pagination-lg hidden-xs">
+<ul class="pagination hidden-xs">
     <li><a href="{$BASE_URL}post/{$job.id}/">{$translations.publish.step1}</a></li>
     <li class="active"><a href="{$BASE_URL}verify/{$job.id}/">{$translations.publish.step2}</a></li>
     <li class="disabled"><a href="#">{$translations.publish.step3}</a></li>

@@ -1,6 +1,6 @@
 {include file="includes/header.tpl"}
 
-<ul class="pagination pagination-lg hidden-xs">
+<ul class="pagination hidden-xs">
     <li class="active"><a href="#">{$translations.publish.step1}</a></li>
     <li class="disabled"><a href="#">{$translations.publish.step2}</a></li>
     <li class="disabled"><a href="#">{$translations.publish.step3}</a></li>
