@@ -1,0 +1,184 @@
+.text-left-not-xs,
+.text-left-not-sm,
+.text-left-not-md,
+.text-left-not-lg {
+  text-align: left;
+}
+.text-center-not-xs,
+.text-center-not-sm,
+.text-center-not-md,
+.text-center-not-lg {
+  text-align: center;
+}
+.text-right-not-xs,
+.text-right-not-sm,
+.text-right-not-md,
+.text-right-not-lg {
+  text-align: right;
+}
+.text-justify-not-xs,
+.text-justify-not-sm,
+.text-justify-not-md,
+.text-justify-not-lg {
+  text-align: justify;
+}
+@media (max-width: 767px) {
+  .text-left-not-xs,
+  .text-center-not-xs,
+  .text-right-not-xs,
+  .text-justify-not-xs {
+    text-align: inherit;
+  }
+  .text-left-xs {
+    text-align: left;
+  }
+  .text-center-xs {
+    text-align: center;
+  }
+  .text-right-xs {
+    text-align: right;
+  }
+  .text-justify-xs {
+    text-align: justify;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .text-left-not-sm,
+  .text-center-not-sm,
+  .text-right-not-sm,
+  .text-justify-not-sm {
+    text-align: inherit;
+  }
+  .text-left-sm {
+    text-align: left;
+  }
+  .text-center-sm {
+    text-align: center;
+  }
+  .text-right-sm {
+    text-align: right;
+  }
+  .text-justify-sm {
+    text-align: justify;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .text-left-not-md,
+  .text-center-not-md,
+  .text-right-not-md,
+  .text-justify-not-md {
+    text-align: inherit;
+  }
+  .text-left-md {
+    text-align: left;
+  }
+  .text-center-md {
+    text-align: center;
+  }
+  .text-right-md {
+    text-align: right;
+  }
+  .text-justify-md {
+    text-align: justify;
+  }
+}
+@media (min-width: 1200px) {
+  .text-left-not-lg,
+  .text-center-not-lg,
+  .text-right-not-lg,
+  .text-justify-not-lg {
+    text-align: inherit;
+  }
+  .text-left-lg {
+    text-align: left;
+  }
+  .text-center-lg {
+    text-align: center;
+  }
+  .text-right-lg {
+    text-align: right;
+  }
+  .text-justify-lg {
+    text-align: justify;
+  }
+}
+/* Sticky footer */
+@media (min-width: 768px) {
+  html {
+    position: relative;
+    min-height: 100%;
+  }
+  body {
+    margin-bottom: 160px;
+  }
+  #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 120px;
+  }
+}
+#nav-top {
+  display: none;
+}
+@media (max-width: 767px) {
+  #nav-top {
+    display: block;
+  }
+}
+#nav-top .add-button {
+  margin-top: 15px;
+}
+#nav-top .navbar-form {
+  padding: 0 15px;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+#header {
+  padding: 20px 0;
+}
+#header .rss-feed {
+  margin-top: 20px;
+}
+#header .logo img {
+  max-width: 100%;
+}
+#nav {
+  margin: 20px 0;
+}
+@media (max-width: 767px) {
+  #nav {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  #search {
+    display: none;
+  }
+  #search input {
+    margin-bottom: 15px;
+  }
+}
+#content .nav-right li {
+  padding: 6px 0;
+}
+#footer {
+  padding: 20px 0;
+  background-color: #f5f5f5;
+}
+.table-jobs .job-type {
+  width: 100px;
+}
+.table-jobs .last {
+  min-width: 100px;
+}
+.filters {
+  margin-bottom: 15px;
+}
+#job-description {
+  margin-top: 20px;
+}
+#content h3 {
+  margin: 30px 0 20px 0;
+}

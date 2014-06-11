@@ -212,6 +212,7 @@
 			$data = array('company' => $company,
 			              'url' => $url,
 			              'title' => $title,
+                          'summary' => $summary,
 			              'city_id' => $city_id,
 			              'category_id' => $category_id,
 			              'type_id' => $type_id,
