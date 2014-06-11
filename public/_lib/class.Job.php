@@ -916,7 +916,7 @@ class Job
 		                         VALUES (' . $params['type_id'] . ',
 		                                 ' . $params['category_id'] . ',
 		                                 "' . $params['title'] . '",
-										 "' . $params['summary'] . '",
+										 "' . (isset($params['summary']) ? $params['summary'] : '') . '",
 		                                 "' . $params['description'] . '",
 		                                 "' . $params['company'] . '",
 		                                 ' . $params['city_id'] . ',
