@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emails>
+    <SendToFriend>
+        <subject>
+            Ik raad je deze vacature aan
+        </subject>
+        <message>
+            <![CDATA[
+				{BR}{BR}---{BR}Je ontving deze email van {YOUR_EMAIL}
+			]]>
+        </message>
+    </SendToFriend>
+
+    <ApplyOnline>
+        <subject>
+            [ {SITE_NAME} ] Ik wil graag soliciteren voor {JOB_TITLE}
+        </subject>
+        <message>
+            <![CDATA[
+				{BR}{BR}---{BR}Deze email is een solicitatie gestuurd met betrekking tot {JOB_URL}
+			]]>
+        </message>
+    </ApplyOnline>
+
+    <PublishToAdmin>
+        <newPostSubject>
+            [ {SITE_NAME}  ] Nieuwe vacature: {JOB_TITLE}
+        </newPostSubject>
+        <editedPostSubject>
+            [ {SITE_NAME}  ] Gewijzigde vacature: {JOB_TITLE}
+        </editedPostSubject>
+        <message>
+            <![CDATA[
+				{JOB_URL}
+				{BR} {JOB_TITLE} bij {JOB_COMPANY}
+				{BR} {JOB_DESCRIPTION}
+				{BR} URL: {JOB_URL}
+				{BR}---{BR} Gepubliceerd door: {JOB_POSTER_EMAIL}
+				{BR}---{BR} Bewerken: {JOB_EDIT_URL}
+				{BR} Deactiveren: {JOB_DEACTIVATE_URL}
+				{BR}{BR}---{BR} IP: {JOB_POSTER_IP}
+				{BR} Datum: {JOB_POST_DATE}
+			]]>
+        </message>
+        <messageFirstPost>
+            <![CDATA[
+				Geactiveerde vacature {JOB_ACTIVATE_URL}{BR}
+			]]>
+        </messageFirstPost>
+    </PublishToAdmin>
+
+    <PublishPendingToUser>
+        <subject>
+            Uw vacature op {SITE_NAME}
+        </subject>
+        <message>
+            <![CDATA[
+				Hallo! :){BR}{BR}
+				Excuses voor het ongemak, maar aangezien dit de eerste keer is dat u een vacature plaatst met dit e-mailadres, moeten we deze eerst goedkeuren.
+				{BR}De vacature zal binnenkort gepubliceerd worden. U ontvangt van ons een e-mail zodra dit is gebeurd! Bedankt voor uw geduld.
+				{BR}{BR}Vanaf dat moment zal elke vacature die u met dit e-mailadres instuurt automatisch gepubliceerd worden.
+				{BR}{BR}---{BR}Hartelijk dank voor het gebruiken van onze diensten!
+				{BR}{SITE_NAME}
+			]]>
+        </message>
+    </PublishPendingToUser>
+
+    <PublishToUser>
+        <subject>
+            Uw vacature op {SITE_NAME} is gepubliceerd
+        </subject>
+        <message>
+            <![CDATA[
+				Hallo! :){BR}{BR}
+				Uw vacature is gepubliceerd en is bereikbaar via {JOB_URL}
+				{BR}{BR}---{BR}Bewerken: {JOB_EDIT_URL}
+				{BR}Deactiveren: {JOB_DEACTIVATE_URL}
+				{BR}{BR}---{BR}Hartelijk dank voor het gebruiken van onze diensten!
+				{BR}{SITE_NAME}
+			]]>
+        </message>
+    </PublishToUser>
+
+    <ReportSpam>
+        <subject>
+            SPAM op {SITE_NAME}] {JOB_TITLE}
+        </subject>
+        <message>
+            <![CDATA[
+				De volgende vacature is gerapporteerd als spam: {BR}---{BR}{BR}
+				{JOB_URL}
+				{BR}{BR} {JOB_TITLE} bij {JOB_COMPANY}
+				{BR}{BR} {JOB_DESCRIPTION}
+				{BR}{BR}---{BR} Gepubliceerd door: {JOB_POSTER_EMAIL}
+				{BR}---{BR}Bewerken: {JOB_EDIT_URL}
+				{BR} Deactiveren: {JOB_DEACTIVATE_URL}
+				{BR}---{BR}IP: {JOB_POSTER_IP}
+				{BR} Datum: {JOB_POST_DATE}
+			]]>
+        </message>
+    </ReportSpam>
+
+    <Contact>
+        <subject>
+            [{SITE_NAME}] contact
+        </subject>
+        <message>
+            <![CDATA[
+				{BR}{BR}---{BR} Ingestuurd door: {SENDER_NAME} <{SENDER_EMAIL}>
+				{BR} IP: {SENDER_IP}
+				{BR} Datum: {SEND_DATE}
+			]]>
+        </message>
+    </Contact>
+</emails>
