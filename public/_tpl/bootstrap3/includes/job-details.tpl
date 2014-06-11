@@ -12,7 +12,7 @@
 
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <h2>
                 {$type = $job.type_var_name}
                 {if $type eq 'fulltime'}
@@ -42,7 +42,7 @@
                 {/if}
             </p>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
             {if $CURRENT_PAGE == $URL_JOB}
                 <div id="applied-to-job" class="text-right-not-xs text-right-not-sm">
                     <h1>
