@@ -38,7 +38,9 @@
 <script src="{$BASE_URL}js/jquery.metadata.js" type="text/javascript"></script>
 <script src="{$BASE_URL}_tpl/{$THEME}/vendor/jquery.validation/dist/jquery.validate.min.js" type="text/javascript"></script>
 <script src="{$BASE_URL}_tpl/{$THEME}/vendor/jquery.validation/dist/additional-methods.min.js" type="text/javascript"></script>
-<script src="{$BASE_URL}_tpl/{$THEME}/vendor/jquery.validation/src/localization/messages_{$lang_code}.js" type="text/javascript"></script>
+{if $lang_code != 'en'}
+    <script src="{$BASE_URL}_tpl/{$THEME}/vendor/jquery.validation/src/localization/messages_{$lang_code}.js" type="text/javascript"></script>
+{/if}
 <script src="{$BASE_URL}js/functions.js" type="text/javascript"></script>
 
 <script type="text/javascript">
