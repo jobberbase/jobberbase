@@ -45,7 +45,7 @@
 					<div class="validation-failure">
 						<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" />
 						{if $smarty.session.apply_allowed AND $smarty.session.apply_allowed eq -1}
-							{$translator->translate("apply.error_apply_timeout_not_passed", $smarty.const.MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP)}
+							{$translator->translate("apply.error_apply_timeout_not_passed", $smarty.const.APPLY_DELAY)}
 						{elseif $smarty.session.apply_mail_sent AND $smarty.session.apply_mail_sent eq -1}
 							{$translations.apply.error_sending_mail}
 						{elseif $smarty.session.apply_errors.apply_cv}
