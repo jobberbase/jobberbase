@@ -26,10 +26,12 @@ class JobApplication
 		global $settings;
 		
 		$sql = 'INSERT INTO '.DB_PREFIX.'job_applications (job_id, name, email, cv_path, message, created_on, ip)
-		                    VALUES (' . $this->mJobId . ',
-                                "' . $this->mData['apply_name'] . '", "' . $this->mData['apply_email'] . '", 
-                                "' . ($settings['keep_uploaded_cvs'] ? $this->mData['attachment_filename'] : '') . '",
-                                "' . $this->mData['apply_msg'] . '",  NOW(), "' . $ip . '")';
+		                    VALUES (' . $db->real_escape_string($this->mJobId) . ',
+                                "' . $db->real_escape_string($this->mData['apply_name']) . '",
+                                "' . $db->real_escape_string($this->mData['apply_email']) . '", 
+                                "' . ($settings['keep_uploaded_cvs'] ? $db->real_escape_string($this->mData['attachment_filename']) : '') . '",
+                                "' . $db->real_escape_string($this->mData['apply_msg']) . '",
+                                NOW(), "' . $db->real_escape_string($ip) . '")';
 		$db->query($sql);
 	}
 	
