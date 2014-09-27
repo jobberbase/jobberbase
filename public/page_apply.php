@@ -71,7 +71,7 @@
 								
 		$app = new JobApplication($job_id, $data);
 		
-		$applicationTimeoutDisabled = MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP <= 0;
+		$applicationTimeoutDisabled = APPLY_DELAY <= 0;
 		$applicationTimeoutPassed = false;
 		
 		$applicantIP = $_SERVER['REMOTE_ADDR'];

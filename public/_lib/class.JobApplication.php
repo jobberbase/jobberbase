@@ -55,7 +55,7 @@ class JobApplication
 		
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'job_applications
-		               WHERE ip = "' . $ip . '" AND DATE_SUB(NOW(), INTERVAL ' . MINUTES_BETWEEN_APPLY_TO_JOBS_FROM_SAME_IP . ' MINUTE) < created_on';
+		               WHERE ip = "' . $ip . '" AND DATE_SUB(NOW(), INTERVAL ' . APPLY_DELAY . ' MINUTE) < created_on';
 		$result = $db->query($sql);
 		
 		$row = $result->fetch_assoc();
