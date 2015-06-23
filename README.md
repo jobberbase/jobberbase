@@ -8,11 +8,6 @@ For comparison, Jobberbase is for job sites what WordPress is for blogs.
 Since launch, Jobberbase was downloaded more than 100,000 times.
 
 
-### Demo
-
-See it in action at http://jobberbase.com/demo/.
-
-
 ### Install
 
 See how to install it at https://github.com/filipcte/jobberbase/wiki/How-to-install-Jobberbase.
