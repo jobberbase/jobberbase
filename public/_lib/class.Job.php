@@ -293,7 +293,7 @@ class Job
 			$sql .= ' AND type_id = ' . $jobTypeID;
 		}
 		
-		$sql .= ' ORDER BY created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
+		$sql .= ' ORDER BY spotlight DESC, created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
 		
 		$result = $db->query($sql);
 		
@@ -320,7 +320,7 @@ class Job
 			$sql .= ' AND type_id = ' . $jobTypeID;
 		}
 		
-		$sql .= ' ORDER BY created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
+		$sql .= ' ORDER BY spotlight DESC, created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
 		
 		$result = $db->query($sql);
 		
@@ -345,7 +345,7 @@ class Job
 		{
 			$sql .= ' AND type_id = ' . $jobTypeID;
 		}
-		$sql .= ' ORDER BY created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
+		$sql .= ' ORDER BY spotlight DESC, created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
 
 		$result = $db->query($sql);
 
@@ -372,7 +372,7 @@ class Job
 			$sql .= ' AND type_id = ' . $jobTypeID;
 		}
 		
-		$sql .= ' ORDER BY created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
+		$sql .= ' ORDER BY spotlight DESC, created_on DESC limit ' . $startIndex . ',' . $numberOfJobsToGet;
 		
 		$result = $db->query($sql);
 		
@@ -1283,7 +1283,7 @@ class Job
 		$sql = 'SELECT id
 		               FROM '.DB_PREFIX.'jobs
 		               WHERE city_id IS NULL' . $conditions . ' AND is_temp = 0 AND is_active = 1
-		               ORDER BY created_on DESC ' . $sql_limit;
+		               ORDER BY spotlight DESC, created_on DESC ' . $sql_limit;
 		
 		$result = $db->query($sql);
 		while ($row = $result->fetch_assoc())
