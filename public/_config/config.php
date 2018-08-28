@@ -32,7 +32,6 @@
 	require_once APP_PATH . '_lib/function.printr.php';
 	require_once APP_PATH . '_lib/function.escape.php';
 	require_once APP_PATH . '_lib/functions.php';
-	require_once APP_PATH . '_lib/recaptchalib.php';
 	require_once APP_PATH . '_lib/CacheLite/Lite.php';
 	require_once APP_PATH . '_lib/class.Cache.php';
 	require_once APP_PATH . '_lib/class.phpmailer.php';

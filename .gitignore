@@ -1,3 +1,4 @@
 .DS_Store
 public/_cache/*
 public/_tpl/default/_cache/*
+public/_config/config.envs.php

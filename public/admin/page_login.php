@@ -6,14 +6,12 @@
 			escape($_POST);
 			$errors = array();
 
+			// validation
 			if ($captcha_enabled)
 			{
-				$resp = recaptcha_check_answer(
-					CAPTCHA_PRIVATE_KEY,
-					$_SERVER["REMOTE_ADDR"],
-					$_POST["recaptcha_challenge_field"],
-					$_POST["recaptcha_response_field"]);
-				if (!$resp->is_valid) $errors['captcha'] = 'Incorrect CAPTCHA code.';
+				if(!validate_recaptcha(CAPTCHA_PRIVATE_KEY , $_POST['g-recaptcha-response'])){
+					$errors['captcha'] = $translations['captcha']['captcha_error'];	
+				}
 			}
 
 			$_SESSION['user_ip'] = $_SERVER['REMOTE_ADDR'];
@@ -55,9 +53,4 @@
 		}
 		$template = 'login.tpl';
 		$smarty->assign('ENABLE_RECAPTCHA', $captcha_enabled);
-
-		if ($captcha_enabled)
-		{
-			$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
-		}
 ?>

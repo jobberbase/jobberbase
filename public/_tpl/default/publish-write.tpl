@@ -1,5 +1,7 @@
 {include file="header.tpl"}
-		
+{if $ENABLE_RECAPTCHA}
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{/if}		
 		<div id="content">
 			<div id="job-listings"></div><!-- #job-listings -->
 			<div class="steps">
@@ -111,19 +113,12 @@
 					</table>
 				</fieldset>
 				{if $ENABLE_RECAPTCHA}
-				<fieldset>
-					<legend>{$translations.captcha.captcha_title}</legend>
-					{literal}
-					<script type="text/javascript">
-					  var RecaptchaOptions = {
-					    theme : 'white',
-					    tabindex : 9
-					  };
-					</script>
-					{/literal}
-					{$the_captcha} <span class="validation-error">{if $errors.captcha}
-					<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
-				</fieldset>
+					<fieldset>	
+						<legend>{$translations.captcha.captcha_title}</legend>
+						<div class="g-recaptcha" data-sitekey="{{$smarty.const.CAPTCHA_PUBLIC_KEY}}"></div>
+						<span class="validation-error">{if $errors.captcha}
+						<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
+					</fieldset>
 				{/if}
 				<fieldset><input type="checkbox" name="apply_online" id="apply_online" class="no-border" {if $job.apply_online == 1 || $is_apply == 1}checked="checked"{/if}{if !isset($job.apply_online) && !isset($is_apply)}checked="checked"{/if} /><label for="apply_online">{$translations.publish.apply_online}</label></fieldset>
 				<fieldset><input type="submit" name="submit" id="submit" value="{$translations.publish.step1_submit}" /></fieldset>
