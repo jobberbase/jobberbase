@@ -12,12 +12,10 @@
 			$errors = array();
 
 			// validation
-			if ($captcha_enabled)
-			{
-				$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
-					$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
-					$_POST["recaptcha_response_field"]);
-				if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
+			if ($captcha_enabled){
+				if(!validate_recaptcha(CAPTCHA_PRIVATE_KEY , $_POST['g-recaptcha-response'])){
+					$errors['captcha'] = $translations['captcha']['captcha_error'];	
+				}
 			}
 
 			$contact_name = strip_tags($_POST['contact_name']);
@@ -75,13 +73,7 @@
 					@unlink($attachment_path);
 				}
 			}
-		} else {
-			$smarty->assign('ENABLE_RECAPTCHA', $captcha_enabled);
-
-			if ($captcha_enabled)
-			{
-				$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
-			}
-		}
+		} 
+		$smarty->assign('ENABLE_RECAPTCHA', $captcha_enabled);
 	}
 ?>

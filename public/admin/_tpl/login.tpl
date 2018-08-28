@@ -1,5 +1,7 @@
 {include file="header.tpl"}
-
+{if $ENABLE_RECAPTCHA}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{/if}
 {if $errors.incorrect}
 		<div class="fail">{$errors.incorrect}</div>
 	{/if}
@@ -18,18 +20,10 @@
 				{if $errors.password}<div class="suggestion">{$errors.password}</div>{/if}
 			</div>
 			{if $ENABLE_RECAPTCHA}
-			<div class="group{if $errors.captcha} error{/if}">
-				{literal}
-				<script type="text/javascript">
-				var RecaptchaOptions = {
-				theme : 'white',
-				tabindex : 3
-				};
-				</script>
-				{/literal}
-				{$the_captcha}
-				{if $errors.captcha}<div class="suggestion">{$errors.captcha}</div>{/if}
-			</div>
+				<div class="g-recaptcha" data-sitekey="{{$smarty.const.CAPTCHA_PUBLIC_KEY}}"></div>
+				<span class="validation-error">{if $errors.captcha}
+				<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
+				<br />
 			{/if}
 			<div class="group_submit">
 				<button type="submit" name="submit" id="submit"><span>Login</span></button>

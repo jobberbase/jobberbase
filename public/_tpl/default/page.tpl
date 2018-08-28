@@ -1,5 +1,7 @@
 {include file="header.tpl"}
-		
+{if $ENABLE_RECAPTCHA}
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{/if}				
 		<div id="content">
 			<div id="job-listings"></div><!-- #job-listings -->
 			<h3 class="page-heading">{$page.title}</h3>
@@ -38,18 +40,12 @@
 
 						{if $ENABLE_RECAPTCHA}
 							<br /><br />
-							<label for="recaptcha_response_field">{$translations.captcha.captcha_title}:</label><br />
-							{literal}
-							<script type="text/javascript">
-							  var RecaptchaOptions = {
-							    theme : 'white',
-							    tabindex : 9
-							  };
-							</script>
-							{/literal}
-							{$the_captcha}
-							<span class="validation-error">{if $errors.captcha}<img src="{$BASE_URL}_tpl/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
-						{/if}
+							<div>
+								<div class="g-recaptcha" data-sitekey="{{$smarty.const.CAPTCHA_PUBLIC_KEY}}"></div>
+								<span class="validation-error">{if $errors.captcha}
+								<img src="{$BASE_URL}_templates/{$THEME}/img/icon-delete.png" alt="" /> {$errors.captcha}{/if}</span>
+							</div>
+						{/if} 
 						<br /><br />
 						<input type="submit" name="submit" id="submit" value="{$translations.contact.submit}" />
 					</form>

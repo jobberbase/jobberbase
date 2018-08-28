@@ -5,11 +5,6 @@
 	$smarty->assign('ENABLE_RECAPTCHA', $captcha_enabled);
 	$smarty->assign('editor', true);
 	
-	if ($captcha_enabled)
-	{
-		$smarty->assign('the_captcha', recaptcha_get_html(CAPTCHA_PUBLIC_KEY));
-	}
-	
 	$later_edit = false;
 	if ($id != 0)
 	{
@@ -68,10 +63,9 @@
 		// validation
 		if ($captcha_enabled)
 		{
-			$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
-			$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
-			$_POST["recaptcha_response_field"]);
-			if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
+			if(!validate_recaptcha(CAPTCHA_PRIVATE_KEY , $_POST['g-recaptcha-response'])){
+				$errors['captcha'] = $translations['captcha']['captcha_error'];	
+			}
 		}
 
         if (!isset($type_id) || !is_numeric($type_id))
@@ -158,10 +152,9 @@
 		// validation
 		if ($captcha_enabled)
 		{
-			$resp = recaptcha_check_answer(CAPTCHA_PRIVATE_KEY,
-			$_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
-			$_POST["recaptcha_response_field"]);
-			if (!$resp->is_valid) $errors['captcha'] = $translations['captcha']['captcha_error'];
+			if(!validate_recaptcha(CAPTCHA_PRIVATE_KEY , $_POST['g-recaptcha-response'])){
+				$errors['captcha'] = $translations['captcha']['captcha_error'];	
+			}
 		}
         if (!isset($type_id) || !is_numeric($type_id))
         {
