@@ -46,7 +46,7 @@ class Db extends mysqli
 		}
 		
 		$array_result = array();
-		while ($line = mysqli_fetch_array($result, MYSQL_ASSOC))
+		while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC))
 		{
 			$NewLine = array();
 			foreach($line as $key=>$val)
@@ -59,9 +59,9 @@ class Db extends mysqli
 	
 	public function QueryArray($query)
 	{
-		$result = parent::query($query); 
+		$result = parent::query($query, $resultmode = NULL);
 		$array_result = array();
-		while ($line = mysqli_fetch_array($result, MYSQL_ASSOC))
+		while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC))
 		{
 			$array_result[] = $line;
 		}
@@ -72,7 +72,7 @@ class Db extends mysqli
 	public function QueryRow($query)
 	{
 		$result = parent::query($query);
-		$line = mysqli_fetch_array($result, MYSQL_ASSOC);
+		$line = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		if (empty($line))
 			return false;
 		$NewLine = array();
@@ -89,7 +89,7 @@ class Db extends mysqli
 		{
 			return false;
 		}
-		$line = mysqli_fetch_array($result, MYSQL_NUM);
+		$line = mysqli_fetch_array($result, MYSQLI_NUM);
 		if ($line)
 		{
 			return stripslashes($line[0]);

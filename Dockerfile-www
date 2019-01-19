@@ -1,0 +1,8 @@
+FROM php:7.3.1-apache
+
+RUN docker-php-ext-install mysqli \
+ && a2enmod rewrite
+
+COPY public/ /var/www/html/
+
+RUN chown -R www-data. /var/www/html/_tpl/default/_cache

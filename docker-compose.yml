@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  www:
+    build:
+      context: .
+      dockerfile: Dockerfile-www
+    ports:
+    - 80:80
+    links:
+    - db
+    networks:
+    - default
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile-db
+    ports:
+    - 3306:3306
+    environment:
+      MYSQL_DATABASE: jobberbase
+      MYSQL_USER: jobberbase
+      MYSQL_PASSWORD: jobberbase
+      MYSQL_ROOT_PASSWORD: jobberbase
+    volumes:
+    - db:/var/lib/mysql
+    networks:
+    - default
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+    - db:db
+    ports:
+    - 8000:80
+    environment:
+      MYSQL_USER: jobberbase
+      MYSQL_PASSWORD: jobberbase
+      MYSQL_ROOT_PASSWORD: jobberbase
+volumes:
+  db:
